@@ -4,20 +4,20 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\CryptoSignals;
+use app\models\ForexSignals;
 
 /**
- * CryptoSignalsSearch represents the model behind the search form of `app\models\CryptoSignals`.
+ * ForexSignalsSearch represents the model behind the search form of `app\models\ForexSignals`.
  */
-class CryptoSignalsSearch extends CryptoSignals {
+class ForexSignalsSearch extends ForexSignals {
 
     /**
      * {@inheritdoc}
      */
     public function rules() {
         return [
-            [['id', 'percentage'], 'integer'],
-            [['comment', 'date', 'coin', 'pair', 'type', 'target', 'result'], 'safe'],
+            [['id'], 'integer'],
+            [['comment', 'date', 'ticker', 'type', 'target', 'result', 'pips'], 'safe'],
         ];
     }
 
@@ -37,12 +37,13 @@ class CryptoSignalsSearch extends CryptoSignals {
      * @return ActiveDataProvider
      */
     public function search($params) {
-        $query = CryptoSignals::find()
-                ->joinWith("coin0")
-                ->joinWith("pair0")
+        $query = ForexSignals::find()
+                ->joinWith("pips0")
                 ->joinWith("result0")
                 ->joinWith("target0")
-                ->joinWith("type0");
+                ->joinWith("type0")
+                ->joinWith("ticker0")
+        ;
 
         // add conditions that should always apply here
 
@@ -61,16 +62,15 @@ class CryptoSignalsSearch extends CryptoSignals {
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'percentage' => $this->percentage,
+            'date' => $this->date,
         ]);
 
         $query->andFilterWhere(['like', 'comment', $this->comment]);
-        $query->andFilterWhere(['like', 'crypto_coin.name', $this->coin]);
-        $query->andFilterWhere(['like', 'crypto_pair.name', $this->pair]);
-        $query->andFilterWhere(['like', 'crypto_result.name', $this->result]);
-        $query->andFilterWhere(['like', 'crypto_target.name', $this->target]);
-        $query->andFilterWhere(['like', 'crypto_type.name', $this->type]);
-        $query->andFilterWhere(['like', 'date', $this->date]);
+        $query->andFilterWhere(['like', 'forex_ticker.name', $this->ticker]);
+        $query->andFilterWhere(['like', 'forex_target.name', $this->target]);
+        $query->andFilterWhere(['like', 'forex_type.name', $this->type]);
+        $query->andFilterWhere(['like', 'forex_result.name', $this->result]);
+        $query->andFilterWhere(['like', 'forex_pips.name', $this->pips]);
 
         return $dataProvider;
     }

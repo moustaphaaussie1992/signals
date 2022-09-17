@@ -30,6 +30,7 @@ class AppAsset extends AssetBundle {
         'sash/assets/colors/color1.css', // check later
     ];
     public $js = [
+//        'sash/assets/js/jquery.min.js',
         'sash/assets/plugins/bootstrap/js/popper.min.js',
         'sash/assets/plugins/bootstrap/js/bootstrap.min.js',
         'sash/assets/js/jquery.sparkline.min.js',
@@ -39,7 +40,7 @@ class AppAsset extends AssetBundle {
         'sash/assets/plugins/peitychart/peitychart.init.js',
         'sash/assets/plugins/sidebar/sidebar.js',
         'sash/assets/plugins/p-scroll/perfect-scrollbar.js',
-        'sash/assets/plugins/p-scroll/pscroll.js',
+//        'sash/assets/plugins/p-scroll/pscroll.js',
         'sash/assets/plugins/p-scroll/pscroll-1.js',
         'sash/assets/plugins/chart/Chart.bundle.js',
         'sash/assets/plugins/chart/rounded-barchart.js',

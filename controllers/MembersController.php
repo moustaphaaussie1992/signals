@@ -42,9 +42,19 @@ class MembersController extends Controller {
         $searchModel = new MembersSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
+        $userId = \Yii::$app->user->id;
+        $totalMembers = 0;
+        if ($userId) {
+            $totalMembers = Members::find()
+                    ->where(["r_user" => $userId])
+                    ->count();
+        }
+
+
         return $this->render('index', [
                     'searchModel' => $searchModel,
                     'dataProvider' => $dataProvider,
+                    'totalMembers' => $totalMembers,
         ]);
     }
 

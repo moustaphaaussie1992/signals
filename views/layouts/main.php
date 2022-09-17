@@ -366,7 +366,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
                                     <ul class="slide-menu">
                                         <li class="side-menu-label1"><a href="javascript:void(0)">Members</a></li>
                                         <li><a href="<?= Url::to(['crypto-signals/index']) ?>" class="slide-item"> Crypto Signals</a></li>
-                                        <li><a href="<?= Url::to(['']) ?>" class="slide-item"> Forex Signals</a></li>
+                                        <li><a href="<?= Url::to(['forex-signals/index']) ?>" class="slide-item"> Forex Signals</a></li>
 
                                     </ul>
                                 </li>
@@ -382,6 +382,12 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
                                         <li><a href="<?= Url::to(['crypto-type/index']) ?>" class="slide-item"> Crypto Type</a></li>
                                         <li><a href="<?= Url::to(['crypto-target/index']) ?>" class="slide-item"> Crypto Target</a></li>
                                         <li><a href="<?= Url::to(['crypto-result/index']) ?>" class="slide-item"> Crypto Result</a></li>
+                                        
+                                        <li><a href="<?= Url::to(['forex-ticker/index']) ?>" class="slide-item"> Forex Ticker</a></li>
+                                        <li><a href="<?= Url::to(['forex-type/index']) ?>" class="slide-item"> Forex Type</a></li>
+                                        <li><a href="<?= Url::to(['forex-target/index']) ?>" class="slide-item"> Forex Target</a></li>
+                                        <li><a href="<?= Url::to(['forex-result/index']) ?>" class="slide-item"> Forex Result</a></li>
+                                        <li><a href="<?= Url::to(['forex-pips/index']) ?>" class="slide-item"> Forex Pips</a></li>
 
                                     </ul>
                                 </li>

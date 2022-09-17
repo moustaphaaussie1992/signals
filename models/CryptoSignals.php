@@ -15,7 +15,8 @@ use Yii;
  * @property int $result
  * @property int $percentage
  * @property string|null $comment
- *
+ * @property string $date 
+ * 
  * @property CryptoCoin $coin0
  * @property CryptoPair $pair0
  * @property CryptoResult $result0
@@ -39,6 +40,7 @@ class CryptoSignals extends \yii\db\ActiveRecord {
             [['coin', 'pair', 'type', 'target', 'result', 'percentage'], 'required'],
             [['coin', 'pair', 'type', 'target', 'result', 'percentage'], 'integer'],
             [['comment'], 'string'],
+            [['date'], 'safe'],     
             [['pair'], 'exist', 'skipOnError' => true, 'targetClass' => CryptoPair::class, 'targetAttribute' => ['pair' => 'id']],
             [['coin'], 'exist', 'skipOnError' => true, 'targetClass' => CryptoCoin::class, 'targetAttribute' => ['coin' => 'id']],
             [['result'], 'exist', 'skipOnError' => true, 'targetClass' => CryptoResult::class, 'targetAttribute' => ['result' => 'id']],
@@ -62,6 +64,7 @@ class CryptoSignals extends \yii\db\ActiveRecord {
             'result' => 'Result',
             'percentage' => 'Percentage',
             'comment' => 'Comment',
+            'date' => 'Date',
         ];
     }
 

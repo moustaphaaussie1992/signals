@@ -1,15 +1,16 @@
 <?php
 
-use app\models\CryptoSignalsSearch;
-use yii\data\ActiveDataProvider;
-use yii\grid\GridView;
+use app\models\ForexSignals;
 use yii\helpers\Html;
-use yii\web\View;
+use yii\helpers\Url;
+use yii\grid\ActionColumn;
+use yii\grid\GridView;
+use yii\widgets\Pjax;
 
-/** @var View $this */
-/** @var CryptoSignalsSearch $searchModel */
-/** @var ActiveDataProvider $dataProvider */
-$this->title = 'Crypto Signals';
+/** @var yii\web\View $this */
+/** @var app\models\ForexSignalsSearch $searchModel */
+/** @var yii\data\ActiveDataProvider $dataProvider */
+$this->title = 'Forex Signals';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="row">
@@ -22,14 +23,16 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <p style="margin-left: 20px;margin-top: 10px;">
                 <?php
-                echo Html::a('Create Crypto Signals', ['create'], ['class' => 'btn btn-success'])
+                echo Html::a('Create Forex Signals', ['create'], ['class' => 'btn btn-success'])
                 ?>
             </p>
 
             <?php Pjax::begin(); ?>
-            <?php // echo $this->render('_search', ['model' => $searchModel]);  ?>
+            <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+
             <div class="card-body">
                 <div class="grid-margin">
+
                     <?=
                     GridView::widget([
                         'dataProvider' => $dataProvider,
@@ -43,12 +46,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             ['class' => 'yii\grid\SerialColumn'],
 //            'id',
                             [
-                                'attribute' => 'coin',
-                                'value' => 'coin0.name'
-                            ],
-                            [
-                                'attribute' => 'pair',
-                                'value' => 'pair0.name'
+                                'attribute' => 'ticker',
+                                'value' => 'ticker0.name'
                             ],
                             [
                                 'attribute' => 'type',
@@ -62,12 +61,20 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'attribute' => 'result',
                                 'value' => 'result0.name'
                             ],
-                            'percentage',
-                            'date',
-                            'comment:ntext',
+                            [
+                                'attribute' => 'pips',
+                                'value' => 'pips0.name'
+                            ],
+//            'ticker',
+//            'type',
+//            'target',
+//            'result',
+                            //'pips',
+                            //'comment:ntext',
+                            //'date',
 //            [
 //                'class' => ActionColumn::className(),
-//                'urlCreator' => function ($action, CryptoSignals $model, $key, $index, $column) {
+//                'urlCreator' => function ($action, ForexSignals $model, $key, $index, $column) {
 //                    return Url::toRoute([$action, 'id' => $model->id]);
 //                }
 //            ],
@@ -104,8 +111,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     ?>
 
                     <?php Pjax::end(); ?>
+
+
                 </div>
             </div>
         </div>
     </div>
 </div>
+
