@@ -37,7 +37,6 @@ class Subscriptions extends \yii\db\ActiveRecord
             [['member_id', 'r_type', 'from', 'to', 'subscription_date', 'fee'], 'required'],
             [['member_id', 'r_type', 'fee'], 'integer'],
             [['from', 'to', 'subscription_date'], 'safe'],
-            [['member_id', 'r_type'], 'unique', 'targetAttribute' => ['member_id', 'r_type']],
             [['member_id'], 'exist', 'skipOnError' => true, 'targetClass' => Members::class, 'targetAttribute' => ['member_id' => 'id']],
             [['r_type'], 'exist', 'skipOnError' => true, 'targetClass' => Type::class, 'targetAttribute' => ['r_type' => 'id']],
         ];

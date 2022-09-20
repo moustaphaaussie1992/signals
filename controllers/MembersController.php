@@ -49,12 +49,21 @@ class MembersController extends Controller {
                     ->where(["r_user" => $userId])
                     ->count();
         }
+        $totalProfits = 0;
+        if ($userId) {
+            $totalProfits = Subscriptions::find()
+                    ->where(["r_user" => $userId])
+                    ->join('join', 'members', 'members.id = subscriptions.member_id')
+                    ->andWhere(["members.r_user" => $userId])
+                    ->sum('fee');
+        }
 
 
         return $this->render('index', [
                     'searchModel' => $searchModel,
                     'dataProvider' => $dataProvider,
                     'totalMembers' => $totalMembers,
+                    'totalProfits' => $totalProfits,
         ]);
     }
 
