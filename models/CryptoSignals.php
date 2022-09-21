@@ -47,7 +47,7 @@ class CryptoSignals extends \yii\db\ActiveRecord {
             [['target'], 'exist', 'skipOnError' => true, 'targetClass' => CryptoTarget::class, 'targetAttribute' => ['target' => 'id']],
             [['type'], 'exist', 'skipOnError' => true, 'targetClass' => CryptoType::class, 'targetAttribute' => ['type' => 'id']],
             ['percentage', 'compare', 'compareValue' => 100, 'operator' => '<='],
-            ['percentage', 'compare', 'compareValue' => 0, 'operator' => '>='],
+            ['percentage', 'compare', 'compareValue' => -100, 'operator' => '>='],
         ];
     }
 

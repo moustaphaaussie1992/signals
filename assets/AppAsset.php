@@ -28,6 +28,7 @@ class AppAsset extends AssetBundle {
         'sash/assets/css/skin-modes.css',
         'sash/assets/css/icons.css',
         'sash/assets/colors/color1.css', // check later
+        'css/myStyle.css', 
     ];
     public $js = [
 //        'sash/assets/js/jquery.min.js',

@@ -1,18 +1,85 @@
 <?php
 
-use app\models\ForexSignals;
-use yii\helpers\Html;
-use yii\helpers\Url;
-use yii\grid\ActionColumn;
+use app\models\ForexPips;
+use app\models\ForexResult;
+use app\models\ForexSignalsSearch;
+use app\models\ForexTarget;
+use app\models\ForexTicker;
+use app\models\ForexType;
+use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
+use yii\web\View;
+use yii\widgets\ActiveForm;
 use yii\widgets\Pjax;
 
-/** @var yii\web\View $this */
-/** @var app\models\ForexSignalsSearch $searchModel */
-/** @var yii\data\ActiveDataProvider $dataProvider */
+/** @var View $this */
+/** @var ForexSignalsSearch $searchModel */
+/** @var ActiveDataProvider $dataProvider */
 $this->title = 'Forex Signals';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<div class="forex-signals-form">
+
+    <?php $form = ActiveForm::begin(); ?>
+    <div class="row">
+        <div class="col-lg-2">
+            <?=
+                    $form->field($model, 'ticker')
+                    ->dropDownList(
+                            ArrayHelper::map(ForexTicker::find()->asArray()->all(), 'id', 'name'
+            ));
+            ?>
+        </div>
+        <div class="col-lg-2">
+            <?=
+                    $form->field($model, 'type')
+                    ->dropDownList(
+                            ArrayHelper::map(ForexType::find()->asArray()->all(), 'id', 'name'
+            ));
+            ?>
+        </div>
+        <div class="col-lg-2">
+            <?=
+                    $form->field($model, 'target')
+                    ->dropDownList(
+                            ArrayHelper::map(ForexTarget::find()->asArray()->all(), 'id', 'name'
+            ));
+            ?>
+        </div>
+        <div class="col-lg-2">
+            <?=
+                    $form->field($model, 'result')
+                    ->dropDownList(
+                            ArrayHelper::map(ForexResult::find()->asArray()->all(), 'id', 'name'
+            ));
+            ?>
+        </div>
+        <div class="col-lg-2">
+            <?=
+                    $form->field($model, 'pips')
+                    ->dropDownList(
+                            ArrayHelper::map(ForexPips::find()->asArray()->all(), 'id', 'name'
+            ));
+            ?>
+        </div>
+        <div class="col-lg-2">
+
+
+
+            <?= $form->field($model, 'comment')->textInput(['rows' => 6]) ?>
+        </div>
+        <div class="form-group">
+            <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        </div>
+
+        <?php ActiveForm::end(); ?>
+
+    </div>
+</div>
+
 <div class="row">
 
     <div class="col-12 col-sm-12">
@@ -21,12 +88,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <h3 class="card-title mb-0"><?= Html::encode($this->title) ?></h3>
             </div>
 
-            <p style="margin-left: 20px;margin-top: 10px;">
-                <?php
-                echo Html::a('Create Forex Signals', ['create'], ['class' => 'btn btn-success'])
-                ?>
-            </p>
-
+          
             <?php Pjax::begin(); ?>
             <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 

@@ -1,0 +1,10 @@
+
+.dark-mode .kv-table-header{
+    background: #292949!important;
+}
+.dark-mode td.kv-group-even{
+    background: #292949!important;
+}
+.dark-mode td.kv-group-odd{
+    background: #292949!important;
+}

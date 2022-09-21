@@ -38,9 +38,21 @@ class ForexSignalsController extends Controller {
         $searchModel = new ForexSignalsSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
+        $model = new ForexSignals();
+
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post()) && $model->save()) {
+//                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['index']);
+            }
+        } else {
+            $model->loadDefaultValues();
+        }
+
         return $this->render('index', [
                     'searchModel' => $searchModel,
                     'dataProvider' => $dataProvider,
+                    'model' => $model,
         ]);
     }
 

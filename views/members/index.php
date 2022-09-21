@@ -122,13 +122,26 @@ $this->params['breadcrumbs'][] = $this->title;
                         },
                         'columns' => [
                             ['class' => 'yii\grid\SerialColumn'],
-                            [
-                                'attribute' => 'id',
-                                'group' => true,
-                            ],
+//                            [
+//                                'attribute' => 'id',
+//                                'group' => true,
+//                            ],
                             'fullname',
                             'registration_date',
                             'subscription_date',
+                            [
+                                'attribute'=> 'r_type',
+                                'value'=> function($model){
+                                    $type = app\models\Type::findOne(["id"=> $model["r_type"]]);
+                                    if($type){
+                                        return $type->name;
+                                    }
+                                    return null;
+                                }
+                            ],
+                            'from',
+                            'to',
+                            'days_left',
 //                            'phone',
 //                            'telegram',
 //                            [
@@ -147,12 +160,12 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'template' => '{phone} {telegram}',
                                 'buttons' => [
                                     'telegram' => function ($url, $model) {
-                                        return Html::a('<i class="fa fa-telegram" data-bs-toggle="tooltip" title="" data-bs-original-title="" aria-label=""></i>', Url::to('https://t.me/' . $model->telegram, true), [
+                                        return Html::a('<i class="fa fa-telegram" data-bs-toggle="tooltip" title="" data-bs-original-title="" aria-label=""></i>', Url::to('https://t.me/' . $model["telegram"], true), [
                                                     'style' => 'color:#2AABEE;'
                                         ]);
                                     },
                                     'phone' => function ($url, $model) {
-                                        return Html::a('<i class="fa fa-whatsapp" data-bs-toggle="tooltip" title="" data-bs-original-title="" aria-label=""></i>', Url::to('https://wa.me/' . $model->phone, true), [
+                                        return Html::a('<i class="fa fa-whatsapp" data-bs-toggle="tooltip" title="" data-bs-original-title="" aria-label=""></i>', Url::to('https://wa.me/' . $model["phone"], true), [
                                                     'style' => 'color:#4caf50;'
                                         ]);
                                     },
@@ -164,24 +177,24 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'template' => '{update}{delete}{view}',
                                 'buttons' => [
                                     'view' => function ($url, $model) {
-                                        return Html::a('<span class="fe fe-eye fs-14"></span>', ['view?id=' . $model->id], [
+                                        return Html::a('<span class="fe fe-eye fs-14"></span>', ['view?id=' . $model["memberId"]], [
                                                     'class' => 'btn text-warning btn-sm',
                                                     'style' => ''
                                         ]);
                                     },
                                     'update' => function ($url, $model) {
-                                        return Html::a('<span class="fe fe-edit fs-14"></span>', $url, [
+                                        return Html::a('<span class="fe fe-edit fs-14"></span>', ['update?id=' . $model["memberId"]], [
                                                     'class' => 'btn text-primary btn-sm',
                                                     'title' => 'Edit'
                                         ]);
                                     },
                                     'delete' => function ($url, $model) {
-                                        return Html::a('<span class="fe fe-trash-2 fs-14"></span>', $url, [
+                                        return Html::a('<span class="fe fe-trash-2 fs-14"></span>', ['delete?id=' . $model["memberId"]], [
                                                     'class' => 'btn text-danger btn-sm',
                                                     'data' => [
                                                         'method' => 'post',
                                                         'params' => [
-                                                            'id' => $model->id
+                                                            'id' => $model["memberId"]
                                                         ],
                                                         'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
                                                         'title' => Yii::t('app', 'Confirmation'),
