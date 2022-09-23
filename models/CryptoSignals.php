@@ -38,16 +38,18 @@ class CryptoSignals extends \yii\db\ActiveRecord {
     public function rules() {
         return [
             [['coin', 'pair', 'type', 'target', 'result', 'percentage'], 'required'],
-            [['coin', 'pair', 'type', 'target', 'result', 'percentage'], 'integer'],
+            [['coin', 'pair', 'type', 'result', 'percentage'], 'integer'],
             [['comment'], 'string'],
-            [['date'], 'safe'],     
+//            [['target'], 'string', 'max' => 255],
+            [['date'], 'safe'],
             [['pair'], 'exist', 'skipOnError' => true, 'targetClass' => CryptoPair::class, 'targetAttribute' => ['pair' => 'id']],
             [['coin'], 'exist', 'skipOnError' => true, 'targetClass' => CryptoCoin::class, 'targetAttribute' => ['coin' => 'id']],
             [['result'], 'exist', 'skipOnError' => true, 'targetClass' => CryptoResult::class, 'targetAttribute' => ['result' => 'id']],
-            [['target'], 'exist', 'skipOnError' => true, 'targetClass' => CryptoTarget::class, 'targetAttribute' => ['target' => 'id']],
+//            [['target'], 'exist', 'skipOnError' => true, 'targetClass' => CryptoTarget::class, 'targetAttribute' => ['target' => 'id']],
             [['type'], 'exist', 'skipOnError' => true, 'targetClass' => CryptoType::class, 'targetAttribute' => ['type' => 'id']],
-            ['percentage', 'compare', 'compareValue' => 100, 'operator' => '<='],
+            ['percentage', 'compare', 'compareValue' => 10000, 'operator' => '<='],
             ['percentage', 'compare', 'compareValue' => -100, 'operator' => '>='],
+            [['target'], 'safe']
         ];
     }
 
@@ -100,9 +102,9 @@ class CryptoSignals extends \yii\db\ActiveRecord {
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getTarget0() {
-        return $this->hasOne(CryptoTarget::class, ['id' => 'target']);
-    }
+//    public function getTarget0() {
+//        return $this->hasOne(CryptoTarget::class, ['id' => 'target']);
+//    }
 
     /**
      * Gets query for [[Type0]].

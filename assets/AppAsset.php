@@ -28,7 +28,7 @@ class AppAsset extends AssetBundle {
         'sash/assets/css/skin-modes.css',
         'sash/assets/css/icons.css',
         'sash/assets/colors/color1.css', // check later
-        'css/myStyle.css', 
+        'css/myStyle.css',
     ];
     public $js = [
 //        'sash/assets/js/jquery.min.js',
@@ -63,7 +63,9 @@ class AppAsset extends AssetBundle {
         'sash/assets/js/typehead.js',
         'sash/assets/js/index1.js',
         'sash/assets/js/themeColors.js',
-        'sash/assets/js/custom.js'
+        'sash/assets/js/custom.js',
+        'sash/assets/plugins/counters/jquery.missofis-countdown.js',
+        'sash/assets/plugins/counters/flipclock.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

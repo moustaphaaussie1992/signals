@@ -1,11 +1,12 @@
 <?php
 
+use app\models\CryptoType;
 use app\models\ForexPips;
 use app\models\ForexResult;
 use app\models\ForexSignalsSearch;
 use app\models\ForexTarget;
 use app\models\ForexTicker;
-use app\models\ForexType;
+use kartik\select2\Select2;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
@@ -25,54 +26,88 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php $form = ActiveForm::begin(); ?>
     <div class="row">
-        <div class="col-lg-2">
+        <div class="col-lg-3">
+
             <?=
-                    $form->field($model, 'ticker')
-                    ->dropDownList(
-                            ArrayHelper::map(ForexTicker::find()->asArray()->all(), 'id', 'name'
-            ));
+            $form->field($model, 'ticker')->widget(Select2::classname(), [
+                'data' => ArrayHelper::map(ForexTicker::find()->all(), 'id', 'name'),
+                'options' => ['placeholder' => 'Select ...',
+                    'style' => "width:100%!important"
+                ],
+                'pluginOptions' => [
+                    'allowClear' => true
+                ],
+            ]);
             ?>
         </div>
-        <div class="col-lg-2">
+        <div class="col-lg-3">
             <?=
-                    $form->field($model, 'type')
-                    ->dropDownList(
-                            ArrayHelper::map(ForexType::find()->asArray()->all(), 'id', 'name'
-            ));
+            $form->field($model, 'type')->widget(Select2::classname(), [
+                'data' => ArrayHelper::map(CryptoType::find()->all(), 'id', 'name'),
+                'options' => ['placeholder' => 'Select ...',
+                    'style' => "width:100%!important"
+                ],
+                'pluginOptions' => [
+                    'allowClear' => true
+                ],
+            ]);
             ?>
         </div>
-        <div class="col-lg-2">
+        <div class="col-lg-3">
+
+
             <?=
-                    $form->field($model, 'target')
-                    ->dropDownList(
-                            ArrayHelper::map(ForexTarget::find()->asArray()->all(), 'id', 'name'
-            ));
+            $form->field($model, 'target')->widget(Select2::classname(), [
+                'data' => ArrayHelper::map(ForexTarget::find()->all(), 'id', 'name'),
+                'options' => ['placeholder' => 'Select ...',
+                    'style' => "width:100%!important"
+                ],
+                'pluginOptions' => [
+                    'allowClear' => true,
+                    'multiple' => true
+                ],
+            ]);
             ?>
         </div>
-        <div class="col-lg-2">
-            <?=
-                    $form->field($model, 'result')
-                    ->dropDownList(
-                            ArrayHelper::map(ForexResult::find()->asArray()->all(), 'id', 'name'
-            ));
-            ?>
-        </div>
-        <div class="col-lg-2">
-            <?=
-                    $form->field($model, 'pips')
-                    ->dropDownList(
-                            ArrayHelper::map(ForexPips::find()->asArray()->all(), 'id', 'name'
-            ));
-            ?>
-        </div>
-        <div class="col-lg-2">
+        <div class="col-lg-3">
 
 
 
-            <?= $form->field($model, 'comment')->textInput(['rows' => 6]) ?>
+            <?=
+            $form->field($model, 'result')->widget(Select2::classname(), [
+                'data' => ArrayHelper::map(ForexResult::find()->all(), 'id', 'name'),
+                'options' => ['placeholder' => 'Select ...',
+                    'style' => "width:100%!important"
+                ],
+                'pluginOptions' => [
+                    'allowClear' => true
+                ],
+            ]);
+            ?>
         </div>
-        <div class="form-group">
-            <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <div class="col-lg-3">
+
+
+            <?=
+            $form->field($model, 'pips')->widget(Select2::classname(), [
+                'data' => ArrayHelper::map(ForexPips::find()->all(), 'id', 'name'),
+                'options' => ['placeholder' => 'Select ...',
+                    'style' => "width:100%!important"
+                ],
+                'pluginOptions' => [
+                    'allowClear' => true
+                ],
+            ]);
+            ?>
+        </div>
+        <div class="col-lg-3">
+            <?= $form->field($model, 'percentage')->textInput() ?>
+        </div>
+        <div class="col-lg-3">
+            <?= $form->field($model, 'comment')->textInput() ?>
+        </div>
+        <div class="form-group col-lg-3">
+            <?= Html::submitButton('Save', ['class' => 'btn btn-success', 'style' => 'margin-top: 27px;']) ?>
         </div>
 
         <?php ActiveForm::end(); ?>
@@ -88,9 +123,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 <h3 class="card-title mb-0"><?= Html::encode($this->title) ?></h3>
             </div>
 
-          
+
             <?php Pjax::begin(); ?>
-            <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+            <?php // echo $this->render('_search', ['model' => $searchModel]);  ?>
 
             <div class="card-body">
                 <div class="grid-margin">
@@ -117,7 +152,11 @@ $this->params['breadcrumbs'][] = $this->title;
                             ],
                             [
                                 'attribute' => 'target',
-                                'value' => 'target0.name'
+                                'value' => function($model) {
+                                    $targets = ForexTarget::find()->select('name')->column();
+                                    $targetString = implode(',', $targets);
+                                    return $targetString;
+                                }
                             ],
                             [
                                 'attribute' => 'result',
@@ -131,9 +170,10 @@ $this->params['breadcrumbs'][] = $this->title;
 //            'type',
 //            'target',
 //            'result',
-                            //'pips',
-                            //'comment:ntext',
-                            //'date',
+                            'percentage',
+                            'pips',
+                            'comment:ntext',
+                            'date',
 //            [
 //                'class' => ActionColumn::className(),
 //                'urlCreator' => function ($action, ForexSignals $model, $key, $index, $column) {

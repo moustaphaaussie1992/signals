@@ -3,9 +3,11 @@
 use app\models\CryptoCoin;
 use app\models\CryptoPair;
 use app\models\CryptoResult;
+use app\models\CryptoSignals;
 use app\models\CryptoSignalsSearch;
 use app\models\CryptoTarget;
 use app\models\CryptoType;
+use kartik\select2\Select2;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
@@ -25,56 +27,87 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php $form = ActiveForm::begin(); ?>
     <div class="row">
-        <div class="col-lg-2">
+        <div class="col-lg-3">
 
 
+
             <?=
-                    $form->field($model, 'coin')
-                    ->dropDownList(
-                            ArrayHelper::map(CryptoCoin::find()->asArray()->all(), 'id', 'name'
-            ));
+            $form->field($model, 'coin')->widget(Select2::classname(), [
+                'data' => ArrayHelper::map(CryptoCoin::find()->all(), 'id', 'name'),
+                'options' => ['placeholder' => 'Select ...',
+                    'style' => "width:100%!important"
+                ],
+                'pluginOptions' => [
+                    'allowClear' => true
+                ],
+            ]);
             ?>
         </div>
-        <div class="col-lg-2">
+        <div class="col-lg-3">
+
             <?=
-                    $form->field($model, 'pair')
-                    ->dropDownList(
-                            ArrayHelper::map(CryptoPair::find()->asArray()->all(), 'id', 'name'
-            ));
+            $form->field($model, 'pair')->widget(Select2::classname(), [
+                'data' => ArrayHelper::map(CryptoPair::find()->all(), 'id', 'name'),
+                'options' => ['placeholder' => 'Select ...',
+                    'style' => "width:100%!important"
+                ],
+                'pluginOptions' => [
+                    'allowClear' => true
+                ],
+            ]);
             ?>
         </div>
-        <div class="col-lg-2">
+        <div class="col-lg-3">
             <?=
-                    $form->field($model, 'type')
-                    ->dropDownList(
-                            ArrayHelper::map(CryptoType::find()->asArray()->all(), 'id', 'name'
-            ));
+            $form->field($model, 'type')->widget(Select2::classname(), [
+                'data' => ArrayHelper::map(CryptoType::find()->all(), 'id', 'name'),
+                'options' => ['placeholder' => 'Select ...',
+                    'style' => "width:100%!important"
+                ],
+                'pluginOptions' => [
+                    'allowClear' => true
+                ],
+            ]);
+            ?>
+
+        </div>
+        <div class="col-lg-3">
+
+            <?=
+            $form->field($model, 'target')->widget(Select2::classname(), [
+                'data' => ArrayHelper::map(CryptoTarget::find()->all(), 'id', 'name'),
+                'options' => ['placeholder' => 'Select ...',
+                    'style' => "width:100%!important"
+                ],
+                'pluginOptions' => [
+                    'allowClear' => true,
+                    'multiple' => true
+                ],
+            ]);
             ?>
         </div>
-        <div class="col-lg-2">
+        <div class="col-lg-3">
+
             <?=
-                    $form->field($model, 'target')
-                    ->dropDownList(
-                            ArrayHelper::map(CryptoTarget::find()->asArray()->all(), 'id', 'name'
-            ));
+            $form->field($model, 'result')->widget(Select2::classname(), [
+                'data' => ArrayHelper::map(CryptoResult::find()->all(), 'id', 'name'),
+                'options' => ['placeholder' => 'Select ...',
+                    'style' => "width:100%!important"
+                ],
+                'pluginOptions' => [
+                    'allowClear' => true
+                ],
+            ]);
             ?>
         </div>
-        <div class="col-lg-1">
-            <?=
-                    $form->field($model, 'result')
-                    ->dropDownList(
-                            ArrayHelper::map(CryptoResult::find()->asArray()->all(), 'id', 'name'
-            ));
-            ?>
-        </div>
-        <div class="col-lg-1">
+        <div class="col-lg-3">
             <?= $form->field($model, 'percentage')->textInput() ?>
         </div>
-        <div class="col-lg-2">
-            <?= $form->field($model, 'comment')->textInput(['rows' => 6]) ?>
+        <div class="col-lg-3">
+            <?= $form->field($model, 'comment')->textInput() ?>
         </div>
-        <div class="form-group">
-            <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <div class="form-group col-lg-3">
+            <?= Html::submitButton('Save', ['class' => 'btn btn-success', 'style' => 'margin-top: 27px;']) ?>
         </div>
     </div>
     <?php ActiveForm::end(); ?>
@@ -94,10 +127,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 <h3 class="card-title mb-0"><?= Html::encode($this->title) ?></h3>
             </div>
 
-         
+
 
             <?php Pjax::begin(); ?>
-            <?php // echo $this->render('_search', ['model' => $searchModel]);  ?>
+            <?php // echo $this->render('_search', ['model' => $searchModel]);   ?>
             <div class="card-body">
                 <div class="grid-margin">
                     <?=
@@ -126,7 +159,11 @@ $this->params['breadcrumbs'][] = $this->title;
                             ],
                             [
                                 'attribute' => 'target',
-                                'value' => 'target0.name'
+                                'value' => function($model) {
+                                    $targets = CryptoTarget::find()->select('name')->column();
+                                    $targetString = implode(',', $targets);
+                                    return $targetString;
+                                }
                             ],
                             [
                                 'attribute' => 'result',

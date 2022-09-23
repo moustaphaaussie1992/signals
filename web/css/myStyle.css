@@ -8,3 +8,48 @@
 .dark-mode td.kv-group-odd{
     background: #292949!important;
 }
+
+.select2-container--krajee-bs5 .dark {
+    background: #282848!important;
+    width: 100%!important;
+}
+.select2-container--krajee-bs5  {
+  
+    width: 100%!important;
+}
+.dark-mode .select2-results__option{
+    background: #292949!important;
+}
+
+.dark-mode  .select2-selection--single{
+    background: #292949!important;
+    background-color: #292949!important;
+    color:  white!important;
+}
+.dark-mode  .select2-selection--multiple{
+    background: #292949!important;
+    background-color: #292949!important;
+    color:  white!important;
+}
+
+.dark-mode .select2-results__option[aria-selected]{
+    color:  white!important;
+}
+.dark-mode .select2-selection__rendered{
+    color:  white!important;
+}
+
+.select2-search__field{
+    color:  white!important;
+    background-color:transparent!important;
+}
+
+.has-success .select2-container--krajee-bs5.select2-container--focus .select2-selection {
+    border-color: #6c5ffc!important;
+   
+        
+}
+
+.select.is-valid + .select2-container--krajee-bs5 .select2-selection--single, .has-success.select2-container--krajee-bs5 .select2-dropdown, .has-success .select2-container--krajee-bs5 .select2-selection {
+    border-color: #6c5ffc!important;
+}

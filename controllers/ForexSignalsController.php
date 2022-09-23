@@ -41,9 +41,13 @@ class ForexSignalsController extends Controller {
         $model = new ForexSignals();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
+            if ($model->load($this->request->post())) {
+                $model->target = implode(',', $model->target);
+                if ($model->save()) {
+
 //                return $this->redirect(['view', 'id' => $model->id]);
-                return $this->redirect(['index']);
+                    return $this->redirect(['index']);
+                }
             }
         } else {
             $model->loadDefaultValues();
