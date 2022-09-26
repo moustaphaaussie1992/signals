@@ -64,12 +64,22 @@ $this->params['breadcrumbs'][] = $this->title;
                                     $seconds = ($model["days_left"] * 60 * 60 * 24) + $secondsOfTodayLeft;
 
 //                                    $seconds = $toDateTime->getTimestamp() - $now->getTimestamp();
-                                    if ($seconds < 0) {
-                                        $seconds = 1;
-                                    }
+//                                    if ($seconds < 0) {
+//                                        $seconds = 1;
+//                                    }
 //                                    yii\helpers\VarDumper::dump($seconds, 3, true);
 //                                    die();
-                                    return '
+                                    if ($seconds < 1) {
+                                        return '<div class="card-transparent bg-danger-transparent border border-danger  text-danger  p-1 br-5">
+                                            <div class="d-flex d-xs-grid">
+                                                <span class="fs-30 pe-2" style="padding-left: 32px;font-size: 15px !important;"><i class="bi bi-alarm"></i></span>
+                                                <div class="">
+                                                    <span days="0" style="font-size: 14px; opacity: 0.5; text-decoration: line-through;" class="h3">00 Day 00 : 00 : 00</span>
+                                                </div>
+                                            </div>
+                                        </div>';
+                                    } else {
+                                        return '
                                         <div class="card-transparent bg-success-transparent border border-success  text-success  p-1 br-5">
                                             <div class="d-flex d-xs-grid">
                                                 <span class="fs-30 pe-2" style="padding-left: 32px;font-size: 15px !important;"><i class="bi bi-alarm"></i></span>
@@ -78,6 +88,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 </div>
                                             </div>
                                         </div>';
+                                    }
                                 }
 //                                'value' => function($model) {
 //                                    return '<div class="border border-secondary">
