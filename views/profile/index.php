@@ -37,10 +37,10 @@ function addhttp($url) {
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="btn-profile">
-                                        <button class="btn btn-primary mt-1 mb-1"> <i class="fa fa-rss"></i> <span>Follow</span></button>
-                                        <button class="btn btn-secondary mt-1 mb-1"> <i class="fa fa-envelope"></i> <span>Message</span></button>
-                                    </div>
+                                    <!--                                    <div class="btn-profile">
+                                                                            <button class="btn btn-primary mt-1 mb-1"> <i class="fa fa-rss"></i> <span>Follow</span></button>
+                                                                            <button class="btn btn-secondary mt-1 mb-1"> <i class="fa fa-envelope"></i> <span>Message</span></button>
+                                                                        </div>-->
                                 </div>
                             </div>
                             <div class="row">

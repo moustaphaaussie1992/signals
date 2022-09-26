@@ -51,24 +51,11 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'contentOptions' => ['style' => 'width:230px;'],
                                 'format' => 'raw',
                                 'value' => function($model) {
-//                                    $now = new DateTime();
-//                                    $toDateTime = DateTime::createFromFormat('Y-m-d h:m:s', $model["to"] . " 00:00:00");
-//
-//                                    yii\helpers\VarDumper::dump($now, 3, true);
-//                                    yii\helpers\VarDumper::dump($now->getTimestamp(), 3, true);
-//                                    yii\helpers\VarDumper::dump($toDateTime, 3, true);
-//                                    yii\helpers\VarDumper::dump($toDateTime->getTimestamp(), 3, true);
-//                                    yii\helpers\VarDumper::dump($toDateTime->getTimestamp() - $now->getTimestamp(), 3, true);
-//                                    yii\helpers\VarDumper::dump($model["to"], 3, true);
+
                                     $secondsOfTodayLeft = (1 * 60 * 60) - (time() - strtotime("today"));
                                     $seconds = ($model["days_left"] * 60 * 60 * 24) + $secondsOfTodayLeft;
 
-//                                    $seconds = $toDateTime->getTimestamp() - $now->getTimestamp();
-//                                    if ($seconds < 0) {
-//                                        $seconds = 1;
-//                                    }
-//                                    yii\helpers\VarDumper::dump($seconds, 3, true);
-//                                    die();
+
                                     if ($seconds < 1) {
                                         return '<div class="card-transparent bg-danger-transparent border border-danger  text-danger  p-1 br-5">
                                             <div class="d-flex d-xs-grid">
@@ -90,14 +77,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                         </div>';
                                     }
                                 }
-//                                'value' => function($model) {
-//                                    return '<div class="border border-secondary">
-//                                            <div>
-//                                                <span class="text-secondary fs-30 pe-5"><i class="bi bi-calendar-day"></i></span>
-//                                                <span  style="font-size: 15px;" id="timer-outputpattern" class="h3 text-secondary">02 Days 23 Hours 59 Minutes 02 Seconds</span>
-//                                            </div>
-//                                        </div>';
-//                                }
                             ],
                             ['class' => 'yii\grid\ActionColumn',
                                 'contentOptions' => ['style' => 'width: 70px;'],
@@ -134,34 +113,17 @@ $this->params['breadcrumbs'][] = $this->title;
 
     var elementsByClass = document.getElementsByClassName("timer-countercallback");
     var a = $('.timer-countercallback');
-    //console.log(a);
     for (var i = 0; i < a.length; i++) {
-//        console.log(a[i]);
         var days = $(a[i]).attr('days');
-//        console.log(days)
         $(a[i]).countdown({
             from: parseInt(days),
-//            from: 1440,
             to: 0,
             timerEnd: function () {
                 this.animate({'opacity': .5}, 500).css({'text-decoration': 'line-through'});
             }
         });
     }
-    //console.log($('#timer-countercallback'));
-    // changed output patterns
-//    $('#timer-outputpattern').countdown({
-//        outputPattern: '$day Days $hour Hours $minute Minutes $second Seconds',
-//        from: 60 * 60 * 24 * 3
-//    });
 
-//    $('#timer-countercallback').countdown({
-//        from: 1440,
-//        to: 0,
-//        timerEnd: function () {
-//            this.animate({'opacity': .5}, 500).css({'text-decoration': 'line-through'});
-//        }
-//    });
 
 </script>
 <?php JSRegister::end(); ?>
