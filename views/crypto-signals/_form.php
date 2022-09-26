@@ -56,7 +56,7 @@ use yii\widgets\ActiveForm;
     ?>
 
     <?= $form->field($model, 'percentage')->textInput() ?>
-    
+
     <?= $form->field($model, 'comment')->textarea(['rows' => 6]) ?>
 
     <div class="form-group">

@@ -17,7 +17,7 @@ class ForexSignalsSearch extends ForexSignals {
     public function rules() {
         return [
             [['id'], 'integer'],
-            [['comment', 'date', 'ticker', 'type', 'target', 'result', 'pips'], 'safe'],
+            [['comment', 'date', 'ticker', 'type', 'result', 'pips'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class ForexSignalsSearch extends ForexSignals {
         $query = ForexSignals::find()
                 ->joinWith("pips0")
                 ->joinWith("result0")
-                ->joinWith("target0")
+//                ->joinWith("target0")
                 ->joinWith("type0")
                 ->joinWith("ticker0")
         ;
@@ -67,7 +67,7 @@ class ForexSignalsSearch extends ForexSignals {
 
         $query->andFilterWhere(['like', 'comment', $this->comment]);
         $query->andFilterWhere(['like', 'forex_ticker.name', $this->ticker]);
-        $query->andFilterWhere(['like', 'forex_target.name', $this->target]);
+//        $query->andFilterWhere(['like', 'forex_target.name', $this->target]);
         $query->andFilterWhere(['like', 'forex_type.name', $this->type]);
         $query->andFilterWhere(['like', 'forex_result.name', $this->result]);
         $query->andFilterWhere(['like', 'forex_pips.name', $this->pips]);

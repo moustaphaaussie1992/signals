@@ -22,39 +22,40 @@ use Yii;
  * @property ForexTicker $ticker0
  * @property ForexType $type0
  */
-class ForexSignals extends \yii\db\ActiveRecord
-{
+class ForexSignals extends \yii\db\ActiveRecord {
+
     /**
      * {@inheritdoc}
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'forex_signals';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            [['ticker', 'type', 'target', 'result', 'pips'], 'required'],
-            [['ticker', 'type', 'target', 'result', 'pips'], 'integer'],
+            [['ticker', 'type', 'target', 'result', 'pips', 'percentage'], 'required'],
+            [['ticker', 'type', 'result', 'pips', 'percentage'], 'integer'],
             [['comment'], 'string'],
             [['date'], 'safe'],
+//            [['target'], 'string', 'max' => 255],
             [['pips'], 'exist', 'skipOnError' => true, 'targetClass' => ForexPips::class, 'targetAttribute' => ['pips' => 'id']],
             [['result'], 'exist', 'skipOnError' => true, 'targetClass' => ForexResult::class, 'targetAttribute' => ['result' => 'id']],
-            [['target'], 'exist', 'skipOnError' => true, 'targetClass' => ForexTarget::class, 'targetAttribute' => ['target' => 'id']],
+//            [['target'], 'exist', 'skipOnError' => true, 'targetClass' => ForexTarget::class, 'targetAttribute' => ['target' => 'id']],
             [['ticker'], 'exist', 'skipOnError' => true, 'targetClass' => ForexTicker::class, 'targetAttribute' => ['ticker' => 'id']],
             [['type'], 'exist', 'skipOnError' => true, 'targetClass' => ForexType::class, 'targetAttribute' => ['type' => 'id']],
+            ['percentage', 'compare', 'compareValue' => 10000, 'operator' => '<='],
+            ['percentage', 'compare', 'compareValue' => -100, 'operator' => '>='],
+            [['target'], 'safe']
         ];
     }
 
     /**
      * {@inheritdoc}
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'ticker' => 'Ticker',
@@ -62,6 +63,7 @@ class ForexSignals extends \yii\db\ActiveRecord
             'target' => 'Target',
             'result' => 'Result',
             'pips' => 'Pips',
+            'percentage' => 'Percentage',
             'comment' => 'Comment',
             'date' => 'Date',
         ];
@@ -72,8 +74,7 @@ class ForexSignals extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getPips0()
-    {
+    public function getPips0() {
         return $this->hasOne(ForexPips::class, ['id' => 'pips']);
     }
 
@@ -82,8 +83,7 @@ class ForexSignals extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getResult0()
-    {
+    public function getResult0() {
         return $this->hasOne(ForexResult::class, ['id' => 'result']);
     }
 
@@ -92,18 +92,16 @@ class ForexSignals extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getTarget0()
-    {
-        return $this->hasOne(ForexTarget::class, ['id' => 'target']);
-    }
+//    public function getTarget0() {
+//        return $this->hasOne(ForexTarget::class, ['id' => 'target']);
+//    }
 
     /**
      * Gets query for [[Ticker0]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getTicker0()
-    {
+    public function getTicker0() {
         return $this->hasOne(ForexTicker::class, ['id' => 'ticker']);
     }
 
@@ -112,8 +110,8 @@ class ForexSignals extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getType0()
-    {
+    public function getType0() {
         return $this->hasOne(ForexType::class, ['id' => 'type']);
     }
+
 }

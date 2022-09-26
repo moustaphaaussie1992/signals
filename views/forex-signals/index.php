@@ -1,18 +1,120 @@
 <?php
 
-use app\models\ForexSignals;
-use yii\helpers\Html;
-use yii\helpers\Url;
-use yii\grid\ActionColumn;
+use app\models\CryptoType;
+use app\models\ForexPips;
+use app\models\ForexResult;
+use app\models\ForexSignalsSearch;
+use app\models\ForexTarget;
+use app\models\ForexTicker;
+use kartik\select2\Select2;
+use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
+use yii\web\View;
+use yii\widgets\ActiveForm;
 use yii\widgets\Pjax;
 
-/** @var yii\web\View $this */
-/** @var app\models\ForexSignalsSearch $searchModel */
-/** @var yii\data\ActiveDataProvider $dataProvider */
+/** @var View $this */
+/** @var ForexSignalsSearch $searchModel */
+/** @var ActiveDataProvider $dataProvider */
 $this->title = 'Forex Signals';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<div class="forex-signals-form">
+
+    <?php $form = ActiveForm::begin(); ?>
+    <div class="row">
+        <div class="col-lg-3">
+
+            <?=
+            $form->field($model, 'ticker')->widget(Select2::classname(), [
+                'data' => ArrayHelper::map(ForexTicker::find()->all(), 'id', 'name'),
+                'options' => ['placeholder' => 'Select ...',
+                    'style' => "width:100%!important"
+                ],
+                'pluginOptions' => [
+                    'allowClear' => true
+                ],
+            ]);
+            ?>
+        </div>
+        <div class="col-lg-3">
+            <?=
+            $form->field($model, 'type')->widget(Select2::classname(), [
+                'data' => ArrayHelper::map(CryptoType::find()->all(), 'id', 'name'),
+                'options' => ['placeholder' => 'Select ...',
+                    'style' => "width:100%!important"
+                ],
+                'pluginOptions' => [
+                    'allowClear' => true
+                ],
+            ]);
+            ?>
+        </div>
+        <div class="col-lg-3">
+
+
+            <?=
+            $form->field($model, 'target')->widget(Select2::classname(), [
+                'data' => ArrayHelper::map(ForexTarget::find()->all(), 'id', 'name'),
+                'options' => ['placeholder' => 'Select ...',
+                    'style' => "width:100%!important"
+                ],
+                'pluginOptions' => [
+                    'allowClear' => true,
+                    'multiple' => true
+                ],
+            ]);
+            ?>
+        </div>
+        <div class="col-lg-3">
+
+
+
+            <?=
+            $form->field($model, 'result')->widget(Select2::classname(), [
+                'data' => ArrayHelper::map(ForexResult::find()->all(), 'id', 'name'),
+                'options' => ['placeholder' => 'Select ...',
+                    'style' => "width:100%!important"
+                ],
+                'pluginOptions' => [
+                    'allowClear' => true
+                ],
+            ]);
+            ?>
+        </div>
+        <div class="col-lg-3">
+
+
+            <?=
+            $form->field($model, 'pips')->widget(Select2::classname(), [
+                'data' => ArrayHelper::map(ForexPips::find()->all(), 'id', 'name'),
+                'options' => ['placeholder' => 'Select ...',
+                    'style' => "width:100%!important"
+                ],
+                'pluginOptions' => [
+                    'allowClear' => true
+                ],
+            ]);
+            ?>
+        </div>
+        <div class="col-lg-3">
+            <?= $form->field($model, 'percentage')->textInput() ?>
+        </div>
+        <div class="col-lg-3">
+            <?= $form->field($model, 'comment')->textInput() ?>
+        </div>
+        <div class="form-group col-lg-3">
+            <?= Html::submitButton('Save', ['class' => 'btn btn-success', 'style' => 'margin-top: 27px;']) ?>
+        </div>
+
+        <?php ActiveForm::end(); ?>
+
+    </div>
+</div>
+
 <div class="row">
 
     <div class="col-12 col-sm-12">
@@ -21,14 +123,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 <h3 class="card-title mb-0"><?= Html::encode($this->title) ?></h3>
             </div>
 
-            <p style="margin-left: 20px;margin-top: 10px;">
-                <?php
-                echo Html::a('Create Forex Signals', ['create'], ['class' => 'btn btn-success'])
-                ?>
-            </p>
 
             <?php Pjax::begin(); ?>
-            <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+            <?php // echo $this->render('_search', ['model' => $searchModel]);  ?>
 
             <div class="card-body">
                 <div class="grid-margin">
@@ -55,7 +152,11 @@ $this->params['breadcrumbs'][] = $this->title;
                             ],
                             [
                                 'attribute' => 'target',
-                                'value' => 'target0.name'
+                                'value' => function($model) {
+                                    $targets = ForexTarget::find()->select('name')->column();
+                                    $targetString = implode(',', $targets);
+                                    return $targetString;
+                                }
                             ],
                             [
                                 'attribute' => 'result',
@@ -69,9 +170,10 @@ $this->params['breadcrumbs'][] = $this->title;
 //            'type',
 //            'target',
 //            'result',
-                            //'pips',
-                            //'comment:ntext',
-                            //'date',
+                            'percentage',
+                            'pips',
+                            'comment:ntext',
+                            'date',
 //            [
 //                'class' => ActionColumn::className(),
 //                'urlCreator' => function ($action, ForexSignals $model, $key, $index, $column) {

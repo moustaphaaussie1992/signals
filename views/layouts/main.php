@@ -338,7 +338,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
                                     <h3>Main</h3>
                                 </li>
                                 <li class="slide">
-                                    <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html"><i
+                                    <a class="side-menu__item has-link" data-bs-toggle="slide" href<?= Url::to(['site/index']) ?>"><i
                                             class="side-menu__icon fe fe-home"></i><span
                                             class="side-menu__label">Dashboard</span></a>
                                 </li>

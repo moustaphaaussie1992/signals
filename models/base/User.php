@@ -50,8 +50,9 @@ abstract class User extends BasicUser {
         return [
             [['username', 'auth_key', 'password_hash', 'email'], 'required'],
             [['status'], 'integer'],
+             [['bio'], 'string'],
             [['username', 'auth_key'], 'string', 'max' => 32],
-            [['password_hash', 'password_reset_token', 'email'], 'string', 'max' => 255]
+            [['password_hash', 'password_reset_token', 'email', 'photo', 'back_photo', 'twitter', 'facebook', 'tiktok', 'insta', 'contact_number', 'telegram_link'], 'string', 'max' => 255]
         ];
     }
 
@@ -69,6 +70,15 @@ abstract class User extends BasicUser {
             'status' => Yii::t('app', 'Status'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
+            'photo' => 'Photo',
+            'back_photo' => 'Back Photo',
+            'bio' => 'Bio',
+            'twitter' => 'Twitter',
+            'facebook' => 'Facebook',
+            'tiktok' => 'Tiktok',
+            'insta' => 'Insta',
+            'contact_number' => 'Contact Number',
+            'telegram_link' => 'Telegram Link',
         ];
     }
 

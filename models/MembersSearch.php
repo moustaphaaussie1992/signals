@@ -42,7 +42,14 @@ class MembersSearch extends Members {
      * @return ActiveDataProvider
      */
     public function search($params) {
-        $query = Members::find()->joinWith('rUser');
+
+        $query = (new \yii\db\Query)
+                ->select('members.*,members.id as memberId,subscriptions.subscription_date,subscriptions.r_type,subscriptions.from,subscriptions.to,datediff(subscriptions.to, curdate()) as days_left,subscriptions.member_id')
+                ->from('members')
+                ->join('join', 'user', 'user.id = members.r_user')
+                ->leftJoin('subscriptions', 'subscriptions.member_id = members.id');
+
+//        $query = Members::find()->joinWith('rUser');
 
 
         $userLoggedInId = \Yii::$app->user->id;

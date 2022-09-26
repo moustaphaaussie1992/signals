@@ -79,6 +79,9 @@ $config = [
             'class' => 'mdm\admin\Module',
             'layout' => 'left-menu',
         ],
+        'gridview' => [
+            'class' => '\kartik\grid\Module'
+        ],
         'datecontrol' => [
             'class' => '\kartik\datecontrol\Module',
             'displaySettings' => [

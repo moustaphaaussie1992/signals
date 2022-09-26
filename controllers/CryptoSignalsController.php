@@ -38,9 +38,27 @@ class CryptoSignalsController extends Controller {
         $searchModel = new CryptoSignalsSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
+        $model = new CryptoSignals();
+
+
+
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post())) {
+                 $model->target = implode(',', $model->target);
+                if ($model->save()) {
+                   
+//                return $this->redirect(['view', 'id' => $model->id]);
+                    return $this->redirect(['index']);
+                }
+            }
+        } else {
+            $model->loadDefaultValues();
+        }
+
         return $this->render('index', [
                     'searchModel' => $searchModel,
                     'dataProvider' => $dataProvider,
+                    'model' => $model,
         ]);
     }
 

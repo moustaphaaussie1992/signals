@@ -17,7 +17,7 @@ class CryptoSignalsSearch extends CryptoSignals {
     public function rules() {
         return [
             [['id', 'percentage'], 'integer'],
-            [['comment', 'date', 'coin', 'pair', 'type', 'target', 'result'], 'safe'],
+            [['comment', 'date', 'coin', 'pair', 'type', 'result'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class CryptoSignalsSearch extends CryptoSignals {
                 ->joinWith("coin0")
                 ->joinWith("pair0")
                 ->joinWith("result0")
-                ->joinWith("target0")
+//                ->joinWith("target0")
                 ->joinWith("type0");
 
         // add conditions that should always apply here
@@ -68,7 +68,7 @@ class CryptoSignalsSearch extends CryptoSignals {
         $query->andFilterWhere(['like', 'crypto_coin.name', $this->coin]);
         $query->andFilterWhere(['like', 'crypto_pair.name', $this->pair]);
         $query->andFilterWhere(['like', 'crypto_result.name', $this->result]);
-        $query->andFilterWhere(['like', 'crypto_target.name', $this->target]);
+//        $query->andFilterWhere(['like', 'crypto_target.name', $this->target]);
         $query->andFilterWhere(['like', 'crypto_type.name', $this->type]);
         $query->andFilterWhere(['like', 'date', $this->date]);
 
