@@ -383,7 +383,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
                                         <li><a href="<?= Url::to(['crypto-type/index']) ?>" class="slide-item"> Crypto Type</a></li>
                                         <li><a href="<?= Url::to(['crypto-target/index']) ?>" class="slide-item"> Crypto Target</a></li>
                                         <li><a href="<?= Url::to(['crypto-result/index']) ?>" class="slide-item"> Crypto Result</a></li>
-                                        
+
                                         <li><a href="<?= Url::to(['forex-ticker/index']) ?>" class="slide-item"> Forex Ticker</a></li>
                                         <li><a href="<?= Url::to(['forex-type/index']) ?>" class="slide-item"> Forex Type</a></li>
                                         <li><a href="<?= Url::to(['forex-target/index']) ?>" class="slide-item"> Forex Target</a></li>
@@ -391,6 +391,15 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
                                         <li><a href="<?= Url::to(['forex-pips/index']) ?>" class="slide-item"> Forex Pips</a></li>
 
                                     </ul>
+                                </li>
+
+                                <li class="sub-category">
+                                    <h3>Profile</h3>
+                                </li>
+                                <li class="slide">
+                                    <a class="side-menu__item has-link" data-bs-toggle="slide" href="<?= Url::to(['profile/index']) ?>"><i
+                                            class="side-menu__icon fe fe-home"></i><span
+                                            class="side-menu__label">profile test</span></a>
                                 </li>
 
                                 <li class="sub-category">
