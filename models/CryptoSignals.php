@@ -11,17 +11,19 @@ use Yii;
  * @property int $coin
  * @property int $pair
  * @property int $type
- * @property int $target
+ * @property string $target
  * @property int $result
  * @property int $percentage
  * @property string|null $comment
  * @property string $date 
+ * @property int $user_id
  * 
  * @property CryptoCoin $coin0
  * @property CryptoPair $pair0
  * @property CryptoResult $result0
  * @property CryptoTarget $target0
  * @property CryptoType $type0
+ * @property User $user 
  */
 class CryptoSignals extends \yii\db\ActiveRecord {
 
@@ -37,8 +39,8 @@ class CryptoSignals extends \yii\db\ActiveRecord {
      */
     public function rules() {
         return [
-            [['coin', 'pair', 'type', 'target', 'result', 'percentage'], 'required'],
-            [['coin', 'pair', 'type', 'result', 'percentage'], 'integer'],
+            [['coin', 'pair', 'type', 'target', 'result', 'percentage', 'user_id'], 'required'],
+            [['coin', 'pair', 'type', 'result', 'percentage', 'user_id'], 'integer'],
             [['comment'], 'string'],
 //            [['target'], 'string', 'max' => 255],
             [['date'], 'safe'],
@@ -49,6 +51,7 @@ class CryptoSignals extends \yii\db\ActiveRecord {
             [['type'], 'exist', 'skipOnError' => true, 'targetClass' => CryptoType::class, 'targetAttribute' => ['type' => 'id']],
             ['percentage', 'compare', 'compareValue' => 10000, 'operator' => '<='],
             ['percentage', 'compare', 'compareValue' => -100, 'operator' => '>='],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
             [['target'], 'safe']
         ];
     }
@@ -67,6 +70,7 @@ class CryptoSignals extends \yii\db\ActiveRecord {
             'percentage' => 'Percentage',
             'comment' => 'Comment',
             'date' => 'Date',
+            'user_id' => 'User ID',
         ];
     }
 
@@ -113,6 +117,15 @@ class CryptoSignals extends \yii\db\ActiveRecord {
      */
     public function getType0() {
         return $this->hasOne(CryptoType::class, ['id' => 'type']);
+    }
+
+    /**
+     * Gets query for [[User]]. 
+     * 
+     * @return \yii\db\ActiveQuery 
+     */
+    public function getUser() {
+        return $this->hasOne(User::class, ['id' => 'user_id']);
     }
 
 }

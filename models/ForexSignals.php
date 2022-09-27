@@ -10,17 +10,19 @@ use Yii;
  * @property int $id
  * @property int $ticker
  * @property int $type
- * @property int $target
+ * @property string $target
  * @property int $result
  * @property int $pips
  * @property string|null $comment
  * @property string $date
+ * @property int $user_id 
  *
  * @property ForexPips $pips0
  * @property ForexResult $result0
  * @property ForexTarget $target0
  * @property ForexTicker $ticker0
  * @property ForexType $type0
+ * @property User $user 
  */
 class ForexSignals extends \yii\db\ActiveRecord {
 
@@ -36,8 +38,8 @@ class ForexSignals extends \yii\db\ActiveRecord {
      */
     public function rules() {
         return [
-            [['ticker', 'type', 'target', 'result', 'pips', 'percentage'], 'required'],
-            [['ticker', 'type', 'result', 'pips', 'percentage'], 'integer'],
+            [['ticker', 'type', 'target', 'result', 'pips', 'percentage', 'user_id'], 'required'],
+            [['ticker', 'type', 'result', 'pips', 'percentage', 'user_id'], 'integer'],
             [['comment'], 'string'],
             [['date'], 'safe'],
 //            [['target'], 'string', 'max' => 255],
@@ -48,6 +50,7 @@ class ForexSignals extends \yii\db\ActiveRecord {
             [['type'], 'exist', 'skipOnError' => true, 'targetClass' => ForexType::class, 'targetAttribute' => ['type' => 'id']],
             ['percentage', 'compare', 'compareValue' => 10000, 'operator' => '<='],
             ['percentage', 'compare', 'compareValue' => -100, 'operator' => '>='],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
             [['target'], 'safe']
         ];
     }
@@ -66,6 +69,7 @@ class ForexSignals extends \yii\db\ActiveRecord {
             'percentage' => 'Percentage',
             'comment' => 'Comment',
             'date' => 'Date',
+            'user_id' => 'User ID',
         ];
     }
 
@@ -112,6 +116,15 @@ class ForexSignals extends \yii\db\ActiveRecord {
      */
     public function getType0() {
         return $this->hasOne(ForexType::class, ['id' => 'type']);
+    }
+
+    /**
+     * Gets query for [[User]]. 
+     * 
+     * @return \yii\db\ActiveQuery 
+     */
+    public function getUser() {
+        return $this->hasOne(User::class, ['id' => 'user_id']);
     }
 
 }

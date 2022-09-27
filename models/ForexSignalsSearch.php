@@ -45,6 +45,11 @@ class ForexSignalsSearch extends ForexSignals {
                 ->joinWith("ticker0")
         ;
 
+        $userId = \Yii::$app->user->id;
+        if ($userId) {
+            $query->where(["user_id" => $userId]);
+        }
+
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([

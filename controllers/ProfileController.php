@@ -9,7 +9,7 @@ class ProfileController extends Controller {
     public function actionIndex($userId = 1) {
 
         $user = \app\models\base\User::find()
-                ->select(['username', 'email', 'photo', 'back_photo', 'bio', 'twitter'
+                ->select(['id','username', 'email', 'photo', 'back_photo', 'bio', 'twitter'
                     , 'facebook', 'tiktok', 'insta', 'contact_number', 'telegram_link'])
                 ->asArray()
                 ->one();
