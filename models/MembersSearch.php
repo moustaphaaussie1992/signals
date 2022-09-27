@@ -15,6 +15,7 @@ class MembersSearch extends Members {
     public $from;
     public $to;
     public $days_left;
+    public $r_type;
 
     /**
      * {@inheritdoc}
@@ -22,7 +23,7 @@ class MembersSearch extends Members {
     public function rules() {
         return [
             [['id'], 'integer'],
-            [['fullname', 'registration_date', 'phone', 'telegram', 'r_user', 'subscription_date', 'from', 'to', 'days_left'], 'safe'],
+            [['fullname', 'registration_date', 'phone', 'telegram', 'r_user', 'subscription_date', 'from', 'to', 'days_left', 'r_type'], 'safe'],
         ];
     }
 
@@ -43,12 +44,17 @@ class MembersSearch extends Members {
      */
     public function search($params) {
 
-        $query = (new \yii\db\Query)
-                ->select('members.*,members.id as memberId,subscriptions.subscription_date,subscriptions.r_type,subscriptions.from,subscriptions.to,datediff(subscriptions.to, curdate()) as days_left,subscriptions.member_id')
-                ->from('members')
-                ->join('join', 'user', 'user.id = members.r_user')
-                ->leftJoin('subscriptions', 'subscriptions.member_id = members.id');
+//        $query = (new \yii\db\Query)
+//                ->select('members.*,members.id as memberId,subscriptions.subscription_date,subscriptions.r_type,subscriptions.from,subscriptions.to,datediff(subscriptions.to, curdate()) as days_left,subscriptions.member_id')
+//                ->from('members')
+//                ->join('join', 'user', 'user.id = members.r_user')
+//                ->leftJoin('subscriptions', 'subscriptions.member_id = members.id');
 
+
+        $query = Members::find()
+                ->select('members.*,subscriptions.subscription_date,subscriptions.from,subscriptions.to,datediff(subscriptions.to, curdate()) as days_left,subscriptions.r_type,subscriptions.member_id')
+                ->joinWith('rUser')
+                ->join('join', 'subscriptions', 'subscriptions.member_id = members.id');
 //        $query = Members::find()->joinWith('rUser');
 
 
@@ -77,6 +83,7 @@ class MembersSearch extends Members {
         $query->andFilterWhere(['like', 'fullname', $this->fullname])
                 ->andFilterWhere(['like', 'phone', $this->phone])
                 ->andFilterWhere(['like', 'telegram', $this->telegram])
+                ->andFilterWhere(['like', 'subscriptions.r_type', $this->r_type])
                 ->andFilterWhere(['like', 'user.username', $this->r_user]);
 
         return $dataProvider;

@@ -23,6 +23,7 @@ class Members extends \yii\db\ActiveRecord {
     public $from;
     public $to;
     public $days_left;
+    public $r_type;
 
     /**
      * {@inheritdoc}
@@ -37,7 +38,7 @@ class Members extends \yii\db\ActiveRecord {
     public function rules() {
         return [
             [['fullname', 'registration_date', 'phone', 'telegram', 'r_user'], 'required'],
-            [['registration_date', 'subscription_date', 'from', 'to', 'days_left', 'date'], 'safe'],
+            [['registration_date', 'subscription_date', 'from', 'to', 'days_left', 'date','r_type'], 'safe'],
             [['r_user'], 'integer'],
             [['fullname', 'phone', 'telegram'], 'string', 'max' => 255],
             [['r_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['r_user' => 'id']],

@@ -4,7 +4,9 @@ use app\models\MembersSearch;
 use app\models\Type;
 use kartik\grid\GridView;
 use richardfan\widget\JSRegister;
+use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\View;
@@ -128,11 +130,14 @@ $this->params['breadcrumbs'][] = $this->title;
 //                                'group' => true,
 //                            ],
                             'fullname',
-                            'registration_date',
-                            'subscription_date',
+//                            'registration_date',
+//                            'subscription_date',
                             [
                                 'attribute' => 'r_type',
+                                'label' => 'Type',
+                                'filter' => ArrayHelper::map(Type::find()->asArray()->all(), 'id', 'name'),
                                 'value' => function($model) {
+
                                     $type = Type::findOne(["id" => $model["r_type"]]);
                                     if ($type) {
                                         return $type->name;
@@ -209,24 +214,24 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'template' => '{update}{delete}{view}',
                                 'buttons' => [
                                     'view' => function ($url, $model) {
-                                        return Html::a('<span class="fe fe-eye fs-14"></span>', ['view?id=' . $model["memberId"]], [
+                                        return Html::a('<span class="fe fe-eye fs-14"></span>', $url, [
                                                     'class' => 'btn text-warning btn-sm',
                                                     'style' => ''
                                         ]);
                                     },
                                     'update' => function ($url, $model) {
-                                        return Html::a('<span class="fe fe-edit fs-14"></span>', ['update?id=' . $model["memberId"]], [
+                                        return Html::a('<span class="fe fe-edit fs-14"></span>', $url, [
                                                     'class' => 'btn text-primary btn-sm',
                                                     'title' => 'Edit'
                                         ]);
                                     },
                                     'delete' => function ($url, $model) {
-                                        return Html::a('<span class="fe fe-trash-2 fs-14"></span>', ['delete?id=' . $model["memberId"]], [
+                                        return Html::a('<span class="fe fe-trash-2 fs-14"></span>', $url, [
                                                     'class' => 'btn text-danger btn-sm',
                                                     'data' => [
                                                         'method' => 'post',
                                                         'params' => [
-                                                            'id' => $model["memberId"]
+                                                            'id' => $model["id"]
                                                         ],
                                                         'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
                                                         'title' => Yii::t('app', 'Confirmation'),
@@ -243,7 +248,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
 
             </div>
-            <?php Pjax::end(); ?>
+
         </div>
     </div>
 </div>
@@ -523,3 +528,4 @@ $this->params['breadcrumbs'][] = $this->title;
 
 </script>
 <?php JSRegister::end(); ?>
+<?php Pjax::end(); ?>
