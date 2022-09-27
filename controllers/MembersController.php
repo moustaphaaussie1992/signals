@@ -90,6 +90,17 @@ class MembersController extends Controller {
         ]);
     }
 
+    public function actionMembersForexAndCrypto() {
+        $searchModel = new MembersSearch();
+        $dataProvider = $searchModel->searchByType($this->request->queryParams, 3); // 2 means forex and crypto
+
+        return $this->render('index_by_type', [
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
+                    'title' => "Forex And Cypto Members",
+        ]);
+    }
+
     /**
      * Displays a single Members model.
      * @param int $id ID

@@ -355,6 +355,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
                                         <li><a href="<?= Url::to(['members/index']) ?>" class="slide-item"> Members</a></li>
                                         <li><a href="<?= Url::to(['members/members-crypto']) ?>" class="slide-item"> Cypto Members</a></li>
                                         <li><a href="<?= Url::to(['members/members-forex']) ?>" class="slide-item"> Forex Members</a></li>
+                                        <li><a href="<?= Url::to(['members/members-forex-and-crypto']) ?>" class="slide-item"> Forex And Crypto Members</a></li>
 
                                     </ul>
                                 </li>
