@@ -63,7 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         </div>
                         <span class="text-muted fs-12">
                             <!--<span class="text-yellow"><i class="fe fe-arrow-down-circle text-yellow"></i> 0.75%</span>-->
-                            Last 7 days</span>
+                            Last 6 months</span>
                     </div>
                 </div>
             </div>

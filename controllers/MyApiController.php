@@ -86,9 +86,9 @@ ORDER BY `DayDate` ASC";
 //        select date_format(subscription_date, '%M %Y'),sum(`fee`)
 //       from `subscriptions`
 //       group by year(subscription_date),month(subscription_date)
-        $rawSql1 = "SELECT (DATE(NOW()) - INTERVAL `day` DAY) AS `DayDate`, COALESCE(sum(`fee`),0) AS `count`
+        $rawSql1 = "SELECT date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %Y') AS `DayDate`, COALESCE(sum(`fee`),0) AS `count`,(DATE(NOW()) - INTERVAL `month` MONTH) as dateWithputFormat
 FROM (
-    SELECT 0 AS `day`
+    SELECT 0 AS `month`
     UNION SELECT 1
     UNION SELECT 2
     UNION SELECT 3
@@ -96,10 +96,9 @@ FROM (
     UNION SELECT 5
     UNION SELECT 6
 ) AS `week`
-LEFT JOIN `members` ON DATE(`date`) = (DATE(NOW()) - INTERVAL `day` DAY)
-LEFT JOIN subscriptions ON subscriptions.member_id = members.id
-GROUP BY `DayDate`
-ORDER BY `DayDate` ASC";
+LEFT JOIN subscriptions ON date_format(subscription_date, '%M %Y') = date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %Y')
+GROUP BY DayDate
+ORDER BY `dateWithputFormat` ASC";
 
 
         $connection1 = Yii::$app->getDb();
@@ -126,13 +125,31 @@ ORDER BY `DayDate` ASC";
 //LEFT JOIN subscriptions ON subscriptions.member_id = members.id
 //GROUP BY `DayDate`
 //ORDER BY `DayDate` ASC";
+//        $rawSql10 = "select DayDate,count from (select date_format(subscription_date, '%M %Y') as DayDate,sum(`fee`) as count
+//       from `subscriptions`
+//       group by year(subscription_date),month(subscription_date) 
+//       ORDER BY subscription_date DESC LIMIT 12) as t
+//       ORDER BY DayDate ASC";
 
-
-        $rawSql10 = "select DayDate,count from (select date_format(subscription_date, '%M %Y') as DayDate,sum(`fee`) as count
-       from `subscriptions`
-       group by year(subscription_date),month(subscription_date) 
-       ORDER BY subscription_date DESC LIMIT 12) as t
-       ORDER BY DayDate ASC";
+        $rawSql10 = "SELECT date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %Y') AS `DayDate`, COALESCE(sum(`fee`),0) AS `count`,(DATE(NOW()) - INTERVAL `month` MONTH) as dateWithputFormat
+FROM (
+    SELECT 0 AS `month`
+    UNION SELECT 1
+    UNION SELECT 2
+    UNION SELECT 3
+    UNION SELECT 4
+    UNION SELECT 5
+    UNION SELECT 6
+    UNION SELECT 7
+    UNION SELECT 8
+    UNION SELECT 9
+    UNION SELECT 10
+    UNION SELECT 11
+    UNION SELECT 12
+) AS `week`
+LEFT JOIN subscriptions ON date_format(subscription_date, '%M %Y') = date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %Y')
+GROUP BY DayDate
+ORDER BY `dateWithputFormat` ASC";
 
 
         $connection10 = Yii::$app->getDb();
