@@ -81,6 +81,11 @@ ORDER BY `DayDate` ASC";
         }
 
 
+
+
+//        select date_format(subscription_date, '%M %Y'),sum(`fee`)
+//       from `subscriptions`
+//       group by year(subscription_date),month(subscription_date)
         $rawSql1 = "SELECT (DATE(NOW()) - INTERVAL `day` DAY) AS `DayDate`, COALESCE(sum(`fee`),0) AS `count`
 FROM (
     SELECT 0 AS `day`
@@ -109,15 +114,25 @@ ORDER BY `DayDate` ASC";
             $labelsubscriptions [] = $result1[$i]["DayDate"];
         }
 
-        $rawSql10 = "SELECT (DATE(NOW()) - INTERVAL `day` DAY) AS `DayDate`, COALESCE(sum(`fee`),0) AS `count`
-FROM (
-    SELECT 0 AS `day` 
-    $union
-) AS `week`
-LEFT JOIN `members` ON DATE(`date`) = (DATE(NOW()) - INTERVAL `day` DAY)
-LEFT JOIN subscriptions ON subscriptions.member_id = members.id
-GROUP BY `DayDate`
-ORDER BY `DayDate` ASC";
+
+
+
+//        $rawSql10 = "SELECT (DATE(NOW()) - INTERVAL `day` DAY) AS `DayDate`, COALESCE(sum(`fee`),0) AS `count`
+//FROM (
+//    SELECT 0 AS `day` 
+//    $union
+//) AS `week`
+//LEFT JOIN `members` ON DATE(`date`) = (DATE(NOW()) - INTERVAL `day` DAY)
+//LEFT JOIN subscriptions ON subscriptions.member_id = members.id
+//GROUP BY `DayDate`
+//ORDER BY `DayDate` ASC";
+
+
+        $rawSql10 = "select DayDate,count from (select date_format(subscription_date, '%M %Y') as DayDate,sum(`fee`) as count
+       from `subscriptions`
+       group by year(subscription_date),month(subscription_date) 
+       ORDER BY subscription_date DESC LIMIT 12) as t
+       ORDER BY DayDate ASC";
 
 
         $connection10 = Yii::$app->getDb();
