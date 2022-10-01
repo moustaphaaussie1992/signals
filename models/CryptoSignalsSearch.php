@@ -75,7 +75,9 @@ class CryptoSignalsSearch extends CryptoSignals {
         $query->andFilterWhere(['like', 'crypto_result.name', $this->result]);
 //        $query->andFilterWhere(['like', 'crypto_target.name', $this->target]);
         $query->andFilterWhere(['like', 'crypto_type.name', $this->type]);
-        $query->andFilterWhere(['like', 'date', $this->date]);
+        $query->andFilterWhere(['like', 'date', $this->date])
+                ->orderBy(["date" => SORT_DESC])
+        ;
 
         return $dataProvider;
     }

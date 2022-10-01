@@ -3,11 +3,11 @@
 use app\models\CryptoCoin;
 use app\models\CryptoPair;
 use app\models\CryptoResult;
-use app\models\CryptoSignals;
 use app\models\CryptoSignalsSearch;
 use app\models\CryptoTarget;
 use app\models\CryptoType;
 use kartik\select2\Select2;
+use richardfan\widget\JSRegister;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
@@ -27,14 +27,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php $form = ActiveForm::begin(); ?>
     <div class="row">
-        <div class="col-lg-3">
+        <div class="col-lg-1">
 
 
 
             <?=
             $form->field($model, 'coin')->widget(Select2::classname(), [
                 'data' => ArrayHelper::map(CryptoCoin::find()->all(), 'id', 'name'),
-                'options' => ['placeholder' => 'Select ...',
+                'options' =>
+                ['placeholder' => '...',
                     'style' => "width:100%!important"
                 ],
                 'pluginOptions' => [
@@ -43,12 +44,12 @@ $this->params['breadcrumbs'][] = $this->title;
             ]);
             ?>
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-1">
 
             <?=
             $form->field($model, 'pair')->widget(Select2::classname(), [
                 'data' => ArrayHelper::map(CryptoPair::find()->all(), 'id', 'name'),
-                'options' => ['placeholder' => 'Select ...',
+                'options' => ['placeholder' => '...',
                     'style' => "width:100%!important"
                 ],
                 'pluginOptions' => [
@@ -57,11 +58,11 @@ $this->params['breadcrumbs'][] = $this->title;
             ]);
             ?>
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-1">
             <?=
             $form->field($model, 'type')->widget(Select2::classname(), [
                 'data' => ArrayHelper::map(CryptoType::find()->all(), 'id', 'name'),
-                'options' => ['placeholder' => 'Select ...',
+                'options' => ['placeholder' => '...',
                     'style' => "width:100%!important"
                 ],
                 'pluginOptions' => [
@@ -76,7 +77,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?=
             $form->field($model, 'target')->widget(Select2::classname(), [
                 'data' => ArrayHelper::map(CryptoTarget::find()->all(), 'id', 'name'),
-                'options' => ['placeholder' => 'Select ...',
+                'options' => ['placeholder' => '...',
                     'style' => "width:100%!important"
                 ],
                 'pluginOptions' => [
@@ -86,12 +87,12 @@ $this->params['breadcrumbs'][] = $this->title;
             ]);
             ?>
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-1">
 
             <?=
             $form->field($model, 'result')->widget(Select2::classname(), [
                 'data' => ArrayHelper::map(CryptoResult::find()->all(), 'id', 'name'),
-                'options' => ['placeholder' => 'Select ...',
+                'options' => ['placeholder' => '...',
                     'style' => "width:100%!important"
                 ],
                 'pluginOptions' => [
@@ -100,14 +101,14 @@ $this->params['breadcrumbs'][] = $this->title;
             ]);
             ?>
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-1">
             <?= $form->field($model, 'percentage')->textInput() ?>
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-1">
             <?= $form->field($model, 'comment')->textInput() ?>
         </div>
-        <div class="form-group col-lg-3">
-            <?= Html::submitButton('Save', ['class' => 'btn btn-success', 'style' => 'margin-top: 27px;']) ?>
+        <div class="form-group col-lg-1">
+            <?= Html::submitButton('Add Signal', ['class' => 'btn btn-success', 'style' => 'margin-top: 27px;']) ?>
         </div>
     </div>
     <?php ActiveForm::end(); ?>
@@ -170,7 +171,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'value' => 'result0.name'
                             ],
                             'percentage',
-                            'date',
+//                            'date',
                             'comment:ntext',
 //            [
 //                'class' => ActionColumn::className(),
@@ -216,3 +217,33 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+<?php JSRegister::begin(); ?>
+<script>
+
+
+// on first focus (bubbles up to document), open the menu
+    $(document).on('focus', '.select2-selection.select2-selection--single', function (e) {
+        $(this).closest(".select2-container").siblings('select:enabled').select2('open');
+    });
+
+// steal focus during close - only capture once and stop propogation
+    $('select.select2').on('select2:closing', function (e) {
+        $(e.target).data("select2").$selection.one('focus focusin', function (e) {
+            e.stopPropagation();
+        });
+    });
+
+
+
+
+
+</script>
+<?php JSRegister::end(); ?>
+

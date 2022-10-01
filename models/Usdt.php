@@ -9,37 +9,34 @@ use Yii;
  *
  * @property int $id
  * @property int $price
- * @property int $profit
  * @property string $date
  * @property int $type
  * @property int $user_id
+ * @property string $name
+ * @property string $phone
  *
  * @property User $user
  */
-class Usdt extends \yii\db\ActiveRecord {
-
-    const BUY_USDT = 1;
-    const SELL_USDT = 2;
-    const USDT_TYPES = [
-        1 => 'Buy',
-        2 => 'Sell'
-    ];
-
+class Usdt extends \yii\db\ActiveRecord
+{
     /**
      * {@inheritdoc}
      */
-    public static function tableName() {
+    public static function tableName()
+    {
         return 'usdt';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function rules() {
+    public function rules()
+    {
         return [
-            [['price', 'profit', 'type', 'user_id'], 'required'],
-            [['price', 'profit', 'type', 'user_id'], 'integer'],
+            [['price', 'type', 'user_id', 'name', 'phone'], 'required'],
+            [['price', 'type', 'user_id'], 'integer'],
             [['date'], 'safe'],
+            [['name', 'phone'], 'string', 'max' => 255],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
@@ -47,14 +44,16 @@ class Usdt extends \yii\db\ActiveRecord {
     /**
      * {@inheritdoc}
      */
-    public function attributeLabels() {
+    public function attributeLabels()
+    {
         return [
             'id' => 'ID',
             'price' => 'Price',
-            'profit' => 'Profit',
             'date' => 'Date',
             'type' => 'Type',
             'user_id' => 'User ID',
+            'name' => 'Name',
+            'phone' => 'Phone',
         ];
     }
 
@@ -63,8 +62,8 @@ class Usdt extends \yii\db\ActiveRecord {
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getUser() {
+    public function getUser()
+    {
         return $this->hasOne(User::class, ['id' => 'user_id']);
     }
-
 }

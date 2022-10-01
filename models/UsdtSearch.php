@@ -16,8 +16,8 @@ class UsdtSearch extends Usdt {
      */
     public function rules() {
         return [
-            [['id', 'price', 'profit', 'type', 'user_id'], 'integer'],
-            [['date'], 'safe'],
+            [['id', 'price', 'type', 'user_id'], 'integer'],
+            [['date', 'name', 'phone'], 'safe'],
         ];
     }
 
@@ -39,9 +39,6 @@ class UsdtSearch extends Usdt {
     public function search($params) {
         $query = Usdt::find();
 
-        $userId = \Yii::$app->user->id;
-        $query->andWhere(['user_id' => $userId]);
-
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
@@ -60,11 +57,14 @@ class UsdtSearch extends Usdt {
         $query->andFilterWhere([
             'id' => $this->id,
             'price' => $this->price,
-            'profit' => $this->profit,
             'date' => $this->date,
             'type' => $this->type,
             'user_id' => $this->user_id,
         ]);
+
+        $query->andFilterWhere(['like', 'name', $this->name])
+                ->andFilterWhere(['like', 'phone', $this->phone])
+                ->orderBy(["date" => SORT_DESC]);
 
         return $dataProvider;
     }

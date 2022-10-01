@@ -4,9 +4,11 @@ namespace app\controllers;
 
 use app\models\Usdt;
 use app\models\UsdtSearch;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
+use yii\web\Response;
 
 /**
  * UsdtController implements the CRUD actions for Usdt model.
@@ -18,13 +20,14 @@ class UsdtController extends Controller {
      */
     public function behaviors() {
         return array_merge(
-                parent::behaviors(), [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
+                parent::behaviors(),
+                [
+                    'verbs' => [
+                        'class' => VerbFilter::className(),
+                        'actions' => [
+                            'delete' => ['POST'],
+                        ],
+                    ],
                 ]
         );
     }
@@ -35,13 +38,41 @@ class UsdtController extends Controller {
      * @return string
      */
     public function actionIndex() {
+
+
+
+
+
+
         $searchModel = new UsdtSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
+        $model = new Usdt();
+
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post())) {
+                $userId = \Yii::$app->user->id;
+                $model->user_id = $userId;
+                $model->type = $model->type[0];
+
+
+
+                if ($model->save()) {
+
+//                return $this->redirect(['view', 'id' => $model->id]);
+                    return $this->redirect(['index']);
+                } else {
+                    return $model->getErrors();
+                }
+            }
+        } else {
+            $model->loadDefaultValues();
+        }
 
         return $this->render('index', [
                     'searchModel' => $searchModel,
                     'dataProvider' => $dataProvider,
+                    'model' => $model,
         ]);
     }
 
@@ -60,16 +91,19 @@ class UsdtController extends Controller {
     /**
      * Creates a new Usdt model.
      * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return string|\yii\web\Response
+     * @return string|Response
      */
     public function actionCreate() {
         $model = new Usdt();
 
         if ($this->request->isPost) {
+
             if ($model->load($this->request->post())) {
-                $model->user_id = \Yii::$app->user->id;
+                $userId = Yii::$app->user->id;
+                $model->user_id = $userId;
                 if ($model->save()) {
-                    return $this->redirect(['view', 'id' => $model->id]);
+//                    return $this->redirect(['view', 'id' => $model->id]);
+                    return $this->redirect(['index']);
                 }
             }
         } else {
@@ -85,7 +119,7 @@ class UsdtController extends Controller {
      * Updates an existing Usdt model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
-     * @return string|\yii\web\Response
+     * @return string|Response
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id) {
@@ -104,7 +138,7 @@ class UsdtController extends Controller {
      * Deletes an existing Usdt model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
-     * @return \yii\web\Response
+     * @return Response
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id) {
