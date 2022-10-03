@@ -167,12 +167,37 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'attribute' => 'pips',
                                 'value' => 'pips0.name'
                             ],
+//                                     'pips',
 //            'ticker',
 //            'type',
 //            'target',
 //            'result',
-                            'percentage',
-                            'pips',
+                                        [
+                                'attribute' => 'percentage',
+                                             'format' => 'raw',
+                                'value' => function($model) {
+                                   if($model->result == 1){
+                                    
+                                         
+                                                                                return '<div class=" bg-success-transparent border border-success  text-success   p-1 br-5"style="display: flex;
+justify-content: center;">
+                                        
+                                        <span class="fs-30 pe-2" style="font-size: 15px !important;">'.$model['percentage'].' %</span>
+                                           
+                                        </div>';
+                                   }else if($model->result==2){
+                                       return '<div class=" bg-danger-transparent border border-danger  text-danger   p-1 br-5"style="display: flex;
+justify-content: center;">
+                                        
+                                        <span class="fs-30 pe-2" style="font-size: 15px !important;">'.$model['percentage'].' %</span>
+                                           
+                                        </div>';
+                                       
+                                   }
+                                    return $targetString;
+                                }
+                            ],
+                           
                             'comment:ntext',
 //                            'date',
 //            [
