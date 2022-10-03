@@ -89,7 +89,7 @@ $sashPath = Yii::getAlias('@web') . '/sash';
                                         <a href="register.html" class="btn ripple btn-min w-sm btn-outline-primary me-2 my-auto"
                                            target="_blank">New User
                                         </a>
-                                        <a href="login.html" class="btn ripple btn-min w-sm btn-primary me-2 my-auto"
+                                        <a href="login" class="btn ripple btn-min w-sm btn-primary me-2 my-auto"
                                            target="_blank">Login
                                         </a>
                                     </div>
@@ -148,7 +148,7 @@ $sashPath = Yii::getAlias('@web') . '/sash';
                                            class="btn ripple btn-min w-sm btn-outline-primary me-2 my-auto d-lg-none d-xl-block d-block"
                                            target="_blank">New User
                                         </a>
-                                        <a href="login.html" class="btn ripple btn-min w-sm btn-primary me-2 my-auto d-lg-none d-xl-block d-block"
+                                        <a href="login" class="btn ripple btn-min w-sm btn-primary me-2 my-auto d-lg-none d-xl-block d-block"
                                            target="_blank">Login
                                         </a>
                                     </div>
@@ -162,24 +162,26 @@ $sashPath = Yii::getAlias('@web') . '/sash';
                     <div class="container px-sm-0">
                         <div class="row">
                             <div class="col-xl-6 col-lg-6 mb-5 pb-5 animation-zidex pos-relative">
-                                <h4 class="fw-semibold mt-7">Manage Your Business</h4>
-                                <h1 class="text-start fw-bold">We Help to Build Your Dream Project with <span
-                                        class="text-primary animate-heading">Sash</span></h1>
+                                <h4 class="fw-semibold mt-7">Manage Your Paid Channels</h4>
+                                <h1 class="text-start fw-bold">We help you manage your
+dream project with <span
+                                        class="text-primary animate-heading">Pro-Labz</span></h1>
                                 <h6 class="pb-3">
-                                    Sash - Now you can use this admin template to design stunning dashboards
-                                    that will wow your target viewers or users to no end. To create a good and
-                                    well-structured dashboard,
-                                    you need to start from scratch with HTML, SCSS, CSS, and JS and with lots of coding,
-                                    but by using this Sash-Admin template.</h6>
+                                   What can you do with Pro-Labz?
+                               ● Edit and track your members, VIP Channel and
+Signals
+
+●Share and save your profits and data 
+
+●Attract new customers from our unlimited number
+of users
+                                </h6>
 
                                 <a href="https://themeforest.net/item/sash-bootstrap-5-admin-dashboard-template/35183671"
                                    target="_blank" class="btn ripple btn-min w-lg mb-3 me-2 btn-primary"><i
-                                        class="fe fe-play me-2"></i> Get Started
+                                        class="fe fe-play me-2"></i> View Demo
                                 </a>
-                                <a href="https://themeforest.net/user/spruko/portfolio"
-                                   class="btn ripple btn-min w-lg btn-outline-primary mb-3 me-2" target="_blank"><i
-                                        class="fe fe-eye me-2"></i>Discover More
-                                </a>
+                               
                             </div>
                             <div class="col-xl-6 col-lg-6 my-auto">
                                 <img src="<?= $sashPath ?>/assets/images/landing/market4.png" alt="">
@@ -299,10 +301,8 @@ $sashPath = Yii::getAlias('@web') . '/sash';
                                     <div class="row">
                                         <h4 class="text-center fw-semibold">Features</h4>
                                         <span class="landing-title"></span>
-                                        <h2 class="fw-semibold text-center">Sash Main Features</h2>
-                                        <p class="text-default mb-5 text-center">The Sash admin template comes with
-                                            ready-to-use features that are completely easy-to-use for any user, even for
-                                            a beginner.</p>
+                                        <h2 class="fw-semibold text-center">Pro-Labz Main Features</h2>
+                                        <p class="text-default mb-5 text-center"></p>
                                         <div class="row mt-7">
                                             <div class="col-lg-6 col-md-12">
                                                 <div class="card features main-features main-features-1 wow fadeInUp reveal revealleft"
@@ -326,9 +326,8 @@ $sashPath = Yii::getAlias('@web') . '/sash';
                                                         </svg>
                                                     </div>
                                                     <div class="text-left">
-                                                        <h4 class="fw-bold">Quality &amp; Clean Code</h4>
-                                                        <p class="mb-0">The Sash admin code is maintained very cleanly
-                                                            and well-structured with proper comments.</p>
+                                                        <h4 class="fw-bold"> Statistics</h4>
+                                                        <p class="mb-0">With ProLabz you can see detailed statistics of your channel, signals, and members through our easy fashionable filters</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -383,10 +382,9 @@ $sashPath = Yii::getAlias('@web') . '/sash';
                                                         </svg>
                                                     </div>
                                                     <div class="text-left">
-                                                        <h4 class="fw-bold">Multiple Demos</h4>
+                                                        <h4 class="fw-bold">Members</h4>
                                                         <p class="mb-0">
-                                                            We included multiple demos, preview video, and screen shots
-                                                            to give a quick overview of our Sash admin template.
+                                                          ProLabz allows you to add, monitor and track your members 
                                                         </p>
                                                     </div>
                                                 </div>
@@ -461,10 +459,10 @@ $sashPath = Yii::getAlias('@web') . '/sash';
                                                         </svg>
                                                     </div>
                                                     <div class="text-left">
-                                                        <h4 class="fw-bold">Validation Forms</h4>
+                                                        <h4 class="fw-bold">Signals</h4>
                                                         <p class="mb-0">
-                                                            Different types of “Form Validation” are implemented in this
-                                                            Sash admin template and used strict validation rules.
+                                                  Our Signals feature allows you to share your success, trades and charts with your members through unlimited platforms
+This feature also gives you the chance to separate between Forex and Crypto users 
                                                         </p>
                                                     </div>
                                                 </div>
@@ -514,11 +512,9 @@ $sashPath = Yii::getAlias('@web') . '/sash';
                                                         </svg>
                                                     </div>
                                                     <div class="text-left">
-                                                        <h4 class="fw-bold">Widgets</h4>
+                                                        <h4 class="fw-bold">Data</h4>
                                                         <p class="mb-0">
-                                                            30+ widgets are included in this template. Please check out
-                                                            the best option that suits you and implement it in your
-                                                            projects.
+                                                            Your data entry never easier to transfer, update and secure with ProLabz
                                                         </p>
                                                     </div>
                                                 </div>
@@ -584,11 +580,9 @@ $sashPath = Yii::getAlias('@web') . '/sash';
                                                         </svg>
                                                     </div>
                                                     <div class="text-left">
-                                                        <h4 class="fw-bold">9 Types of Charts</h4>
+                                                        <h4 class="fw-bold">Market & Share</h4>
                                                         <p class="mb-0">
-                                                            We included nine (9) types of the best possible chart
-                                                            options for your project. You can customize with your
-                                                            requirement.
+                                                       Our platfotm allows you to share your success in a modern fashionable dashboards through ProLabz and other social media platforms to unlimited number of users
                                                         </p>
                                                     </div>
                                                 </div>
@@ -622,11 +616,9 @@ $sashPath = Yii::getAlias('@web') . '/sash';
                                                         </svg>
                                                     </div>
                                                     <div class="text-left">
-                                                        <h4 class="fw-bold">Documentation</h4>
+                                                        <h4 class="fw-bold">USDT Cash-out*</h4>
                                                         <p class="mb-0">
-                                                            The documentation provides clear-cut material for the Sash
-                                                            admin template. The documentation is explained or instructed
-                                                            in such a way that every user can understand.
+                                                           ProLabz will allow you to upgrade your data entry game with our easy filtration of Clients info, USDT flow and sales
                                                         </p>
                                                     </div>
                                                 </div>
@@ -644,7 +636,7 @@ $sashPath = Yii::getAlias('@web') . '/sash';
                                         <h4 class="text-center fw-semibold">Our Mission</h4>
                                         <span class="landing-title"></span>
                                         <div class="text-center">
-                                            <h2 class="text-center fw-semibold">Our mission is to make work meaningful.
+                                            <h2 class="text-center fw-semibold">Is to help our clients market, share and track data
                                             </h2>
                                         </div>
                                         <div class="col-lg-12">
