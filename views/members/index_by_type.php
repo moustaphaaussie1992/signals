@@ -19,7 +19,7 @@ use yii\widgets\Pjax;
 $this->title = $title;
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-
+<?php Pjax::begin(); ?>
 <div class="row">
     <div class="col-12 col-sm-12">
         <div class="card">
@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <h3 class="card-title mb-0"><?= Html::encode($this->title) ?></h3>
             </div>
 
-            <?php Pjax::begin(); ?>
+
             <?php // echo $this->render('_search', ['model' => $searchModel]);     ?>
             <div class="card-body">
                 <div class="grid-margin">
@@ -101,7 +101,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
 
             </div>
-            <?php Pjax::end(); ?>
+
         </div>
     </div>
 </div>
@@ -127,3 +127,4 @@ $this->params['breadcrumbs'][] = $this->title;
 
 </script>
 <?php JSRegister::end(); ?>
+<?php Pjax::end(); ?>
