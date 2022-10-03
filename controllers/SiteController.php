@@ -77,7 +77,7 @@ class SiteController extends Controller {
         }
 
         $model->password = '';
-        return $this->render('login', [
+        return $this->renderPartial('login', [
                     'model' => $model,
         ]);
     }

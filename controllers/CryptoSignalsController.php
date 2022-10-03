@@ -45,6 +45,7 @@ class CryptoSignalsController extends Controller {
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
                 $model->target = implode(',', $model->target);
+                $model->user_id = \Yii::$app->user->id;
                 if ($model->save()) {
 
 //                return $this->redirect(['view', 'id' => $model->id]);

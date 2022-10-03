@@ -1,6 +1,8 @@
 <?php
 
 use app\models\Utils;
+use richardfan\widget\JSRegister;
+use yii\helpers\Url;
 
 //\yii\helpers\VarDumper::dump($user, 3, true);
 //die();
@@ -80,139 +82,111 @@ function addhttp($url) {
                                 <?= $user["bio"] ?> 
                             </p>
                         </div>
-<!--                        <hr>
-                        <div class="d-flex align-items-center mb-3 mt-3">
-                            <div class="me-4 text-center text-primary">
-                                <span><i class="fe fe-briefcase fs-20"></i></span>
-                            </div>
-                            <div>
-                                <strong>San Francisco, CA </strong>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-center mb-3 mt-3">
-                            <div class="me-4 text-center text-primary">
-                                <span><i class="fe fe-map-pin fs-20"></i></span>
-                            </div>
-                            <div>
-                                <strong>Francisco, USA</strong>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-center mb-3 mt-3">
-                            <div class="me-4 text-center text-primary">
-                                <span><i class="fe fe-phone fs-20"></i></span>
-                            </div>
-                            <div>
-                                <strong>+125 254 3562 </strong>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-center mb-3 mt-3">
-                            <div class="me-4 text-center text-primary">
-                                <span><i class="fe fe-mail fs-20"></i></span>
-                            </div>
-                            <div>
-                                <strong>georgeme@abc.com </strong>
-                            </div>
-                        </div>-->
+                        <!--                        <hr>
+                                                <div class="d-flex align-items-center mb-3 mt-3">
+                                                    <div class="me-4 text-center text-primary">
+                                                        <span><i class="fe fe-briefcase fs-20"></i></span>
+                                                    </div>
+                                                    <div>
+                                                        <strong>San Francisco, CA </strong>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex align-items-center mb-3 mt-3">
+                                                    <div class="me-4 text-center text-primary">
+                                                        <span><i class="fe fe-map-pin fs-20"></i></span>
+                                                    </div>
+                                                    <div>
+                                                        <strong>Francisco, USA</strong>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex align-items-center mb-3 mt-3">
+                                                    <div class="me-4 text-center text-primary">
+                                                        <span><i class="fe fe-phone fs-20"></i></span>
+                                                    </div>
+                                                    <div>
+                                                        <strong>+125 254 3562 </strong>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex align-items-center mb-3 mt-3">
+                                                    <div class="me-4 text-center text-primary">
+                                                        <span><i class="fe fe-mail fs-20"></i></span>
+                                                    </div>
+                                                    <div>
+                                                        <strong>georgeme@abc.com </strong>
+                                                    </div>
+                                                </div>-->
                     </div>
                 </div>
 
             </div>
 
-            <div class="col-xl-3">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="main-profile-contact-list">
-                            <div class="me-5">
-                                <div class="media mb-4 d-flex">
-                                    <div class="media-icon bg-secondary bradius me-3 mt-1">
-                                        <i class="fa fa-line-chart fs-20 text-white"></i>
-                                    </div>
-                                    <div class="media-body">
-                                        <span class="text-muted">Signals Forex</span>
-                                        <div class="fw-semibold fs-25">
-                                            <?= Utils::getSignalForexCountByUserId($user["id"]) ?>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="me-5 mt-5 mt-md-0">
-                                <div class="media mb-4 d-flex">
-                                    <div class="media-icon bg-danger bradius text-white me-3 mt-1">
-                                        <span class="mt-3">
-                                            <i class="fa fa-line-chart fs-20"></i>
-                                        </span>
-                                    </div>
-                                    <div class="media-body">
-                                        <span class="text-muted">Win Signals Forex</span>
-                                        <div class="fw-semibold fs-25">
-                                            <?= Utils::getSignalForexCountWinByUserId($user["id"]) ?>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="me-0 mt-5 mt-md-0">
-                                <div class="media">
-                                    <div class="media-icon bg-primary text-white bradius me-3 mt-1">
-                                        <span class="mt-3">
-                                            <i class="fe fe-dollar-sign fs-20"></i>
-                                        </span>
-                                    </div>
-                                    <div class="media-body">
-                                        <span class="text-muted">Profit Signals Forex</span>
-                                        <div class="fw-semibold fs-25">
-                                            2,876
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="col-xl-3">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="main-profile-contact-list">
-                            <div class="me-5">
-                                <div class="media mb-4 d-flex">
-                                    <div class="media-icon bg-secondary bradius me-3 mt-1">
-                                        <i class="fa fa-line-chart fs-20 text-white"></i>
-                                    </div>
-                                    <div class="media-body">
-                                        <span class="text-muted">Signals Crypto</span>
-                                        <div class="fw-semibold fs-25">
-                                            <?= Utils::getSignalCryptoCountByUserId($user["id"]) ?>
+            <div class="col-xl-12 row">
+                <div class="col-xl-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Crypto</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="main-profile-contact-list">
+                                <div class="me-5">
+                                    <div class="media mb-4 d-flex">
+                                        <div class="media-icon bg-secondary bradius me-3 mt-1">
+                                            <i class="fa fa-line-chart fs-20 text-white"></i>
+                                        </div>
+                                        <div class="media-body">
+                                            <span class="text-muted">Signals</span>
+                                            <div class="fw-semibold fs-25">
+                                                <?= Utils::getSignalCryptoCountByUserId($user["id"]) ?>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="me-5 mt-5 mt-md-0">
-                                <div class="media mb-4 d-flex">
-                                    <div class="media-icon bg-danger bradius text-white me-3 mt-1">
-                                        <span class="mt-3">
-                                            <i class="fa fa-line-chart fs-20"></i>
-                                        </span>
-                                    </div>
-                                    <div class="media-body">
-                                        <span class="text-muted">Win Crypto Forex</span>
-                                        <div class="fw-semibold fs-25">
-                                            <?= Utils::getSignalCryptoCountWinByUserId($user["id"]) ?>
+                                <div class="me-5 mt-5 mt-md-0">
+                                    <div class="media mb-4 d-flex">
+                                        <div class="media-icon bg-success bradius text-white me-3 mt-1">
+                                            <span class="mt-3">
+                                                <i class="fa fa-line-chart fs-20"></i>
+                                            </span>
+                                        </div>
+                                        <div class="media-body">
+                                            <span class="text-muted">Won Signals</span>
+                                            <div class="fw-semibold fs-25">
+                                                <?php
+                                                $wonCryptoSignals = Utils::getSignalCryptoCountWinByUserId($user["id"]);
+                                                echo $wonCryptoSignals;
+                                                ?>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="me-0 mt-5 mt-md-0">
-                                <div class="media">
-                                    <div class="media-icon bg-primary text-white bradius me-3 mt-1">
-                                        <span class="mt-3">
-                                            <i class="fe fe-dollar-sign fs-20"></i>
-                                        </span>
+                                </div>  
+                                <div class="me-5 mt-5 mt-md-0">
+                                    <div class="media mb-4 d-flex">
+                                        <div class="media-icon bg-danger bradius text-white me-3 mt-1">
+                                            <span class="mt-3">
+                                                <i class="fa fa-line-chart fs-20"></i>
+                                            </span>
+                                        </div>
+                                        <div class="media-body">
+                                            <span class="text-muted">Loss Signals</span>
+                                            <div class="fw-semibold fs-25">
+                                                <?= Utils::getSignalCryptoCountLossByUserId($user["id"]) ?>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="media-body">
-                                        <span class="text-muted">Profit Crypto Crypto</span>
-                                        <div class="fw-semibold fs-25">
-                                            2,876
+                                </div>  
+                                <div class="me-0 mt-5 mt-md-0">
+                                    <div class="media">
+                                        <div class="media-icon bg-primary text-white bradius me-3 mt-1">
+                                            <span class="mt-3">
+                                                <i class="fe fe-dollar-sign fs-20"></i>
+                                            </span>
+                                        </div>
+                                        <div class="media-body">
+                                            <span class="text-muted">Profit From Signals</span>
+                                            <div class="fw-semibold fs-25">
+                                                2,876
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -220,8 +194,102 @@ function addhttp($url) {
                         </div>
                     </div>
                 </div>
+                <div class="col-xl-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Crypto Signals</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                                <canvas id="winSignalCryptoChart" class="h-275 chartjs-render-monitor" width="663" height="343" style="display: block; height: 275px; width: 531px;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
+            <div class="col-xl-12 row">
+                <div class="col-xl-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Forex</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="main-profile-contact-list">
+                                <div class="me-5">
+                                    <div class="media mb-4 d-flex">
+                                        <div class="media-icon bg-secondary bradius me-3 mt-1">
+                                            <i class="fa fa-line-chart fs-20 text-white"></i>
+                                        </div>
+                                        <div class="media-body">
+                                            <span class="text-muted">Signal</span>
+                                            <div class="fw-semibold fs-25">
+                                                <?= Utils::getSignalForexCountByUserId($user["id"]) ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="me-5 mt-5 mt-md-0">
+                                    <div class="media mb-4 d-flex">
+                                        <div class="media-icon bg-success bradius text-white me-3 mt-1">
+                                            <span class="mt-3">
+                                                <i class="fa fa-line-chart fs-20"></i>
+                                            </span>
+                                        </div>
+                                        <div class="media-body">
+                                            <span class="text-muted">Won Signals</span>
+                                            <div class="fw-semibold fs-25">
+                                                <?= Utils::getSignalForexCountWinByUserId($user["id"]) ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="me-5 mt-5 mt-md-0">
+                                    <div class="media mb-4 d-flex">
+                                        <div class="media-icon bg-danger bradius text-white me-3 mt-1">
+                                            <span class="mt-3">
+                                                <i class="fa fa-line-chart fs-20"></i>
+                                            </span>
+                                        </div>
+                                        <div class="media-body">
+                                            <span class="text-muted">Loss Signals</span>
+                                            <div class="fw-semibold fs-25">
+                                                <?= Utils::getSignalForexCountLossByUserId($user["id"]) ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="me-0 mt-5 mt-md-0">
+                                    <div class="media">
+                                        <div class="media-icon bg-primary text-white bradius me-3 mt-1">
+                                            <span class="mt-3">
+                                                <i class="fe fe-dollar-sign fs-20"></i>
+                                            </span>
+                                        </div>
+                                        <div class="media-body">
+                                            <span class="text-muted">Profit From Signals</span>
+                                            <div class="fw-semibold fs-25">
+                                                2,876
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Forex Signals</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                                <canvas id="winSignalForexChart" class="h-275 chartjs-render-monitor" width="663" height="343" style="display: block; height: 275px; width: 531px;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <!--                        <div class="card">
                                         <div class="card-header">
@@ -674,4 +742,183 @@ function addhttp($url) {
     </div>
 </div>
 <!-- COL-END -->
-</div>
+
+<?php JSRegister::begin(); ?>
+<script>
+
+    $.ajax({
+        url: '<?php echo Url::toRoute("/my-api/get-signals-stat") ?>',
+        type: "POST",
+        data: {
+            'userId': '<?= Yii::$app->user->id ?>',
+        },
+        success: function (data) {
+
+            var resultSignals = data["resultSignals"];
+            var resultWonCryptoSignals = data["resultWonCryptoSignals"];
+            var resultLossCryptoSignals = data["resultLossCryptoSignals"];
+            var labelsCryptoSignals = data["labelsCryptoSignals"];
+
+            var ctx = document.getElementById("winSignalCryptoChart").getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labelsCryptoSignals,
+                    datasets: [
+                        {
+                            label: 'Signals',
+                            data: resultSignals,
+                            borderWidth: 2,
+                            backgroundColor: 'transparent',
+                            borderColor: '#6c5ffc',
+                            borderWidth: 3,
+                            pointBackgroundColor: '#ffffff',
+                            pointRadius: 2
+                        },
+                        {
+                            label: 'Win',
+                            data: resultWonCryptoSignals,
+                            borderWidth: 2,
+                            backgroundColor: 'transparent',
+                            borderColor: 'green',
+                            borderWidth: 3,
+                            pointBackgroundColor: '#ffffff',
+                            pointRadius: 2
+                        },
+                        {
+                            label: 'Loss',
+                            data: resultLossCryptoSignals,
+                            borderWidth: 2,
+                            backgroundColor: 'transparent',
+                            borderColor: 'red',
+                            borderWidth: 3,
+                            pointBackgroundColor: '#ffffff',
+                            pointRadius: 2
+                        },
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        xAxes: [{
+                                ticks: {
+                                    fontColor: "#9ba6b5",
+                                },
+                                display: true,
+                                gridLines: {
+                                    color: 'rgba(119, 119, 142, 0.2)'
+                                }
+                            }],
+                        yAxes: [{
+                                ticks: {
+                                    fontColor: "#9ba6b5",
+                                },
+                                display: true,
+                                gridLines: {
+                                    color: 'rgba(119, 119, 142, 0.2)'
+                                },
+                                scaleLabel: {
+                                    display: false,
+                                    labelString: 'Thousands',
+                                    fontColor: 'rgba(119, 119, 142, 0.2)'
+                                }
+                            }]
+                    },
+                    legend: {
+                        labels: {
+                            fontColor: "#9ba6b5"
+                        },
+                    },
+                }
+
+            });
+
+            var resultSignalsForex = data["resultSignalsForex"];
+            var resultWonForexSignals = data["resultWonForexSignals"];
+            var resultLossForexSignals = data["resultLossForexSignals"];
+            var labelsForexSignals = data["labelsForexSignals"];
+
+
+            var ctx = document.getElementById("winSignalForexChart").getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labelsForexSignals,
+                    datasets: [
+                        {
+                            label: 'Signals',
+                            data: resultSignalsForex,
+                            borderWidth: 2,
+                            backgroundColor: 'transparent',
+                            borderColor: '#6c5ffc',
+                            borderWidth: 3,
+                            pointBackgroundColor: '#ffffff',
+                            pointRadius: 2
+                        },
+                        {
+                            label: 'Win',
+                            data: resultWonForexSignals,
+                            borderWidth: 2,
+                            backgroundColor: 'transparent',
+                            borderColor: 'green',
+                            borderWidth: 3,
+                            pointBackgroundColor: '#ffffff',
+                            pointRadius: 2
+                        },
+                        {
+                            label: 'Loss',
+                            data: resultLossForexSignals,
+                            borderWidth: 2,
+                            backgroundColor: 'transparent',
+                            borderColor: 'red',
+                            borderWidth: 3,
+                            pointBackgroundColor: '#ffffff',
+                            pointRadius: 2
+                        },
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        xAxes: [{
+                                ticks: {
+                                    fontColor: "#9ba6b5",
+                                },
+                                display: true,
+                                gridLines: {
+                                    color: 'rgba(119, 119, 142, 0.2)'
+                                }
+                            }],
+                        yAxes: [{
+                                ticks: {
+                                    fontColor: "#9ba6b5",
+                                },
+                                display: true,
+                                gridLines: {
+                                    color: 'rgba(119, 119, 142, 0.2)'
+                                },
+                                scaleLabel: {
+                                    display: false,
+                                    labelString: 'Thousands',
+                                    fontColor: 'rgba(119, 119, 142, 0.2)'
+                                }
+                            }]
+                    },
+                    legend: {
+                        labels: {
+                            fontColor: "#9ba6b5"
+                        },
+                    },
+                }
+
+            });
+        },
+        error: function (errormessage) {
+            console.log("not working");
+        }
+    });
+
+</script>
+<?php JSRegister::end(); ?>
