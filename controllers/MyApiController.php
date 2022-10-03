@@ -193,6 +193,7 @@ ORDER BY `dateWithputFormat` ASC";
 
         $rawSqlCrypto = "SELECT date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %Y') AS `MonthDate`
             ,COALESCE(count(`id`),0) AS `count`,
+            COALESCE(sum(`percentage`),0) AS `percentage`,
             COALESCE(SUM(case when crypto_signals.result = 1 then 1 else 0 end),0) as countWin,
             COALESCE(SUM(case when crypto_signals.result = 2 then 1 else 0 end),0) as countLoss,
             
@@ -221,8 +222,10 @@ ORDER BY `dateWithputFormat` ASC";
         $connection = Yii::$app->getDb();
         $command = $connection->createCommand($rawSqlCrypto);
         $result = $command->queryAll();
+        
 
         for ($i = 0; $i < sizeof($result); $i++) {
+            $profitCrpto [] = $result[$i]["percentage"];
             $resultSignals [] = $result[$i]["count"];
             $resultWonCryptoSignals [] = $result[$i]["countWin"];
             $resultLossCryptoSignals [] = $result[$i]["countLoss"];
@@ -232,6 +235,7 @@ ORDER BY `dateWithputFormat` ASC";
 
         $rawSqlForex = "SELECT date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %Y') AS `MonthDate`
             ,COALESCE(count(`id`),0) AS `count`,
+            COALESCE(sum(`percentage`),0) AS `percentage`,
             COALESCE(SUM(case when forex_signals.result = 1 then 1 else 0 end),0) as countWin,
             COALESCE(SUM(case when forex_signals.result = 2 then 1 else 0 end),0) as countLoss,
             
@@ -259,8 +263,8 @@ ORDER BY `dateWithputFormat` ASC";
 
         $resultForex = Yii::$app->getDb()->createCommand($rawSqlForex)->queryAll();
 
-
         for ($i = 0; $i < sizeof($resultForex); $i++) {
+            $profitForex [] = $resultForex[$i]["percentage"];
             $resultSignalsForex [] = $resultForex[$i]["count"];
             $resultWonForexSignals [] = $resultForex[$i]["countWin"];
             $resultLossForexSignals [] = $resultForex[$i]["countLoss"];
@@ -273,10 +277,12 @@ ORDER BY `dateWithputFormat` ASC";
             return [
                 'status' => true,
                 'message' => "",
+                'profitCrpto' => $profitCrpto,
                 'resultSignals' => $resultSignals,
                 'resultWonCryptoSignals' => $resultWonCryptoSignals,
                 'resultLossCryptoSignals' => $resultLossCryptoSignals,
                 'labelsCryptoSignals' => $labelsCryptoSignals,
+                'profitForex' => $profitForex,
                 'resultSignalsForex' => $resultSignalsForex,
                 'resultWonForexSignals' => $resultWonForexSignals,
                 'resultLossForexSignals' => $resultLossForexSignals,

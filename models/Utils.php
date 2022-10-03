@@ -32,6 +32,13 @@ class Utils {
                         ])->count();
     }
 
+    public static function getSignalForexProfitByUserId($userId) {
+        return ForexSignals::find()
+                        ->where([
+                            "user_id" => $userId,
+                        ])->sum('percentage');
+    }
+
     public static function getSignalCryptoCountByUserId($userId) {
         return CryptoSignals::find()
                         ->where([
@@ -53,6 +60,13 @@ class Utils {
                             "user_id" => $userId,
                             "result" => Utils::$CRYPTO_SIGNAL_LOSS
                         ])->count();
+    }
+
+    public static function getSignalCryptoProfitByUserId($userId) {
+        return CryptoSignals::find()
+                        ->where([
+                            "user_id" => $userId,
+                        ])->sum('percentage');
     }
 
 }
