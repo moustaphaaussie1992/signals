@@ -14,17 +14,15 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'price')->textInput() ?>
 
-    <?= $form->field($model, 'profit')->textInput() ?>
+    <?= $form->field($model, 'date')->textInput() ?>
 
-    <?php
-//    echo $form->field($model, 'date')->textInput();
-    ?>
+    <?= $form->field($model, 'type')->textInput() ?>
 
-    <?= $form->field($model, 'type')->dropDownList(app\models\Usdt::USDT_TYPES) ?>
+    <?= $form->field($model, 'user_id')->textInput() ?>
 
-    <?php
-//    $form->field($model, 'user_id')->textInput();
-    ?>
+    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

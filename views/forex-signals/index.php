@@ -7,6 +7,7 @@ use app\models\ForexSignalsSearch;
 use app\models\ForexTarget;
 use app\models\ForexTicker;
 use kartik\select2\Select2;
+use richardfan\widget\JSRegister;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
@@ -26,12 +27,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php $form = ActiveForm::begin(); ?>
     <div class="row">
-        <div class="col-lg-3">
+        <div class="col-lg-1">
 
             <?=
             $form->field($model, 'ticker')->widget(Select2::classname(), [
                 'data' => ArrayHelper::map(ForexTicker::find()->all(), 'id', 'name'),
-                'options' => ['placeholder' => 'Select ...',
+                'options' => ['placeholder' => '...',
                     'style' => "width:100%!important"
                 ],
                 'pluginOptions' => [
@@ -40,11 +41,11 @@ $this->params['breadcrumbs'][] = $this->title;
             ]);
             ?>
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-1">
             <?=
             $form->field($model, 'type')->widget(Select2::classname(), [
                 'data' => ArrayHelper::map(CryptoType::find()->all(), 'id', 'name'),
-                'options' => ['placeholder' => 'Select ...',
+                'options' => ['placeholder' => '...',
                     'style' => "width:100%!important"
                 ],
                 'pluginOptions' => [
@@ -59,7 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?=
             $form->field($model, 'target')->widget(Select2::classname(), [
                 'data' => ArrayHelper::map(ForexTarget::find()->all(), 'id', 'name'),
-                'options' => ['placeholder' => 'Select ...',
+                'options' => ['placeholder' => '...',
                     'style' => "width:100%!important"
                 ],
                 'pluginOptions' => [
@@ -69,14 +70,14 @@ $this->params['breadcrumbs'][] = $this->title;
             ]);
             ?>
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-1">
 
 
 
             <?=
             $form->field($model, 'result')->widget(Select2::classname(), [
                 'data' => ArrayHelper::map(ForexResult::find()->all(), 'id', 'name'),
-                'options' => ['placeholder' => 'Select ...',
+                'options' => ['placeholder' => '...',
                     'style' => "width:100%!important"
                 ],
                 'pluginOptions' => [
@@ -85,13 +86,13 @@ $this->params['breadcrumbs'][] = $this->title;
             ]);
             ?>
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-1">
 
 
             <?=
             $form->field($model, 'pips')->widget(Select2::classname(), [
                 'data' => ArrayHelper::map(ForexPips::find()->all(), 'id', 'name'),
-                'options' => ['placeholder' => 'Select ...',
+                'options' => ['placeholder' => '...',
                     'style' => "width:100%!important"
                 ],
                 'pluginOptions' => [
@@ -100,13 +101,13 @@ $this->params['breadcrumbs'][] = $this->title;
             ]);
             ?>
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-1">
             <?= $form->field($model, 'percentage')->textInput() ?>
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-1">
             <?= $form->field($model, 'comment')->textInput() ?>
         </div>
-        <div class="form-group col-lg-3">
+        <div class="form-group col-lg-1">
             <?= Html::submitButton('Save', ['class' => 'btn btn-success', 'style' => 'margin-top: 27px;']) ?>
         </div>
 
@@ -173,7 +174,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'percentage',
                             'pips',
                             'comment:ntext',
-                            'date',
+//                            'date',
 //            [
 //                'class' => ActionColumn::className(),
 //                'urlCreator' => function ($action, ForexSignals $model, $key, $index, $column) {
@@ -221,3 +222,25 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 </div>
 
+<?php JSRegister::begin(); ?>
+<script>
+
+
+// on first focus (bubbles up to document), open the menu
+    $(document).on('focus', '.select2-selection.select2-selection--single', function (e) {
+        $(this).closest(".select2-container").siblings('select:enabled').select2('open');
+    });
+
+// steal focus during close - only capture once and stop propogation
+    $('select.select2').on('select2:closing', function (e) {
+        $(e.target).data("select2").$selection.one('focus focusin', function (e) {
+            e.stopPropagation();
+        });
+    });
+
+
+
+
+
+</script>
+<?php JSRegister::end(); ?>

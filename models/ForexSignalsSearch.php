@@ -75,7 +75,8 @@ class ForexSignalsSearch extends ForexSignals {
 //        $query->andFilterWhere(['like', 'forex_target.name', $this->target]);
         $query->andFilterWhere(['like', 'forex_type.name', $this->type]);
         $query->andFilterWhere(['like', 'forex_result.name', $this->result]);
-        $query->andFilterWhere(['like', 'forex_pips.name', $this->pips]);
+        $query->andFilterWhere(['like', 'forex_pips.name', $this->pips])
+                ->orderBy(["date" => SORT_DESC]);
 
         return $dataProvider;
     }
