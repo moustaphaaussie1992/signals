@@ -19,6 +19,8 @@ $this->title = 'Members';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
+<?php Pjax::begin(); ?>
+
 <div class="row">
 
     <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
@@ -110,7 +112,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ?>
             </p>
 
-            <?php Pjax::begin(); ?>
+
             <?php // echo $this->render('_search', ['model' => $searchModel]);    ?>
             <div class="card-body">
                 <div class="grid-margin">
@@ -179,18 +181,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                     }
                                 }
                             ],
-//                            'phone',
-//                            'telegram',
-//                            [
-//                                'attribute' => 'r_user',
-//                                'value' => 'rUser.username'
-//                            ],
-//                            [
-//                                'class' => ActionColumn::className(),
-//                                'urlCreator' => function ($action, Members $model, $key, $index, $column) {
-//                                    return Url::toRoute([$action, 'id' => $model->id]);
-//                                }
-//                            ],
                             ['class' => 'yii\grid\ActionColumn',
                                 'contentOptions' => ['style' => 'width: 70px;'],
                                 'visible' => Yii::$app->user->isGuest ? false : true,
@@ -528,4 +518,5 @@ $this->params['breadcrumbs'][] = $this->title;
 
 </script>
 <?php JSRegister::end(); ?>
+
 <?php Pjax::end(); ?>

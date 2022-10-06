@@ -22,10 +22,23 @@ class MyApiController extends Controller {
 
         $post = Yii::$app->request->post();
         $userId = $post["userId"];
+        $subscriptionType = (isset($post["subscriptionType"])) ? $post["subscriptionType"] : 0;
 
+        $subscTypeQuerymembers = "";
+        if ($subscriptionType > 0) {
+            $subscTypeQuerymembers = "(SELECT members.* FROM members JOIN subscriptions ON subscriptions.member_id = members.id WHERE subscriptions.r_type = $subscriptionType) members ";
+        } else {
+            $subscTypeQuerymembers = "members";
+        }
 
+        $subscTypeQuerySubs = "";
+        if ($subscriptionType > 0) {
+            $subscTypeQuerySubs = "(SELECT subscriptions.* FROM subscriptions WHERE subscriptions.r_type = $subscriptionType) subscriptions ";
+        } else {
+            $subscTypeQuerySubs = "subscriptions";
+        }
 
-        $rawSql = "SELECT (DATE(NOW()) - INTERVAL `day` DAY) AS `DayDate`, COUNT(`id`) AS `count`
+        $rawSql = "SELECT (DATE(NOW()) - INTERVAL `day` DAY) AS `DayDate`, COUNT(members.id) AS `count`
 FROM (
     SELECT 0 AS `day`
     UNION SELECT 1
@@ -35,7 +48,7 @@ FROM (
     UNION SELECT 5
     UNION SELECT 6
 ) AS `week`
-LEFT JOIN `members` ON DATE(`date`) = (DATE(NOW()) - INTERVAL `day` DAY)
+LEFT JOIN $subscTypeQuerymembers ON DATE(`date`) = (DATE(NOW()) - INTERVAL `day` DAY)
 GROUP BY `DayDate`
 ORDER BY `DayDate` ASC";
 
@@ -63,7 +76,7 @@ FROM (
     SELECT 0 AS `day` 
     $union
 ) AS `week`
-LEFT JOIN `members` ON DATE(`date`) = (DATE(NOW()) - INTERVAL `day` DAY)
+LEFT JOIN $subscTypeQuerymembers ON DATE(`date`) = (DATE(NOW()) - INTERVAL `day` DAY)
 GROUP BY `DayDate`
 ORDER BY `DayDate` ASC";
 
@@ -96,7 +109,7 @@ FROM (
     UNION SELECT 5
     UNION SELECT 6
 ) AS `week`
-LEFT JOIN subscriptions ON date_format(subscription_date, '%M %Y') = date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %Y')
+LEFT JOIN $subscTypeQuerySubs ON date_format(subscription_date, '%M %Y') = date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %Y')
 GROUP BY DayDate
 ORDER BY `dateWithputFormat` ASC";
 
@@ -147,7 +160,7 @@ FROM (
     UNION SELECT 11
     UNION SELECT 12
 ) AS `week`
-LEFT JOIN subscriptions ON date_format(subscription_date, '%M %Y') = date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %Y')
+LEFT JOIN $subscTypeQuerySubs ON date_format(subscription_date, '%M %Y') = date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %Y')
 GROUP BY DayDate
 ORDER BY `dateWithputFormat` ASC";
 
@@ -222,7 +235,7 @@ ORDER BY `dateWithputFormat` ASC";
         $connection = Yii::$app->getDb();
         $command = $connection->createCommand($rawSqlCrypto);
         $result = $command->queryAll();
-        
+
 
         for ($i = 0; $i < sizeof($result); $i++) {
             $profitCrpto [] = $result[$i]["percentage"];

@@ -69,35 +69,107 @@ class MembersController extends Controller {
 
     public function actionMembersCrypto() {
         $searchModel = new MembersSearch();
-        $dataProvider = $searchModel->searchByType($this->request->queryParams, 1); // 1 means crypto
+        $subscriptionType = 1;
+        $dataProvider = $searchModel->searchByType($this->request->queryParams, $subscriptionType); // 1 means crypto
+
+        $userId = \Yii::$app->user->id;
+        $totalMembers = 0;
+        if ($userId) {
+            $totalMembers = Members::find()
+                    ->where(["r_user" => $userId])
+                    ->join('join', 'subscriptions', 'subscriptions.member_id = members.id')
+                    ->andWhere(['subscriptions.r_type' => $subscriptionType])
+                    ->count();
+        }
+        $totalProfits = 0;
+        if ($userId) {
+            $totalProfits = Subscriptions::find()
+                    ->where(["r_user" => $userId])
+                    ->join('join', 'members', 'members.id = subscriptions.member_id')
+                    ->andWhere(["members.r_user" => $userId])
+                    ->andWhere(['subscriptions.r_type' => $subscriptionType])
+                    ->sum('fee');
+        }
 
 
         return $this->render('index_by_type', [
                     'searchModel' => $searchModel,
                     'dataProvider' => $dataProvider,
                     'title' => "Crypto Members",
+                    'totalMembers' => $totalMembers,
+                    'totalProfits' => $totalProfits,
+                    'subscriptionType' => $subscriptionType,
         ]);
     }
 
     public function actionMembersForex() {
         $searchModel = new MembersSearch();
-        $dataProvider = $searchModel->searchByType($this->request->queryParams, 2); // 2 means forex
+        $subscriptionType = 2;
+        $dataProvider = $searchModel->searchByType($this->request->queryParams, $subscriptionType); // 2 means forex
+
+        $userId = \Yii::$app->user->id;
+        $totalMembers = 0;
+        if ($userId) {
+            $totalMembers = Members::find()
+                    ->where(["r_user" => $userId])
+                    ->join('join', 'subscriptions', 'subscriptions.member_id = members.id')
+                    ->andWhere(['subscriptions.r_type' => $subscriptionType])
+                    ->count();
+        }
+        $totalProfits = 0;
+        if ($userId) {
+            $totalProfits = Subscriptions::find()
+                    ->where(["r_user" => $userId])
+                    ->join('join', 'members', 'members.id = subscriptions.member_id')
+                    ->andWhere(["members.r_user" => $userId])
+                    ->andWhere(['subscriptions.r_type' => $subscriptionType])
+                    ->sum('fee');
+        }
+
 
         return $this->render('index_by_type', [
                     'searchModel' => $searchModel,
                     'dataProvider' => $dataProvider,
                     'title' => "Forex Members",
+                    'totalMembers' => $totalMembers,
+                    'totalProfits' => $totalProfits,
+                    'subscriptionType' => $subscriptionType,
         ]);
     }
 
     public function actionMembersForexAndCrypto() {
         $searchModel = new MembersSearch();
+        $subscriptionType = 3;
         $dataProvider = $searchModel->searchByType($this->request->queryParams, 3); // 2 means forex and crypto
+
+
+        $userId = \Yii::$app->user->id;
+        $totalMembers = 0;
+        if ($userId) {
+            $totalMembers = Members::find()
+                    ->where(["r_user" => $userId])
+                    ->join('join', 'subscriptions', 'subscriptions.member_id = members.id')
+                    ->andWhere(['subscriptions.r_type' => $subscriptionType])
+                    ->count();
+        }
+        $totalProfits = 0;
+        if ($userId) {
+            $totalProfits = Subscriptions::find()
+                    ->where(["r_user" => $userId])
+                    ->join('join', 'members', 'members.id = subscriptions.member_id')
+                    ->andWhere(["members.r_user" => $userId])
+                    ->andWhere(['subscriptions.r_type' => $subscriptionType])
+                    ->sum('fee');
+        }
+
 
         return $this->render('index_by_type', [
                     'searchModel' => $searchModel,
                     'dataProvider' => $dataProvider,
                     'title' => "Forex And Cypto Members",
+                    'totalMembers' => $totalMembers,
+                    'totalProfits' => $totalProfits,
+                    'subscriptionType' => $subscriptionType,
         ]);
     }
 
