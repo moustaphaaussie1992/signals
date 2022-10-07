@@ -21,6 +21,14 @@ function addhttp($url) {
 }
 ?>
 
+ <style>
+    .fontawesomesvg {width: 1em;
+      height: 1em;
+      vertical-align: -.125em;
+      color: #6c5ffc
+    }
+  </style>
+
 <div class="row" id="user-profile">
     <div class="col-lg-12">
         <div class="card">
@@ -56,7 +64,7 @@ function addhttp($url) {
                                             <a class="social-icon text-primary" href="<?= $user['twitter'] ?>" target="_blank"><i class="fa fa-twitter"></i></a>
                                             <a class="social-icon text-primary" href="<?= $user["insta"] ?>" target="_blank"><i class="fa fa-instagram"></i></a>
                                             <a class="social-icon text-primary" href="<?= $user["telegram_link"] ?>" target="_blank"><i class="fa fa-telegram"></i></a>
-                                            <a class="social-icon text-primary" href="<?= $user["tiktok"] ?>" target="_blank"><i class="fa fa-tiktok">T</i></a>
+                                            <a class="social-icon text-primary" href="<?= $user["tiktok"] ?>" target="_blank"><svg class='fontawesomesvg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z" fill="#6c5ffc"/></svg></a>
                                             <!--<a class="social-icon text-primary" href="javascript:void(0)"><i class="fa fa-rss"></i></a>-->
                                             <!--<a class="social-icon text-primary" href="https://www.linkedin.com/" target="_blank"><i class="fa fa-linkedin"></i></a>-->
                                             <!--<a class="social-icon text-primary" href="https://myaccount.google.com/" target="_blank"><i class="fa fa-google-plus"></i></a>-->
