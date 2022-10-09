@@ -15,6 +15,7 @@ class ProfileController extends Controller {
                 ->select(['id', 'username', 'email', 'photo', 'back_photo', 'bio', 'twitter'
                     , 'facebook', 'tiktok', 'insta', 'contact_number', 'telegram_link'])
                 ->asArray()
+                ->where(['id' => $userId])
                 ->one();
         return $this->render('index', [
                     'user' => $user
@@ -27,6 +28,7 @@ class ProfileController extends Controller {
                 ->select(['id', 'username', 'email', 'photo', 'back_photo', 'bio', 'twitter'
                     , 'facebook', 'tiktok', 'insta', 'contact_number', 'telegram_link'])
                 ->asArray()
+                ->where(['id' => $userId])
                 ->one();
 
 

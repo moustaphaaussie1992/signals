@@ -6,12 +6,14 @@ use app\models\ForexResult;
 use app\models\ForexSignalsSearch;
 use app\models\ForexTarget;
 use app\models\ForexTicker;
+use app\models\Utils;
 use kartik\select2\Select2;
 use richardfan\widget\JSRegister;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\web\View;
 use yii\widgets\ActiveForm;
 use yii\widgets\Pjax;
@@ -27,6 +29,106 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php $form = ActiveForm::begin(); ?>
     <div class="row">
+
+        <div class="col-xl-12 row" style="margin: 0px;
+             padding: 0px;" >
+            <div class="col-xl-3">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Forex</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="main-profile-contact-list">
+                            <div class="me-5">
+                                <div class="media mb-4 d-flex">
+                                    <div class="media-icon bg-secondary bradius me-3 mt-1">
+                                        <i class="fa fa-line-chart fs-20 text-white"></i>
+                                    </div>
+                                    <div class="media-body">
+                                        <span class="text-muted">Signal</span>
+                                        <div class="fw-semibold fs-25">
+                                            <?= Utils::getSignalForexCountByUserId($user["id"]) ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="me-5 mt-5 mt-md-0">
+                                <div class="media mb-4 d-flex">
+                                    <div class="media-icon bg-success bradius text-white me-3 mt-1">
+                                        <span class="mt-3">
+                                            <i class="fa fa-line-chart fs-20"></i>
+                                        </span>
+                                    </div>
+                                    <div class="media-body">
+                                        <span class="text-muted">Won Signals</span>
+                                        <div class="fw-semibold fs-25">
+                                            <?= Utils::getSignalForexCountWinByUserId($user["id"]) ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="me-5 mt-5 mt-md-0">
+                                <div class="media mb-4 d-flex">
+                                    <div class="media-icon bg-danger bradius text-white me-3 mt-1">
+                                        <span class="mt-3">
+                                            <i class="fa fa-line-chart fs-20"></i>
+                                        </span>
+                                    </div>
+                                    <div class="media-body">
+                                        <span class="text-muted">Loss Signals</span>
+                                        <div class="fw-semibold fs-25">
+                                            <?= Utils::getSignalForexCountLossByUserId($user["id"]) ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="me-0 mt-5 mt-md-0">
+                                <div class="media">
+                                    <div class="media-icon bg-primary text-white bradius me-3 mt-1">
+                                        <span class="mt-3">
+                                            <i class="fe fe-dollar-sign fs-20"></i>
+                                        </span>
+                                    </div>
+                                    <div class="media-body">
+                                        <span class="text-muted">Profit From Signals</span>
+                                        <div class="fw-semibold fs-25">
+                                            <?= Utils::getSignalForexProfitByUserId($user["id"]) ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-9 row" style="padding: 0px; margin: 0px;" >
+                <div class="col-xl-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Forex Signals</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                                <canvas id="winSignalForexChart" class="h-275 chartjs-render-monitor" width="663" height="343" style="display: block; height: 275px; width: 531px;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Forex Profit</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                                <canvas id="ProfitForexChart" class="h-275 chartjs-render-monitor" width="663" height="343" style="display: block; height: 275px; width: 531px;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="col-lg-1">
 
             <?=
@@ -172,32 +274,30 @@ $this->params['breadcrumbs'][] = $this->title;
 //            'type',
 //            'target',
 //            'result',
-                                        [
+                            [
                                 'attribute' => 'percentage',
-                                             'format' => 'raw',
+                                'format' => 'raw',
                                 'value' => function($model) {
-                                   if($model->result == 1){
-                                    
-                                         
-                                                                                return '<div class=" bg-success-transparent border border-success  text-success   p-1 br-5"style="display: flex;
+                                    if ($model->result == 1) {
+
+
+                                        return '<div class=" bg-success-transparent border border-success  text-success   p-1 br-5"style="display: flex;
 justify-content: center;">
                                         
-                                        <span class="fs-30 pe-2" style="font-size: 15px !important;">'.$model['percentage'].' %</span>
+                                        <span class="fs-30 pe-2" style="font-size: 15px !important;">' . $model['percentage'] . ' %</span>
                                            
                                         </div>';
-                                   }else if($model->result==2){
-                                       return '<div class=" bg-danger-transparent border border-danger  text-danger   p-1 br-5"style="display: flex;
+                                    } else if ($model->result == 2) {
+                                        return '<div class=" bg-danger-transparent border border-danger  text-danger   p-1 br-5"style="display: flex;
 justify-content: center;">
                                         
-                                        <span class="fs-30 pe-2" style="font-size: 15px !important;">'.$model['percentage'].' %</span>
+                                        <span class="fs-30 pe-2" style="font-size: 15px !important;">' . $model['percentage'] . ' %</span>
                                            
                                         </div>';
-                                       
-                                   }
+                                    }
                                     return $targetString;
                                 }
                             ],
-                           
                             'comment:ntext',
 //                            'date',
 //            [
@@ -264,7 +364,155 @@ justify-content: center;">
     });
 
 
+    $.ajax({
+        url: '<?php echo Url::toRoute("/my-api/get-signals-stat") ?>',
+        type: "POST",
+        data: {
+            'userId': '<?= Yii::$app->user->id ?>',
+        },
+        success: function (data) {
 
+
+            var profitForex = data["profitForex"];
+            var resultSignalsForex = data["resultSignalsForex"];
+            var resultWonForexSignals = data["resultWonForexSignals"];
+            var resultLossForexSignals = data["resultLossForexSignals"];
+            var labelsForexSignals = data["labelsForexSignals"];
+
+            var ctx = document.getElementById("winSignalForexChart").getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labelsForexSignals,
+                    datasets: [
+                        {
+                            label: 'Signals',
+                            data: resultSignalsForex,
+                            borderWidth: 2,
+                            backgroundColor: 'transparent',
+                            borderColor: '#6c5ffc',
+                            borderWidth: 3,
+                            pointBackgroundColor: '#ffffff',
+                            pointRadius: 2
+                        },
+                        {
+                            label: 'Win',
+                            data: resultWonForexSignals,
+                            borderWidth: 2,
+                            backgroundColor: 'transparent',
+                            borderColor: 'green',
+                            borderWidth: 3,
+                            pointBackgroundColor: '#ffffff',
+                            pointRadius: 2
+                        },
+                        {
+                            label: 'Loss',
+                            data: resultLossForexSignals,
+                            borderWidth: 2,
+                            backgroundColor: 'transparent',
+                            borderColor: 'red',
+                            borderWidth: 3,
+                            pointBackgroundColor: '#ffffff',
+                            pointRadius: 2
+                        },
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        xAxes: [{
+                                ticks: {
+                                    fontColor: "#9ba6b5",
+                                },
+                                display: true,
+                                gridLines: {
+                                    color: 'rgba(119, 119, 142, 0.2)'
+                                }
+                            }],
+                        yAxes: [{
+                                ticks: {
+                                    fontColor: "#9ba6b5",
+                                },
+                                display: true,
+                                gridLines: {
+                                    color: 'rgba(119, 119, 142, 0.2)'
+                                },
+                                scaleLabel: {
+                                    display: false,
+                                    labelString: 'Thousands',
+                                    fontColor: 'rgba(119, 119, 142, 0.2)'
+                                }
+                            }]
+                    },
+                    legend: {
+                        labels: {
+                            fontColor: "#9ba6b5"
+                        },
+                    },
+                }
+
+            });
+
+            var ctx = document.getElementById("ProfitForexChart").getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labelsForexSignals,
+                    datasets: [
+                        {
+                            label: 'Profit',
+                            data: profitForex,
+                            borderWidth: 2,
+                            backgroundColor: 'transparent',
+                            borderColor: '#6c5ffc',
+                            borderWidth: 3,
+                            pointBackgroundColor: '#ffffff',
+                            pointRadius: 2
+                        },
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        xAxes: [{
+                                ticks: {
+                                    fontColor: "#9ba6b5",
+                                },
+                                display: true,
+                                gridLines: {
+                                    color: 'rgba(119, 119, 142, 0.2)'
+                                }
+                            }],
+                        yAxes: [{
+                                ticks: {
+                                    fontColor: "#9ba6b5",
+                                },
+                                display: true,
+                                gridLines: {
+                                    color: 'rgba(119, 119, 142, 0.2)'
+                                },
+                                scaleLabel: {
+                                    display: false,
+                                    labelString: 'Thousands',
+                                    fontColor: 'rgba(119, 119, 142, 0.2)'
+                                }
+                            }]
+                    },
+                    legend: {
+                        labels: {
+                            fontColor: "#9ba6b5"
+                        },
+                    },
+                }
+
+            });
+        },
+        error: function (errormessage) {
+            console.log("not working");
+        }
+    });
 
 
 </script>

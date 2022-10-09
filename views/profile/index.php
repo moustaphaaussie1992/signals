@@ -303,6 +303,7 @@ function addhttp($url) {
         },
         success: function (data) {
 
+
             var profitCrpto = data["profitCrpto"];
             var resultSignals = data["resultSignals"];
             var resultWonCryptoSignals = data["resultWonCryptoSignals"];
