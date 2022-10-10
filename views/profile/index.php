@@ -21,13 +21,13 @@ function addhttp($url) {
 }
 ?>
 
- <style>
+<style>
     .fontawesomesvg {width: 1em;
-      height: 1em;
-      vertical-align: -.125em;
-      color: #6c5ffc
+                     height: 1em;
+                     vertical-align: -.125em;
+                     color: #6c5ffc
     }
-  </style>
+</style>
 
 <div class="row" id="user-profile">
     <div class="col-lg-12">
@@ -310,6 +310,7 @@ function addhttp($url) {
             'userId': '<?= Yii::$app->user->id ?>',
         },
         success: function (data) {
+
 
             var profitCrpto = data["profitCrpto"];
             var resultSignals = data["resultSignals"];

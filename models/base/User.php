@@ -22,6 +22,14 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $aliasModel
+ * @property Usdt[] $usdts 
+ * @property CryptoSignals[] $cryptoSignals 
+ * @property ForexSignals[] $forexSignals 
+ * @property string $fullname 
+ * @property string|null $channel_link_telegram 
+ * @property string|null $monthly_charge_offer 
+ * @property string|null $three_months_offer 
+ * @property string|null $all_till_offer 
  */
 abstract class User extends BasicUser {
 
@@ -48,11 +56,14 @@ abstract class User extends BasicUser {
      */
     public function rules() {
         return [
-            [['username', 'auth_key', 'password_hash', 'email'], 'required'],
+            [['username', 'auth_key', 'password_hash', 'email', 'fullname'], 'required'],
             [['status'], 'integer'],
-             [['bio'], 'string'],
+            [['bio'], 'string'],
             [['username', 'auth_key'], 'string', 'max' => 32],
-            [['password_hash', 'password_reset_token', 'email', 'photo', 'back_photo', 'twitter', 'facebook', 'tiktok', 'insta', 'contact_number', 'telegram_link'], 'string', 'max' => 255]
+            [['password_hash', 'password_reset_token', 'email', 'photo',
+            'back_photo', 'twitter', 'facebook',
+            'tiktok', 'insta', 'contact_number', 'telegram_link',
+            'fullname', 'channel_link_telegram', 'monthly_charge_offer', 'three_months_offer', 'all_till_offer'], 'string', 'max' => 255]
         ];
     }
 
@@ -79,7 +90,24 @@ abstract class User extends BasicUser {
             'insta' => 'Insta',
             'contact_number' => 'Contact Number',
             'telegram_link' => 'Telegram Link',
+            'fullname' => 'Fullname',
+            'channel_link_telegram' => 'Channel Link Telegram',
+            'monthly_charge_offer' => 'Monthly Charge Offer',
+            'three_months_offer' => 'Three Months Offer',
+            'all_till_offer' => 'All Till Offer',
         ];
+    }
+
+    public function getCryptoSignals() {
+        return $this->hasMany(CryptoSignals::class, ['user_id' => 'id']);
+    }
+
+    public function getForexSignals() {
+        return $this->hasMany(ForexSignals::class, ['user_id' => 'id']);
+    }
+
+    public function getUsdts() {
+        return $this->hasMany(Usdt::class, ['user_id' => 'id']);
     }
 
 }
