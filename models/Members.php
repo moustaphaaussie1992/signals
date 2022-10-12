@@ -13,6 +13,7 @@ use Yii;
  * @property string $phone
  * @property string $telegram
  * @property int $r_user
+ * @property int $active
  *
  * @property User $rUser
  * @property Subscriptions[] $subscriptions
@@ -39,7 +40,7 @@ class Members extends \yii\db\ActiveRecord {
         return [
             [['fullname', 'registration_date', 'phone', 'telegram', 'r_user'], 'required'],
             [['registration_date', 'subscription_date', 'from', 'to', 'days_left', 'date','r_type'], 'safe'],
-            [['r_user'], 'integer'],
+            [['r_user','active'], 'integer'],
             [['fullname', 'phone', 'telegram'], 'string', 'max' => 255],
             [['r_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['r_user' => 'id']],
         ];
@@ -57,6 +58,7 @@ class Members extends \yii\db\ActiveRecord {
             'telegram' => 'Telegram',
             'r_user' => 'User',
             'date' => 'Date',
+            'active' => 'Active',
         ];
     }
 

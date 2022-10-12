@@ -22,12 +22,13 @@
         "mdmsoft/yii2-admin": "*",
         "kartik-v/yii2-datecontrol": "*",
         "kartik-v/yii2-widget-select2": "dev-master",
-        "kartik-v/yii2-widget-datepicker": "dev-master",
+        "kartik-v/yii2-widget-datepicker": "@dev",
         "loveorigami/yii2-modal-ajax": "@dev",
         "kartik-v/yii2-grid": "dev-master",
         "kartik-v/yii2-bootstrap5-dropdown": "dev-master",
         "yiisoft/yii2-bootstrap5": "@dev",
-        "kartik-v/yii2-widget-fileinput": "@dev"
+        "kartik-v/yii2-widget-fileinput": "@dev",
+        "kartik-v/yii2-date-range": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

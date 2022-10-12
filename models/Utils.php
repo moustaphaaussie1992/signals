@@ -33,10 +33,16 @@ class Utils {
     }
 
     public static function getSignalForexProfitByUserId($userId) {
-        return ForexSignals::find()
+        $forexSignals = ForexSignals::find()
+                        ->select("COALESCE(SUM(case when forex_signals.result = 1 then percentage else -percentage end),0) as `percentage`")
                         ->where([
                             "user_id" => $userId,
-                        ])->sum('percentage');
+                        ])->all();
+        if (sizeof($forexSignals)) {
+            return $forexSignals[0]["percentage"];
+        } else {
+            return 0;
+        }
     }
 
     public static function getSignalCryptoCountByUserId($userId) {
@@ -63,10 +69,17 @@ class Utils {
     }
 
     public static function getSignalCryptoProfitByUserId($userId) {
-        return CryptoSignals::find()
+        $cryptoSignals = CryptoSignals::find()
+                        ->select("COALESCE(SUM(case when result = 1 then percentage else -percentage end),0) as `percentage`")
                         ->where([
                             "user_id" => $userId,
-                        ])->sum('percentage');
+                           
+                        ])->all();
+        if (sizeof($cryptoSignals)) {
+            return $cryptoSignals[0]["percentage"];
+        } else {
+            return 0;
+        }
     }
 
 }

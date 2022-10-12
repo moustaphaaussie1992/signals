@@ -2,10 +2,9 @@
 
 use app\models\MembersSearch;
 use app\models\Type;
-use kartik\grid\GridView;
 use richardfan\widget\JSRegister;
-use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -73,7 +72,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Total Members</h3>
+                        <h3 class="card-title">Members</h3>
                     </div>
                     <div class="card-body">
                         <div class="chart-container"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
@@ -181,14 +180,31 @@ $this->params['breadcrumbs'][] = $this->title;
                                     }
                                 }
                             ],
+                           
+                                      [
+                                'attribute' => 'active',
+                               
+                               'format' => 'raw',
+                                'value' => function($model) {
+
+                                    $type = Type::findOne(["id" => $model["r_type"]]);
+                                    if ($model["active"]==1) {
+                                       return  '<div class="avatar avatar-md bg-secondary-transparent text-secondary bradius me-3">
+                                                <i class="fe fe-check"></i>
+                                            </div>'; }
+                                    else '<div class="avatar  avatar-md bg-pink-transparent text-pink bradius me-3">
+                                                <i class="fe fe-x"></i>
+                                            </div>' ;
+                                }
+                            ],
                             ['class' => 'yii\grid\ActionColumn',
-                                'contentOptions' => ['style' => 'width: 70px;'],
+                                'contentOptions' => ['style' => 'width: 90px;'],
                                 'visible' => Yii::$app->user->isGuest ? false : true,
                                 'template' => '{phone} {telegram}',
                                 'buttons' => [
                                     'telegram' => function ($url, $model) {
-                                        return Html::a('<i class="fa fa-telegram" data-bs-toggle="tooltip" title="" data-bs-original-title="" aria-label=""></i>', Url::to('https://t.me/' . $model["telegram"], true), [
-                                                    'style' => 'color:#2AABEE;'
+                                        return Html::a('<i class="fa fa-telegram"style="margin-right: 10px!important;"  data-bs-toggle="tooltip" title="" data-bs-original-title="" aria-label=""></i>', Url::to('https://t.me/' . $model["telegram"], true), [
+                                                    'style' => 'color:#2AABEE;margin-right: 10px!important;'
                                         ]);
                                     },
                                     'phone' => function ($url, $model) {
@@ -274,7 +290,7 @@ $this->params['breadcrumbs'][] = $this->title;
 //                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
                         datasets: [{
                                 label: 'Total Members',
-                                data: resultMembers,
+                                data: resultMembers.map((sum = 0, n => sum += n)),
 //                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
                                 backgroundColor: 'transparent',
                                 borderColor: '#f46ef4',
@@ -330,7 +346,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         labels: labelsMembers0,
                         datasets: [{
                                 label: 'Members',
-                                data: resultMembers0,
+                                data: resultMembers0.map((sum = 0, n => sum += n)),
                                 borderWidth: 2,
                                 backgroundColor: 'transparent',
                                 borderColor: '#6c5ffc',

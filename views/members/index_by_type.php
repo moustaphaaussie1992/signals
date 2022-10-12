@@ -217,7 +217,7 @@ $this->params['breadcrumbs'][] = $this->title;
 //                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
                         datasets: [{
                                 label: 'Total Members',
-                                data: resultMembers,
+                                data: resultMembers.map((sum = 0, n => sum += n)),
 //                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
                                 backgroundColor: 'transparent',
                                 borderColor: '#f46ef4',
@@ -273,7 +273,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         labels: labelsMembers0,
                         datasets: [{
                                 label: 'Members',
-                                data: resultMembers0,
+                                data: resultMembers0.map((sum = 0, n => sum += n)),
                                 borderWidth: 2,
                                 backgroundColor: 'transparent',
                                 borderColor: '#6c5ffc',
@@ -330,7 +330,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         labels: labelsubscriptions,
 //                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
                         datasets: [{
-                                label: 'Total Members',
+                                label: 'Members',
                                 data: dataSubscriptions,
 //                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
                                 backgroundColor: 'transparent',

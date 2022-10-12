@@ -31,6 +31,10 @@ use yii\widgets\ActiveForm;
         ],
     ])->hint(false);
     ?>
+ <?= $form->field($model, 'active')->dropDownList([
+     "1"=>"Active",
+     "0"=>"Inactive"
+ ]) ?>
 
     <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
 

@@ -38,7 +38,7 @@ function addhttp($url) {
                         <div class="col-lg-12 col-md-12">
                             <div class="row">
                                 <div class="panel profile-cover" >
-                                    <div class="profile-cover__action bg-img" style="background-image: url('<?= Yii::getAlias('@web') . "/profilePhotos/" . $user['back_photo'] ?>')"></div>
+                                    <div class="profile-cover__action bg-img" style="background-image: url('<?= Yii::getAlias('@web') . "/coverPhotos/" . $user['back_photo'] ?>')"></div>
                                     <div class="profile-cover__img">
                                         <div class="profile-img-1">
                                             <img src="<?= Yii::getAlias('@web') . "/profilePhotos/" . $user['photo'] ?>" style="height: 120px;width: 120px;object-fit: cover;" alt="img">

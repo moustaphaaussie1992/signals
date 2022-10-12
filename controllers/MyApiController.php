@@ -206,7 +206,7 @@ ORDER BY `dateWithputFormat` ASC";
 
         $rawSqlCrypto = "SELECT date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %Y') AS `MonthDate`
             ,COALESCE(count(`id`),0) AS `count`,
-            COALESCE(sum(`percentage`),0) AS `percentage`,
+            COALESCE(SUM(case when crypto_signals.result = 1 then percentage else -percentage end),0) as `percentage`,
             COALESCE(SUM(case when crypto_signals.result = 1 then 1 else 0 end),0) as countWin,
             COALESCE(SUM(case when crypto_signals.result = 2 then 1 else 0 end),0) as countLoss,
             
@@ -245,10 +245,10 @@ ORDER BY `dateWithputFormat` ASC";
             $labelsCryptoSignals [] = $result[$i]["MonthDate"];
         }
 
-
+//            COALESCE(sum(`percentage`),0) AS `percentage`,
         $rawSqlForex = "SELECT date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %Y') AS `MonthDate`
             ,COALESCE(count(`id`),0) AS `count`,
-            COALESCE(sum(`percentage`),0) AS `percentage`,
+            COALESCE(SUM(case when forex_signals.result = 1 then percentage else -percentage end),0) as `percentage`,
             COALESCE(SUM(case when forex_signals.result = 1 then 1 else 0 end),0) as countWin,
             COALESCE(SUM(case when forex_signals.result = 2 then 1 else 0 end),0) as countLoss,
             
