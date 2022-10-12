@@ -23,7 +23,7 @@ class MembersSearch extends Members {
     public function rules() {
         return [
             [['id'], 'integer'],
-            [['fullname', 'registration_date', 'phone', 'telegram', 'r_user', 'subscription_date', 'from', 'to', 'days_left', 'r_type'], 'safe'],
+            [['fullname', 'registration_date', 'phone', 'telegram', 'r_user', 'subscription_date', 'from', 'to', 'days_left', 'r_type','active'], 'safe'],
         ];
     }
 
