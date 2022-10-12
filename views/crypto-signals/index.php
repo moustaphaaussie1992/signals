@@ -382,6 +382,7 @@ justify-content: center;">
         success: function (data) {
 
             var profitCrpto = data["profitCrpto"];
+//            var profitCrpto =  data["resultWinPercentage"] - data["resultLossPercentage"];
             var resultSignals = data["resultSignals"];
             var resultWonCryptoSignals = data["resultWonCryptoSignals"];
             var resultLossCryptoSignals = data["resultLossCryptoSignals"];
