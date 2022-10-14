@@ -47,14 +47,26 @@ class MembersController extends Controller {
         if ($userId) {
             $totalMembers = Members::find()
                     ->where(["r_user" => $userId])
+                    ->andWhere(["active"=>1])
+                    ->count();
+              $totalInactive = Members::find()
+                    ->where(["r_user" => $userId])
+                    ->andWhere(["active"=>0])
+                    ->count();
+              $newMembers= Members::find()
+                    ->where(' date between  DATE_FORMAT(NOW() ,"%Y-%m-01") AND NOW() ')
+                    ->andWhere(["r_user" => $userId])
+                    ->andWhere(["active"=>1])
                     ->count();
         }
         $totalProfits = 0;
         if ($userId) {
             $totalProfits = Subscriptions::find()
+                    
                     ->where(["r_user" => $userId])
                     ->join('join', 'members', 'members.id = subscriptions.member_id')
                     ->andWhere(["members.r_user" => $userId])
+                      ->andWhere('subscription_date between  DATE_FORMAT(NOW() ,"%Y-%m-01") AND NOW() ')
                     ->sum('fee');
         }
 
@@ -64,6 +76,8 @@ class MembersController extends Controller {
                     'dataProvider' => $dataProvider,
                     'totalMembers' => $totalMembers,
                     'totalProfits' => $totalProfits,
+                    'totalInactive' => $totalInactive,
+                    'newMembers' => $newMembers,
         ]);
     }
 
@@ -78,7 +92,21 @@ class MembersController extends Controller {
             $totalMembers = Members::find()
                     ->where(["r_user" => $userId])
                     ->join('join', 'subscriptions', 'subscriptions.member_id = members.id')
+                      ->andWhere(["active"=>1])
                     ->andWhere(['subscriptions.r_type' => $subscriptionType])
+                    ->count();
+                    $totalInactive = Members::find()
+                               ->join('join', 'subscriptions', 'subscriptions.member_id = members.id')
+                    ->andWhere(['subscriptions.r_type' => $subscriptionType])
+                    ->andWhere(["r_user" => $userId])
+                    ->andWhere(["active"=>0])
+                    ->count();
+              $newMembers= Members::find()
+                         ->join('join', 'subscriptions', 'subscriptions.member_id = members.id')
+                    ->andWhere(['subscriptions.r_type' => $subscriptionType])
+                    ->andWhere(' date between  DATE_FORMAT(NOW() ,"%Y-%m-01") AND NOW() ')
+                    ->andWhere(["r_user" => $userId])
+                    ->andWhere(["active"=>1])
                     ->count();
         }
         $totalProfits = 0;
@@ -88,6 +116,7 @@ class MembersController extends Controller {
                     ->join('join', 'members', 'members.id = subscriptions.member_id')
                     ->andWhere(["members.r_user" => $userId])
                     ->andWhere(['subscriptions.r_type' => $subscriptionType])
+                            ->andWhere('subscription_date between  DATE_FORMAT(NOW() ,"%Y-%m-01") AND NOW() ')
                     ->sum('fee');
         }
 
@@ -99,6 +128,8 @@ class MembersController extends Controller {
                     'totalMembers' => $totalMembers,
                     'totalProfits' => $totalProfits,
                     'subscriptionType' => $subscriptionType,
+                      'totalInactive' => $totalInactive,
+                    'newMembers' => $newMembers,
         ]);
     }
 
@@ -114,6 +145,20 @@ class MembersController extends Controller {
                     ->where(["r_user" => $userId])
                     ->join('join', 'subscriptions', 'subscriptions.member_id = members.id')
                     ->andWhere(['subscriptions.r_type' => $subscriptionType])
+                         ->andWhere(["active"=>1])
+                    ->count();
+                       $totalInactive = Members::find()
+                                  ->join('join', 'subscriptions', 'subscriptions.member_id = members.id')
+                    ->andWhere(['subscriptions.r_type' => $subscriptionType])
+                    ->andWhere(["r_user" => $userId])
+                    ->andWhere(["active"=>0])
+                    ->count();
+              $newMembers= Members::find()
+                         ->join('join', 'subscriptions', 'subscriptions.member_id = members.id')
+                    ->andWhere(['subscriptions.r_type' => $subscriptionType])
+                    ->andWhere(' date between  DATE_FORMAT(NOW() ,"%Y-%m-01") AND NOW() ')
+                    ->andWhere(["r_user" => $userId])
+                    ->andWhere(["active"=>1])
                     ->count();
         }
         $totalProfits = 0;
@@ -123,6 +168,7 @@ class MembersController extends Controller {
                     ->join('join', 'members', 'members.id = subscriptions.member_id')
                     ->andWhere(["members.r_user" => $userId])
                     ->andWhere(['subscriptions.r_type' => $subscriptionType])
+                             ->andWhere('subscription_date between  DATE_FORMAT(NOW() ,"%Y-%m-01") AND NOW() ')
                     ->sum('fee');
         }
 
@@ -134,6 +180,8 @@ class MembersController extends Controller {
                     'totalMembers' => $totalMembers,
                     'totalProfits' => $totalProfits,
                     'subscriptionType' => $subscriptionType,
+                      'totalInactive' => $totalInactive,
+                    'newMembers' => $newMembers,
         ]);
     }
 
@@ -150,6 +198,20 @@ class MembersController extends Controller {
                     ->where(["r_user" => $userId])
                     ->join('join', 'subscriptions', 'subscriptions.member_id = members.id')
                     ->andWhere(['subscriptions.r_type' => $subscriptionType])
+                             ->andWhere(["active"=>1])
+                    ->count();
+                      $totalInactive = Members::find()
+                                 ->join('join', 'subscriptions', 'subscriptions.member_id = members.id')
+                    ->andWhere(['subscriptions.r_type' => $subscriptionType])
+                    ->andWhere(["r_user" => $userId])
+                    ->andWhere(["active"=>0])
+                    ->count();
+              $newMembers= Members::find()
+                         ->join('join', 'subscriptions', 'subscriptions.member_id = members.id')
+                    ->andWhere(['subscriptions.r_type' => $subscriptionType])
+                    ->andWhere(' date between  DATE_FORMAT(NOW() ,"%Y-%m-01") AND NOW() ')
+                    ->andWhere(["r_user" => $userId])
+                    ->andWhere(["active"=>1])
                     ->count();
         }
         $totalProfits = 0;
@@ -159,6 +221,7 @@ class MembersController extends Controller {
                     ->join('join', 'members', 'members.id = subscriptions.member_id')
                     ->andWhere(["members.r_user" => $userId])
                     ->andWhere(['subscriptions.r_type' => $subscriptionType])
+                             ->andWhere('subscription_date between  DATE_FORMAT(NOW() ,"%Y-%m-01") AND NOW() ')
                     ->sum('fee');
         }
 
@@ -170,6 +233,8 @@ class MembersController extends Controller {
                     'totalMembers' => $totalMembers,
                     'totalProfits' => $totalProfits,
                     'subscriptionType' => $subscriptionType,
+                 'totalInactive' => $totalInactive,
+                    'newMembers' => $newMembers,
         ]);
     }
 

@@ -105,9 +105,7 @@ FROM (
     UNION SELECT 1
     UNION SELECT 2
     UNION SELECT 3
-    UNION SELECT 4
-    UNION SELECT 5
-    UNION SELECT 6
+   
 ) AS `week`
 LEFT JOIN $subscTypeQuerySubs ON date_format(subscription_date, '%M %Y') = date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %Y')
 GROUP BY DayDate
