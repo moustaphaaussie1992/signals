@@ -1,5 +1,6 @@
 <?php
 
+
 use app\models\MembersSearch;
 use app\models\Type;
 use richardfan\widget\JSRegister;
@@ -29,23 +30,53 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="card overflow-hidden">
                     <div class="card-body">
                         <div class="d-flex">
-                            <div class="mt-2">
-                                <h6 class="">Total Members</h6>
+                                  <div class="mt-2" style="margin-right: 20px">
+                                <h6 class="">New Members</h6>
+                                <h2 class="mb-0 number-font"><?= $newMembers ?></h2>
+                            </div>
+                             <div class="mt-2" style="margin-right: 20px">
+                                <h6 class="">Inactive Members</h6>
+                                <h2 class="mb-0 number-font"><?= $totalInactive ?></h2>
+                            </div>
+                            <div class="mt-2"style="margin-right: 20px">
+                                <h6 class="">Active Members</h6>
                                 <h2 class="mb-0 number-font"><?= $totalMembers ?></h2>
                             </div>
+                            
+                      
+                            
+                             
                             <div class="ms-auto">
                                 <div class="chart-wrapper mt-1"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
                                     <canvas id="leadschartMembers" class="h-8 w-9 chart-dropshadow chartjs-render-monitor" width="120" height="80" style="display: block; height: 64px; width: 96px;"></canvas>
                                 </div>
                             </div>
+                            
                         </div>
-                        <span class="text-muted fs-12">
+                           <div class="d-flex">
+                         <div class="mt-2" style="margin-right: 50px">
+                        <span class="text-muted fs-12"">
 <!--                            <span class="text-pink">
                                 <i class="fe fe-arrow-down-circle text-pink"></i> 0.75%
                             </span>-->
-                            Last 7 days</span>
+                            This Month</span>
+                         </div> <div class="mt-2" style="margin-right: 90px">
+                            <span class="text-muted fs-12">
+<!--                            <span class="text-pink">
+                                <i class="fe fe-arrow-down-circle text-pink"></i> 0.75%
+                            </span>-->
+                            All Time</span>
+                         </div>
+                         <div class="mt-2" style="margin-right: 20px">
+                          <span class="text-muted fs-12" style="margin-right: 20px">
+<!--                            <span class="text-pink">
+                                <i class="fe fe-arrow-down-circle text-pink"></i> 0.75%
+                            </span>-->
+                              All Time</span></div>
+                    </div>
                     </div>
                 </div>
+                
             </div>
 
             <div class="col-lg-6">
@@ -54,7 +85,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <div class="d-flex">
                             <div class="mt-2">
                                 <h6 class="">Total Profits</h6>
-                                <h2 class="mb-0 number-font"><?= $totalProfits ?></h2>
+                                <h2 class="mb-0 number-font"><?= $totalProfits ?>$</h2>
                             </div>
                             <div class="ms-auto">
                                 <div class="chart-wrapper mt-1"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
@@ -64,7 +95,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         </div>
                         <span class="text-muted fs-12">
                             <!--<span class="text-yellow"><i class="fe fe-arrow-down-circle text-yellow"></i> 0.75%</span>-->
-                            Last 6 months</span>
+                            This Month</span>
                     </div>
                 </div>
             </div>
@@ -131,7 +162,7 @@ $this->params['breadcrumbs'][] = $this->title;
 //                                'group' => true,
 //                            ],
                             'fullname',
-//                            'registration_date',
+                            'date',
 //                            'subscription_date',
                             [
                                 'attribute' => 'r_type',
@@ -185,6 +216,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'attribute' => 'active',
                                
                                'format' => 'raw',
+                                          'contentOptions' => ['style' => 'width: 40px;'],
                                 'value' => function($model) {
 
                                     $type = Type::findOne(["id" => $model["r_type"]]);
@@ -192,7 +224,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                        return  '<div class="avatar avatar-md bg-secondary-transparent text-secondary bradius me-3">
                                                 <i class="fe fe-check"></i>
                                             </div>'; }
-                                    else '<div class="avatar  avatar-md bg-pink-transparent text-pink bradius me-3">
+                                    else return '<div class="avatar  avatar-md bg-pink-transparent text-pink bradius me-3">
                                                 <i class="fe fe-x"></i>
                                             </div>' ;
                                 }
@@ -203,13 +235,17 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'template' => '{phone} {telegram}',
                                 'buttons' => [
                                     'telegram' => function ($url, $model) {
-                                        return Html::a('<i class="fa fa-telegram"style="margin-right: 10px!important;"  data-bs-toggle="tooltip" title="" data-bs-original-title="" aria-label=""></i>', Url::to('https://t.me/' . $model["telegram"], true), [
-                                                    'style' => 'color:#2AABEE;margin-right: 10px!important;'
+                                      
+                                          return Html::a('<span class="fa fa-telegram "></span>', Url::to( $model["telegram"], true), [
+                                                    'class' => 'btn  btn-sm',
+                                                    'style' => 'color:#2AABEE'
                                         ]);
                                     },
                                     'phone' => function ($url, $model) {
-                                        return Html::a('<i class="fa fa-whatsapp" data-bs-toggle="tooltip" title="" data-bs-original-title="" aria-label=""></i>', Url::to('https://wa.me/' . $model["phone"], true), [
-                                                    'style' => 'color:#4caf50;'
+                                 
+                                           return Html::a('<span class="fa fa-whatsapp "></span>', Url::to('https://wa.me/' . $model["phone"], true), [
+                                                    'class' => 'btn  btn-sm',
+                                                    'style' => 'color:#4caf50'
                                         ]);
                                     },
                                 ],
@@ -337,7 +373,18 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                 });
 
-
+const findCumulativeSum = arr => {
+   const creds = arr.reduce((acc, val) => {
+      let { sum, res } = acc;
+      sum += val;
+      res.push(sum);
+      return { sum, res };
+   }, {
+      sum: 0,
+      res: []
+   });
+   return creds.res;
+};
 
                 var ctx = document.getElementById("chartLineMembers").getContext('2d');
                 var myChart = new Chart(ctx, {
@@ -347,6 +394,12 @@ $this->params['breadcrumbs'][] = $this->title;
                         datasets: [{
                                 label: 'Members',
                                 data: resultMembers0.map((sum = 0, n => sum += n)),
+
+
+
+
+//console.log(findCumulativeSum(arr));
+//                                data: findCumulativeSum(resultMembers0),
                                 borderWidth: 2,
                                 backgroundColor: 'transparent',
                                 borderColor: '#6c5ffc',
@@ -387,6 +440,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         legend: {
                             labels: {
                                 fontColor: "#9ba6b5"
+                              
                             },
                         },
                     }

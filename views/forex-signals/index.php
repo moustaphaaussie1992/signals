@@ -86,7 +86,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <div class="media">
                                     <div class="media-icon bg-primary text-white bradius me-3 mt-1">
                                         <span class="mt-3">
-                                            <i class="fe fe-dollar-sign fs-20"></i>
+                                            <i class="fa fa-percent  fs-20"></i>
                                         </span>
                                     </div>
                                     <div class="media-body">
@@ -245,6 +245,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'columns' => [
                             ['class' => 'yii\grid\SerialColumn'],
 //            'id',
+                            'date',
                             [
                                 'attribute' => 'ticker',
                                 'value' => 'ticker0.name'

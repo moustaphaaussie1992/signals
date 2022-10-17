@@ -90,7 +90,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <div class="media">
                                     <div class="media-icon bg-primary text-white bradius me-3 mt-1">
                                         <span class="mt-3">
-                                            <i class="fe fe-dollar-sign fs-20"></i>
+                                            <i class="fa fa-percent fs-20"></i>
                                         </span>
                                     </div>
                                     <div class="media-body">
@@ -253,6 +253,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         },
                         'columns' => [
                             ['class' => 'yii\grid\SerialColumn'],
+                            'date',
 //            'id',
                             [
                                 'attribute' => 'coin',
@@ -379,9 +380,10 @@ justify-content: center;">
         data: {
             'userId': '<?= Yii::$app->user->id ?>',
         },
-        success: function (data) {
+              success: function (data) {
 
             var profitCrpto = data["profitCrpto"];
+//            var profitCrpto =  data["resultWinPercentage"] - data["resultLossPercentage"];
             var resultSignals = data["resultSignals"];
             var resultWonCryptoSignals = data["resultWonCryptoSignals"];
             var resultLossCryptoSignals = data["resultLossCryptoSignals"];

@@ -23,7 +23,7 @@ class MembersSearch extends Members {
     public function rules() {
         return [
             [['id'], 'integer'],
-            [['fullname', 'registration_date', 'phone', 'telegram', 'r_user', 'subscription_date', 'from', 'to', 'days_left', 'r_type','active'], 'safe'],
+            [['fullname', 'registration_date', 'phone', 'telegram', 'r_user', 'subscription_date', 'from', 'to', 'days_left', 'r_type','active','date'], 'safe'],
         ];
     }
 
@@ -54,7 +54,7 @@ class MembersSearch extends Members {
         $query = Members::find()
                 ->select('members.*,subscriptions.subscription_date,subscriptions.from,subscriptions.to,datediff(subscriptions.to, curdate()) as days_left,subscriptions.r_type,subscriptions.member_id')
                 ->joinWith('rUser')
-                ->join('join', 'subscriptions', 'subscriptions.member_id = members.id');
+                ->join('LEFT join', 'subscriptions', 'subscriptions.member_id = members.id');
 //        $query = Members::find()->joinWith('rUser');
 
 
@@ -83,8 +83,11 @@ class MembersSearch extends Members {
         $query->andFilterWhere(['like', 'fullname', $this->fullname])
                 ->andFilterWhere(['like', 'phone', $this->phone])
                 ->andFilterWhere(['like', 'telegram', $this->telegram])
+                ->andFilterWhere(['like', 'date', $this->date])
                 ->andFilterWhere(['like', 'subscriptions.r_type', $this->r_type])
-                ->andFilterWhere(['like', 'user.username', $this->r_user]);
+                ->andFilterWhere(['like', 'user.username', $this->r_user])
+                    ->andFilterWhere(['>=', 'subscriptions.from', $this->from])
+                ->andFilterWhere(['<=', 'subscriptions.to', $this->to]);
 
         return $dataProvider;
     }
@@ -145,8 +148,10 @@ class MembersSearch extends Members {
                 ->andFilterWhere(['like', 'telegram', $this->telegram])
                 ->andFilterWhere(['like', 'user.username', $this->r_user])
                 ->andFilterWhere(['like', 'subscriptions.subscription_date', $this->subscription_date])
-                ->andFilterWhere(['like', 'subscriptions.from', $this->from])
-                ->andFilterWhere(['like', 'subscriptions.to', $this->to])
+                ->andFilterWhere(['>=', 'subscriptions.from', $this->from])
+                ->andFilterWhere(['<=', 'subscriptions.to', $this->to]);
+             
+              
 
         ;
 

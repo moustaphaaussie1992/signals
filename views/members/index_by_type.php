@@ -29,9 +29,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="card overflow-hidden">
                     <div class="card-body">
                         <div class="d-flex">
-                            <div class="mt-2">
-                                <h6 class="">Total Members</h6>
+                            <div class="mt-2"style="margin-right: 20px">
+                                <h6 class="">Current Members</h6>
                                 <h2 class="mb-0 number-font"><?= $totalMembers ?></h2>
+                            </div>
+                            
+                            <div class="mt-2" style="margin-right: 20px">
+                                <h6 class="">New Members</h6>
+                                <h2 class="mb-0 number-font"><?= $newMembers ?></h2>
+                            </div>
+                              <div class="mt-2">
+                                <h6 class="">Inactive Members</h6>
+                                <h2 class="mb-0 number-font"><?= $totalInactive ?></h2>
                             </div>
                             <div class="ms-auto">
                                 <div class="chart-wrapper mt-1"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>

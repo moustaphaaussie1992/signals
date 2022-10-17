@@ -6,6 +6,7 @@ use app\models\CryptoResult;
 use app\models\CryptoSignals;
 use app\models\CryptoTarget;
 use app\models\CryptoType;
+use kartik\select2\Select2;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\web\View;
@@ -41,12 +42,22 @@ use yii\widgets\ActiveForm;
     ));
     ?>
 
-    <?=
-            $form->field($model, 'target')
-            ->dropDownList(
-                    ArrayHelper::map(CryptoTarget::find()->asArray()->all(), 'id', 'name'
-    ));
-    ?>
+
+          
+
+            <?=
+            $form->field($model, 'target')->widget(Select2::classname(), [
+                'data' => ArrayHelper::map(CryptoTarget::find()->all(), 'id', 'name'),
+                'options' => ['placeholder' => '...',
+                    'style' => "width:100%!important"
+                ],
+                'pluginOptions' => [
+                    'allowClear' => true,
+                    'multiple' => true
+                ],
+            ]);
+            ?>
+       
 
     <?=
             $form->field($model, 'result')
