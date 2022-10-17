@@ -1,10 +1,11 @@
 <?php
 
-use app\assets\CounterAsset;
 use app\models\MembersSearch;
+use app\models\Type;
 use richardfan\widget\JSRegister;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\View;
@@ -118,7 +119,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php // echo $this->render('_search', ['model' => $searchModel]);     ?>
             <div class="card-body">
                 <div class="grid-margin">
-                    <?=
+                     <?=
                     GridView::widget([
                         'dataProvider' => $dataProvider,
                         'filterModel' => $searchModel,
@@ -129,8 +130,14 @@ $this->params['breadcrumbs'][] = $this->title;
                         },
                         'columns' => [
                             ['class' => 'yii\grid\SerialColumn'],
+//                            [
+//                                'attribute' => 'id',
+//                                'group' => true,
+//                            ],
                             'fullname',
-                            'subscription_date',
+                            'date',
+//                            'subscription_date',
+//                          
                             'from',
                             'to',
 //                            'days_left',
@@ -165,21 +172,77 @@ $this->params['breadcrumbs'][] = $this->title;
                                     }
                                 }
                             ],
+                           
+                                      [
+                                'attribute' => 'active',
+                               
+                               'format' => 'raw',
+                                          'contentOptions' => ['style' => 'width: 40px;'],
+                                'value' => function($model) {
+
+                                    $type = Type::findOne(["id" => $model["r_type"]]);
+                                    if ($model["active"]==1) {
+                                       return  '<div class="avatar avatar-md bg-secondary-transparent text-secondary bradius me-3">
+                                                <i class="fe fe-check"></i>
+                                            </div>'; }
+                                    else return '<div class="avatar  avatar-md bg-pink-transparent text-pink bradius me-3">
+                                                <i class="fe fe-x"></i>
+                                            </div>' ;
+                                }
+                            ],
                             ['class' => 'yii\grid\ActionColumn',
-                                'contentOptions' => ['style' => 'width: 70px;'],
+                                'contentOptions' => ['style' => 'width: 90px;'],
                                 'visible' => Yii::$app->user->isGuest ? false : true,
                                 'template' => '{phone} {telegram}',
                                 'buttons' => [
                                     'telegram' => function ($url, $model) {
-                                        return Html::a('<i class="fa fa-telegram" data-bs-toggle="tooltip" title="" data-bs-original-title="" aria-label=""></i>', Url::to('https://t.me/' . $model->telegram, true), [
-                                                    'style' => 'color:#2AABEE;'
+                                      
+                                          return Html::a('<span class="fa fa-telegram "></span>', Url::to( $model["telegram"], true), [
+                                                    'class' => 'btn  btn-sm',
+                                                    'style' => 'color:#2AABEE'
                                         ]);
                                     },
                                     'phone' => function ($url, $model) {
-                                        return Html::a('<i class="fa fa-whatsapp" data-bs-toggle="tooltip" title="" data-bs-original-title="" aria-label=""></i>', Url::to('https://wa.me/' . $model->phone, true), [
-                                                    'style' => 'color:#4caf50;'
+                                 
+                                           return Html::a('<span class="fa fa-whatsapp "></span>', Url::to('https://wa.me/' . $model["phone"], true), [
+                                                    'class' => 'btn  btn-sm',
+                                                    'style' => 'color:#4caf50'
                                         ]);
                                     },
+                                ],
+                            ],
+                            ['class' => 'yii\grid\ActionColumn',
+                                'contentOptions' => ['style' => 'width: 140px;'],
+                                'visible' => Yii::$app->user->isGuest ? false : true,
+                                'template' => '{update}{delete}{view}',
+                                'buttons' => [
+                                    'view' => function ($url, $model) {
+                                        return Html::a('<span class="fe fe-eye fs-14"></span>', $url, [
+                                                    'class' => 'btn text-warning btn-sm',
+                                                    'style' => ''
+                                        ]);
+                                    },
+                                    'update' => function ($url, $model) {
+                                        return Html::a('<span class="fe fe-edit fs-14"></span>', $url, [
+                                                    'class' => 'btn text-primary btn-sm',
+                                                    'title' => 'Edit'
+                                        ]);
+                                    },
+                                    'delete' => function ($url, $model) {
+                                        return Html::a('<span class="fe fe-trash-2 fs-14"></span>', $url, [
+                                                    'class' => 'btn text-danger btn-sm',
+                                                    'data' => [
+                                                        'method' => 'post',
+                                                        'params' => [
+                                                            'id' => $model["id"]
+                                                        ],
+                                                        'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
+                                                        'title' => Yii::t('app', 'Confirmation'),
+                                                        'ok' => Yii::t('app', 'OK'),
+                                                        'cancel' => Yii::t('app', 'Cancel'),
+                                                    ]
+                                        ]);
+                                    }
                                 ],
                             ]
                         ],
@@ -196,6 +259,19 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?php JSRegister::begin(); ?>
 <script>
+    
+    const findCumulativeSum = arr => {
+   const creds = arr.reduce((acc, val) => {
+      let { sum, res } = acc;
+      sum += val;
+      res.push(sum);
+      return { sum, res };
+   }, {
+      sum: 0,
+      res: []
+   });
+   return creds.res;
+};
 
 
     $.ajax({

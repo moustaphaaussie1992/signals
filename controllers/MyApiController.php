@@ -67,18 +67,18 @@ ORDER BY `DayDate` ASC";
 
 
         $union = "";
-        for ($i = 1; $i < 30; $i++) {
+        for ($i = 1; $i < 13; $i++) {
             $union = $union . "UNION SELECT $i ";
         }
 
-        $rawSql0 = "SELECT (DATE(NOW()) - INTERVAL `day` DAY) AS `DayDate`, COUNT(`id`) AS `count`
+        $rawSql0 = "SELECT date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %Y') AS `DayDate`, COALESCE(sum(`id`),0) AS `count`,(DATE(NOW()) - INTERVAL `month` MONTH) as dateWithputFormat
 FROM (
-    SELECT 0 AS `day` 
+    SELECT 0 AS `month` 
     $union
 ) AS `week`
-LEFT JOIN $subscTypeQuerymembers ON DATE(`date`) = (DATE(NOW()) - INTERVAL `day` DAY)
-GROUP BY `DayDate`
-ORDER BY `DayDate` ASC";
+LEFT JOIN $subscTypeQuerymembers  ON date_format(date, '%M %Y') = date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %Y')
+GROUP BY DayDate
+ORDER BY `dateWithputFormat` ASC";
 
         $connection0 = Yii::$app->getDb();
         $command0 = $connection0->createCommand($rawSql0);
@@ -89,10 +89,13 @@ ORDER BY `DayDate` ASC";
         $dataMembers0 = [];
         $labelsMembers0 = [];
         for ($i = 0; $i < sizeof($result0); $i++) {
-            $dataMembers0 [] = $result0[$i]["count"];
+            $dataMembers0 [] = intval($result0[$i]["count"]);
             $labelsMembers0 [] = $result0[$i]["DayDate"];
         }
 
+//        \yii\helpers\VarDumper::dump($labelsMembers0,3,3);
+//        \yii\helpers\VarDumper::dump($dataMembers0,3,3);
+//        die();
 
 
 
@@ -120,7 +123,7 @@ ORDER BY `dateWithputFormat` ASC";
         $dataSubscriptions = [];
         $labelsubscriptions = [];
         for ($i = 0; $i < sizeof($result1); $i++) {
-            $dataSubscriptions [] = $result1[$i]["count"];
+            $dataSubscriptions [] = $result1[$i]["count"]; 
             $labelsubscriptions [] = $result1[$i]["DayDate"];
         }
 
@@ -171,7 +174,7 @@ ORDER BY `dateWithputFormat` ASC";
         $dataSubscriptions10 = [];
         $labelsubscriptions10 = [];
         for ($i = 0; $i < sizeof($result10); $i++) {
-            $dataSubscriptions10 [] = $result10[$i]["count"];
+            $dataSubscriptions10 [] =  intval($result10[$i]["count"]);
             $labelsubscriptions10 [] = $result10[$i]["DayDate"];
         }
 

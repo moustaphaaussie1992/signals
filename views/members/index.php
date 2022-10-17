@@ -385,6 +385,8 @@ const findCumulativeSum = arr => {
    });
    return creds.res;
 };
+//console.log(findCumulativeSum(resultMembers0))
+
 
                 var ctx = document.getElementById("chartLineMembers").getContext('2d');
                 var myChart = new Chart(ctx, {
@@ -393,13 +395,14 @@ const findCumulativeSum = arr => {
                         labels: labelsMembers0,
                         datasets: [{
                                 label: 'Members',
-                                data: resultMembers0.map((sum = 0, n => sum += n)),
+//                                data: resultMembers0.map((sum = 0, n => sum += n)),
 
 
 
 
-//console.log(findCumulativeSum(arr));
-//                                data: findCumulativeSum(resultMembers0),
+
+
+                                data: findCumulativeSum(resultMembers0),
                                 borderWidth: 2,
                                 backgroundColor: 'transparent',
                                 borderColor: '#6c5ffc',
