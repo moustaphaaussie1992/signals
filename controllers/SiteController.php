@@ -64,6 +64,9 @@ class SiteController extends Controller {
     public function actionLanding() {
         return $this->renderPartial('landing');
     }
+    public function actionDashboard() {
+        return $this->render('dashboard');
+    }
 
     /**
      * Login action.
