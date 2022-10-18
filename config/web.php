@@ -1,4 +1,4 @@
-    <?php
+<?php
 
 use kartik\datecontrol\DateControl;
 
@@ -32,11 +32,35 @@ $config = [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+//        'mailer' => [
+//            'class' => \yii\symfonymailer\Mailer::class,
+////            'viewPath' => '@app/mail',
+////            // send all mails to a file by default.
+////            'useFileTransport' => true,
+////            'class' => 'yii\swiftmailer\Mailer',
+//            'transport' => [
+//                'scheme' => 'smtps',
+////                'class' => 'Swift_SmtpTransport',
+//                'host' => 'smtp.gmail.com', // e.g. smtp.mandrillapp.com or smtp.gmail.com
+//                'username' => 'moustaphaaussie@gmail.com',
+//                'password' => 'mustafa1O',
+//                'port' => '587', // Port 25 is a very common port too
+//                'encryption' => 'tls', // It is often used, check your provider or mail server specs
+//            ],
+//        ],
         'mailer' => [
-            'class' => \yii\symfonymailer\Mailer::class,
-            'viewPath' => '@app/mail',
-            // send all mails to a file by default.
-            'useFileTransport' => true,
+            'class' => 'yii\swiftmailer\Mailer',
+            'useFileTransport' => false,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'encryption' => 'tls',
+                'host' => 'smtp.gmail.com',
+                'port' => '587',
+                'username' => 'mortux313@gmail.com',
+//                'username' => 'service.get4lessghana@gmail.com',
+                'password' => '123456:P',
+//                'password' => 'G4L@gh91',
+            ],
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
