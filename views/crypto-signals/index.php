@@ -300,7 +300,7 @@ justify-content: center;">
                                            
                                         </div>';
                                     }
-                                    return $targetString;
+                                    return $model->result;
                                 }
                             ],
 //                            'date',
