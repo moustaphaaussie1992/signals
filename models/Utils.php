@@ -44,6 +44,31 @@ class Utils {
             return 0;
         }
     }
+    
+        public static function getSignalForexProfitWonByUserId($userId) {
+        $forexSignals = ForexSignals::find()
+                        ->select("COALESCE(SUM(case when forex_signals.result = 1 then percentage else 0 end),0) as `percentage`")
+                        ->where([
+                            "user_id" => $userId,
+                        ])->all();
+        if (sizeof($forexSignals)) {
+            return $forexSignals[0]["percentage"];
+        } else {
+            return 0;
+        }
+    }
+         public static function getSignalForexProfitLossByUserId($userId) {
+        $forexSignals = ForexSignals::find()
+                        ->select("COALESCE(SUM(case when forex_signals.result = 2 then percentage else 0 end),0) as `percentage`")
+                        ->where([
+                            "user_id" => $userId,
+                        ])->all();
+        if (sizeof($forexSignals)) {
+            return $forexSignals[0]["percentage"];
+        } else {
+            return 0;
+        }
+    }
 
     public static function getSignalCryptoCountByUserId($userId) {
         return CryptoSignals::find()
@@ -71,6 +96,32 @@ class Utils {
     public static function getSignalCryptoProfitByUserId($userId) {
         $cryptoSignals = CryptoSignals::find()
                         ->select("COALESCE(SUM(case when result = 1 then percentage else -percentage end),0) as `percentage`")
+                        ->where([
+                            "user_id" => $userId,
+                           
+                        ])->all();
+        if (sizeof($cryptoSignals)) {
+            return $cryptoSignals[0]["percentage"];
+        } else {
+            return 0;
+        }
+    }
+      public static function getSignalCryptoProfitWonByUserId($userId) {
+        $cryptoSignals = CryptoSignals::find()
+                        ->select("COALESCE(SUM(case when result = 1 then percentage else 0 end),0) as `percentage`")
+                        ->where([
+                            "user_id" => $userId,
+                           
+                        ])->all();
+        if (sizeof($cryptoSignals)) {
+            return $cryptoSignals[0]["percentage"];
+        } else {
+            return 0;
+        }
+    }
+      public static function getSignalCryptoProfitLossByUserId($userId) {
+        $cryptoSignals = CryptoSignals::find()
+                        ->select("COALESCE(SUM(case when result = 2 then percentage else 0 end),0) as `percentage`")
                         ->where([
                             "user_id" => $userId,
                            
