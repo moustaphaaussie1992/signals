@@ -2,7 +2,8 @@
 
 namespace app\models;
 
-use Yii;
+use yii\db\ActiveQuery;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "user".
@@ -33,10 +34,20 @@ class User extends base\User {
     /**
      * Gets query for [[Members]].
      *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
+    public $password;
+
     public function getMembers() {
         return $this->hasMany(Members::class, ['r_user' => 'id']);
+    }
+
+    public function rules() {
+
+        return ArrayHelper::merge(parent::rules(), [
+                    ['password', 'required', 'on' => 'sign-up'],
+                    ['password', 'string', 'min' => 6],
+        ]);
     }
 
 }

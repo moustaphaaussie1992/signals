@@ -126,14 +126,25 @@ class UserController extends Controller {
 
     public function actionSignUp() {
 
-        \Yii::$app->mailer->compose()
-                ->setFrom('mortux313@gmail.com')
-                ->setTo("moustaphaaussie@gmail.com")
-                ->setSubject("asd")
-                ->setTextBody("dddd")
-                ->send();
+//        \Yii::$app->mailer->compose()
+//                ->setFrom('mortux313@gmail.com')
+//                ->setTo("moustaphaaussie@gmail.com")
+//                ->setSubject("asd")
+//                ->setTextBody("dddd")
+//                ->send();
 
-        return $this->render('sign_up', [
+        $model = new User();
+
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+        } else {
+            $model->loadDefaultValues();
+        }
+
+        return $this->renderPartial('sign_up', [
+                    'model' => $model,
         ]);
     }
 
