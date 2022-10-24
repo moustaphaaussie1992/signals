@@ -9,60 +9,69 @@ class Utils {
     public static $FOREX_SIGNAL_LOSS = 2;
     public static $CRYPTO_SIGNAL_LOSS = 2;
 
-    public static function getSignalForexCountByUserId($userId) {
+    public static function getSignalForexCountByUserId($userId, $from = null, $to = null) {
         return ForexSignals::find()
                         ->where([
                             "user_id" => $userId
-                        ])->count();
+                        ])
+                        ->andFilterWhere(['>=', 'date', $from])
+                        ->andFilterWhere(['<=', 'date', $to])
+                        ->count();
     }
 
-    public static function getSignalForexCountWinByUserId($userId) {
+    public static function getSignalForexCountWinByUserId($userId, $from = null, $to = null) {
         return ForexSignals::find()
                         ->where([
                             "user_id" => $userId,
                             "result" => Utils::$FOREX_SIGNAL_WIN
-                        ])->count();
+                        ])->andFilterWhere(['>=', 'date', $from])
+                        ->andFilterWhere(['<=', 'date', $to])->count();
     }
 
-    public static function getSignalForexCountLossByUserId($userId) {
+    public static function getSignalForexCountLossByUserId($userId, $from = null, $to = null) {
         return ForexSignals::find()
                         ->where([
                             "user_id" => $userId,
                             "result" => Utils::$FOREX_SIGNAL_LOSS
-                        ])->count();
+                        ])->andFilterWhere(['>=', 'date', $from])
+                        ->andFilterWhere(['<=', 'date', $to])->count();
     }
 
-    public static function getSignalForexProfitByUserId($userId) {
+    public static function getSignalForexProfitByUserId($userId, $from = null, $to = null) {
         $forexSignals = ForexSignals::find()
                         ->select("COALESCE(SUM(case when forex_signals.result = 1 then percentage else -percentage end),0) as `percentage`")
                         ->where([
                             "user_id" => $userId,
-                        ])->all();
+                        ])->andFilterWhere(['>=', 'date', $from])
+                        ->andFilterWhere(['<=', 'date', $to])->all();
         if (sizeof($forexSignals)) {
             return $forexSignals[0]["percentage"];
         } else {
             return 0;
         }
     }
-    
-        public static function getSignalForexProfitWonByUserId($userId) {
+
+    public static function getSignalForexProfitWonByUserId($userId, $from = null, $to = null) {
         $forexSignals = ForexSignals::find()
                         ->select("COALESCE(SUM(case when forex_signals.result = 1 then percentage else 0 end),0) as `percentage`")
                         ->where([
                             "user_id" => $userId,
-                        ])->all();
+                        ])->andFilterWhere(['>=', 'date', $from])
+                        ->andFilterWhere(['<=', 'date', $to])->all();
         if (sizeof($forexSignals)) {
             return $forexSignals[0]["percentage"];
         } else {
             return 0;
         }
     }
-         public static function getSignalForexProfitLossByUserId($userId) {
+
+    public static function getSignalForexProfitLossByUserId($userId, $from = null, $to = null) {
         $forexSignals = ForexSignals::find()
                         ->select("COALESCE(SUM(case when forex_signals.result = 2 then percentage else 0 end),0) as `percentage`")
                         ->where([
                             "user_id" => $userId,
-                        ])->all();
+                        ])->andFilterWhere(['>=', 'date', $from])
+                        ->andFilterWhere(['<=', 'date', $to])->all();
         if (sizeof($forexSignals)) {
             return $forexSignals[0]["percentage"];
         } else {
@@ -70,62 +79,67 @@ class Utils {
         }
     }
 
-    public static function getSignalCryptoCountByUserId($userId) {
+    public static function getSignalCryptoCountByUserId($userId, $from = null, $to = null) {
         return CryptoSignals::find()
                         ->where([
                             "user_id" => $userId
-                        ])->count();
+                        ])->andFilterWhere(['>=', 'date', $from])
+                        ->andFilterWhere(['<=', 'date', $to])->count();
     }
 
-    public static function getSignalCryptoCountWinByUserId($userId) {
+    public static function getSignalCryptoCountWinByUserId($userId, $from = null, $to = null) {
         return CryptoSignals::find()
                         ->where([
                             "user_id" => $userId,
                             "result" => Utils::$CRYPTO_SIGNAL_WIN
-                        ])->count();
+                        ])->andFilterWhere(['>=', 'date', $from])
+                        ->andFilterWhere(['<=', 'date', $to])->count();
     }
 
-    public static function getSignalCryptoCountLossByUserId($userId) {
+    public static function getSignalCryptoCountLossByUserId($userId, $from = null, $to = null) {
         return CryptoSignals::find()
                         ->where([
                             "user_id" => $userId,
                             "result" => Utils::$CRYPTO_SIGNAL_LOSS
-                        ])->count();
+                        ])->andFilterWhere(['>=', 'date', $from])
+                        ->andFilterWhere(['<=', 'date', $to])->count();
     }
 
-    public static function getSignalCryptoProfitByUserId($userId) {
+    public static function getSignalCryptoProfitByUserId($userId, $from = null, $to = null) {
         $cryptoSignals = CryptoSignals::find()
                         ->select("COALESCE(SUM(case when result = 1 then percentage else -percentage end),0) as `percentage`")
                         ->where([
                             "user_id" => $userId,
-                           
-                        ])->all();
+                        ])->andFilterWhere(['>=', 'date', $from])
+                        ->andFilterWhere(['<=', 'date', $to])->all();
         if (sizeof($cryptoSignals)) {
             return $cryptoSignals[0]["percentage"];
         } else {
             return 0;
         }
     }
-      public static function getSignalCryptoProfitWonByUserId($userId) {
+
+    public static function getSignalCryptoProfitWonByUserId($userId, $from = null, $to = null) {
         $cryptoSignals = CryptoSignals::find()
                         ->select("COALESCE(SUM(case when result = 1 then percentage else 0 end),0) as `percentage`")
                         ->where([
                             "user_id" => $userId,
-                           
-                        ])->all();
+                        ])->andFilterWhere(['>=', 'date', $from])
+                        ->andFilterWhere(['<=', 'date', $to])->all();
         if (sizeof($cryptoSignals)) {
             return $cryptoSignals[0]["percentage"];
         } else {
             return 0;
         }
     }
-      public static function getSignalCryptoProfitLossByUserId($userId) {
+
+    public static function getSignalCryptoProfitLossByUserId($userId, $from = null, $to = null) {
         $cryptoSignals = CryptoSignals::find()
                         ->select("COALESCE(SUM(case when result = 2 then percentage else 0 end),0) as `percentage`")
                         ->where([
                             "user_id" => $userId,
-                           
-                        ])->all();
+                        ])->andFilterWhere(['>=', 'date', $from])
+                        ->andFilterWhere(['<=', 'date', $to])->all();
         if (sizeof($cryptoSignals)) {
             return $cryptoSignals[0]["percentage"];
         } else {

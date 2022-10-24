@@ -196,6 +196,11 @@ ORDER BY `dateWithputFormat` ASC";
 
         $post = Yii::$app->request->post();
         $userId = $post["userId"];
+        $from_date = $post["from_date"];
+        $to_date = $post["to_date"];
+        
+        
+        
         $subscriptionType = (isset($post["subscriptionType"])) ? $post["subscriptionType"] : 0;
 
         $subscTypeQuerymembers = "";
@@ -211,6 +216,8 @@ ORDER BY `dateWithputFormat` ASC";
         } else {
             $subscTypeQuerySubs = "subscriptions";
         }
+        
+        
 
         $rawSql = "SELECT (DATE(NOW()) - INTERVAL `day` DAY) AS `DayDate`, COUNT(members.id) AS `count`
 FROM (
@@ -336,15 +343,23 @@ ORDER BY `dateWithputFormat` ASC";
         for ($i = 1; $i < $month; $i++) {
             $union = $union . "UNION SELECT $i ";
         }
-
-        $rawSql0 = "SELECT date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %y') AS `DayDate`, COALESCE(sum(`id`),0) AS `count`,(DATE(NOW()) - INTERVAL `month` MONTH) as dateWithputFormat
+if($from_date && $to_date){
+         $rawSql0 = "SELECT date_format(date, '%M %d') AS `DayDate`, COALESCE(count(`id`),0) AS `count`
+FROM members
+GROUP BY date_format(date, '%M %y %d')
+ORDER BY `date` ASC"; 
+}else{
+        $rawSql0 = "SELECT date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %y') AS `DayDate`, COALESCE(count(`id`),0) AS `count`,(DATE(NOW()) - INTERVAL `month` MONTH) as dateWithputFormat
 FROM (
     SELECT 0 AS `month` 
     $union
 ) AS `week`
 LEFT JOIN $subscTypeQuerymembers  ON date_format(date, '%M %Y') = date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %Y')
 GROUP BY DayDate
-ORDER BY `dateWithputFormat` ASC";
+ORDER BY `dateWithputFormat` ASC"; 
+}
+
+  
 
         $connection0 = Yii::$app->getDb();
         $command0 = $connection0->createCommand($rawSql0);

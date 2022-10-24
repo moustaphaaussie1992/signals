@@ -3,10 +3,13 @@
 use app\assets\DashboardAsset;
 use app\models\MembersSearch;
 use app\models\Utils;
+use kartik\datecontrol\DateControl;
 use richardfan\widget\JSRegister;
 use yii\data\ActiveDataProvider;
+use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\View;
+use yii\widgets\ActiveForm;
 use yii\widgets\Pjax;
 
 /** @var View $this */
@@ -22,6 +25,45 @@ DashboardAsset::register($this);
 <div class="row">
 
 
+    <?php
+    $form = ActiveForm::begin([
+                'id' => 'search-form',
+                'options' => ['class' => 'form-horizontal'],
+            ])
+    ?>
+    <?=
+    $form->field($model, 'from_date')->widget(DateControl::classname(), [
+        'type' => DateControl::FORMAT_DATE,
+        'ajaxConversion' => false,
+        'widgetOptions' => [
+            'pluginOptions' => [
+                'autoclose' => true,
+                'todayHighlight' => true,
+                'pickerPosition' => 'top'
+            ],
+        ],
+    ]);
+    ?>
+    <?=
+    $form->field($model, 'to_date')->widget(DateControl::classname(), [
+        'type' => DateControl::FORMAT_DATE,
+        'ajaxConversion' => false,
+        'widgetOptions' => [
+            'pluginOptions' => [
+                'autoclose' => true,
+                'todayHighlight' => true,
+                'pickerPosition' => 'top'
+            ],
+        ],
+    ]);
+    ?>
+
+    <div class="form-group">
+        <div class="col-lg-offset-1 col-lg-11">
+            <?= Html::submitButton('Login', ['class' => 'btn btn-primary']) ?>
+        </div>
+    </div>
+    <?php ActiveForm::end() ?>
 
     <!-- members stats -->
 
@@ -292,7 +334,7 @@ DashboardAsset::register($this);
                             <div class="d-flex">
                                 <div class="mt-2">
                                     <h6 class="">Crypto Signals</h6>
-                                    <h2 class="mb-0 number-font">   <?= Utils::getSignalCryptoCountByUserId($userId) ?></h2>
+                                    <h2 class="mb-0 number-font">   <?= Utils::getSignalCryptoCountByUserId($userId, $model->from_date, $model->to_date) ?></h2>
                                 </div>
                                 <div class="ms-auto">
                                     <div class="chart-wrapper mt-1">
@@ -314,7 +356,7 @@ DashboardAsset::register($this);
                                 <div class="mt-2">
                                     <h6 class="">Won Crypto Signals</h6>
                                     <h2 class="mb-0 number-font">   <?php
-                                        $wonCryptoSignals = Utils::getSignalCryptoCountWinByUserId($userId);
+                                        $wonCryptoSignals = Utils::getSignalCryptoCountWinByUserId($userId, $model->from_date, $model->to_date);
                                         echo $wonCryptoSignals;
                                         ?></h2>
                                 </div>
@@ -342,7 +384,7 @@ DashboardAsset::register($this);
                             <div class="d-flex">
                                 <div class="mt-2">
                                     <h6 class="">Loss Crypto Signals</h6>
-                                    <h2 class="mb-0 number-font">  <?= Utils::getSignalCryptoCountLossByUserId($userId) ?></h2>
+                                    <h2 class="mb-0 number-font">  <?= Utils::getSignalCryptoCountLossByUserId($userId, $model->from_date, $model->to_date) ?></h2>
                                 </div>
                                 <div class="ms-auto">
                                     <div class="chart-wrapper mt-1">
@@ -399,7 +441,7 @@ DashboardAsset::register($this);
                             <div class="d-flex">
                                 <div class="mt-2">
                                     <h6 class="">Net Crypto Signals Profit</h6>
-                                    <h2 class="mb-0 number-font">   <?= Utils::getSignalCryptoProfitByUserId($userId) ?></h2>
+                                    <h2 class="mb-0 number-font">   <?= Utils::getSignalCryptoProfitByUserId($userId, $model->from_date, $model->to_date) ?></h2>
                                 </div>
                                 <div class="ms-auto">
                                     <div class="chart-wrapper mt-1">
@@ -421,7 +463,7 @@ DashboardAsset::register($this);
                                 <div class="mt-2">
                                     <h6 class="">Won Crypto Signals Profit</h6>
                                     <h2 class="mb-0 number-font">   <?php
-                                        $wonCryptoSignals = Utils::getSignalCryptoProfitWonByUserId($userId);
+                                        $wonCryptoSignals = Utils::getSignalCryptoProfitWonByUserId($userId, $model->from_date, $model->to_date);
                                         echo $wonCryptoSignals;
                                         ?></h2>
                                 </div>
@@ -449,7 +491,7 @@ DashboardAsset::register($this);
                             <div class="d-flex">
                                 <div class="mt-2">
                                     <h6 class="">Loss Crypto Signals Profit</h6>
-                                    <h2 class="mb-0 number-font">  <?= Utils::getSignalCryptoProfitLossByUserId($userId) ?></h2>
+                                    <h2 class="mb-0 number-font">  <?= Utils::getSignalCryptoProfitLossByUserId($userId, $model->from_date, $model->to_date) ?></h2>
                                 </div>
                                 <div class="ms-auto">
                                     <div class="chart-wrapper mt-1">
@@ -470,7 +512,7 @@ DashboardAsset::register($this);
                             <div class="d-flex">
                                 <div class="mt-2">
                                     <h6 class="">Total Crypto Signals Profit</h6>
-                                    <h2 class="mb-0 number-font">   <?= Utils::getSignalCryptoProfitByUserId($userId) ?>%</h2>
+                                    <h2 class="mb-0 number-font">   <?= Utils::getSignalCryptoProfitByUserId($userId, $model->from_date, $model->to_date) ?>%</h2>
                                 </div>
                                 <div class="ms-auto">
                                     <div class="chart-wrapper mt-1">
@@ -527,7 +569,7 @@ DashboardAsset::register($this);
                             <div class="d-flex">
                                 <div class="mt-2">
                                     <h6 class="">Forex Signals</h6>
-                                    <h2 class="mb-0 number-font"> <?= Utils::getSignalForexCountByUserId($userId) ?></h2>
+                                    <h2 class="mb-0 number-font"> <?= Utils::getSignalForexCountByUserId($userId, $model->from_date, $model->to_date) ?></h2>
                                 </div>
                                 <div class="ms-auto">
                                     <div class="chart-wrapper mt-1">
@@ -548,7 +590,7 @@ DashboardAsset::register($this);
                             <div class="d-flex">
                                 <div class="mt-2">
                                     <h6 class="">Won Forex Signals</h6>
-                                    <h2 class="mb-0 number-font"> <?= Utils::getSignalForexCountWinByUserId($userId) ?></h2>
+                                    <h2 class="mb-0 number-font"> <?= Utils::getSignalForexCountWinByUserId($userId, $model->from_date, $model->to_date) ?></h2>
                                 </div>
                                 <div class="ms-auto">
                                     <div class="chart-wrapper mt-1">
@@ -575,7 +617,7 @@ DashboardAsset::register($this);
                                 <div class="mt-2">
                                     <h6 class="">Loss Forex Signals</h6>
                                     <h2 class="mb-0 number-font">
-                                        <?= Utils::getSignalForexCountLossByUserId($userId) ?></h2>
+                                        <?= Utils::getSignalForexCountLossByUserId($userId, $model->from_date, $model->to_date) ?></h2>
                                 </div>
                                 <div class="ms-auto">
                                     <div class="chart-wrapper mt-1">
@@ -637,7 +679,7 @@ DashboardAsset::register($this);
                             <div class="d-flex">
                                 <div class="mt-2">
                                     <h6 class="">Net Forex Signals Profit</h6>
-                                    <h2 class="mb-0 number-font"> <?= Utils::getSignalForexProfitByUserId($userId) ?></h2>
+                                    <h2 class="mb-0 number-font"> <?= Utils::getSignalForexProfitByUserId($userId, $model->from_date, $model->to_date) ?></h2>
                                 </div>
                                 <div class="ms-auto">
                                     <div class="chart-wrapper mt-1">
@@ -658,7 +700,7 @@ DashboardAsset::register($this);
                             <div class="d-flex">
                                 <div class="mt-2">
                                     <h6 class="">Won Forex Signals Profit</h6>
-                                    <h2 class="mb-0 number-font"> <?= Utils::getSignalForexProfitWonByUserId($userId) ?></h2>
+                                    <h2 class="mb-0 number-font"> <?= Utils::getSignalForexProfitWonByUserId($userId, $model->from_date, $model->to_date) ?></h2>
                                 </div>
                                 <div class="ms-auto">
                                     <div class="chart-wrapper mt-1">
@@ -685,7 +727,7 @@ DashboardAsset::register($this);
                                 <div class="mt-2">
                                     <h6 class="">Loss Forex Signals Profit</h6>
                                     <h2 class="mb-0 number-font">
-                                        <?= Utils::getSignalForexProfitLossByUserId($userId) ?></h2>
+                                        <?= Utils::getSignalForexProfitLossByUserId($userId, $model->from_date, $model->to_date) ?></h2>
                                 </div>
                                 <div class="ms-auto">
                                     <div class="chart-wrapper mt-1">
@@ -760,6 +802,8 @@ DashboardAsset::register($this);
         type: "POST",
         data: {
             'userId': '<?= Yii::$app->user->id ?>',
+            'from_date': '<?= $model->from_date ?>',
+            'to_date': '<?= $model->to_date ?>',
         },
         success: function (data) {
 
