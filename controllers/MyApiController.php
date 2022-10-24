@@ -56,8 +56,6 @@ ORDER BY `DayDate` ASC";
         $command = $connection->createCommand($rawSql);
         $result = $command->queryAll();
 
-
-
         $dataMembers = [];
         $labelsMembers = [];
         for ($i = 0; $i < sizeof($result); $i++) {
@@ -84,8 +82,6 @@ ORDER BY `dateWithputFormat` ASC";
         $command0 = $connection0->createCommand($rawSql0);
         $result0 = $command0->queryAll();
 
-
-
         $dataMembers0 = [];
         $labelsMembers0 = [];
         for ($i = 0; $i < sizeof($result0); $i++) {
@@ -96,9 +92,6 @@ ORDER BY `dateWithputFormat` ASC";
 //        \yii\helpers\VarDumper::dump($labelsMembers0,3,3);
 //        \yii\helpers\VarDumper::dump($dataMembers0,3,3);
 //        die();
-
-
-
 //        select date_format(subscription_date, '%M %Y'),sum(`fee`)
 //       from `subscriptions`
 //       group by year(subscription_date),month(subscription_date)
@@ -114,16 +107,14 @@ LEFT JOIN $subscTypeQuerySubs ON date_format(subscription_date, '%M %Y') = date_
 GROUP BY DayDate
 ORDER BY `dateWithputFormat` ASC";
 
-
         $connection1 = Yii::$app->getDb();
         $command1 = $connection1->createCommand($rawSql1);
         $result1 = $command1->queryAll();
 
-
         $dataSubscriptions = [];
         $labelsubscriptions = [];
         for ($i = 0; $i < sizeof($result1); $i++) {
-            $dataSubscriptions [] = $result1[$i]["count"]; 
+            $dataSubscriptions [] = $result1[$i]["count"];
             $labelsubscriptions [] = $result1[$i]["DayDate"];
         }
 
@@ -165,16 +156,14 @@ LEFT JOIN $subscTypeQuerySubs ON date_format(subscription_date, '%M %Y') = date_
 GROUP BY DayDate
 ORDER BY `dateWithputFormat` ASC";
 
-
         $connection10 = Yii::$app->getDb();
         $command10 = $connection10->createCommand($rawSql10);
         $result10 = $command10->queryAll();
 
-
         $dataSubscriptions10 = [];
         $labelsubscriptions10 = [];
         for ($i = 0; $i < sizeof($result10); $i++) {
-            $dataSubscriptions10 [] =  intval($result10[$i]["count"]);
+            $dataSubscriptions10 [] = intval($result10[$i]["count"]);
             $labelsubscriptions10 [] = $result10[$i]["DayDate"];
         }
 
@@ -199,11 +188,11 @@ ORDER BY `dateWithputFormat` ASC";
             'message' => ''
         ];
     }
-        public function actionGetUsersStatDashboard() {
-            
-            $month = date('m');
-            $month = intval($month);
 
+    public function actionGetUsersStatDashboard() {
+
+        $month = date('m');
+        $month = intval($month);
 
         $post = Yii::$app->request->post();
         $userId = $post["userId"];
@@ -241,18 +230,16 @@ ORDER BY `DayDate` ASC";
         $command = $connection->createCommand($rawSql);
         $result = $command->queryAll();
 
-
-
         $dataMembers = [];
         $labelsMembers = [];
         for ($i = 0; $i < sizeof($result); $i++) {
             $dataMembers [] = $result[$i]["count"];
             $labelsMembers [] = $result[$i]["DayDate"];
         }
-        
+
         //////////////////crypto members
-              $cryptomembers = "(SELECT members.* FROM members JOIN subscriptions ON subscriptions.member_id = members.id WHERE subscriptions.r_type = '1') members ";
-          $union = "";
+        $cryptomembers = "(SELECT members.* FROM members JOIN subscriptions ON subscriptions.member_id = members.id WHERE subscriptions.r_type = '1') members ";
+        $union = "";
         for ($i = 1; $i < $month; $i++) {
             $union = $union . "UNION SELECT $i ";
         }
@@ -270,23 +257,20 @@ ORDER BY `dateWithputFormat` ASC";
         $commandCrypto = $connectionCrypto->createCommand($rawSqlCrypto);
         $resultCrypto = $commandCrypto->queryAll();
 
-
-
         $CryptoMembers = [];
         $labelsCryptoMembers = [];
         for ($i = 0; $i < sizeof($resultCrypto); $i++) {
             $CryptoMembers [] = intval($resultCrypto[$i]["count"]);
             $labelsCryptoMembers [] = $resultCrypto[$i]["DayDate"];
         }
-        
-        
-        
-        
+
+
+
+
         ///////////
-        
-          //////////////////forex members
-              $forexmembers = "(SELECT members.* FROM members JOIN subscriptions ON subscriptions.member_id = members.id WHERE subscriptions.r_type = '2') members ";
-          $union = "";
+        //////////////////forex members
+        $forexmembers = "(SELECT members.* FROM members JOIN subscriptions ON subscriptions.member_id = members.id WHERE subscriptions.r_type = '2') members ";
+        $union = "";
         for ($i = 1; $i < $month; $i++) {
             $union = $union . "UNION SELECT $i ";
         }
@@ -304,23 +288,20 @@ ORDER BY `dateWithputFormat` ASC";
         $commandforex = $connectionforex->createCommand($rawSqlforex);
         $resultforex = $commandforex->queryAll();
 
-
-
         $forexMembers = [];
         $labelsforexMembers = [];
         for ($i = 0; $i < sizeof($resultforex); $i++) {
             $forexMembers [] = intval($resultforex[$i]["count"]);
             $labelsforexMembers [] = $resultforex[$i]["DayDate"];
         }
-        
-        
-        
-        
+
+
+
+
         ///////////
-        
-           //////////////////forex members
-              $forexandcryptomembers = "(SELECT members.* FROM members JOIN subscriptions ON subscriptions.member_id = members.id WHERE subscriptions.r_type = '3') members ";
-          $union = "";
+        //////////////////forex members
+        $forexandcryptomembers = "(SELECT members.* FROM members JOIN subscriptions ON subscriptions.member_id = members.id WHERE subscriptions.r_type = '3') members ";
+        $union = "";
         for ($i = 1; $i < $month; $i++) {
             $union = $union . "UNION SELECT $i ";
         }
@@ -338,18 +319,16 @@ ORDER BY `dateWithputFormat` ASC";
         $commandforexandcrypto = $connectionforexandcrypto->createCommand($rawSqlforexandcrypto);
         $resultforexandcrypto = $commandforexandcrypto->queryAll();
 
-
-
         $forexandcryptoMembers = [];
         $labelsforexandcryptoMembers = [];
         for ($i = 0; $i < sizeof($resultforexandcrypto); $i++) {
             $forexandcryptoMembers [] = intval($resultforexandcrypto[$i]["count"]);
             $labelsforexandcryptoMembers [] = $resultforexandcrypto[$i]["DayDate"];
         }
-        
-        
-        
-        
+
+
+
+
         ///////////
 
 
@@ -371,8 +350,6 @@ ORDER BY `dateWithputFormat` ASC";
         $command0 = $connection0->createCommand($rawSql0);
         $result0 = $command0->queryAll();
 
-
-
         $dataMembers0 = [];
         $labelsMembers0 = [];
         for ($i = 0; $i < sizeof($result0); $i++) {
@@ -383,9 +360,6 @@ ORDER BY `dateWithputFormat` ASC";
 //        \yii\helpers\VarDumper::dump($labelsMembers0,3,3);
 //        \yii\helpers\VarDumper::dump($dataMembers0,3,3);
 //        die();
-
-
-
 //        select date_format(subscription_date, '%M %Y'),sum(`fee`)
 //       from `subscriptions`
 //       group by year(subscription_date),month(subscription_date)
@@ -401,16 +375,14 @@ LEFT JOIN $subscTypeQuerySubs ON date_format(subscription_date, '%M %Y') = date_
 GROUP BY DayDate
 ORDER BY `dateWithputFormat` ASC";
 
-
         $connection1 = Yii::$app->getDb();
         $command1 = $connection1->createCommand($rawSql1);
         $result1 = $command1->queryAll();
 
-
         $dataSubscriptions = [];
         $labelsubscriptions = [];
         for ($i = 0; $i < sizeof($result1); $i++) {
-            $dataSubscriptions [] = $result1[$i]["count"]; 
+            $dataSubscriptions [] = $result1[$i]["count"];
             $labelsubscriptions [] = $result1[$i]["DayDate"];
         }
 
@@ -431,7 +403,7 @@ ORDER BY `dateWithputFormat` ASC";
 //       group by year(subscription_date),month(subscription_date) 
 //       ORDER BY subscription_date DESC LIMIT 12) as t
 //       ORDER BY DayDate ASC";
-           $union = "";
+        $union = "";
         for ($i = 1; $i < $month; $i++) {
             $union = $union . "UNION SELECT $i ";
         }
@@ -446,23 +418,21 @@ LEFT JOIN $subscTypeQuerySubs ON date_format(subscription_date, '%M %Y') = date_
 GROUP BY DayDate
 ORDER BY `dateWithputFormat` ASC";
 
-
         $connection10 = Yii::$app->getDb();
         $command10 = $connection10->createCommand($rawSql10);
         $result10 = $command10->queryAll();
-
 
         $dataSubscriptions10 = [];
         $labelsubscriptions10 = [];
         for ($i = 0; $i < sizeof($result10); $i++) {
-            $dataSubscriptions10 [] =  intval($result10[$i]["count"]);
+            $dataSubscriptions10 [] = intval($result10[$i]["count"]);
             $labelsubscriptions10 [] = $result10[$i]["DayDate"];
         }
-        
-        
+
+
         /////crypto member revenue 
-           $subscTypeQuerySubs = "(SELECT subscriptions.* FROM subscriptions WHERE subscriptions.r_type = '1') subscriptions ";
-                $rawSql10 = "SELECT date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %Y') AS `DayDate`, COALESCE(sum(`fee`),0) AS `count`,(DATE(NOW()) - INTERVAL `month` MONTH) as dateWithputFormat
+        $subscTypeQuerySubs = "(SELECT subscriptions.* FROM subscriptions WHERE subscriptions.r_type = '1') subscriptions ";
+        $rawSql10 = "SELECT date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %Y') AS `DayDate`, COALESCE(sum(`fee`),0) AS `count`,(DATE(NOW()) - INTERVAL `month` MONTH) as dateWithputFormat
 FROM (
     SELECT 0 AS `month`
   $union
@@ -471,23 +441,20 @@ LEFT JOIN $subscTypeQuerySubs ON date_format(subscription_date, '%M %Y') = date_
 GROUP BY DayDate
 ORDER BY `dateWithputFormat` ASC";
 
-
         $connection10 = Yii::$app->getDb();
         $command10 = $connection10->createCommand($rawSql10);
         $result10 = $command10->queryAll();
-
 
         $cryptomemberSubscriptions = [];
-        
+
         for ($i = 0; $i < sizeof($result10); $i++) {
-            $cryptomemberSubscriptions [] =  intval($result10[$i]["count"]);
-           
+            $cryptomemberSubscriptions [] = intval($result10[$i]["count"]);
         }
-        
-        
+
+
         ////// forex members revenue
-               $subscTypeQuerySubs = "(SELECT subscriptions.* FROM subscriptions WHERE subscriptions.r_type = '2') subscriptions ";
-                $rawSql10 = "SELECT date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %Y') AS `DayDate`, COALESCE(sum(`fee`),0) AS `count`,(DATE(NOW()) - INTERVAL `month` MONTH) as dateWithputFormat
+        $subscTypeQuerySubs = "(SELECT subscriptions.* FROM subscriptions WHERE subscriptions.r_type = '2') subscriptions ";
+        $rawSql10 = "SELECT date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %Y') AS `DayDate`, COALESCE(sum(`fee`),0) AS `count`,(DATE(NOW()) - INTERVAL `month` MONTH) as dateWithputFormat
 FROM (
     SELECT 0 AS `month`
   $union
@@ -496,22 +463,19 @@ LEFT JOIN $subscTypeQuerySubs ON date_format(subscription_date, '%M %Y') = date_
 GROUP BY DayDate
 ORDER BY `dateWithputFormat` ASC";
 
-
         $connection10 = Yii::$app->getDb();
         $command10 = $connection10->createCommand($rawSql10);
         $result10 = $command10->queryAll();
-
 
         $forexmemberSubscriptions = [];
-        
+
         for ($i = 0; $i < sizeof($result10); $i++) {
-            $forexmemberSubscriptions [] =  intval($result10[$i]["count"]);
-           
+            $forexmemberSubscriptions [] = intval($result10[$i]["count"]);
         }
-        
+
         ///// crypto and forex members revenue
-             $subscTypeQuerySubs = "(SELECT subscriptions.* FROM subscriptions WHERE subscriptions.r_type = '3') subscriptions ";
-                $rawSql10 = "SELECT date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %Y') AS `DayDate`, COALESCE(sum(`fee`),0) AS `count`,(DATE(NOW()) - INTERVAL `month` MONTH) as dateWithputFormat
+        $subscTypeQuerySubs = "(SELECT subscriptions.* FROM subscriptions WHERE subscriptions.r_type = '3') subscriptions ";
+        $rawSql10 = "SELECT date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %Y') AS `DayDate`, COALESCE(sum(`fee`),0) AS `count`,(DATE(NOW()) - INTERVAL `month` MONTH) as dateWithputFormat
 FROM (
     SELECT 0 AS `month`
   $union
@@ -520,27 +484,24 @@ LEFT JOIN $subscTypeQuerySubs ON date_format(subscription_date, '%M %Y') = date_
 GROUP BY DayDate
 ORDER BY `dateWithputFormat` ASC";
 
-
         $connection10 = Yii::$app->getDb();
         $command10 = $connection10->createCommand($rawSql10);
         $result10 = $command10->queryAll();
 
-
         $cryptoforexmemberSubscriptions = [];
-        
+
         for ($i = 0; $i < sizeof($result10); $i++) {
-            $cryptoforexmemberSubscriptions [] =  intval($result10[$i]["count"]);
-           
+            $cryptoforexmemberSubscriptions [] = intval($result10[$i]["count"]);
         }
-        
+
         ////////////////////////signals ::::
-        
-        
-            $union = "";
+
+
+        $union = "";
         for ($i = 1; $i < $month; $i++) {
             $union = $union . "UNION SELECT $i ";
         }
-        
+
         $rawSqlCrypto = "SELECT date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %Y') AS `MonthDate`
             ,COALESCE(count(`id`),0) AS `count`,
             COALESCE(SUM(case when crypto_signals.result = 1 then percentage else -percentage end),0) as `percentage`,
@@ -559,11 +520,9 @@ LEFT JOIN crypto_signals ON date_format(date, '%M %Y') = date_format((DATE(NOW()
 GROUP BY MonthDate
 ORDER BY `dateWithputFormat` ASC";
 
-
         $connection = Yii::$app->getDb();
         $command = $connection->createCommand($rawSqlCrypto);
         $result = $command->queryAll();
-
 
         for ($i = 0; $i < sizeof($result); $i++) {
             $profitCrpto [] = $result[$i]["percentage"];
@@ -594,7 +553,6 @@ LEFT JOIN forex_signals ON date_format(date, '%M %Y') = date_format((DATE(NOW())
 GROUP BY MonthDate
 ORDER BY `dateWithputFormat` ASC";
 
-
         $resultForex = Yii::$app->getDb()->createCommand($rawSqlForex)->queryAll();
 
         for ($i = 0; $i < sizeof($resultForex); $i++) {
@@ -603,7 +561,7 @@ ORDER BY `dateWithputFormat` ASC";
             $resultWonForexSignals [] = $resultForex[$i]["countWin"];
             $resultLossForexSignals [] = $resultForex[$i]["countLoss"];
             $labelsForexSignals [] = $resultForex[$i]["MonthDate"];
-           $resultWinForex [] = $resultForex[$i]["resultWinForex"];
+            $resultWinForex [] = $resultForex[$i]["resultWinForex"];
             $resultLossForex [] = $resultForex[$i]["resultLossForex"];
         }
 
@@ -656,7 +614,6 @@ ORDER BY `dateWithputFormat` ASC";
         $post = Yii::$app->request->post();
         $userId = Yii::$app->user->id;
 
-
         $rawSqlCrypto = "SELECT date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %Y') AS `MonthDate`
             ,COALESCE(count(`id`),0) AS `count`,
             COALESCE(SUM(case when crypto_signals.result = 1 then percentage else -percentage end),0) as `percentage`,
@@ -684,11 +641,9 @@ LEFT JOIN crypto_signals ON date_format(date, '%M %Y') = date_format((DATE(NOW()
 GROUP BY MonthDate
 ORDER BY `dateWithputFormat` ASC";
 
-
         $connection = Yii::$app->getDb();
         $command = $connection->createCommand($rawSqlCrypto);
         $result = $command->queryAll();
-
 
         for ($i = 0; $i < sizeof($result); $i++) {
             $profitCrpto [] = $result[$i]["percentage"];
@@ -725,7 +680,6 @@ FROM (
 LEFT JOIN forex_signals ON date_format(date, '%M %Y') = date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %Y') AND  forex_signals.user_id = $userId
 GROUP BY MonthDate
 ORDER BY `dateWithputFormat` ASC";
-
 
         $resultForex = Yii::$app->getDb()->createCommand($rawSqlForex)->queryAll();
 
