@@ -48,18 +48,42 @@ $config = [
 //                'encryption' => 'tls', // It is often used, check your provider or mail server specs
 //            ],
 //        ],
+//        'mailer' => [
+//            'class' => 'yii\swiftmailer\Mailer',
+//            'useFileTransport' => false,
+//            'transport' => [
+//                'class' => 'Swift_SmtpTransport',
+//                'encryption' => 'tls',
+//                'host' => 'smtp.gmail.com',
+////                'host' => 'smtp.gmail.com',
+//                'port' => '587',
+//                'username' => 'mortux313@gmail.com',
+////                'username' => 'service.get4lessghana@gmail.com',
+//                'password' => "123456:P",
+////                'password' => 'G4L@gh91',
+//            ],
+//        ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
+//            'viewPath' => '@common/mail',
             'useFileTransport' => false,
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
-                'encryption' => 'tls',
-                'host' => 'smtp.gmail.com',
-                'port' => '587',
-                'username' => 'mortux313@gmail.com',
-//                'username' => 'service.get4lessghana@gmail.com',
+                'host' => 'smtp-mail.outlook.com',
+                'username' => 'mortux313@outlook.com', // SMTP username
                 'password' => '123456:P',
-//                'password' => 'G4L@gh91',
+                'port' => '587',
+                'encryption' => 'tls',
+//                'encryption' => 'tls',
+                'streamOptions' => [
+                    'ssl' => [
+                        'verify_peer' => false,
+                        'allow_self_signed' => true
+                    ],
+                ],
+            ],
+            'messageConfig' => [
+                'charset' => 'UTF-8',
             ],
         ],
         'log' => [
@@ -123,9 +147,15 @@ $config = [
         'class' => 'mdm\admin\components\AccessControl',
         'allowActions' => [
 //            '*',
+            'site/logout',
             'site/login',
             'site/error',
-            'admin/*'
+            'user/sign-up',
+            'user/verify-account',
+            'user/check-email',
+            'user/forget-password',
+            'user/create-new-password',
+//            'admin/*'
         ]
     ],
     'params' => $params,

@@ -2,11 +2,17 @@
 
 namespace app\controllers;
 
+use app\models\ChangePassword;
+use app\models\ForgetPassword;
+use app\models\NewPassword;
 use app\models\User;
 use app\models\UserSearch;
+use Yii;
+use yii\filters\VerbFilter;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
+use yii\web\Response;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -59,7 +65,7 @@ class UserController extends Controller {
     /**
      * Creates a new User model.
      * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return string|\yii\web\Response
+     * @return string|Response
      */
     public function actionCreate() {
         $model = new User();
@@ -81,7 +87,7 @@ class UserController extends Controller {
      * Updates an existing User model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
-     * @return string|\yii\web\Response
+     * @return string|Response
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id) {
@@ -100,7 +106,7 @@ class UserController extends Controller {
      * Deletes an existing User model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
-     * @return \yii\web\Response
+     * @return Response
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id) {
@@ -126,18 +132,27 @@ class UserController extends Controller {
 
     public function actionSignUp() {
 
-//        \Yii::$app->mailer->compose()
-//                ->setFrom('mortux313@gmail.com')
-//                ->setTo("moustaphaaussie@gmail.com")
-//                ->setSubject("asd")
-//                ->setTextBody("dddd")
-//                ->send();
+
+        $string = Yii::$app->security->generateRandomString();
+        $verifyUrl = Yii::$app->params['ip'] . Url::to(['user/verify-account', 's' => $string]);
+
+
 
         $model = new User();
-
+        $model->scenario = 'signUp';
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            $model->verify_sgn_up = $string;
+            if ($model->load($this->request->post()) && $model->signup()) {
+
+                Yii::$app->mailer->compose()
+                        ->setFrom('mortux313@outlook.com')
+                        ->setTo($model->username)
+                        ->setSubject('Verify Account')
+                        ->setTextBody('Please click on the link to verify your account')
+                        ->setHtmlBody('<a href="' . $verifyUrl . '">' . $verifyUrl . '</a>')
+                        ->send();
+
+                return $this->redirect(['user/check-email', 'id' => $model->id]);
             }
         } else {
             $model->loadDefaultValues();
@@ -146,6 +161,99 @@ class UserController extends Controller {
         return $this->renderPartial('sign_up', [
                     'model' => $model,
         ]);
+    }
+
+    public function actionVerifyAccount($s) {
+        $user = User::findOne([
+                    "verify_sgn_up" => $s
+        ]);
+        if ($user) {
+            $user->status = 10;
+            $user->save();
+            return $this->renderPartial('verified');
+        }
+        return "failed";
+    }
+
+    public function actionCheckEmail() {
+        return $this->renderPartial('check_email');
+    }
+
+    public function actionChangePassword() {
+        $request = Yii::$app->getRequest();
+        $session = Yii::$app->session;
+
+        $model = new ChangePassword();
+
+        if ($model->load($request->post()) && $model->change()) {
+            $session->setFlash('success', 'The password has beeen changed successfully');
+            return $this->goHome();
+        }
+
+        return $this->render('change-password', [
+                    'model' => $model,
+        ]);
+    }
+
+    public function actionForgetPassword() {
+
+        $request = Yii::$app->getRequest();
+
+        $model = new ForgetPassword();
+        if ($model->load($request->post())) {
+
+
+            $string = Yii::$app->security->generateRandomString();
+            $verifyUrl = Yii::$app->params['ip'] . Url::to(['user/create-new-password', 's' => $string]);
+
+
+            $user = User::findOne(["username" => $model->email]);
+            if ($user) {
+                Yii::$app->mailer->compose()
+                        ->setFrom('mortux313@outlook.com')
+                        ->setTo($model->email)
+                        ->setSubject('Forget Password')
+                        ->setTextBody('Please click on the link to create new password')
+                        ->setHtmlBody('<a href="' . $verifyUrl . '">' . $verifyUrl . '</a>')
+                        ->send();
+
+                $user->forget_password_token = $string;
+                $user->save();
+            } else {
+                $model->addError('email', 'email not available');
+            }
+        }
+
+
+
+        return $this->renderPartial('forget_password', [
+                    'model' => $model
+        ]);
+    }
+
+    public function actionCreateNewPassword($s) {
+        $request = Yii::$app->getRequest();
+        $user = User::findOne([
+                    "forget_password_token" => $s
+        ]);
+        if ($user) {
+            $model = new NewPassword();
+
+            if ($model->load($request->post())) {
+                $newPassword = $model->password;
+                $user->setPassword($model->password);
+                $user->generateAuthKey();
+                if ($user->save()) {
+                    return $this->renderPartial('password_succefully_changed');
+                }
+            }
+
+
+            return $this->renderPartial('create_new_password', [
+                        'model' => $model
+            ]);
+        }
+        return "failed";
     }
 
 }

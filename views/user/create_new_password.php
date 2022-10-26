@@ -61,31 +61,23 @@ $sashPath = Yii::getAlias('@web') . '/sash';
                         <div class="wrap-login100 p-6">
 
                             <span class="login100-form-title">
-                                Registration
+                                Create new password
                             </span>
 
                             <div class="row">
                                 <?php $form = ActiveForm::begin(); ?>
 
                                 <div class="col-lg-12">
-                                    <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
-                                </div>                                    
-                                
-
-                                <div class="col-lg-12">
-                                    <?= $form->field($model, 'password')->passwordInput() ?>
-                                </div>                                               
+                                    <?= $form->field($model, 'password')->textInput(['maxlength' => true]) ?>
+                                </div>                                                                              
                                 <div class="col-lg-12">
                                     <div class="form-group">
-                                        <?= Html::submitButton('Register', ['class' => 'login100-form-btn btn-primary']) ?>
+                                        <?= Html::submitButton('Save', ['class' => 'login100-form-btn btn-primary']) ?>
                                     </div>
                                 </div>    
 
                                 <?php ActiveForm::end(); ?>
 
-                            </div>
-                            <div class="text-center pt-3">
-                                <p class="text-dark mb-0">Already have account?<a href="<?= Url::to(['site/login']) ?>" class="text-primary ms-1">Sign In</a></p>
                             </div>
 
                         </div>
