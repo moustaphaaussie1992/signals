@@ -31,44 +31,55 @@ DashboardAsset::register($this);
                 'options' => ['class' => 'form-horizontal'],
             ])
     ?>
-    <?=
-    $form->field($model, 'from_date')->widget(DateControl::classname(), [
-        'type' => DateControl::FORMAT_DATE,
-        'ajaxConversion' => false,
-        'widgetOptions' => [
-            'pluginOptions' => [
-                'autoclose' => true,
-                'todayHighlight' => true,
-                'pickerPosition' => 'top'
-            ],
-        ],
-    ]);
-    ?>
-    <?=
-    $form->field($model, 'to_date')->widget(DateControl::classname(), [
-        'type' => DateControl::FORMAT_DATE,
-        'ajaxConversion' => false,
-        'widgetOptions' => [
-            'pluginOptions' => [
-                'autoclose' => true,
-                'todayHighlight' => true,
-                'pickerPosition' => 'top'
-            ],
-        ],
-    ]);
-    ?>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
 
-    <div class="form-group">
-        <div class="col-lg-offset-1 col-lg-11">
-            <?= Html::submitButton('Login', ['class' => 'btn btn-primary']) ?>
+            <h3 style="
+                margin-top: 36px;">Filter By Date</h3>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2">
+            <?=
+            $form->field($model, 'from_date')->widget(DateControl::classname(), [
+                'type' => DateControl::FORMAT_DATE,
+                'ajaxConversion' => false,
+                'widgetOptions' => [
+                    'pluginOptions' => [
+                        'autoclose' => true,
+                        'todayHighlight' => true,
+                        'pickerPosition' => 'top'
+                    ],
+                ],
+            ]);
+            ?>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2">
+            <?=
+            $form->field($model, 'to_date')->widget(DateControl::classname(), [
+                'type' => DateControl::FORMAT_DATE,
+                'ajaxConversion' => false,
+                'widgetOptions' => [
+                    'pluginOptions' => [
+                        'autoclose' => true,
+                        'todayHighlight' => true,
+                        'pickerPosition' => 'top'
+                    ],
+                ],
+            ]);
+            ?>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2" style="    margin-top: 28px;">
+
+
+            <?= Html::submitButton('Filter', ['class' => 'btn btn-primary']) ?>
+
         </div>
     </div>
     <?php ActiveForm::end() ?>
 
     <!-- members stats -->
 
-
-
+    <h1 style="    text-align: center;margin-bottom: 40px;
+        margin-top: 20px;">Members Statistics</h1>
 
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
@@ -88,9 +99,7 @@ DashboardAsset::register($this);
                                     </div>
                                 </div>
                             </div>
-                            <span class="text-muted fs-12"><span class="text-secondary"><i
-                                        class="fe fe-arrow-up-circle  text-secondary"></i> 5%</span>
-                                Last week</span>
+
                         </div>
                     </div>
                 </div>
@@ -109,9 +118,7 @@ DashboardAsset::register($this);
                                     </div>
                                 </div>
                             </div>
-                            <span class="text-muted fs-12"><span class="text-pink"><i
-                                        class="fe fe-arrow-down-circle text-pink"></i> 0.75%</span>
-                                Last 6 days</span>
+
                         </div>
                     </div>
                 </div>
@@ -135,9 +142,7 @@ DashboardAsset::register($this);
                                     </div>
                                 </div>
                             </div>
-                            <span class="text-muted fs-12"><span class="text-green"><i
-                                        class="fe fe-arrow-up-circle text-green"></i> 0.9%</span>
-                                Last 9 days</span>
+
                         </div>
                     </div>
                 </div>
@@ -156,9 +161,7 @@ DashboardAsset::register($this);
                                     </div>
                                 </div>
                             </div>
-                            <span class="text-muted fs-12"><span class="text-warning"><i
-                                        class="fe fe-arrow-up-circle text-warning"></i> 0.6%</span>
-                                Last year</span>
+
                         </div>
                     </div>
                 </div>
@@ -195,7 +198,8 @@ DashboardAsset::register($this);
 
 
     <!<!-- members revenue -->
-
+    <h1 style="    text-align: center;margin-bottom: 40px;
+        margin-top: 20px;">Members Revenue Statistics</h1>
 
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
@@ -215,9 +219,7 @@ DashboardAsset::register($this);
                                     </div>
                                 </div>
                             </div>
-                            <span class="text-muted fs-12"><span class="text-secondary"><i
-                                        class="fe fe-arrow-up-circle  text-secondary"></i> 5%</span>
-                                Last week</span>
+
                         </div>
                     </div>
                 </div>
@@ -236,9 +238,7 @@ DashboardAsset::register($this);
                                     </div>
                                 </div>
                             </div>
-                            <span class="text-muted fs-12"><span class="text-pink"><i
-                                        class="fe fe-arrow-down-circle text-pink"></i> 0.75%</span>
-                                Last 6 days</span>
+
                         </div>
                     </div>
                 </div>
@@ -262,9 +262,7 @@ DashboardAsset::register($this);
                                     </div>
                                 </div>
                             </div>
-                            <span class="text-muted fs-12"><span class="text-green"><i
-                                        class="fe fe-arrow-up-circle text-green"></i> 0.9%</span>
-                                Last 9 days</span>
+
                         </div>
                     </div>
                 </div>
@@ -283,9 +281,7 @@ DashboardAsset::register($this);
                                     </div>
                                 </div>
                             </div>
-                            <span class="text-muted fs-12"><span class="text-warning"><i
-                                        class="fe fe-arrow-up-circle text-warning"></i> 0.6%</span>
-                                Last year</span>
+
                         </div>
                     </div>
                 </div>
@@ -324,7 +320,8 @@ DashboardAsset::register($this);
 
     <!-- crypto signals -->
 
-
+    <h1 style="    text-align: center;margin-bottom: 40px;
+        margin-top: 20px;">Crypto Signals Statistics</h1>
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
             <div class="row">
@@ -343,9 +340,7 @@ DashboardAsset::register($this);
                                     </div>
                                 </div>
                             </div>
-                            <span class="text-muted fs-12"><span class="text-secondary"><i
-                                        class="fe fe-arrow-up-circle  text-secondary"></i> 5%</span>
-                                Last week</span>
+
                         </div>
                     </div>
                 </div>
@@ -367,9 +362,7 @@ DashboardAsset::register($this);
                                     </div>
                                 </div>
                             </div>
-                            <span class="text-muted fs-12"><span class="text-pink"><i
-                                        class="fe fe-arrow-down-circle text-pink"></i> 0.75%</span>
-                                Last 6 days</span>
+
                         </div>
                     </div>
                 </div>
@@ -393,9 +386,7 @@ DashboardAsset::register($this);
                                     </div>
                                 </div>
                             </div>
-                            <span class="text-muted fs-12"><span class="text-green"><i
-                                        class="fe fe-arrow-up-circle text-green"></i> 0.9%</span>
-                                Last 9 days</span>
+
                         </div>
                     </div>
                 </div>
@@ -431,7 +422,8 @@ DashboardAsset::register($this);
     </div>
 
     <!-- crypto percentage -->
-
+    <h1 style="    text-align: center;margin-bottom: 40px;
+        margin-top: 20px;">Crypto Signals Percentage Statistics</h1>
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
             <div class="row">
@@ -450,9 +442,7 @@ DashboardAsset::register($this);
                                     </div>
                                 </div>
                             </div>
-                            <span class="text-muted fs-12"><span class="text-secondary"><i
-                                        class="fe fe-arrow-up-circle  text-secondary"></i> 5%</span>
-                                Last week</span>
+
                         </div>
                     </div>
                 </div>
@@ -474,9 +464,7 @@ DashboardAsset::register($this);
                                     </div>
                                 </div>
                             </div>
-                            <span class="text-muted fs-12"><span class="text-pink"><i
-                                        class="fe fe-arrow-down-circle text-pink"></i> 0.75%</span>
-                                Last 6 days</span>
+
                         </div>
                     </div>
                 </div>
@@ -500,9 +488,7 @@ DashboardAsset::register($this);
                                     </div>
                                 </div>
                             </div>
-                            <span class="text-muted fs-12"><span class="text-green"><i
-                                        class="fe fe-arrow-up-circle text-green"></i> 0.9%</span>
-                                Last 9 days</span>
+
                         </div>
                     </div>
                 </div>
@@ -521,9 +507,7 @@ DashboardAsset::register($this);
                                     </div>
                                 </div>
                             </div>
-                            <span class="text-muted fs-12"><span class="text-warning"><i
-                                        class="fe fe-arrow-up-circle text-warning"></i> 0.6%</span>
-                                Last year</span>
+
                         </div>
                     </div>
                 </div>
@@ -559,7 +543,8 @@ DashboardAsset::register($this);
 
     <!-- forex signals -->
 
-
+    <h1 style="    text-align: center;margin-bottom: 40px;
+        margin-top: 20px;">Forex Signals Statistics</h1>
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
             <div class="row">
@@ -578,9 +563,8 @@ DashboardAsset::register($this);
                                     </div>
                                 </div>
                             </div>
-                            <span class="text-muted fs-12"><span class="text-secondary"><i
-                                        class="fe fe-arrow-up-circle  text-secondary"></i> 5%</span>
-                                Last week</span>
+
+
                         </div>
                     </div>
                 </div>
@@ -599,9 +583,7 @@ DashboardAsset::register($this);
                                     </div>
                                 </div>
                             </div>
-                            <span class="text-muted fs-12"><span class="text-pink"><i
-                                        class="fe fe-arrow-down-circle text-pink"></i> 0.75%</span>
-                                Last 6 days</span>
+
                         </div>
                     </div>
                 </div>
@@ -626,9 +608,7 @@ DashboardAsset::register($this);
                                     </div>
                                 </div>
                             </div>
-                            <span class="text-muted fs-12"><span class="text-green"><i
-                                        class="fe fe-arrow-up-circle text-green"></i> 0.9%</span>
-                                Last 9 days</span>
+
                         </div>
                     </div>
                 </div>
@@ -670,6 +650,9 @@ DashboardAsset::register($this);
 
 
     <!-- forex profit -->
+
+    <h1 style="    text-align: center;margin-bottom: 40px;
+        margin-top: 20px;">Forex Signals Percentage Statistics</h1>
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
             <div class="row">
@@ -688,9 +671,7 @@ DashboardAsset::register($this);
                                     </div>
                                 </div>
                             </div>
-                            <span class="text-muted fs-12"><span class="text-secondary"><i
-                                        class="fe fe-arrow-up-circle  text-secondary"></i> 5%</span>
-                                Last week</span>
+
                         </div>
                     </div>
                 </div>
@@ -709,9 +690,7 @@ DashboardAsset::register($this);
                                     </div>
                                 </div>
                             </div>
-                            <span class="text-muted fs-12"><span class="text-pink"><i
-                                        class="fe fe-arrow-down-circle text-pink"></i> 0.75%</span>
-                                Last 6 days</span>
+
                         </div>
                     </div>
                 </div>
@@ -736,9 +715,7 @@ DashboardAsset::register($this);
                                     </div>
                                 </div>
                             </div>
-                            <span class="text-muted fs-12"><span class="text-green"><i
-                                        class="fe fe-arrow-up-circle text-green"></i> 0.9%</span>
-                                Last 9 days</span>
+
                         </div>
                     </div>
                 </div>
