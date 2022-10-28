@@ -10,7 +10,6 @@ use app\models\Subscriptions;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
-use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\Response;
 use const YII_ENV_TEST;
@@ -63,7 +62,15 @@ class SiteController extends Controller {
      * @return string
      */
     public function actionIndex() {
-        return $this->render('index');
+
+//        Yii::$app->html2pdf
+//                ->convert($this->render('index'))
+//                ->saveAs('/path/to/output.pdf');
+//        return $this->render('index');
+
+        $html2pdf = new Html2Pdf();
+        $html2pdf->writeHTML('<h1>HelloWorld</h1>This is my first test');
+        $html2pdf->output();
     }
 
     public function actionLanding() {
@@ -86,16 +93,16 @@ class SiteController extends Controller {
             $totalMembers = Members::find()
                     ->where(["r_user" => $userId])
                     ->andWhere(["active" => 1])
-                    ->andFilterWhere(['>=', 'date', $model->from_date])
-                    ->andFilterWhere(['<=', 'date', $model->to_date])
+                    ->andFilterWhere([' >= ', 'date', $model->from_date])
+                    ->andFilterWhere([' <= ', 'date', $model->to_date])
                     ->count();
             $totalMembersCrypto = Members::find()
                     ->where(["r_user" => $userId])
                     ->join('join', 'subscriptions', 'subscriptions.member_id = members.id')
                     ->andWhere(["active" => 1])
                     ->andWhere(['subscriptions.r_type' => 1])
-                    ->andFilterWhere(['>=', 'subscription_date', $model->from_date])
-                    ->andFilterWhere(['<=', 'subscription_date', $model->to_date])
+                    ->andFilterWhere([' >= ', 'subscription_date', $model->from_date])
+                    ->andFilterWhere([' <= ', 'subscription_date', $model->to_date])
                     ->count();
 
             $totalMembersForex = Members::find()
@@ -103,8 +110,8 @@ class SiteController extends Controller {
                     ->join('join', 'subscriptions', 'subscriptions.member_id = members.id')
                     ->andWhere(["active" => 1])
                     ->andWhere(['subscriptions.r_type' => 2])
-                    ->andFilterWhere(['>=', 'subscription_date', $model->from_date])
-                    ->andFilterWhere(['<=', 'subscription_date', $model->to_date])
+                    ->andFilterWhere([' >= ', 'subscription_date', $model->from_date])
+                    ->andFilterWhere([' <= ', 'subscription_date', $model->to_date])
                     ->count();
 
             $totalMembersCryptoAndForex = Members::find()
@@ -112,8 +119,8 @@ class SiteController extends Controller {
                     ->join('join', 'subscriptions', 'subscriptions.member_id = members.id')
                     ->andWhere(["active" => 1])
                     ->andWhere(['subscriptions.r_type' => 3])
-                    ->andFilterWhere(['>=', 'subscription_date', $model->from_date])
-                    ->andFilterWhere(['<=', 'subscription_date', $model->to_date])
+                    ->andFilterWhere([' >= ', 'subscription_date', $model->from_date])
+                    ->andFilterWhere([' <= ', 'subscription_date', $model->to_date])
                     ->count();
 
             $totalProfits = 0;
@@ -122,9 +129,9 @@ class SiteController extends Controller {
                     ->where(["r_user" => $userId])
                     ->join('join', 'members', 'members.id = subscriptions.member_id')
                     ->andWhere(["members.r_user" => $userId])
-//                      ->andWhere('subscription_date between  DATE_FORMAT(NOW() ,"%Y-%m-01") AND NOW() ')
-                    ->andFilterWhere(['>=', 'subscription_date', $model->from_date])
-                    ->andFilterWhere(['<=', 'subscription_date', $model->to_date])
+//                      ->andWhere('subscription_date between DATE_FORMAT(NOW(), "%Y-%m-01") AND NOW() ')
+                    ->andFilterWhere([' >= ', 'subscription_date', $model->from_date])
+                    ->andFilterWhere([' <= ', 'subscription_date', $model->to_date])
                     ->sum('fee');
 
             $totalProfitsCrypto = Subscriptions::find()
@@ -132,27 +139,27 @@ class SiteController extends Controller {
                     ->join('join', 'members', 'members.id = subscriptions.member_id')
                     ->andWhere(["members.r_user" => $userId])
                     ->andWhere(['subscriptions.r_type' => 1])
-//                            ->andWhere('subscription_date between  DATE_FORMAT(NOW() ,"%Y-%m-01") AND NOW() ')
-                    ->andFilterWhere(['>=', 'subscription_date', $model->from_date])
-                    ->andFilterWhere(['<=', 'subscription_date', $model->to_date])
+//                            ->andWhere('subscription_date between DATE_FORMAT(NOW(), "%Y-%m-01") AND NOW() ')
+                    ->andFilterWhere([' >= ', 'subscription_date', $model->from_date])
+                    ->andFilterWhere([' <= ', 'subscription_date', $model->to_date])
                     ->sum('fee');
             $totalProfitsForex = Subscriptions::find()
                     ->where(["r_user" => $userId])
                     ->join('join', 'members', 'members.id = subscriptions.member_id')
                     ->andWhere(["members.r_user" => $userId])
                     ->andWhere(['subscriptions.r_type' => 2])
-//                            ->andWhere('subscription_date between  DATE_FORMAT(NOW() ,"%Y-%m-01") AND NOW() ')
-                    ->andFilterWhere(['>=', 'subscription_date', $model->from_date])
-                    ->andFilterWhere(['<=', 'subscription_date', $model->to_date])
+//                            ->andWhere('subscription_date between DATE_FORMAT(NOW(), "%Y-%m-01") AND NOW() ')
+                    ->andFilterWhere([' >= ', 'subscription_date', $model->from_date])
+                    ->andFilterWhere([' <= ', 'subscription_date', $model->to_date])
                     ->sum('fee');
             $totalProfitsCryptoAndForex = Subscriptions::find()
                     ->where(["r_user" => $userId])
                     ->join('join', 'members', 'members.id = subscriptions.member_id')
                     ->andWhere(["members.r_user" => $userId])
                     ->andWhere(['subscriptions.r_type' => 3])
-//                            ->andWhere('subscription_date between  DATE_FORMAT(NOW() ,"%Y-%m-01") AND NOW() ')
-                    ->andFilterWhere(['>=', 'subscription_date', $model->from_date])
-                    ->andFilterWhere(['<=', 'subscription_date', $model->to_date])
+//                            ->andWhere('subscription_date between DATE_FORMAT(NOW(), "%Y-%m-01") AND NOW() ')
+                    ->andFilterWhere([' >= ', 'subscription_date', $model->from_date])
+                    ->andFilterWhere([' <= ', 'subscription_date', $model->to_date])
                     ->sum('fee');
         }
 
@@ -160,13 +167,13 @@ class SiteController extends Controller {
 
         return $this->render('dashboard', [
                     'totalMembers' => $totalMembers,
-                    'totalProfits' => ($totalProfits?$totalProfits:0),
+                    'totalProfits' => ($totalProfits ? $totalProfits : 0),
                     'totalMembersCrypto' => $totalMembersCrypto,
                     'totalMembersForex' => $totalMembersForex,
                     'totalMembersCryptoAndForex' => $totalMembersCryptoAndForex,
-                    'totalProfitsCrypto' => ($totalProfitsCrypto?$totalProfitsCrypto:0),
-                    'totalProfitsForex' => ($totalProfitsForex?$totalProfitsForex:0),
-                    'totalProfitsCryptoAndForex' => ($totalProfitsCryptoAndForex?$totalProfitsCryptoAndForex:0),
+                    'totalProfitsCrypto' => ($totalProfitsCrypto ? $totalProfitsCrypto : 0),
+                    'totalProfitsForex' => ($totalProfitsForex ? $totalProfitsForex : 0),
+                    'totalProfitsCryptoAndForex' => ($totalProfitsCryptoAndForex ? $totalProfitsCryptoAndForex : 0),
                     'userId' => $userId,
                     'model' => $model
         ]);
@@ -227,7 +234,8 @@ class SiteController extends Controller {
      * @return string
      */
     public function actionAbout() {
-        return $this->render('about');
+        return $this->render
+                        ('about');
     }
 
 }

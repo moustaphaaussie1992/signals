@@ -16,11 +16,6 @@ use yii\web\AssetBundle;
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
-
-
-
-    
-
 class DashboardAsset extends AssetBundle {
 
     public $basePath = '@webroot';
@@ -39,34 +34,20 @@ class DashboardAsset extends AssetBundle {
         'sash/assets/plugins/bootstrap/js/popper.min.js',
         'sash/assets/plugins/bootstrap/js/bootstrap.min.js',
         'sash/assets/js/jquery.sparkline.min.js',
-        
         'sash/assets/js/sticky.js',
         'sash/assets/js/circle-progress.min.js',
-        
         'sash/assets/plugins/peitychart/jquery.peity.min.js',
-        
         'sash/assets/plugins/peitychart/peitychart.init.js',
-        
-        
-        
         'sash/assets/plugins/sidebar/sidebar.js',
-        
-        
         'sash/assets/plugins/p-scroll/perfect-scrollbar.js',
-        
         'sash/assets/plugins/p-scroll/pscroll.js',
-        
         'sash/assets/plugins/p-scroll/pscroll-1.js',
-        
-   'sash/assets/plugins/chart/Chart.bundle.js',
-    'sash/assets/plugins/chart/utils.js',
-
-   'sash/assets/plugins/select2/select2.full.min.js',
-
-
-  'sash/assets/plugins/datatable/js/jquery.dataTables.min.js',
-    'sash/assets/plugins/datatable/js/dataTables.bootstrap5.js',
-   'sash/assets/plugins/datatable/dataTables.responsive.min.js',
+        'sash/assets/plugins/chart/Chart.bundle.js',
+        'sash/assets/plugins/chart/utils.js',
+        'sash/assets/plugins/select2/select2.full.min.js',
+        'sash/assets/plugins/datatable/js/jquery.dataTables.min.js',
+        'sash/assets/plugins/datatable/js/dataTables.bootstrap5.js',
+        'sash/assets/plugins/datatable/dataTables.responsive.min.js',
         'sash/assets/js/apexcharts.js',
         'sash/assets/plugins/apexchart/irregular-data-series.js',
         'sash/assets/plugins/flot/jquery.flot.js',
@@ -81,18 +62,6 @@ class DashboardAsset extends AssetBundle {
         'sash/assets/js/index1.js',
         'sash/assets/js/themeColors.js',
         'sash/assets/js/custom.js'
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
     ];
     public $depends = [
         'yii\web\YiiAsset',
@@ -100,17 +69,3 @@ class DashboardAsset extends AssetBundle {
     ];
 
 }
-
-
-
-
-
-
-  
-
-
-
-
-
-
-    

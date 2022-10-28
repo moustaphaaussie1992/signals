@@ -33,9 +33,9 @@ class MyApiController extends Controller {
 
         $subscTypeQuerySubs = "";
         if ($subscriptionType > 0) {
-            $subscTypeQuerySubs = "(SELECT subscriptions.* FROM subscriptions WHERE subscriptions.r_type = $subscriptionType) subscriptions ";
+            $subscTypeQuerySubs = "(SELECT subscriptions.* FROM subscriptions JOIN members ON members.id = subscriptions.member_id AND members.r_user = $userId  WHERE subscriptions.r_type = $subscriptionType) subscriptions ";
         } else {
-            $subscTypeQuerySubs = "subscriptions";
+            $subscTypeQuerySubs = "(SELECT subscriptions.* FROM subscriptions JOIN members ON members.id = subscriptions.member_id AND members.r_user = $userId )subscriptions";
         }
 
         $rawSql = "SELECT (DATE(NOW()) - INTERVAL `day` DAY) AS `DayDate`, COUNT(members.id) AS `count`
@@ -212,9 +212,9 @@ ORDER BY `dateWithputFormat` ASC";
 
         $subscTypeQuerySubs = "";
         if ($subscriptionType > 0) {
-            $subscTypeQuerySubs = "(SELECT subscriptions.* FROM subscriptions WHERE subscriptions.r_type = $subscriptionType) subscriptions ";
+            $subscTypeQuerySubs = "(SELECT subscriptions.* FROM subscriptions JOIN members ON members.id = subscriptions.member_id AND members.r_user = $userId WHERE subscriptions.r_type = $subscriptionType  ) subscriptions";
         } else {
-            $subscTypeQuerySubs = "subscriptions";
+            $subscTypeQuerySubs = "(SELECT subscriptions.* FROM subscriptions JOIN members ON members.id = subscriptions.member_id AND members.r_user = $userId )subscriptions";
         }
 
 
@@ -229,7 +229,7 @@ FROM (
     UNION SELECT 5
     UNION SELECT 6
 ) AS `week`
-LEFT JOIN $subscTypeQuerymembers ON DATE(`date`) = (DATE(NOW()) - INTERVAL `day` DAY)
+LEFT JOIN $subscTypeQuerymembers ON DATE(`date`) = (DATE(NOW()) - INTERVAL `day` DAY) AND  members.r_user  = $userId
 GROUP BY `DayDate`
 ORDER BY `DayDate` ASC";
 
@@ -245,7 +245,7 @@ ORDER BY `DayDate` ASC";
         }
 
         //////////////////crypto members
-        $cryptomembers = "(SELECT members.* FROM members JOIN subscriptions ON subscriptions.member_id = members.id WHERE subscriptions.r_type = '1') members ";
+        $cryptomembers = "(SELECT members.* FROM members JOIN subscriptions ON subscriptions.member_id = members.id WHERE subscriptions.r_type = '1'  AND members.r_user  = $userId) members ";
         $union = "";
         for ($i = 1; $i < $month; $i++) {
             $union = $union . "UNION SELECT $i ";
@@ -278,7 +278,7 @@ ORDER BY `DayDate` ASC";
             $rawSqlCrypto = "SELECT date_list.the_date as DayDate,
                 (SELECT COUNT(mbs.id) as count FROM members mbs
                 JOIN subscriptions ON subscriptions.member_id = mbs.id
-                WHERE date_format(subscriptions.subscription_date, '%Y-%m-%d') = date_list.the_date  AND subscriptions.r_type = '1') AS count
+                WHERE date_format(subscriptions.subscription_date, '%Y-%m-%d') = date_list.the_date  AND subscriptions.r_type = '1'  AND mbs.r_user  = $userId) AS count
                 FROM
 (SELECT a.the_date
 FROM (
@@ -302,7 +302,7 @@ FROM (
     SELECT 0 AS `month`
     $union
 ) AS `week`
-LEFT JOIN $cryptomembers  ON date_format(date, '%M %Y') = date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %Y')
+LEFT JOIN $cryptomembers  ON date_format(date, '%M %Y') = date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %Y') AND members.r_user  = $userId
 GROUP BY DayDate
 ORDER BY `dateWithputFormat` ASC";
         }
@@ -322,10 +322,9 @@ ORDER BY `dateWithputFormat` ASC";
 
 
 
-
         ///////////
         //////////////////forex members
-        $forexmembers = "(SELECT members.* FROM members JOIN subscriptions ON subscriptions.member_id = members.id WHERE subscriptions.r_type = '2') members ";
+        $forexmembers = "(SELECT members.* FROM members JOIN subscriptions ON subscriptions.member_id = members.id WHERE subscriptions.r_type = '2' AND  members.r_user  = $userId) members ";
         $union = "";
         for ($i = 1; $i < $month; $i++) {
             $union = $union . "UNION SELECT $i ";
@@ -355,7 +354,7 @@ ORDER BY `dateWithputFormat` ASC";
             $rawSqlforex = "SELECT date_list.the_date as DayDate,
                 (SELECT COUNT(mbs.id) as count FROM members mbs
                 JOIN subscriptions ON subscriptions.member_id = mbs.id
-                WHERE date_format(subscriptions.subscription_date, '%Y-%m-%d') = date_list.the_date  AND subscriptions.r_type = '2') AS count
+                WHERE date_format(subscriptions.subscription_date, '%Y-%m-%d') = date_list.the_date  AND subscriptions.r_type = '2'   AND mbs.r_user  = $userId) AS count
                 FROM
 (SELECT a.the_date
 FROM (
@@ -379,7 +378,7 @@ FROM (
     SELECT 0 AS `month`
     $union
 ) AS `week`
-LEFT JOIN $forexmembers  ON date_format(date, '%M %Y') = date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %Y')
+LEFT JOIN $forexmembers  ON date_format(date, '%M %Y') = date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %Y')  AND members.r_user  = $userId
 GROUP BY DayDate
 ORDER BY `dateWithputFormat` ASC";
         }
@@ -403,7 +402,7 @@ ORDER BY `dateWithputFormat` ASC";
 
         ///////////
         //////////////////forex members
-        $forexandcryptomembers = "(SELECT members.* FROM members JOIN subscriptions ON subscriptions.member_id = members.id WHERE subscriptions.r_type = '3') members ";
+        $forexandcryptomembers = "(SELECT members.* FROM members JOIN subscriptions ON subscriptions.member_id = members.id WHERE subscriptions.r_type = '3' AND  members.r_user  = $userId) members ";
         $union = "";
         for ($i = 1; $i < $month; $i++) {
             $union = $union . "UNION SELECT $i ";
@@ -433,7 +432,7 @@ ORDER BY `dateWithputFormat` ASC";
             $rawSqlforexandcrypto = "SELECT date_list.the_date as DayDate,
                 (SELECT COUNT(mbs.id) as count FROM members mbs
                 JOIN subscriptions ON subscriptions.member_id = mbs.id
-                WHERE date_format(subscriptions.subscription_date, '%Y-%m-%d') = date_list.the_date  AND subscriptions.r_type = '3') AS count
+                WHERE date_format(subscriptions.subscription_date, '%Y-%m-%d') = date_list.the_date  AND subscriptions.r_type = '3'   AND mbs.r_user  = $userId) AS count
                 FROM
 (SELECT a.the_date
 FROM (
@@ -457,7 +456,7 @@ FROM (
     SELECT 0 AS `month`
     $union
 ) AS `week`
-LEFT JOIN $forexandcryptomembers  ON date_format(date, '%M %Y') = date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %Y')
+LEFT JOIN $forexandcryptomembers  ON date_format(date, '%M %Y') = date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %Y')  AND members.r_user  = $userId
 GROUP BY DayDate
 ORDER BY `dateWithputFormat` ASC";
         }
@@ -494,7 +493,7 @@ ORDER BY `dateWithputFormat` ASC";
 //GROUP BY date_format(date, '%M %y %d')
 //ORDER BY `date` ASC";
             $rawSql0 = "SELECT date_list.the_date as DayDate,
-                (SELECT COUNT(id) as count FROM members mbs WHERE date_format(mbs.registration_date, '%Y-%m-%d') = date_list.the_date) AS count
+                (SELECT COUNT(id) as count FROM members mbs WHERE date_format(mbs.registration_date, '%Y-%m-%d') = date_list.the_date   AND mbs.r_user  = $userId) AS count
                 FROM
 (SELECT a.the_date
 FROM (
@@ -518,7 +517,7 @@ FROM (
     SELECT 0 AS `month`
     $union
 ) AS `week`
-LEFT JOIN $subscTypeQuerymembers  ON date_format(date, '%M %Y') = date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %Y')
+LEFT JOIN $subscTypeQuerymembers  ON date_format(date, '%M %Y') = date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %Y')  AND members.r_user  = $userId
 GROUP BY DayDate
 ORDER BY `dateWithputFormat` ASC";
         }
@@ -566,6 +565,88 @@ ORDER BY `dateWithputFormat` ASC";
         }
 
 
+        $rawSql1leadschartProfitsFromCryptoMembers = "SELECT date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %Y') AS `DayDate`, COALESCE(sum(`fee`),0) AS `count`,(DATE(NOW()) - INTERVAL `month` MONTH) as dateWithputFormat
+FROM (
+    SELECT 0 AS `month`
+    UNION SELECT 1
+    UNION SELECT 2
+    UNION SELECT 3
+
+) AS `week`
+LEFT JOIN
+(SELECT subscriptions.* FROM subscriptions JOIN members ON members.id = subscriptions.member_id AND members.r_user = $userId WHERE subscriptions.r_type = '1'  ) subscriptions
+ON date_format(subscription_date, '%M %Y') = date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %Y')
+GROUP BY DayDate
+ORDER BY `dateWithputFormat` ASC";
+
+        $connection1 = Yii::$app->getDb();
+        $command1 = $connection1->createCommand($rawSql1leadschartProfitsFromCryptoMembers);
+        $result1 = $command1->queryAll();
+
+        $dataSubscriptionsleadschartProfitsFromCryptoMembers = [];
+        $labelsubscriptionsleadschartProfitsFromCryptoMembers = [];
+        for ($i = 0; $i < sizeof($result1); $i++) {
+            $dataSubscriptionsleadschartProfitsFromCryptoMembers [] = $result1[$i]["count"];
+            $labelsubscriptionsleadschartProfitsFromCryptoMembers [] = $result1[$i]["DayDate"];
+        }
+
+
+
+
+        $rawSql1leadschartProfitsFromForexMembers = "SELECT date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %Y') AS `DayDate`, COALESCE(sum(`fee`),0) AS `count`,(DATE(NOW()) - INTERVAL `month` MONTH) as dateWithputFormat
+FROM (
+    SELECT 0 AS `month`
+    UNION SELECT 1
+    UNION SELECT 2
+    UNION SELECT 3
+
+) AS `week`
+LEFT JOIN
+(SELECT subscriptions.* FROM subscriptions JOIN members ON members.id = subscriptions.member_id AND members.r_user = $userId WHERE subscriptions.r_type = '2'  ) subscriptions
+ON date_format(subscription_date, '%M %Y') = date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %Y')
+GROUP BY DayDate
+ORDER BY `dateWithputFormat` ASC";
+
+        $connection1 = Yii::$app->getDb();
+        $command1 = $connection1->createCommand($rawSql1leadschartProfitsFromForexMembers);
+        $result1 = $command1->queryAll();
+
+        $dataSubscriptionsleadschartProfitsFromForexMembers = [];
+        $labelsubscriptionsleadschartProfitsFromForexMembers = [];
+        for ($i = 0; $i < sizeof($result1); $i++) {
+            $dataSubscriptionsleadschartProfitsFromForexMembers [] = $result1[$i]["count"];
+            $labelsubscriptionsleadschartProfitsFromForexMembers [] = $result1[$i]["DayDate"];
+        }
+
+
+
+
+
+        $rawSql1leadschartProfitsFromCryptoForexMembers = "SELECT date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %Y') AS `DayDate`, COALESCE(sum(`fee`),0) AS `count`,(DATE(NOW()) - INTERVAL `month` MONTH) as dateWithputFormat
+FROM (
+    SELECT 0 AS `month`
+    UNION SELECT 1
+    UNION SELECT 2
+    UNION SELECT 3
+
+) AS `week`
+LEFT JOIN
+(SELECT subscriptions.* FROM subscriptions JOIN members ON members.id = subscriptions.member_id AND members.r_user = $userId WHERE subscriptions.r_type = '3'  ) subscriptions
+ON date_format(subscription_date, '%M %Y') = date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %Y')
+GROUP BY DayDate
+ORDER BY `dateWithputFormat` ASC";
+
+        $connection1 = Yii::$app->getDb();
+        $command1 = $connection1->createCommand($rawSql1leadschartProfitsFromCryptoForexMembers);
+        $result1 = $command1->queryAll();
+
+        $dataSubscriptionsleadschartProfitsFromCryptoForexMembers = [];
+        $labelsubscriptionsleadschartProfitsFromCryptoForexMembers = [];
+        for ($i = 0; $i < sizeof($result1); $i++) {
+            $dataSubscriptionsleadschartProfitsFromCryptoForexMembers [] = $result1[$i]["count"];
+            $labelsubscriptionsleadschartProfitsFromCryptoForexMembers [] = $result1[$i]["DayDate"];
+        }
+
 
 
 //        $rawSql10 = "SELECT (DATE(NOW()) - INTERVAL `day` DAY) AS `DayDate`, COALESCE(sum(`fee`),0) AS `count`
@@ -593,7 +674,7 @@ ORDER BY `dateWithputFormat` ASC";
             $rawSql10 = "SELECT date_list.the_date as DayDate,
                 (SELECT sum(fee) as count FROM members mbs
                 JOIN subscriptions ON subscriptions.member_id = mbs.id
-                WHERE date_format(subscriptions.subscription_date, '%Y-%m-%d') = date_list.the_date  ) AS count
+                WHERE date_format(subscriptions.subscription_date, '%Y-%m-%d') = date_list.the_date    AND mbs.r_user  = $userId) AS count
                 FROM
 (SELECT a.the_date
 FROM (
@@ -638,13 +719,13 @@ ORDER BY `dateWithputFormat` ASC";
 
 
         /////crypto member revenue
-        $subscTypeQuerySubs = "(SELECT subscriptions.* FROM subscriptions WHERE subscriptions.r_type = '1') subscriptions ";
+        $subscTypeQuerySubs = "(SELECT subscriptions.* FROM subscriptions JOIN members ON members.id = subscriptions.member_id AND members.r_user = $userId  WHERE subscriptions.r_type = '1' ) subscriptions ";
 
         if ($from_date && $to_date) {
             $rawSql10 = "SELECT date_list.the_date as DayDate,
                 (SELECT sum(fee) as count FROM members mbs
                 JOIN subscriptions ON subscriptions.member_id = mbs.id
-                WHERE date_format(subscriptions.subscription_date, '%Y-%m-%d') = date_list.the_date  and  subscriptions.r_type='1') AS count
+                WHERE date_format(subscriptions.subscription_date, '%Y-%m-%d') = date_list.the_date  and  subscriptions.r_type='1'   AND mbs.r_user  = $userId) AS count
                 FROM
 (SELECT a.the_date
 FROM (
@@ -685,13 +766,13 @@ ORDER BY `dateWithputFormat` ASC";
 
 
         ////// forex members revenue
-        $subscTypeQuerySubs = "(SELECT subscriptions.* FROM subscriptions WHERE subscriptions.r_type = '2') subscriptions ";
+        $subscTypeQuerySubs = "(SELECT subscriptions.* FROM subscriptions JOIN members ON members.id = subscriptions.member_id AND members.r_user = $userId  WHERE subscriptions.r_type = '2') subscriptions ";
 
         if ($from_date && $to_date) {
             $rawSql10 = "SELECT date_list.the_date as DayDate,
                 (SELECT sum(fee) as count FROM members mbs
                 JOIN subscriptions ON subscriptions.member_id = mbs.id
-                WHERE date_format(subscriptions.subscription_date, '%Y-%m-%d') = date_list.the_date  and  subscriptions.r_type='2') AS count
+                WHERE date_format(subscriptions.subscription_date, '%Y-%m-%d') = date_list.the_date  and  subscriptions.r_type='2'   AND mbs.r_user  = $userId) AS count
                 FROM
 (SELECT a.the_date
 FROM (
@@ -731,12 +812,12 @@ ORDER BY `dateWithputFormat` ASC";
         }
 
         ///// crypto and forex members revenue
-        $subscTypeQuerySubs = "(SELECT subscriptions.* FROM subscriptions WHERE subscriptions.r_type = '3') subscriptions ";
+        $subscTypeQuerySubs = "(SELECT subscriptions.* FROM subscriptions JOIN members ON members.id = subscriptions.member_id AND members.r_user = $userId  WHERE subscriptions.r_type = '3') subscriptions ";
         if ($from_date && $to_date) {
             $rawSql10 = "SELECT date_list.the_date as DayDate,
                 (SELECT sum(fee) as count FROM members mbs
                 JOIN subscriptions ON subscriptions.member_id = mbs.id
-                WHERE date_format(subscriptions.subscription_date, '%Y-%m-%d') = date_list.the_date  and  subscriptions.r_type='3') AS count
+                WHERE date_format(subscriptions.subscription_date, '%Y-%m-%d') = date_list.the_date  and  subscriptions.r_type='3'   AND mbs.r_user  = $userId) AS count
                 FROM
 (SELECT a.the_date
 FROM (
@@ -782,8 +863,33 @@ GROUP BY DayDate
         for ($i = 1; $i < $month; $i++) {
             $union = $union . "UNION SELECT $i ";
         }
+        if ($from_date && $to_date) {
+            $rawSqlCrypto = "SELECT date_list.the_date as MonthDate,
+                (SELECT count(*) FROM crypto_signals  WHERE date_format(date, '%Y-%m-%d') = date_list.the_date AND user_id = $userId ) AS count,
+                (SELECT COALESCE(SUM(case when crypto_signals.result = 1 then percentage else -percentage end),0) FROM crypto_signals  WHERE date_format(date, '%Y-%m-%d') = date_list.the_date AND user_id = $userId) AS percentage,
+                (SELECT COALESCE(SUM(case when crypto_signals.result = 1 then 1 else 0 end),0)  FROM crypto_signals  WHERE date_format(date, '%Y-%m-%d') = date_list.the_date AND user_id = $userId) AS countWin,
+                (SELECT COALESCE(SUM(case when crypto_signals.result = 2 then 1 else 0 end),0) FROM crypto_signals  WHERE date_format(date, '%Y-%m-%d') = date_list.the_date AND user_id = $userId) AS countLoss,
+                (SELECT COALESCE(SUM(case when crypto_signals.result = 1 then percentage else 0 end),0) FROM crypto_signals  WHERE date_format(date, '%Y-%m-%d') = date_list.the_date AND user_id = $userId) AS resultWin,
+                (SELECT COALESCE(SUM(case when crypto_signals.result = 2 then -percentage else 0 end),0) FROM crypto_signals WHERE date_format(date, '%Y-%m-%d') = date_list.the_date AND user_id = $userId) AS resultLoss
+                FROM
+(SELECT a.the_date
+FROM (
+    SELECT
+		'$to_date' - INTERVAL ( a.a + (10 * b.a) ) DAY AS the_date
+    FROM (
+		SELECT 0 AS a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9
+	) AS a
+	CROSS JOIN (
+		SELECT 0 AS a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9
+	) AS b
+) a
+WHERE a.the_date BETWEEN '$from_date' AND '$to_date') date_list
 
-        $rawSqlCrypto = "SELECT date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %Y') AS `MonthDate`
+
+ORDER BY date_list.the_date ASC;
+";
+        } else {
+            $rawSqlCrypto = "SELECT date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %Y') AS `MonthDate`
             ,COALESCE(count(`id`),0) AS `count`,
             COALESCE(SUM(case when crypto_signals.result = 1 then percentage else -percentage end),0) as `percentage`,
             COALESCE(SUM(case when crypto_signals.result = 1 then 1 else 0 end),0) as countWin,
@@ -800,6 +906,7 @@ $union
 LEFT JOIN crypto_signals ON date_format(date, '%M %Y') = date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %Y') AND  crypto_signals.user_id = $userId
 GROUP BY MonthDate
 ORDER BY `dateWithputFormat` ASC";
+        }
 
         $connection = Yii::$app->getDb();
         $command = $connection->createCommand($rawSqlCrypto);
@@ -815,8 +922,34 @@ ORDER BY `dateWithputFormat` ASC";
             $labelsCryptoSignals [] = $result[$i]["MonthDate"];
         }
 
+        if ($from_date && $to_date) {
+            $rawSqlForex = "SELECT date_list.the_date as MonthDate,
+                (SELECT count(*) FROM forex_signals  WHERE date_format(date, '%Y-%m-%d') = date_list.the_date AND user_id = $userId ) AS count,
+                (SELECT COALESCE(SUM(case when forex_signals.result = 1 then percentage else -percentage end),0) FROM forex_signals  WHERE date_format(date, '%Y-%m-%d') = date_list.the_date AND user_id = $userId) AS percentage,
+                (SELECT COALESCE(SUM(case when forex_signals.result = 1 then 1 else 0 end),0)  FROM forex_signals  WHERE date_format(date, '%Y-%m-%d') = date_list.the_date AND user_id = $userId) AS countWin,
+                (SELECT COALESCE(SUM(case when forex_signals.result = 2 then 1 else 0 end),0) FROM forex_signals  WHERE date_format(date, '%Y-%m-%d') = date_list.the_date AND user_id = $userId) AS countLoss,
+                (SELECT COALESCE(SUM(case when forex_signals.result = 1 then percentage else 0 end),0) FROM forex_signals  WHERE date_format(date, '%Y-%m-%d') = date_list.the_date AND user_id = $userId) AS resultWinForex,
+                (SELECT COALESCE(SUM(case when forex_signals.result = 2 then -percentage else 0 end),0) FROM forex_signals WHERE date_format(date, '%Y-%m-%d') = date_list.the_date AND user_id = $userId) AS resultLossForex
+                FROM
+(SELECT a.the_date
+FROM (
+    SELECT
+		'$to_date' - INTERVAL ( a.a + (10 * b.a) ) DAY AS the_date
+    FROM (
+		SELECT 0 AS a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9
+	) AS a
+	CROSS JOIN (
+		SELECT 0 AS a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9
+	) AS b
+) a
+WHERE a.the_date BETWEEN '$from_date' AND '$to_date') date_list
+
+
+ORDER BY date_list.the_date ASC;
+";
+        } else {
 //            COALESCE(sum(`percentage`),0) AS `percentage`,
-        $rawSqlForex = "SELECT date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %Y') AS `MonthDate`
+            $rawSqlForex = "SELECT date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %Y') AS `MonthDate`
             ,COALESCE(count(`id`),0) AS `count`,
             COALESCE(SUM(case when forex_signals.result = 1 then percentage else -percentage end),0) as `percentage`,
             COALESCE(SUM(case when forex_signals.result = 1 then 1 else 0 end),0) as countWin,
@@ -833,7 +966,7 @@ FROM (
 LEFT JOIN forex_signals ON date_format(date, '%M %Y') = date_format((DATE(NOW()) - INTERVAL `month` MONTH), '%M %Y') AND  forex_signals.user_id = $userId
 GROUP BY MonthDate
 ORDER BY `dateWithputFormat` ASC";
-
+        }
         $resultForex = Yii::$app->getDb()->createCommand($rawSqlForex)->queryAll();
 
         for ($i = 0; $i < sizeof($resultForex); $i++) {
@@ -883,6 +1016,12 @@ ORDER BY `dateWithputFormat` ASC";
                 'resultLossForex' => $resultLossForex,
                 'resultLossCrypto' => $resultLossCrypto,
                 'resultWinCrypto' => $resultWinCrypto,
+                'labelsubscriptionsleadschartProfitsFromCryptoMembers' => $labelsubscriptionsleadschartProfitsFromCryptoMembers,
+                'dataSubscriptionsleadschartProfitsFromCryptoMembers' => $dataSubscriptionsleadschartProfitsFromCryptoMembers,
+                'labelsubscriptionsleadschartProfitsFromForexMembers' => $labelsubscriptionsleadschartProfitsFromForexMembers,
+                'dataSubscriptionsleadschartProfitsFromForexMembers' => $dataSubscriptionsleadschartProfitsFromForexMembers,
+                'labelsubscriptionsleadschartProfitsFromCryptoForexMembers' => $labelsubscriptionsleadschartProfitsFromCryptoForexMembers,
+                'dataSubscriptionsleadschartProfitsFromCryptoForexMembers' => $dataSubscriptionsleadschartProfitsFromCryptoForexMembers,
             ];
         }
         return [

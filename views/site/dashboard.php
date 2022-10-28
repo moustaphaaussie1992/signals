@@ -94,7 +94,7 @@ DashboardAsset::register($this);
                                 </div>
                                 <div class="ms-auto">
                                     <div class="chart-wrapper mt-1">
-                                        <canvas id="leadschartProfitsFromMembers"
+                                        <canvas id="leadschartMembers"
                                                 class="h-8 w-9 chart-dropshadow"></canvas>
                                     </div>
                                 </div>
@@ -113,7 +113,7 @@ DashboardAsset::register($this);
                                 </div>
                                 <div class="ms-auto">
                                     <div class="chart-wrapper mt-1">
-                                        <canvas id="leadschartMembers"
+                                        <canvas id="leadschartCryptoMembers"
                                                 class="h-8 w-9 chart-dropshadow"></canvas>
                                     </div>
                                 </div>
@@ -233,7 +233,7 @@ DashboardAsset::register($this);
                                 </div>
                                 <div class="ms-auto">
                                     <div class="chart-wrapper mt-1">
-                                        <canvas id="leadschart"
+                                        <canvas id="leadschartProfitsFromCryptoMembers"
                                                 class="h-8 w-9 chart-dropshadow"></canvas>
                                     </div>
                                 </div>
@@ -257,7 +257,7 @@ DashboardAsset::register($this);
                                 </div>
                                 <div class="ms-auto">
                                     <div class="chart-wrapper mt-1">
-                                        <canvas id="profitchart"
+                                        <canvas id="leadschartProfitsFromForexMembers"
                                                 class="h-8 w-9 chart-dropshadow"></canvas>
                                     </div>
                                 </div>
@@ -276,7 +276,7 @@ DashboardAsset::register($this);
                                 </div>
                                 <div class="ms-auto">
                                     <div class="chart-wrapper mt-1">
-                                        <canvas id="costchart"
+                                        <canvas id="leadschartProfitsFromCryptoForexMembers"
                                                 class="h-8 w-9 chart-dropshadow"></canvas>
                                     </div>
                                 </div>
@@ -335,7 +335,7 @@ DashboardAsset::register($this);
                                 </div>
                                 <div class="ms-auto">
                                     <div class="chart-wrapper mt-1">
-                                        <canvas id="saleschart"
+                                        <canvas id="leadschartCryptoTotal"
                                                 class="h-8 w-9 chart-dropshadow"></canvas>
                                     </div>
                                 </div>
@@ -357,7 +357,7 @@ DashboardAsset::register($this);
                                 </div>
                                 <div class="ms-auto">
                                     <div class="chart-wrapper mt-1">
-                                        <canvas id="leadschart"
+                                        <canvas id="leadschartCryptoWon"
                                                 class="h-8 w-9 chart-dropshadow"></canvas>
                                     </div>
                                 </div>
@@ -381,7 +381,7 @@ DashboardAsset::register($this);
                                 </div>
                                 <div class="ms-auto">
                                     <div class="chart-wrapper mt-1">
-                                        <canvas id="profitchart"
+                                        <canvas id="leadschartCryptoLoss"
                                                 class="h-8 w-9 chart-dropshadow"></canvas>
                                     </div>
                                 </div>
@@ -437,7 +437,7 @@ DashboardAsset::register($this);
                                 </div>
                                 <div class="ms-auto">
                                     <div class="chart-wrapper mt-1">
-                                        <canvas id="saleschart"
+                                        <canvas id="leadschartCryptoProfit"
                                                 class="h-8 w-9 chart-dropshadow"></canvas>
                                     </div>
                                 </div>
@@ -459,7 +459,7 @@ DashboardAsset::register($this);
                                 </div>
                                 <div class="ms-auto">
                                     <div class="chart-wrapper mt-1">
-                                        <canvas id="leadschart"
+                                        <canvas id="leadschartCryptoWonPercentage"
                                                 class="h-8 w-9 chart-dropshadow"></canvas>
                                     </div>
                                 </div>
@@ -483,7 +483,7 @@ DashboardAsset::register($this);
                                 </div>
                                 <div class="ms-auto">
                                     <div class="chart-wrapper mt-1">
-                                        <canvas id="profitchart"
+                                        <canvas id="leadschartCryptoLossPercentage"
                                                 class="h-8 w-9 chart-dropshadow"></canvas>
                                     </div>
                                 </div>
@@ -492,25 +492,7 @@ DashboardAsset::register($this);
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xl-6">
-                    <div class="card overflow-hidden">
-                        <div class="card-body">
-                            <div class="d-flex">
-                                <div class="mt-2">
-                                    <h6 class="">Total Crypto Signals Profit</h6>
-                                    <h2 class="mb-0 number-font">   <?= Utils::getSignalCryptoProfitByUserId($userId, $model->from_date, $model->to_date) ?>%</h2>
-                                </div>
-                                <div class="ms-auto">
-                                    <div class="chart-wrapper mt-1">
-                                        <canvas id="costchart"
-                                                class="h-8 w-9 chart-dropshadow"></canvas>
-                                    </div>
-                                </div>
-                            </div>
 
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -558,7 +540,7 @@ DashboardAsset::register($this);
                                 </div>
                                 <div class="ms-auto">
                                     <div class="chart-wrapper mt-1">
-                                        <canvas id="saleschart"
+                                        <canvas id="leadschartForexTotal"
                                                 class="h-8 w-9 chart-dropshadow"></canvas>
                                     </div>
                                 </div>
@@ -578,7 +560,7 @@ DashboardAsset::register($this);
                                 </div>
                                 <div class="ms-auto">
                                     <div class="chart-wrapper mt-1">
-                                        <canvas id="leadschart"
+                                        <canvas id="leadschartForexWon"
                                                 class="h-8 w-9 chart-dropshadow"></canvas>
                                     </div>
                                 </div>
@@ -603,7 +585,7 @@ DashboardAsset::register($this);
                                 </div>
                                 <div class="ms-auto">
                                     <div class="chart-wrapper mt-1">
-                                        <canvas id="profitchart"
+                                        <canvas id="leadschartForexLoss"
                                                 class="h-8 w-9 chart-dropshadow"></canvas>
                                     </div>
                                 </div>
@@ -666,7 +648,7 @@ DashboardAsset::register($this);
                                 </div>
                                 <div class="ms-auto">
                                     <div class="chart-wrapper mt-1">
-                                        <canvas id="saleschart"
+                                        <canvas id="leadschartForexProfit"
                                                 class="h-8 w-9 chart-dropshadow"></canvas>
                                     </div>
                                 </div>
@@ -685,7 +667,7 @@ DashboardAsset::register($this);
                                 </div>
                                 <div class="ms-auto">
                                     <div class="chart-wrapper mt-1">
-                                        <canvas id="leadschart"
+                                        <canvas id="leadschartForexWonPercentage"
                                                 class="h-8 w-9 chart-dropshadow"></canvas>
                                     </div>
                                 </div>
@@ -710,7 +692,7 @@ DashboardAsset::register($this);
                                 </div>
                                 <div class="ms-auto">
                                     <div class="chart-wrapper mt-1">
-                                        <canvas id="profitchart"
+                                        <canvas id="leadschartForexLossPercentage"
                                                 class="h-8 w-9 chart-dropshadow"></canvas>
                                     </div>
                                 </div>
@@ -813,6 +795,12 @@ DashboardAsset::register($this);
             var resultLossCrypto = data["resultLossCrypto"];
             var resultWinCrypto = data["resultWinCrypto"];
             var profitForex = data["profitForex"];
+            var dataSubscriptionsleadschartProfitsFromCryptoMembers = data["dataSubscriptionsleadschartProfitsFromCryptoMembers"];
+            var labelsubscriptionsleadschartProfitsFromCryptoMembers = data["labelsubscriptionsleadschartProfitsFromCryptoMembers"];
+            var dataSubscriptionsleadschartProfitsFromForexMembers = data["dataSubscriptionsleadschartProfitsFromForexMembers"];
+            var labelsubscriptionsleadschartProfitsFromForexMembers = data["labelsubscriptionsleadschartProfitsFromForexMembers"];
+            var labelsubscriptionsleadschartProfitsFromCryptoForexMembers = data["labelsubscriptionsleadschartProfitsFromCryptoForexMembers"];
+            var dataSubscriptionsleadschartProfitsFromCryptoForexMembers = data["dataSubscriptionsleadschartProfitsFromCryptoForexMembers"];
             // TRANSACTIONS
 
             var ctx = document.getElementById("transactions");
@@ -1338,7 +1326,888 @@ DashboardAsset::register($this);
                 }
             });
 
-            var ctx = document.getElementById('leadschartMembers').getContext('2d');
+
+            var leadschartProfitsFromCryptoMembers = document.getElementById('leadschartProfitsFromCryptoMembers').getContext('2d');
+            memberssmallchart.height = 10;
+            var myChart = new Chart(leadschartProfitsFromCryptoMembers, {
+                type: 'line',
+                data: {
+                    labels: labelsubscriptionsleadschartProfitsFromCryptoMembers,
+//                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
+                    datasets: [{
+                            label: 'Total Members',
+                            data: dataSubscriptionsleadschartProfitsFromCryptoMembers,
+//                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
+                            backgroundColor: 'transparent',
+                            borderColor: '#4ecc48',
+                            borderWidth: '2.5',
+                            pointBorderColor: 'transparent',
+                            pointBackgroundColor: 'transparent',
+                        }, ]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    legend: {
+                        display: false
+                    },
+                    responsive: true,
+                    tooltips: {
+                        enabled: false,
+                    },
+                    scales: {
+                        xAxes: [{
+                                categoryPercentage: 1.0,
+                                barPercentage: 1.0,
+                                barDatasetSpacing: 0,
+                                display: false,
+                                barThickness: 5,
+                                gridLines: {
+                                    color: 'transparent',
+                                    zeroLineColor: 'transparent'
+                                },
+                                ticks: {
+                                    fontSize: 2,
+                                    fontColor: 'transparent'
+                                }
+                            }],
+                        yAxes: [{
+                                display: false,
+                                ticks: {
+                                    display: false,
+                                }
+                            }]
+                    },
+                    title: {
+                        display: false,
+                    },
+                }
+            });
+            ////member crypto and forex revenue
+
+            var leadschartProfitsFromCryptoForexMembers = document.getElementById('leadschartProfitsFromCryptoForexMembers').getContext('2d');
+            memberssmallchart.height = 10;
+            var myChart = new Chart(leadschartProfitsFromCryptoForexMembers, {
+                type: 'line',
+                data: {
+                    labels: labelsubscriptionsleadschartProfitsFromCryptoForexMembers,
+//                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
+                    datasets: [{
+                            label: 'Total Members',
+                            data: dataSubscriptionsleadschartProfitsFromCryptoForexMembers,
+//                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
+                            backgroundColor: 'transparent',
+                            borderColor: '#f46ef4',
+                            borderWidth: '2.5',
+                            pointBorderColor: 'transparent',
+                            pointBackgroundColor: 'transparent',
+                        }, ]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    legend: {
+                        display: false
+                    },
+                    responsive: true,
+                    tooltips: {
+                        enabled: false,
+                    },
+                    scales: {
+                        xAxes: [{
+                                categoryPercentage: 1.0,
+                                barPercentage: 1.0,
+                                barDatasetSpacing: 0,
+                                display: false,
+                                barThickness: 5,
+                                gridLines: {
+                                    color: 'transparent',
+                                    zeroLineColor: 'transparent'
+                                },
+                                ticks: {
+                                    fontSize: 2,
+                                    fontColor: 'transparent'
+                                }
+                            }],
+                        yAxes: [{
+                                display: false,
+                                ticks: {
+                                    display: false,
+                                }
+                            }]
+                    },
+                    title: {
+                        display: false,
+                    },
+                }
+            });
+            /////////// crypto signals small  total
+
+            var leadschartCryptoTotal = document.getElementById('leadschartCryptoTotal').getContext('2d');
+            memberssmallchart.height = 10;
+            var myChart = new Chart(leadschartCryptoTotal, {
+                type: 'line',
+                data: {
+                    labels: labelsCryptoSignals,
+//                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
+                    datasets: [{
+                            label: 'Total Members',
+                            data: resultSignals,
+//                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
+                            backgroundColor: 'transparent',
+                            borderColor: '#05c3fb',
+                            borderWidth: '2.5',
+                            pointBorderColor: 'transparent',
+                            pointBackgroundColor: 'transparent',
+                        }, ]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    legend: {
+                        display: false
+                    },
+                    responsive: true,
+                    tooltips: {
+                        enabled: false,
+                    },
+                    scales: {
+                        xAxes: [{
+                                categoryPercentage: 1.0,
+                                barPercentage: 1.0,
+                                barDatasetSpacing: 0,
+                                display: false,
+                                barThickness: 5,
+                                gridLines: {
+                                    color: 'transparent',
+                                    zeroLineColor: 'transparent'
+                                },
+                                ticks: {
+                                    fontSize: 2,
+                                    fontColor: 'transparent'
+                                }
+                            }],
+                        yAxes: [{
+                                display: false,
+                                ticks: {
+                                    display: false,
+                                }
+                            }]
+                    },
+                    title: {
+                        display: false,
+                    },
+                }
+            });
+
+            /////////// crypto signals small  won
+
+            var leadschartCryptoWon = document.getElementById('leadschartCryptoWon').getContext('2d');
+            memberssmallchart.height = 10;
+            var myChart = new Chart(leadschartCryptoWon, {
+                type: 'line',
+                data: {
+                    labels: labelsCryptoSignals,
+//                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
+                    datasets: [{
+                            label: 'Total Members',
+                            data: resultWonCryptoSignals,
+//                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
+                            backgroundColor: 'transparent',
+                            borderColor: '#299e48',
+                            borderWidth: '2.5',
+                            pointBorderColor: 'transparent',
+                            pointBackgroundColor: 'transparent',
+                        }, ]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    legend: {
+                        display: false
+                    },
+                    responsive: true,
+                    tooltips: {
+                        enabled: false,
+                    },
+                    scales: {
+                        xAxes: [{
+                                categoryPercentage: 1.0,
+                                barPercentage: 1.0,
+                                barDatasetSpacing: 0,
+                                display: false,
+                                barThickness: 5,
+                                gridLines: {
+                                    color: 'transparent',
+                                    zeroLineColor: 'transparent'
+                                },
+                                ticks: {
+                                    fontSize: 2,
+                                    fontColor: 'transparent'
+                                }
+                            }],
+                        yAxes: [{
+                                display: false,
+                                ticks: {
+                                    display: false,
+                                }
+                            }]
+                    },
+                    title: {
+                        display: false,
+                    },
+                }
+            });
+
+            /////////// crypto signals small  Loss
+
+            var leadschartCryptoLoss = document.getElementById('leadschartCryptoLoss').getContext('2d');
+            memberssmallchart.height = 10;
+            var myChart = new Chart(leadschartCryptoLoss, {
+                type: 'line',
+                data: {
+                    labels: labelsCryptoSignals,
+//                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
+                    datasets: [{
+                            label: 'Total Members',
+                            data: resultLossCryptoSignals,
+//                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
+                            backgroundColor: 'transparent',
+                            borderColor: '#ed2024',
+                            borderWidth: '2.5',
+                            pointBorderColor: 'transparent',
+                            pointBackgroundColor: 'transparent',
+                        }, ]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    legend: {
+                        display: false
+                    },
+                    responsive: true,
+                    tooltips: {
+                        enabled: false,
+                    },
+                    scales: {
+                        xAxes: [{
+                                categoryPercentage: 1.0,
+                                barPercentage: 1.0,
+                                barDatasetSpacing: 0,
+                                display: false,
+                                barThickness: 5,
+                                gridLines: {
+                                    color: 'transparent',
+                                    zeroLineColor: 'transparent'
+                                },
+                                ticks: {
+                                    fontSize: 2,
+                                    fontColor: 'transparent'
+                                }
+                            }],
+                        yAxes: [{
+                                display: false,
+                                ticks: {
+                                    display: false,
+                                }
+                            }]
+                    },
+                    title: {
+                        display: false,
+                    },
+                }
+            });
+
+
+            /////////// crypto signals small  profit total
+
+            var leadschartCryptoProfit = document.getElementById('leadschartCryptoProfit').getContext('2d');
+            memberssmallchart.height = 10;
+            var myChart = new Chart(leadschartCryptoProfit, {
+                type: 'line',
+                data: {
+                    labels: profitCrpto,
+//                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
+                    datasets: [{
+                            label: 'Total Members',
+                            data: profitCrpto,
+//                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
+                            backgroundColor: 'transparent',
+                            borderColor: '#05c3fb',
+                            borderWidth: '2.5',
+                            pointBorderColor: 'transparent',
+                            pointBackgroundColor: 'transparent',
+                        }, ]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    legend: {
+                        display: false
+                    },
+                    responsive: true,
+                    tooltips: {
+                        enabled: false,
+                    },
+                    scales: {
+                        xAxes: [{
+                                categoryPercentage: 1.0,
+                                barPercentage: 1.0,
+                                barDatasetSpacing: 0,
+                                display: false,
+                                barThickness: 5,
+                                gridLines: {
+                                    color: 'transparent',
+                                    zeroLineColor: 'transparent'
+                                },
+                                ticks: {
+                                    fontSize: 2,
+                                    fontColor: 'transparent'
+                                }
+                            }],
+                        yAxes: [{
+                                display: false,
+                                ticks: {
+                                    display: false,
+                                }
+                            }]
+                    },
+                    title: {
+                        display: false,
+                    },
+                }
+            });
+
+            /////////// crypto signals won percentage
+
+            var leadschartCryptoWonPercentage = document.getElementById('leadschartCryptoWonPercentage').getContext('2d');
+            memberssmallchart.height = 10;
+            var myChart = new Chart(leadschartCryptoWonPercentage, {
+                type: 'line',
+                data: {
+                    labels: labelsCryptoSignals,
+//                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
+                    datasets: [{
+                            label: 'Total Members',
+                            data: resultWinCrypto,
+//                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
+                            backgroundColor: 'transparent',
+                            borderColor: '#4ecc48',
+                            borderWidth: '2.5',
+                            pointBorderColor: 'transparent',
+                            pointBackgroundColor: 'transparent',
+                        }, ]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    legend: {
+                        display: false
+                    },
+                    responsive: true,
+                    tooltips: {
+                        enabled: false,
+                    },
+                    scales: {
+                        xAxes: [{
+                                categoryPercentage: 1.0,
+                                barPercentage: 1.0,
+                                barDatasetSpacing: 0,
+                                display: false,
+                                barThickness: 5,
+                                gridLines: {
+                                    color: 'transparent',
+                                    zeroLineColor: 'transparent'
+                                },
+                                ticks: {
+                                    fontSize: 2,
+                                    fontColor: 'transparent'
+                                }
+                            }],
+                        yAxes: [{
+                                display: false,
+                                ticks: {
+                                    display: false,
+                                }
+                            }]
+                    },
+                    title: {
+                        display: false,
+                    },
+                }
+            });
+
+
+            /////////// crypto signals small  Loss percentage
+
+            var leadschartCryptoLossPercentage = document.getElementById('leadschartCryptoLossPercentage').getContext('2d');
+            memberssmallchart.height = 10;
+            var myChart = new Chart(leadschartCryptoLossPercentage, {
+                type: 'line',
+                data: {
+                    labels: labelsCryptoSignals,
+//                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
+                    datasets: [{
+                            label: 'Total Members',
+                            data: resultLossCrypto,
+//                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
+                            backgroundColor: 'transparent',
+                            borderColor: '#ed2024',
+                            borderWidth: '2.5',
+                            pointBorderColor: 'transparent',
+                            pointBackgroundColor: 'transparent',
+                        }, ]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    legend: {
+                        display: false
+                    },
+                    responsive: true,
+                    tooltips: {
+                        enabled: false,
+                    },
+                    scales: {
+                        xAxes: [{
+                                categoryPercentage: 1.0,
+                                barPercentage: 1.0,
+                                barDatasetSpacing: 0,
+                                display: false,
+                                barThickness: 5,
+                                gridLines: {
+                                    color: 'transparent',
+                                    zeroLineColor: 'transparent'
+                                },
+                                ticks: {
+                                    fontSize: 2,
+                                    fontColor: 'transparent'
+                                }
+                            }],
+                        yAxes: [{
+                                display: false,
+                                ticks: {
+                                    display: false,
+                                }
+                            }]
+                    },
+                    title: {
+                        display: false,
+                    },
+                }
+            });
+            /////////////////////////////////forex signals small charts
+
+            /////////// forex signals small  total
+
+            var leadschartForexTotal = document.getElementById('leadschartForexTotal').getContext('2d');
+            memberssmallchart.height = 10;
+            var myChart = new Chart(leadschartForexTotal, {
+                type: 'line',
+                data: {
+                    labels: labelsForexSignals,
+//                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
+                    datasets: [{
+                            label: 'Total Members',
+                            data: resultSignals,
+//                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
+                            backgroundColor: 'transparent',
+                            borderColor: '#05c3fb',
+                            borderWidth: '2.5',
+                            pointBorderColor: 'transparent',
+                            pointBackgroundColor: 'transparent',
+                        }, ]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    legend: {
+                        display: false
+                    },
+                    responsive: true,
+                    tooltips: {
+                        enabled: false,
+                    },
+                    scales: {
+                        xAxes: [{
+                                categoryPercentage: 1.0,
+                                barPercentage: 1.0,
+                                barDatasetSpacing: 0,
+                                display: false,
+                                barThickness: 5,
+                                gridLines: {
+                                    color: 'transparent',
+                                    zeroLineColor: 'transparent'
+                                },
+                                ticks: {
+                                    fontSize: 2,
+                                    fontColor: 'transparent'
+                                }
+                            }],
+                        yAxes: [{
+                                display: false,
+                                ticks: {
+                                    display: false,
+                                }
+                            }]
+                    },
+                    title: {
+                        display: false,
+                    },
+                }
+            });
+
+            /////////// forex signals small  won
+
+            var leadschartForexWon = document.getElementById('leadschartForexWon').getContext('2d');
+            memberssmallchart.height = 10;
+            var myChart = new Chart(leadschartForexWon, {
+                type: 'line',
+                data: {
+                    labels: labelsForexSignals,
+//                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
+                    datasets: [{
+                            label: 'Total Members',
+                            data: resultWonForexSignals,
+//                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
+                            backgroundColor: 'transparent',
+                            borderColor: '#4ecc48',
+                            borderWidth: '2.5',
+                            pointBorderColor: 'transparent',
+                            pointBackgroundColor: 'transparent',
+                        }, ]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    legend: {
+                        display: false
+                    },
+                    responsive: true,
+                    tooltips: {
+                        enabled: false,
+                    },
+                    scales: {
+                        xAxes: [{
+                                categoryPercentage: 1.0,
+                                barPercentage: 1.0,
+                                barDatasetSpacing: 0,
+                                display: false,
+                                barThickness: 5,
+                                gridLines: {
+                                    color: 'transparent',
+                                    zeroLineColor: 'transparent'
+                                },
+                                ticks: {
+                                    fontSize: 2,
+                                    fontColor: 'transparent'
+                                }
+                            }],
+                        yAxes: [{
+                                display: false,
+                                ticks: {
+                                    display: false,
+                                }
+                            }]
+                    },
+                    title: {
+                        display: false,
+                    },
+                }
+            });
+
+            /////////// forex signals small  Loss
+
+            var leadschartForexLoss = document.getElementById('leadschartForexLoss').getContext('2d');
+            memberssmallchart.height = 10;
+            var myChart = new Chart(leadschartForexLoss, {
+                type: 'line',
+                data: {
+                    labels: labelsForexSignals,
+//                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
+                    datasets: [{
+                            label: 'Total Members',
+                            data: resultLossForexSignals,
+//                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
+                            backgroundColor: 'transparent',
+                            borderColor: '#ed2024',
+                            borderWidth: '2.5',
+                            pointBorderColor: 'transparent',
+                            pointBackgroundColor: 'transparent',
+                        }, ]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    legend: {
+                        display: false
+                    },
+                    responsive: true,
+                    tooltips: {
+                        enabled: false,
+                    },
+                    scales: {
+                        xAxes: [{
+                                categoryPercentage: 1.0,
+                                barPercentage: 1.0,
+                                barDatasetSpacing: 0,
+                                display: false,
+                                barThickness: 5,
+                                gridLines: {
+                                    color: 'transparent',
+                                    zeroLineColor: 'transparent'
+                                },
+                                ticks: {
+                                    fontSize: 2,
+                                    fontColor: 'transparent'
+                                }
+                            }],
+                        yAxes: [{
+                                display: false,
+                                ticks: {
+                                    display: false,
+                                }
+                            }]
+                    },
+                    title: {
+                        display: false,
+                    },
+                }
+            });
+
+
+            /////////// forex signals small  profit total
+
+            var leadschartForexProfit = document.getElementById('leadschartForexProfit').getContext('2d');
+            memberssmallchart.height = 10;
+            var myChart = new Chart(leadschartForexProfit, {
+                type: 'line',
+                data: {
+                    labels: profitCrpto,
+//                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
+                    datasets: [{
+                            label: 'Total Members',
+                            data: profitCrpto,
+//                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
+                            backgroundColor: 'transparent',
+                            borderColor: '#05c3fb',
+                            borderWidth: '2.5',
+                            pointBorderColor: 'transparent',
+                            pointBackgroundColor: 'transparent',
+                        }, ]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    legend: {
+                        display: false
+                    },
+                    responsive: true,
+                    tooltips: {
+                        enabled: false,
+                    },
+                    scales: {
+                        xAxes: [{
+                                categoryPercentage: 1.0,
+                                barPercentage: 1.0,
+                                barDatasetSpacing: 0,
+                                display: false,
+                                barThickness: 5,
+                                gridLines: {
+                                    color: 'transparent',
+                                    zeroLineColor: 'transparent'
+                                },
+                                ticks: {
+                                    fontSize: 2,
+                                    fontColor: 'transparent'
+                                }
+                            }],
+                        yAxes: [{
+                                display: false,
+                                ticks: {
+                                    display: false,
+                                }
+                            }]
+                    },
+                    title: {
+                        display: false,
+                    },
+                }
+            });
+
+            /////////// forex signals won percentage
+
+            var leadschartForexWonPercentage = document.getElementById('leadschartForexWonPercentage').getContext('2d');
+            memberssmallchart.height = 10;
+            var myChart = new Chart(leadschartForexWonPercentage, {
+                type: 'line',
+                data: {
+                    labels: labelsForexSignals,
+//                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
+                    datasets: [{
+                            label: 'Total Members',
+                            data: resultWinForex,
+//                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
+                            backgroundColor: 'transparent',
+                            borderColor: '#4ecc48',
+                            borderWidth: '2.5',
+                            pointBorderColor: 'transparent',
+                            pointBackgroundColor: 'transparent',
+                        }, ]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    legend: {
+                        display: false
+                    },
+                    responsive: true,
+                    tooltips: {
+                        enabled: false,
+                    },
+                    scales: {
+                        xAxes: [{
+                                categoryPercentage: 1.0,
+                                barPercentage: 1.0,
+                                barDatasetSpacing: 0,
+                                display: false,
+                                barThickness: 5,
+                                gridLines: {
+                                    color: 'transparent',
+                                    zeroLineColor: 'transparent'
+                                },
+                                ticks: {
+                                    fontSize: 2,
+                                    fontColor: 'transparent'
+                                }
+                            }],
+                        yAxes: [{
+                                display: false,
+                                ticks: {
+                                    display: false,
+                                }
+                            }]
+                    },
+                    title: {
+                        display: false,
+                    },
+                }
+            });
+
+
+            /////////// forex signals small  Loss percentage
+
+            var leadschartForexLossPercentage = document.getElementById('leadschartForexLossPercentage').getContext('2d');
+            memberssmallchart.height = 10;
+            var myChart = new Chart(leadschartForexLossPercentage, {
+                type: 'line',
+                data: {
+                    labels: labelsForexSignals,
+//                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
+                    datasets: [{
+                            label: 'Total Members',
+                            data: resultLossCrypto,
+//                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
+                            backgroundColor: 'transparent',
+                            borderColor: '#ed2024',
+                            borderWidth: '2.5',
+                            pointBorderColor: 'transparent',
+                            pointBackgroundColor: 'transparent',
+                        }, ]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    legend: {
+                        display: false
+                    },
+                    responsive: true,
+                    tooltips: {
+                        enabled: false,
+                    },
+                    scales: {
+                        xAxes: [{
+                                categoryPercentage: 1.0,
+                                barPercentage: 1.0,
+                                barDatasetSpacing: 0,
+                                display: false,
+                                barThickness: 5,
+                                gridLines: {
+                                    color: 'transparent',
+                                    zeroLineColor: 'transparent'
+                                },
+                                ticks: {
+                                    fontSize: 2,
+                                    fontColor: 'transparent'
+                                }
+                            }],
+                        yAxes: [{
+                                display: false,
+                                ticks: {
+                                    display: false,
+                                }
+                            }]
+                    },
+                    title: {
+                        display: false,
+                    },
+                }
+            });
+
+
+
+
+
+            ////////////////////////////////////////////////////
+
+
+
+
+
+            var leadschartProfitsFromForexMembers = document.getElementById('leadschartProfitsFromForexMembers').getContext('2d');
+            memberssmallchart.height = 10;
+            var myChart = new Chart(leadschartProfitsFromForexMembers, {
+                type: 'line',
+                data: {
+                    labels: labelsubscriptionsleadschartProfitsFromForexMembers,
+//                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
+                    datasets: [{
+                            label: 'Total Members',
+                            data: dataSubscriptionsleadschartProfitsFromForexMembers,
+//                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
+                            backgroundColor: 'transparent',
+                            borderColor: '#ed2024',
+                            borderWidth: '2.5',
+                            pointBorderColor: 'transparent',
+                            pointBackgroundColor: 'transparent',
+                        }, ]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    legend: {
+                        display: false
+                    },
+                    responsive: true,
+                    tooltips: {
+                        enabled: false,
+                    },
+                    scales: {
+                        xAxes: [{
+                                categoryPercentage: 1.0,
+                                barPercentage: 1.0,
+                                barDatasetSpacing: 0,
+                                display: false,
+                                barThickness: 5,
+                                gridLines: {
+                                    color: 'transparent',
+                                    zeroLineColor: 'transparent'
+                                },
+                                ticks: {
+                                    fontSize: 2,
+                                    fontColor: 'transparent'
+                                }
+                            }],
+                        yAxes: [{
+                                display: false,
+                                ticks: {
+                                    display: false,
+                                }
+                            }]
+                    },
+                    title: {
+                        display: false,
+                    },
+                }
+            });
+
+
+            var ctx = document.getElementById('leadschartCryptoMembers').getContext('2d');
             ctx.height = 10;
             var myChart = new Chart(ctx, {
                 type: 'line',
@@ -1348,6 +2217,61 @@ DashboardAsset::register($this);
                     datasets: [{
                             label: 'Total Members',
                             data: CryptoMembers,
+//                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
+                            backgroundColor: 'transparent',
+                            borderColor: '#ed2024',
+                            borderWidth: '2.5',
+                            pointBorderColor: 'transparent',
+                            pointBackgroundColor: 'transparent',
+                        }, ]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    legend: {
+                        display: false
+                    },
+                    responsive: true,
+                    tooltips: {
+                        enabled: false,
+                    },
+                    scales: {
+                        xAxes: [{
+                                categoryPercentage: 1.0,
+                                barPercentage: 1.0,
+                                barDatasetSpacing: 0,
+                                display: false,
+                                barThickness: 5,
+                                gridLines: {
+                                    color: 'transparent',
+                                    zeroLineColor: 'transparent'
+                                },
+                                ticks: {
+                                    fontSize: 2,
+                                    fontColor: 'transparent'
+                                }
+                            }],
+                        yAxes: [{
+                                display: false,
+                                ticks: {
+                                    display: false,
+                                }
+                            }]
+                    },
+                    title: {
+                        display: false,
+                    },
+                }
+            });
+            var ctx = document.getElementById('leadschartMembers').getContext('2d');
+            ctx.height = 10;
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labelsMembers0,
+//                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
+                    datasets: [{
+                            label: 'Total Members',
+                            data: resultMembers0,
 //                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
                             backgroundColor: 'transparent',
                             borderColor: '#f46ef4',
