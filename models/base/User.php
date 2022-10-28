@@ -30,6 +30,8 @@ use yii\behaviors\TimestampBehavior;
  * @property string|null $monthly_charge_offer 
  * @property string|null $three_months_offer 
  * @property string|null $all_till_offer 
+ * @property string|null $verify_sgn_up
+ * @property string|null $forget_password_token
  */
 abstract class User extends BasicUser {
 
@@ -56,14 +58,16 @@ abstract class User extends BasicUser {
      */
     public function rules() {
         return [
-            [['username', 'auth_key', 'password_hash', 'email', 'fullname'], 'required'],
-            [['status'], 'integer'],
+            [['username'], 'required'],
+            [['username'], 'email'],
+            [['status', 'created_at', 'updated_at'], 'integer'],
             [['bio'], 'string'],
             [['username', 'auth_key'], 'string', 'max' => 32],
             [['password_hash', 'password_reset_token', 'email', 'photo',
             'back_photo', 'twitter', 'facebook',
             'tiktok', 'insta', 'contact_number', 'telegram_link',
-            'fullname', 'channel_link_telegram', 'monthly_charge_offer', 'three_months_offer', 'all_till_offer'], 'string', 'max' => 255]
+            'fullname', 'channel_link_telegram', 'monthly_charge_offer', 'three_months_offer', 'all_till_offer', 'verify_sgn_up', 'forget_password_token'], 'string', 'max' => 255],
+            [['username'], 'unique'],
         ];
     }
 
@@ -73,7 +77,7 @@ abstract class User extends BasicUser {
     public function attributeLabels() {
         return [
             'id' => Yii::t('app', 'ID'),
-            'username' => Yii::t('app', 'Username'),
+            'username' => Yii::t('app', 'Email'),
             'auth_key' => Yii::t('app', 'Auth Key'),
             'password_hash' => Yii::t('app', 'Password Hash'),
             'password_reset_token' => Yii::t('app', 'Password Reset Token'),
@@ -95,6 +99,8 @@ abstract class User extends BasicUser {
             'monthly_charge_offer' => 'Monthly Charge Offer',
             'three_months_offer' => 'Three Months Offer',
             'all_till_offer' => 'All Till Offer',
+            'verify_sgn_up' => 'Verify Sgn Up',
+            'forget_password_token' => 'Forget Password Token',
         ];
     }
 

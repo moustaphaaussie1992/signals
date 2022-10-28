@@ -3,6 +3,7 @@
 use app\assets\LoginAsset;
 use yii\bootstrap5\ActiveForm;
 use yii\bootstrap5\Html;
+use yii\helpers\Url;
 
 LoginAsset::register($this);
 $sashPath = Yii::getAlias('@web') . '/sash';
@@ -78,7 +79,9 @@ $sashPath = Yii::getAlias('@web') . '/sash';
                                     <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
 
                                     <?= $form->field($model, 'password')->passwordInput() ?>
-
+                                    <span style="margin-top: 0px;" class="text-dark mb-0"><a style="font-size: 12px; margin-top: 0px;" href="<?= Url::to(['user/forget-password']) ?>" class="text-primary ms-1">Forget Password</a></span>
+                                    <br>
+                                    <br>
                                     <?=
                                     $form->field($model, 'rememberMe')->checkbox([
                                         'template' => "<div class=\" col-lg-12 custom-control custom-checkbox\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
@@ -94,6 +97,9 @@ $sashPath = Yii::getAlias('@web') . '/sash';
                                 </div>
                             </div>
 
+                            <div class="text-center pt-3">
+                                <p class="text-dark mb-0">Make new account?<a href="<?= Url::to(['user/sign-up']) ?>" class="text-primary ms-1">Register</a></p>
+                            </div>
                         </div>
                     </div>
                     <!-- CONTAINER CLOSED -->
