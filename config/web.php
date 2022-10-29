@@ -155,6 +155,7 @@ $config = [
             'user/check-email',
             'user/forget-password',
             'user/create-new-password',
+            'user/check-email-to-reset-password',
 //            'admin/*'
         ]
     ],

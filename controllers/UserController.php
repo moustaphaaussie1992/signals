@@ -179,6 +179,10 @@ class UserController extends Controller {
         return $this->renderPartial('check_email');
     }
 
+    public function actionCheckEmailToResetPassword() {
+        return $this->renderPartial('check_email_to_reset_password');
+    }
+
     public function actionChangePassword() {
         $request = Yii::$app->getRequest();
         $session = Yii::$app->session;
@@ -219,6 +223,8 @@ class UserController extends Controller {
 
                 $user->forget_password_token = $string;
                 $user->save();
+
+                return $this->redirect(['check-email-to-reset-password']);
             } else {
                 $model->addError('email', 'email not available');
             }
