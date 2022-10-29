@@ -81,7 +81,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
 
 
 
-                                        <!--                                             NOTIFICATIONS 
+                                        <!--                                             NOTIFICATIONS
                                                                                     <div class="dropdown d-flex header-settings">
                                                                                         <a href="javascript:void(0);" class="nav-link icon"
                                                                                            data-bs-toggle="sidebar-right" data-target=".sidebar-right">
@@ -123,13 +123,13 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
                                                 <!--<li class="dropdown-icon fe fe-alert-circle">-->
 
 
-                                                <?=
+                                                <?php
                                                 Html::beginForm(['/site/logout', 'id' => 'form-logout'])
                                                 ?>
                                                 <button type = "submit" class = "dropdown-item"><li class = "dropdown-icon fe fe-alert-circle"></li>Sign out</button>
-                                                <?=
+                                                <?php
                                                 Html::endForm()
-                                                ?>                                            
+                                                ?>
                                                 <!--</li>-->
                                                 <!--</a>-->
                                             </div>
@@ -901,6 +901,9 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
 <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
 
 <?php $this->endBody() ?>
+<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" crossorigin="anonymous"></script>
+
 </body>
+
 </html>
 <?php $this->endPage() ?>

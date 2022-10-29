@@ -70,7 +70,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                         </div>
                                     </div>
                                 </div>
-                            </div>  
+                            </div>
                             <div class="me-5 mt-5 mt-md-0">
                                 <div class="media mb-4 d-flex">
                                     <div class="media-icon bg-danger bradius text-white me-3 mt-1">
@@ -85,7 +85,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                         </div>
                                     </div>
                                 </div>
-                            </div>  
+                            </div>
                             <div class="me-0 mt-5 mt-md-0">
                                 <div class="media">
                                     <div class="media-icon bg-primary text-white bradius me-3 mt-1">
@@ -270,7 +270,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             [
                                 'attribute' => 'target',
                                 'value' => function($model) {
-                                    $targets = CryptoTarget::find()->select('name')->column();
+                                    $s = explode(',', $model->target);
+                                    $targets = CryptoTarget::find()->select('name')->where(["id" => $s])->column();
                                     $targetString = implode(',', $targets);
                                     return $targetString;
                                 }
@@ -288,16 +289,16 @@ $this->params['breadcrumbs'][] = $this->title;
 
                                         return '<div class=" bg-success-transparent border border-success  text-success   p-1 br-5"style="display: flex;
 justify-content: center;">
-                                        
+
                                         <span class="fs-30 pe-2" style="font-size: 15px !important;">' . $model['percentage'] . ' %</span>
-                                           
+
                                         </div>';
                                     } else if ($model->result == 2) {
                                         return '<div class=" bg-danger-transparent border border-danger  text-danger   p-1 br-5"style="display: flex;
 justify-content: center;">
-                                        
+
                                         <span class="fs-30 pe-2" style="font-size: 15px !important;">' . $model['percentage'] . ' %</span>
-                                           
+
                                         </div>';
                                     }
                                     return $model->result;
@@ -314,14 +315,14 @@ justify-content: center;">
                             ['class' => 'yii\grid\ActionColumn',
                                 'contentOptions' => ['style' => 'width: 140px;'],
                                 'visible' => Yii::$app->user->isGuest ? false : true,
-                                'template' => '{update}{delete}',
+                                'template' => '{delete}',
                                 'buttons' => [
-                                    'update' => function ($url, $model) {
-                                        return Html::a('<span class="fe fe-edit fs-14"></span>', $url, [
-                                                    'class' => 'btn text-primary btn-sm',
-                                                    'title' => 'Edit'
-                                        ]);
-                                    },
+//                                    'update' => function ($url, $model) {
+//                                        return Html::a('<span class="fe fe-edit fs-14"></span>', $url, [
+//                                                    'class' => 'btn text-primary btn-sm',
+//                                                    'title' => 'Edit'
+//                                        ]);
+//                                    },
                                     'delete' => function ($url, $model) {
                                         return Html::a('<span class="fe fe-trash-2 fs-14"></span>', $url, [
                                                     'class' => 'btn text-danger btn-sm',
@@ -380,7 +381,7 @@ justify-content: center;">
         data: {
             'userId': '<?= Yii::$app->user->id ?>',
         },
-              success: function (data) {
+        success: function (data) {
 
             var profitCrpto = data["profitCrpto"];
 //            var profitCrpto =  data["resultWinPercentage"] - data["resultLossPercentage"];
