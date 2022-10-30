@@ -15,15 +15,35 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    
+        <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
 
-    <?= $form->field($model, 'username') ?>
+            <h3 style="
+                margin-top: 36px;">Pro-Labz Users</h3>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2">
+            <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'auth_key') ?>
+        </div>
+      
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2" style="    margin-top: 28px;">
 
-    <?= $form->field($model, 'password_hash') ?>
 
-    <?= $form->field($model, 'password_reset_token') ?>
+              <div class="form-group">
+        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
+        <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>
+    </div>
+
+        </div>
+    </div>
+  
+
+    <?php // echo $form->field($model, 'auth_key') ?>
+
+    <?php // echo $form->field($model, 'password_hash') ?>
+
+    <?php // echo $form->field($model, 'password_reset_token') ?>
 
     <?php // echo $form->field($model, 'email') ?>
 
@@ -51,10 +71,7 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'telegram_link') ?>
 
-    <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>
-    </div>
+  
 
     <?php ActiveForm::end(); ?>
 

@@ -105,6 +105,7 @@ $sashPath = Yii::getAlias('@web') . '/sash';
                     <?= $userSocialMediaForm->field($userSocialMediaModel, 'tiktok')->textInput(['maxlength' => true]) ?>
 
                     <?= $userSocialMediaForm->field($userSocialMediaModel, 'insta')->textInput(['maxlength' => true]) ?>
+                    <?= $userSocialMediaForm->field($userSocialMediaModel, 'discord')->textInput(['maxlength' => true]) ?>
 
                     <?= $userSocialMediaForm->field($userSocialMediaModel, 'telegram_link')->textInput(['maxlength' => true]) ?>
 
@@ -147,6 +148,7 @@ $sashPath = Yii::getAlias('@web') . '/sash';
                     <?= $userForm->field($userModel, 'monthly_charge_offer')->textInput(['maxlength' => true]) ?>
 
                     <?= $userForm->field($userModel, 'three_months_offer')->textInput(['maxlength' => true]) ?>
+                    <?= $userForm->field($userModel, 'year_offer')->textInput(['maxlength' => true]) ?>
 
                     <?= $userForm->field($userModel, 'all_till_offer')->textInput(['maxlength' => true]) ?>
 

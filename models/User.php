@@ -27,6 +27,8 @@ use yii\helpers\ArrayHelper;
  * @property string|null $contact_number
  * @property string|null $telegram_link
  * @property string|null $fullname 
+ * @property string|null $discord 
+ * @property string|null $year_offer 
  * @property string|null $channel_link_telegram 
  * @property string|null $monthly_charge_offer 
  * @property string|null $three_months_offer 

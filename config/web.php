@@ -32,6 +32,36 @@ $config = [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        'htmlToPdf' => [
+    'class' => 'boundstate\htmlconverter\HtmlToPdfConverter',
+    'bin' => '/usr/bin/wkhtmltopdf',
+    // global wkhtmltopdf command line options
+    // (see http://wkhtmltopdf.org/usage/wkhtmltopdf.txt)
+    'options' => [
+        'print-media-type',
+        'disable-smart-shrinking',
+        'no-outline',
+        'page-size' => 'letter',
+        'load-error-handling' => 'ignore',
+        'load-media-error-handling' => 'ignore'
+    ],
+],
+'htmlToImage' => [
+    'class' => 'boundstate\htmlconverter\HtmlToImageConverter',
+    'bin' => '/usr/bin/wkhtmltoimage',
+],
+'response' => [
+    'formatters' => [
+        'pdf' => [
+            'class' => 'boundstate\htmlconverter\PdfResponseFormatter',
+            // Set a filename to download the response as an attachments (instead of displaying in browser)
+            'filename' => 'attachment.pdf'
+        ],
+        'image' => [
+            'class' => 'boundstate\htmlconverter\ImageResponseFormatter',
+        ],
+    ]
+],
 //        'mailer' => [
 //            'class' => \yii\symfonymailer\Mailer::class,
 ////            'viewPath' => '@app/mail',

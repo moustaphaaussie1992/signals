@@ -66,7 +66,7 @@ abstract class User extends BasicUser {
             [['password_hash', 'password_reset_token', 'email', 'photo',
             'back_photo', 'twitter', 'facebook',
             'tiktok', 'insta', 'contact_number', 'telegram_link',
-            'fullname', 'channel_link_telegram', 'monthly_charge_offer', 'three_months_offer', 'all_till_offer', 'verify_sgn_up', 'forget_password_token'], 'string', 'max' => 255],
+            'fullname','discord', 'channel_link_telegram', 'monthly_charge_offer', 'three_months_offer', 'all_till_offer', 'verify_sgn_up', 'forget_password_token'], 'string', 'max' => 255],
             [['username'], 'unique'],
         ];
     }
@@ -92,11 +92,14 @@ abstract class User extends BasicUser {
             'facebook' => 'Facebook',
             'tiktok' => 'Tiktok',
             'insta' => 'Insta',
+            'discord' => 'Discord',
             'contact_number' => 'Contact Number',
             'telegram_link' => 'Telegram Link',
             'fullname' => 'Fullname',
             'channel_link_telegram' => 'Channel Link Telegram',
             'monthly_charge_offer' => 'Monthly Charge Offer',
+            'year_offer ' => 'Year Charge Offer',
+            
             'three_months_offer' => 'Three Months Offer',
             'all_till_offer' => 'All Till Offer',
             'verify_sgn_up' => 'Verify Sgn Up',

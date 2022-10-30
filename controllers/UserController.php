@@ -49,6 +49,15 @@ class UserController extends Controller {
                     'dataProvider' => $dataProvider,
         ]);
     }
+     public function actionProlabzUsers() {
+        $searchModel = new UserSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
+        return $this->render('prolabz-users', [
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
+        ]);
+    }
 
     /**
      * Displays a single User model.

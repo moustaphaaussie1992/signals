@@ -7,6 +7,7 @@ use app\models\LoginForm;
 use app\models\Members;
 use app\models\StatisticsSearchModel;
 use app\models\Subscriptions;
+use Spipu\Html2Pdf\Html2Pdf;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -67,9 +68,13 @@ class SiteController extends Controller {
 //                ->convert($this->render('index'))
 //                ->saveAs('/path/to/output.pdf');
 //        return $this->render('index');
-
+//        Yii::$app->response->format = 'image';
+//$html = $this->render('<h1>haha</h1>');
+//$pdf = Yii::$app->htmlToImage->convert($html);
+//        \yii\helpers\VarDumper::dump($this->renderPartial('about'),3,3);
+//        die();
         $html2pdf = new Html2Pdf();
-        $html2pdf->writeHTML('<h1>HelloWorld</h1>This is my first test');
+        $html2pdf->writeHTML($this->renderPartial('index'));
         $html2pdf->output();
     }
 

@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\ChangePassword;
 use app\models\CoverPictureModel;
+use app\models\Members;
 use app\models\ProfilePictureModel;
 use app\models\User as User;
 use Yii;
@@ -16,12 +17,45 @@ class ProfileController extends Controller {
 
         $user = User::find()
                 ->select(['id', 'username', 'email', 'photo', 'back_photo', 'bio', 'twitter'
-                    , 'facebook', 'tiktok', 'insta', 'contact_number', 'telegram_link'])
+                    , 'facebook', 'tiktok', 'insta', 'contact_number', 'telegram_link','discord','year_offer','all_till_offer','three_months_offer','monthly_charge_offer'])
                 ->asArray()
                 ->where(['id' => $userId])
                 ->one();
+        
+        
+           $totalMembersCrypto = Members::find()
+                    ->where(["r_user" => $userId])
+                    ->join('join', 'subscriptions', 'subscriptions.member_id = members.id')
+                    ->andWhere(['subscriptions.r_type' => 1])
+                             ->andWhere(["active"=>1])
+                    ->count();
+            $totalMembersForex = Members::find()
+                    ->where(["r_user" => $userId])
+                    ->join('join', 'subscriptions', 'subscriptions.member_id = members.id')
+                    ->andWhere(['subscriptions.r_type' => 2])
+                             ->andWhere(["active"=>1])
+                    ->count();
+      
+             $totalMembersCryptoForex = Members::find()
+                    ->where(["r_user" => $userId])
+                    ->join('join', 'subscriptions', 'subscriptions.member_id = members.id')
+                    ->andWhere(['subscriptions.r_type' => 3])
+                             ->andWhere(["active"=>1])
+                    ->count();
+      
+      
+                   $totalMembers = Members::find()
+                    ->where(["r_user" => $userId])
+                    ->andWhere(["active"=>1])
+                    ->count();
+        
+        
         return $this->render('index', [
-                    'user' => $user
+                    'user' => $user,
+                    'totalMembers' => $totalMembers,
+                    'totalMembersCryptoForex' => $totalMembersCryptoForex,
+                    'totalMembersForex' => $totalMembersForex,
+                    'totalMembersCrypto' => $totalMembersCrypto,
         ]);
     }
 

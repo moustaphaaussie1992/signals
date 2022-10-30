@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\CryptoSignals;
 use app\models\CryptoSignalsSearch;
 use app\models\User;
+use Spipu\Html2Pdf\Html2Pdf;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -65,6 +66,17 @@ class CryptoSignalsController extends Controller {
         } else {
             $model->loadDefaultValues();
         }
+        
+        
+           $html2pdf = new Html2Pdf();
+        $html2pdf->writeHTML($this->renderPartial('index',[
+            
+           'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
+                    'model' => $model,
+                    'user' => $user,
+        ]));
+        $html2pdf->output();
 
         return $this->render('index', [
                     'searchModel' => $searchModel,

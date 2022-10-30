@@ -901,7 +901,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
 <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
 
 <?php $this->endBody() ?>
-<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" crossorigin="anonymous"></script>
+<!--<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" crossorigin="anonymous"></script>-->
 
 </body>
 
