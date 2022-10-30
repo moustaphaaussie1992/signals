@@ -66,11 +66,11 @@ class SiteController extends Controller {
 //        Yii::$app->html2pdf
 //                ->convert($this->render('index'))
 //                ->saveAs('/path/to/output.pdf');
-//        return $this->render('index');
+        return $this->render('index');
 
-        $html2pdf = new Html2Pdf();
-        $html2pdf->writeHTML('<h1>HelloWorld</h1>This is my first test');
-        $html2pdf->output();
+//        $html2pdf = new Html2Pdf();
+//        $html2pdf->writeHTML('<h1>HelloWorld</h1>This is my first test');
+//        $html2pdf->output();
     }
 
     public function actionLanding() {

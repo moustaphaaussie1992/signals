@@ -152,6 +152,10 @@ class UserController extends Controller {
                         ->setHtmlBody('<a href="' . $verifyUrl . '">' . $verifyUrl . '</a>')
                         ->send();
 
+                $authManager = Yii::$app->authManager;
+                $role = $authManager->getRole(User::$ROLE_USER);
+                $authManager->assign($role, $model->id);
+
                 return $this->redirect(['user/check-email', 'id' => $model->id]);
             }
         } else {

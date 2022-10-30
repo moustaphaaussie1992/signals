@@ -53,17 +53,19 @@ class ForexSignalsController extends Controller {
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
-                $userId = Yii::$app->user->id;
-                $model->user_id = $userId;
-                $model->target = implode(',', $model->target);
-                $model->user_id = Yii::$app->user->id;
-                if ($model->save()) {
+                if (\Yii::$app->user->can("/forex-signals/create")) {
+                    $userId = Yii::$app->user->id;
+                    $model->user_id = $userId;
+                    $model->target = implode(',', $model->target);
+                    $model->user_id = Yii::$app->user->id;
+                    if ($model->save()) {
 
 //                return $this->redirect(['view', 'id' => $model->id]);
-                    return $this->redirect(['index']);
-                } else {
-                    VarDumper::dump($model->getErrors(), 3, true);
-                    die();
+                        return $this->redirect(['index']);
+                    } else {
+                        VarDumper::dump($model->getErrors(), 3, true);
+                        die();
+                    }
                 }
             }
         } else {

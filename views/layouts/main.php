@@ -102,7 +102,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
                                                     </div>
                                                 </div>
                                                 <div class="dropdown-divider m-0"></div>
-                                                <a class="dropdown-item" href="<?= Url::to(['profile/index', 'userId' => Yii::$app->user->id]) ?>">
+                                                <a class="dropdown-item" href="<?= Url::to(['profile/index']) ?>">
                                                     <i class="dropdown-icon fe fe-user"></i>Profile
                                                 </a>
                                                 <div class="dropdown-divider m-0"></div>
@@ -124,11 +124,11 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
 
 
                                                 <?php
-                                                Html::beginForm(['/site/logout', 'id' => 'form-logout'])
+                                                echo Html::beginForm(['/site/logout', 'id' => 'form-logout'])
                                                 ?>
                                                 <button type = "submit" class = "dropdown-item"><li class = "dropdown-icon fe fe-alert-circle"></li>Sign out</button>
                                                 <?php
-                                                Html::endForm()
+                                                echo Html::endForm()
                                                 ?>
                                                 <!--</li>-->
                                                 <!--</a>-->
@@ -219,36 +219,42 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
 
                             </ul>
                         </li>
-                        <li class="slide">
-                            <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
-                                    class="side-menu__icon fe fe-slack"></i><span
-                                    class="side-menu__label">Settings</span><i
-                                    class="angle fe fe-chevron-right"></i></a>
-                            <ul class="slide-menu">
-                                <li class="side-menu-label1"><a href="javascript:void(0)">Members</a></li>
-                                <li><a href="<?= Url::to(['crypto-coin/index']) ?>" class="slide-item"> Crypto Coin</a></li>
-                                <li><a href="<?= Url::to(['crypto-pair/index']) ?>" class="slide-item"> Crypto Pair</a></li>
-                                <li><a href="<?= Url::to(['crypto-type/index']) ?>" class="slide-item"> Crypto Type</a></li>
-                                <li><a href="<?= Url::to(['crypto-target/index']) ?>" class="slide-item"> Crypto Target</a></li>
-                                <li><a href="<?= Url::to(['crypto-result/index']) ?>" class="slide-item"> Crypto Result</a></li>
+                        <?php
+                        if (Yii::$app->user->can("Administrator")) {
+                            ?>
+                            <li class="slide">
+                                <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
+                                        class="side-menu__icon fe fe-slack"></i><span
+                                        class="side-menu__label">Settings</span><i
+                                        class="angle fe fe-chevron-right"></i></a>
+                                <ul class="slide-menu">
+                                    <li class="side-menu-label1"><a href="javascript:void(0)">Members</a></li>
+                                    <li><a href="<?= Url::to(['crypto-coin/index']) ?>" class="slide-item"> Crypto Coin</a></li>
+                                    <li><a href="<?= Url::to(['crypto-pair/index']) ?>" class="slide-item"> Crypto Pair</a></li>
+                                    <li><a href="<?= Url::to(['crypto-type/index']) ?>" class="slide-item"> Crypto Type</a></li>
+                                    <li><a href="<?= Url::to(['crypto-target/index']) ?>" class="slide-item"> Crypto Target</a></li>
+                                    <li><a href="<?= Url::to(['crypto-result/index']) ?>" class="slide-item"> Crypto Result</a></li>
 
-                                <li><a href="<?= Url::to(['forex-ticker/index']) ?>" class="slide-item"> Forex Ticker</a></li>
-                                <li><a href="<?= Url::to(['forex-type/index']) ?>" class="slide-item"> Forex Type</a></li>
-                                <li><a href="<?= Url::to(['forex-target/index']) ?>" class="slide-item"> Forex Target</a></li>
-                                <li><a href="<?= Url::to(['forex-result/index']) ?>" class="slide-item"> Forex Result</a></li>
-                                <li><a href="<?= Url::to(['forex-pips/index']) ?>" class="slide-item"> Forex Pips</a></li>
+                                    <li><a href="<?= Url::to(['forex-ticker/index']) ?>" class="slide-item"> Forex Ticker</a></li>
+                                    <li><a href="<?= Url::to(['forex-type/index']) ?>" class="slide-item"> Forex Type</a></li>
+                                    <li><a href="<?= Url::to(['forex-target/index']) ?>" class="slide-item"> Forex Target</a></li>
+                                    <li><a href="<?= Url::to(['forex-result/index']) ?>" class="slide-item"> Forex Result</a></li>
+                                    <li><a href="<?= Url::to(['forex-pips/index']) ?>" class="slide-item"> Forex Pips</a></li>
 
-                            </ul>
-                        </li>
+                                </ul>
+                            </li>
+                            <?php
+                        }
+                        ?>
 
-                        <li class="sub-category">
-                            <h3>Profile</h3>
-                        </li>
-                        <li class="slide">
-                            <a class="side-menu__item has-link" data-bs-toggle="slide" href="<?= Url::to(['profile/index']) ?>"><i
-                                    class="side-menu__icon fe fe-home"></i><span
-                                    class="side-menu__label">profile test</span></a>
-                        </li>
+                        <!--                        <li class="sub-category">
+                                                    <h3>Profile</h3>
+                                                </li>
+                                                <li class="slide">
+                                                    <a class="side-menu__item has-link" data-bs-toggle="slide" href="<?= Url::to(['profile/index']) ?>"><i
+                                                            class="side-menu__icon fe fe-home"></i><span
+                                                            class="side-menu__label">profile test</span></a>
+                                                </li>-->
 
                         <li class="sub-category">
                             <h3>UI Kit</h3>
@@ -258,7 +264,9 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
                         <li>
                             <a class="side-menu__item has-link" href="<?= Url::to(['site/landing']) ?>"><i
                                     class="side-menu__icon fe fe-zap"></i><span
-                                    class="side-menu__label">Landing Page</span><span class="badge bg-green br-5 side-badge blink-text pb-1">New</span></a>
+                                    class="side-menu__label">Landing Page</span>
+                                    <!--<span class="badge bg-green br-5 side-badge blink-text pb-1">New</span>-->
+                            </a>
 
 
                         </li>
@@ -274,6 +282,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
                         </svg></div>
                 </div>
             </div>
+
             <!--/APP-SIDEBAR-->
         </div>
 
@@ -798,89 +807,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
     </div>
     <!--/Sidebar-right-->
 
-    <!-- Country-selector modal-->
-    <div class="modal fade" id="country-selector">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content country-select-modal">
-                <div class="modal-header">
-                    <h6 class="modal-title">Choose Country</h6><button aria-label="Close" class="btn-close"
-                                                                       data-bs-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
-                </div>
-                <div class="modal-body">
-                    <ul class="row p-3">
-                        <li class="col-lg-6 mb-2">
-                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block active">
-                                <span class="country-selector"><img alt="" src="<?= $sashPath ?>/assets/images/flags/us_flag.jpg"
-                                                                    class="me-3 language"></span>USA
-                            </a>
-                        </li>
-                        <li class="col-lg-6 mb-2">
-                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
-                                <span class="country-selector"><img alt=""
-                                                                    src="<?= $sashPath ?>/assets/images/flags/italy_flag.jpg"
-                                                                    class="me-3 language"></span>Italy
-                            </a>
-                        </li>
-                        <li class="col-lg-6 mb-2">
-                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
-                                <span class="country-selector"><img alt=""
-                                                                    src="<?= $sashPath ?>/assets/images/flags/spain_flag.jpg"
-                                                                    class="me-3 language"></span>Spain
-                            </a>
-                        </li>
-                        <li class="col-lg-6 mb-2">
-                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
-                                <span class="country-selector"><img alt=""
-                                                                    src="<?= $sashPath ?>/assets/images/flags/india_flag.jpg"
-                                                                    class="me-3 language"></span>India
-                            </a>
-                        </li>
-                        <li class="col-lg-6 mb-2">
-                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
-                                <span class="country-selector"><img alt=""
-                                                                    src="<?= $sashPath ?>/assets/images/flags/french_flag.jpg"
-                                                                    class="me-3 language"></span>French
-                            </a>
-                        </li>
-                        <li class="col-lg-6 mb-2">
-                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
-                                <span class="country-selector"><img alt=""
-                                                                    src="<?= $sashPath ?>/assets/images/flags/russia_flag.jpg"
-                                                                    class="me-3 language"></span>Russia
-                            </a>
-                        </li>
-                        <li class="col-lg-6 mb-2">
-                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
-                                <span class="country-selector"><img alt=""
-                                                                    src="<?= $sashPath ?>/assets/images/flags/germany_flag.jpg"
-                                                                    class="me-3 language"></span>Germany
-                            </a>
-                        </li>
-                        <li class="col-lg-6 mb-2">
-                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
-                                <span class="country-selector"><img alt=""
-                                                                    src="<?= $sashPath ?>/assets/images/flags/argentina.jpg"
-                                                                    class="me-3 language"></span>Argentina
-                            </a>
-                        </li>
-                        <li class="col-lg-6 mb-2">
-                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
-                                <span class="country-selector"><img alt="" src="<?= $sashPath ?>/assets/images/flags/malaysia.jpg"
-                                                                    class="me-3 language"></span>Malaysia
-                            </a>
-                        </li>
-                        <li class="col-lg-6 mb-2">
-                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
-                                <span class="country-selector"><img alt="" src="<?= $sashPath ?>/assets/images/flags/turkey.jpg"
-                                                                    class="me-3 language"></span>Turkey
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Country-selector modal-->
+
 
     <!-- FOOTER -->
     <footer class="footer">
@@ -895,13 +822,12 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
     </footer>
     <!-- FOOTER END -->
 
-</div>
 
-<!-- BACK-TO-TOP -->
-<a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
+    <!-- BACK-TO-TOP -->
+    <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
 
-<?php $this->endBody() ?>
-<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" crossorigin="anonymous"></script>
+    <?php $this->endBody() ?>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" crossorigin="anonymous"></script>
 
 </body>
 

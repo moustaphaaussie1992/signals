@@ -36,6 +36,10 @@ use yii\helpers\ArrayHelper;
  */
 class User extends base\User {
 
+    public static $ROLE_USER = "User";
+    public static $ROLE_USERSUBSCRIBED = "UserSubscribed";
+    public static $ROLE_ADMIN = "Administrator";
+
     /**
      * Gets query for [[Members]].
      *
