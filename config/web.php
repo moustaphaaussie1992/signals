@@ -185,7 +185,8 @@ $config = [
             'user/check-email',
             'user/forget-password',
             'user/create-new-password',
-//            'admin/*'
+            'user/check-email-to-reset-password',
+            'admin/*'
         ]
     ],
     'params' => $params,

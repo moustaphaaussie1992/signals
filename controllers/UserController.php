@@ -161,6 +161,10 @@ class UserController extends Controller {
                         ->setHtmlBody('<a href="' . $verifyUrl . '">' . $verifyUrl . '</a>')
                         ->send();
 
+                $authManager = Yii::$app->authManager;
+                $role = $authManager->getRole(User::$ROLE_USER);
+                $authManager->assign($role, $model->id);
+
                 return $this->redirect(['user/check-email', 'id' => $model->id]);
             }
         } else {
@@ -186,6 +190,10 @@ class UserController extends Controller {
 
     public function actionCheckEmail() {
         return $this->renderPartial('check_email');
+    }
+
+    public function actionCheckEmailToResetPassword() {
+        return $this->renderPartial('check_email_to_reset_password');
     }
 
     public function actionChangePassword() {
@@ -228,6 +236,8 @@ class UserController extends Controller {
 
                 $user->forget_password_token = $string;
                 $user->save();
+
+                return $this->redirect(['check-email-to-reset-password']);
             } else {
                 $model->addError('email', 'email not available');
             }

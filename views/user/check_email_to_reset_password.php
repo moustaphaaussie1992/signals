@@ -1,16 +1,11 @@
 <?php
 
-use app\assets\RegisterAsset;
-use app\models\User;
-use yii\helpers\Html;
+use app\assets\LoginAsset;
+use yii\bootstrap5\ActiveForm;
+use yii\bootstrap5\Html;
 use yii\helpers\Url;
-use yii\web\View;
-use yii\widgets\ActiveForm;
 
-/** @var View $this */
-/** @var User $model */
-/** @var ActiveForm $form */
-RegisterAsset::register($this);
+LoginAsset::register($this);
 $sashPath = Yii::getAlias('@web') . '/sash';
 ?>
 <?php $this->beginPage() ?>
@@ -32,8 +27,11 @@ $sashPath = Yii::getAlias('@web') . '/sash';
         <?php $this->head() ?>
 
     </head>
+
+
     <body class="app sidebar-mini ltr login-img">
         <?php $this->beginBody() ?>
+        <!-- BACKGROUND-IMAGE -->
         <div class="">
 
             <!-- GLOABAL LOADER -->
@@ -44,48 +42,38 @@ $sashPath = Yii::getAlias('@web') . '/sash';
 
             <!-- PAGE -->
             <div class="page">
-
-
-
-
                 <div class="">
 
                     <!-- CONTAINER OPEN -->
                     <div class="col col-login mx-auto mt-7">
                         <div class="text-center">
-                            <a href="index.html"><img src="<?= $sashPath ?>/assets/images/brand/logo-white.png" class="header-brand-img m-0" alt=""></a>
+                            <a href="index.html"><img src="<?= $sashPath ?>/assets/images/brand/logo-white.png" class="header-brand-img" alt=""></a>
                         </div>
                     </div>
-                    <div class="container col-lg-3">
+
+                    <div class="container-login100">
+
 
                         <div class="wrap-login100 p-6">
 
-                            <span class="login100-form-title">
-                                Create new password
+
+                            <span class="login100-form-title pb-5">
+                                Reset password
                             </span>
+                            <div class="panel panel-primary">
 
-                            <div class="row">
-                                <?php $form = ActiveForm::begin(); ?>
+                                Please check you email to reset you password
 
-                                <div class="col-lg-12">
-                                    <?= $form->field($model, 'password')->passwordInput() ?>
-                                </div>                                                                              
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <?= Html::submitButton('Save', ['class' => 'login100-form-btn btn-primary']) ?>
-                                    </div>
-                                </div>    
-
-                                <?php ActiveForm::end(); ?>
 
                             </div>
+
 
                         </div>
                     </div>
                     <!-- CONTAINER CLOSED -->
                 </div>
             </div>
-            <!-- END PAGE -->
+            <!-- End PAGE -->
 
         </div>
         <?php $this->endBody() ?>
