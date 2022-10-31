@@ -29,10 +29,14 @@ use yii\helpers\ArrayHelper;
  * @property string|null $fullname 
  * @property string|null $discord 
  * @property string|null $year_offer 
+ * @property string|null $year_offer_forex 
  * @property string|null $channel_link_telegram 
  * @property string|null $monthly_charge_offer 
  * @property string|null $three_months_offer 
  * @property string|null $all_till_offer 
+ * @property string|null $monthly_charge_offer_forex
+ * @property string|null $three_months_offer_forex 
+ * @property string|null $all_till_offer_forex 
  *
  * @property Members[] $members
  */

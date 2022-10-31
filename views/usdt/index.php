@@ -49,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 'pluginOptions' => [
                     'allowClear' => true,
-                    'multiple' => true
+                    'multiple' => false
                 ],
             ]);
             ?>

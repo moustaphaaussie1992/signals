@@ -151,6 +151,12 @@ $sashPath = Yii::getAlias('@web') . '/sash';
                     <?= $userForm->field($userModel, 'year_offer')->textInput(['maxlength' => true]) ?>
 
                     <?= $userForm->field($userModel, 'all_till_offer')->textInput(['maxlength' => true]) ?>
+                    <?= $userForm->field($userModel, 'monthly_charge_offer_forex')->textInput(['maxlength' => true]) ?>
+
+                    <?= $userForm->field($userModel, 'three_months_offer_forex')->textInput(['maxlength' => true]) ?>
+                    <?= $userForm->field($userModel, 'year_offer_forex')->textInput(['maxlength' => true]) ?>
+
+                    <?= $userForm->field($userModel, 'all_till_offer_forex')->textInput(['maxlength' => true]) ?>
 
                     <div class="form-group">
                         <?= Html::submitButton('Save', ['class' => 'btn btn-primary pull-right']) ?>

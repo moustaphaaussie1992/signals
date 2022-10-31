@@ -1,15 +1,12 @@
 <?php
 
-use app\models\User;
 use app\models\UserSearch;
-use SebastianBergmann\Type\Type;
 use yii\data\ActiveDataProvider;
-use yii\grid\ActionColumn;
 use yii\grid\GridView;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\View;
+use function PHPUnit\Framework\fileExists;
 
 /** @var View $this */
 /** @var UserSearch $searchModel */
@@ -58,10 +55,15 @@ $this->params['breadcrumbs'][] = $this->title;
                             'label' => 'profile',
                             'filter' => false,
                             'value' => function($model) {
-                                if (is_file(Yii::getAlias('@web/profilePhotos/') . $model['photo'])) {
-                                    return Html::img('@web/profilePhotos/' . $model['photo'] . '', ['class' => 'class="avatar avatar-md br-7"',
-                                    ]);
-                                } else {
+                                
+                                if (fileExists(Yii::getAlias('@web/profilePhotos/') . $model['photo'])) {
+                                  
+                                    
+                                        return Html::img('@web/profilePhotos/' . $model['photo'] . '', ['class' => 'class="avatar avatar-md br-7"']);   
+                                }
+                                    
+                               
+                                 else {
                                     return '';
                                 }
                             }

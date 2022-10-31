@@ -2,7 +2,9 @@
 /** @var View $this */
 
 /** @var string $content */
+
 use app\assets\AppAsset;
+use richardfan\widget\JSRegister;
 use yii\bootstrap5\Html;
 use yii\helpers\Url;
 use yii\web\View;
@@ -91,7 +93,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
                                         <!-- SIDE-MENU -->
                                         <div class="dropdown d-flex profile-1">
                                             <a href="javascript:void(0)" data-bs-toggle="dropdown" class="nav-link leading-none d-flex">
-                                                <img src="<?= $sashPath ?>/assets/images/users/21.jpg" alt="profile-user"
+                                                <img id="profile "src="<?= $sashPath ?>/assets/images/users/21.jpg" alt="profile-user"
                                                      class="avatar  profile-user brround cover-image">
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
@@ -152,8 +154,8 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
             <div class="app-sidebar__overlay" data-bs-toggle="sidebar"></div>
             <div class="app-sidebar">
                 <div class="side-header">
-                    <a class="header-brand1" style ="color:white;font-size: 30px;"href="index.html">
-                        <img style ="width:60%"src="<?= $sashPath ?>/assets/images/brand/logo.png" class="header-brand-img desktop-logo" alt="logo">
+                    <a class="header-brand1" style ="color:white;font-size: 30px;"href="<?= Url::to(['site/dashboard']) ?>">
+                        <img style ="width:60%"src="<?= $sashPath ?>/assets/images/brand/logo-3.png" class="header-brand-img desktop-logo" alt="logo">
                         <img src="<?= $sashPath ?>/assets/images/brand/logo-1.png" class="header-brand-img toggle-logo"
                              alt="logo">
                         <img src="<?= $sashPath ?>/assets/images/brand/logo-2.png" class="header-brand-img light-logo" alt="logo">
@@ -265,6 +267,15 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
                             <a class="side-menu__item has-link" href="<?= Url::to(['site/landing']) ?>"><i
                                     class="side-menu__icon fe fe-zap"></i><span
                                     class="side-menu__label">Landing Page</span>
+                                    <!--<span class="badge bg-green br-5 side-badge blink-text pb-1">New</span>-->
+                            </a>
+
+
+                        </li>
+                         <li>
+                            <a class="side-menu__item has-link" href="<?= Url::to(['user/prolabz-users']) ?>"><i
+                                    class="side-menu__icon fe fe-users"></i><span
+                                    class="side-menu__label">Pro-Labz Users</span>
                                     <!--<span class="badge bg-green br-5 side-badge blink-text pb-1">New</span>-->
                             </a>
 
@@ -827,9 +838,34 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
     <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
 
     <?php $this->endBody() ?>
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" crossorigin="anonymous"></script>
+    <!--<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" crossorigin="anonymous"></script>-->
 
 </body>
 
 </html>
+
+<?php JSRegister::begin(); ?>
+<script>
+    
+//    $.ajax({
+//        url: '<?php echo Url::toRoute("/my-api/get-user-profile") ?>',
+//        type: "POST",
+//        data: {
+//            'userId': '<?= Yii::$app->user->id ?>',
+//        },
+//        success: function (data) {
+//            
+//$("#profile").attr("src", data);
+//
+//      
+//            
+//            
+//     error: function (errormessage) {
+//            console.log("not working");
+//        }
+//        }});
+
+
+</script>
+<?php JSRegister::end(); ?>
 <?php $this->endPage() ?>

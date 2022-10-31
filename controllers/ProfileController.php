@@ -22,7 +22,7 @@ class ProfileController extends Controller {
 
         $user = User::find()
                 ->select(['id', 'username', 'email', 'photo', 'back_photo', 'bio', 'twitter'
-                    , 'facebook', 'tiktok', 'insta', 'contact_number', 'telegram_link', 'discord', 'year_offer', 'all_till_offer', 'three_months_offer', 'monthly_charge_offer'])
+                    , 'facebook', 'tiktok', 'insta', 'contact_number', 'telegram_link', 'discord', 'year_offer', 'all_till_offer', 'three_months_offer', 'monthly_charge_offer','year_offer_forex', 'all_till_offer_forex', 'three_months_offer_forex', 'monthly_charge_offer_forex'])
                 ->asArray()
                 ->where(['id' => $userId])
                 ->one();

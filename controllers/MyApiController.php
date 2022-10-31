@@ -17,6 +17,16 @@ use yii\rest\Controller;
  * @author user
  */
 class MyApiController extends Controller {
+        public function actionGetUserProfile() {
+        $post = Yii::$app->request->post();
+        $userId = $Yii::$app->user->id;
+        return   User::find()
+                ->select( 'photo')
+                ->asArray()
+                ->where(['id' => $userId])
+                ->one();
+        
+        }
 
     public function actionGetUsersStat() {
 

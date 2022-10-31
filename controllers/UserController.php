@@ -154,7 +154,7 @@ class UserController extends Controller {
             if ($model->load($this->request->post()) && $model->signup()) {
 
                 Yii::$app->mailer->compose()
-                        ->setFrom('mortux313@outlook.com')
+                        ->setFrom('supp-pro-labz@outlook.com')
                         ->setTo($model->username)
                         ->setSubject('Verify Account')
                         ->setTextBody('Please click on the link to verify your account')
@@ -227,7 +227,7 @@ class UserController extends Controller {
             $user = User::findOne(["username" => $model->email]);
             if ($user) {
                 Yii::$app->mailer->compose()
-                        ->setFrom('mortux313@outlook.com')
+                        ->setFrom('supp-pro-labz@outlook.com')
                         ->setTo($model->email)
                         ->setSubject('Forget Password')
                         ->setTextBody('Please click on the link to create new password')

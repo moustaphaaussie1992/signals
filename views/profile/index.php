@@ -51,10 +51,25 @@ function addhttp($url) {
                                         </div>
                                         <div class="profile-img-content text-dark text-start">
                                             <div class="text-dark">
-                                                <h3 class="h3 mb-2"><?= $user["username"] ?></h3>
-                                                <h5 class="text-muted"><?= $user["email"] ?></h5>
+                                             
+                                           
+                                                
+ <h3 class="h3 mb-2"style="float:left;"><?= $user["username"] ?></h3>
+
+
+ <h3 class="h3 mb-2"style="font-size:26px ; color:#6c5ffc "> #<?= $user["id"] ?></h3>
+ 
+                                           
+
+                                                     
+                                      <h5 class="text-muted"style="margin-top: 15px;"><?= $user["email"] ?></h5>                  
+                                            
+                                              
+                                               
                                             </div>
+                                            
                                         </div>
+                                        
                                     </div>
                                     <!--                                    <div class="btn-profile">
                                                                             <button class="btn btn-primary mt-1 mb-1"> <i class="fa fa-rss"></i> <span>Follow</span></button>
@@ -410,7 +425,7 @@ function addhttp($url) {
     <div class="col-xl-3">
         <div class="card">
             <div class="card-header">
-                <div class="card-title">Subscriptions Pachages</div>
+                <div class="card-title">Crypto Subscriptions Pachages</div>
             </div>
             <div class="card-body">
                 <div class="main-profile-contact-list">
@@ -420,7 +435,7 @@ function addhttp($url) {
                                 <i style ="    display: inline!important;" class=" lnr lnr-cart fs-30 text-white mt-4"></i>
                             </div>
                             <div class="media-body">
-                                <span class="text-muted">1 Month Subscription</span>
+                                <span class="text-muted">Crypto 1 Month Subscription</span>
                                 <div class="fw-semibold fs-25">
                                     <?= $user["monthly_charge_offer"] ?>
                                 </div>
@@ -436,7 +451,7 @@ function addhttp($url) {
 
                             </div>
                             <div class="media-body">
-                                <span class="text-muted">3 Months Subscription</span>
+                                <span class="text-muted">Crypto 3 Months Subscription</span>
                                 <div class="fw-semibold fs-25">
                                     <?= $user["three_months_offer"] ?>
                                 </div>
@@ -451,7 +466,7 @@ function addhttp($url) {
                                 </span>
                             </div>
                             <div class="media-body">
-                                <span class="text-muted">1 Year Subscription</span>
+                                <span class="text-muted">Crypto 1 Year Subscription</span>
                                 <div class="fw-semibold fs-25">
                                     <?= $user["year_offer"] ?>
                                 </div>
@@ -466,9 +481,79 @@ function addhttp($url) {
                                 </span>
                             </div>
                             <div class="media-body">
-                                <span class="text-muted">Life Time Subscription</span>
+                                <span class="text-muted">Crypto Life Time Subscription</span>
                                 <div class="fw-semibold fs-25">
                                     <?= $user["all_till_offer"] ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+      <div class="col-xl-3">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Forex Subscriptions Pachages</div>
+            </div>
+            <div class="card-body">
+                <div class="main-profile-contact-list">
+                    <div class="me-5">
+                        <div class="media mb-4 d-flex">
+                            <div class="media-icon bg-secondary bradius me-3 mt-1">
+                                <i style ="    display: inline!important;" class=" lnr lnr-cart fs-30 text-white mt-4"></i>
+                            </div>
+                            <div class="media-body">
+                                <span class="text-muted">Forex 1 Month Subscription</span>
+                                <div class="fw-semibold fs-25">
+                                    <?= $user["monthly_charge_offer_forex"] ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="me-5 mt-5 mt-md-0">
+                        <div class="media mb-4 d-flex">
+                            <div class="media-icon bg-success bradius text-white me-3 mt-1">
+                                <span class="mt-3">
+                                    <i style ="    display: inline;"class=" lnr lnr-cart fs-30 text-white mt-4"></i>
+                                </span>
+
+                            </div>
+                            <div class="media-body">
+                                <span class="text-muted">Forex 3 Months Subscription</span>
+                                <div class="fw-semibold fs-25">
+                                    <?= $user["three_months_offer_forex"] ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="me-5 mt-5 mt-md-0">
+                        <div class="media mb-4 d-flex">
+                            <div class="media-icon bg-danger bradius text-white me-3 mt-1">
+                                <span class="mt-3">
+                                    <i style ="    display: inline;" class=" lnr lnr-cart fs-30 text-white mt-4"></i>
+                                </span>
+                            </div>
+                            <div class="media-body">
+                                <span class="text-muted">Forex 1 Year Subscription</span>
+                                <div class="fw-semibold fs-25">
+                                    <?= $user["year_offer_forex"] ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="me-0 mt-5 mt-md-0">
+                        <div class="media">
+                            <div class="media-icon bg-primary text-white bradius me-3 mt-1">
+                                <span class="mt-3">
+                                    <i style ="    display: inline;" class=" lnr lnr-cart fs-30 text-white mt-4"></i>
+                                </span>
+                            </div>
+                            <div class="media-body">
+                                <span class="text-muted">Forex Life Time Subscription</span>
+                                <div class="fw-semibold fs-25">
+                                    <?= $user["all_till_offer_forex"] ?>
                                 </div>
                             </div>
                         </div>
