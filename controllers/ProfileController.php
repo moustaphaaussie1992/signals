@@ -13,43 +13,48 @@ use yii\web\UploadedFile;
 
 class ProfileController extends Controller {
 
-    public function actionIndex($userId = 1) {
+    public function actionIndex($userId = null) {
+        if ($userId) {
+
+        } else {
+            $userId = Yii::$app->user->id;
+        }
 
         $user = User::find()
                 ->select(['id', 'username', 'email', 'photo', 'back_photo', 'bio', 'twitter'
-                    , 'facebook', 'tiktok', 'insta', 'contact_number', 'telegram_link','discord','year_offer','all_till_offer','three_months_offer','monthly_charge_offer'])
+                    , 'facebook', 'tiktok', 'insta', 'contact_number', 'telegram_link', 'discord', 'year_offer', 'all_till_offer', 'three_months_offer', 'monthly_charge_offer'])
                 ->asArray()
                 ->where(['id' => $userId])
                 ->one();
-        
-        
-           $totalMembersCrypto = Members::find()
-                    ->where(["r_user" => $userId])
-                    ->join('join', 'subscriptions', 'subscriptions.member_id = members.id')
-                    ->andWhere(['subscriptions.r_type' => 1])
-                             ->andWhere(["active"=>1])
-                    ->count();
-            $totalMembersForex = Members::find()
-                    ->where(["r_user" => $userId])
-                    ->join('join', 'subscriptions', 'subscriptions.member_id = members.id')
-                    ->andWhere(['subscriptions.r_type' => 2])
-                             ->andWhere(["active"=>1])
-                    ->count();
-      
-             $totalMembersCryptoForex = Members::find()
-                    ->where(["r_user" => $userId])
-                    ->join('join', 'subscriptions', 'subscriptions.member_id = members.id')
-                    ->andWhere(['subscriptions.r_type' => 3])
-                             ->andWhere(["active"=>1])
-                    ->count();
-      
-      
-                   $totalMembers = Members::find()
-                    ->where(["r_user" => $userId])
-                    ->andWhere(["active"=>1])
-                    ->count();
-        
-        
+
+
+        $totalMembersCrypto = Members::find()
+                ->where(["r_user" => $userId])
+                ->join('join', 'subscriptions', 'subscriptions.member_id = members.id')
+                ->andWhere(['subscriptions.r_type' => 1])
+                ->andWhere(["active" => 1])
+                ->count();
+        $totalMembersForex = Members::find()
+                ->where(["r_user" => $userId])
+                ->join('join', 'subscriptions', 'subscriptions.member_id = members.id')
+                ->andWhere(['subscriptions.r_type' => 2])
+                ->andWhere(["active" => 1])
+                ->count();
+
+        $totalMembersCryptoForex = Members::find()
+                ->where(["r_user" => $userId])
+                ->join('join', 'subscriptions', 'subscriptions.member_id = members.id')
+                ->andWhere(['subscriptions.r_type' => 3])
+                ->andWhere(["active" => 1])
+                ->count();
+
+
+        $totalMembers = Members::find()
+                ->where(["r_user" => $userId])
+                ->andWhere(["active" => 1])
+                ->count();
+
+
         return $this->render('index', [
                     'user' => $user,
                     'totalMembers' => $totalMembers,
@@ -116,7 +121,7 @@ class ProfileController extends Controller {
             if ($model->uploadFile($file, $userId)) {
                 return $this->redirect(['edit']);
             } else {
-                
+
             }
         }
         return $this->render('edit_profile_picture', [
@@ -134,7 +139,7 @@ class ProfileController extends Controller {
             if ($model->uploadFile($file, $userId)) {
                 return $this->redirect(['edit']);
             } else {
-                
+
             }
         }
         return $this->render('edit_cover_photo', [

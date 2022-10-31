@@ -10,13 +10,15 @@ use yii\widgets\ActiveForm;
 
 <div class="user-search">
 
-    <?php $form = ActiveForm::begin([
-        'action' => ['index'],
-        'method' => 'get',
-    ]); ?>
+    <?php
+    $form = ActiveForm::begin([
+                'action' => ['prolabz-users'],
+                'method' => 'get',
+    ]);
+    ?>
 
-    
-        <div class="row">
+
+    <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
 
             <h3 style="
@@ -26,18 +28,17 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'id') ?>
 
         </div>
-      
+
         <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2" style="    margin-top: 28px;">
 
 
-              <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>
-    </div>
+            <div class="form-group">
+                <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
+            </div>
 
         </div>
     </div>
-  
+
 
     <?php // echo $form->field($model, 'auth_key') ?>
 
@@ -69,9 +70,9 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'contact_number') ?>
 
-    <?php // echo $form->field($model, 'telegram_link') ?>
+    <?php // echo $form->field($model, 'telegram_link')  ?>
 
-  
+
 
     <?php ActiveForm::end(); ?>
 

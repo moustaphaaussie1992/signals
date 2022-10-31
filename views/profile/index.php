@@ -3,6 +3,7 @@
 use app\models\Utils;
 use richardfan\widget\JSRegister;
 use yii\helpers\Url;
+
 $sashPath = Yii::getAlias('@web') . '/sash';
 //\yii\helpers\VarDumper::dump($user, 3, true);
 //die();
@@ -27,11 +28,11 @@ function addhttp($url) {
                      vertical-align: -.125em;
                      color: #6c5ffc
     }
-    
+
     a:hover {
-  background-color: #6c5ffcbf;
-}
-    
+        background-color: #6c5ffcbf;
+    }
+
 </style>
 
 <div class="row" id="user-profile">
@@ -93,211 +94,210 @@ function addhttp($url) {
                     <div class="card-body ">
                         <div>
                             <p>
-                                <?= $user["bio"] ?> 
+                                <?= $user["bio"] ?>
                             </p>
                         </div>
                         <hr><!-- comment -->
-                       
-                                                <div class="d-flex align-items-center mb-3 mt-3">
-                                                    <div class="me-4 text-center text-primary">
-                                                        <span><i class="fe fe-link fs-20"></i></span>
-                                                    </div>
-                                                    <div>
-                                                      
-                                                         <a style='color: white!important;' class="social-icon text-primary" href="<?= $user['telegram_link'] ?>" target="_blank"><?= $user['telegram_link'] ?></a>
-                                                    </div>
-                                                </div>
-                                                <div class="d-flex align-items-center mb-3 mt-3">
-                                                    <div class="me-4 text-center text-primary">
-                                                        <span><i class="fe fe-phone fs-20"></i></span>
-                                                    </div>
-                                                    <div>
-                                                          <a style='color: white!important;'class="social-icon text-primary" href="<?=  Url::to('https://wa.me/' .$user['contact_number']) ?>" target="_blank"><?= $user['contact_number'] ?></a>
-                                                
-                                                    </div>
-                                                </div>
-                                                <div class="d-flex align-items-center mb-3 mt-3">
-                                                    <div class="me-4 text-center text-primary">
-                                                        <span><i class="fe fe-mail fs-20"></i></span>
-                                                    </div>
-                                                    <div>
-                                                        
-                                                    </div><a style='color: white!important;' class="social-icon text-primary" href="<?=  Url::to('mailto:' .$user['email']) ?>" target="_blank"><?= $user['email'] ?></a>
-                                                      
-                                                    </div>
-                                                </div>
+
+                        <div class="d-flex align-items-center mb-3 mt-3">
+                            <div class="me-4 text-center text-primary">
+                                <span><i class="fe fe-link fs-20"></i></span>
+                            </div>
+                            <div>
+
+                                <a style='color: white!important;' class="social-icon text-primary" href="<?= $user['telegram_link'] ?>" target="_blank"><?= $user['telegram_link'] ?></a>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center mb-3 mt-3">
+                            <div class="me-4 text-center text-primary">
+                                <span><i class="fe fe-phone fs-20"></i></span>
+                            </div>
+                            <div>
+                                <a style='color: white!important;'class="social-icon text-primary" href="<?= Url::to('https://wa.me/' . $user['contact_number']) ?>" target="_blank"><?= $user['contact_number'] ?></a>
+
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center mb-3 mt-3">
+                            <div class="me-4 text-center text-primary">
+                                <span><i class="fe fe-mail fs-20"></i></span>
+                            </div>
+                            <div>
+
+                            </div><a style='color: white!important;' class="social-icon text-primary" href="<?= Url::to('mailto:' . $user['email']) ?>" target="_blank"><?= $user['email'] ?></a>
+
+                        </div>
                     </div>
-                   
                 </div>
 
             </div>
 
+        </div>
 
-            <div class="col-xl-12 row " style="margin: 0px;
-                 padding: 0px;">
-                <div class="col-xl-3">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-title">Crypto</div>
-                        </div>
-                        <div class="card-body">
-                            <div class="main-profile-contact-list">
-                                <div class="me-5">
-                                    <div class="media mb-4 d-flex">
-                                        <div class="media-icon bg-secondary bradius me-3 mt-1">
-                                            <i class="fa fa-line-chart fs-20 text-white"></i>
-                                        </div>
-                                        <div class="media-body">
-                                            <span class="text-muted">Signals</span>
-                                            <div class="fw-semibold fs-25">
-                                                <?= Utils::getSignalCryptoCountByUserId($user["id"]) ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="me-5 mt-5 mt-md-0">
-                                    <div class="media mb-4 d-flex">
-                                        <div class="media-icon bg-success bradius text-white me-3 mt-1">
-                                            <span class="mt-3">
-                                                <i class="fa fa-line-chart fs-20"></i>
-                                            </span>
-                                        </div>
-                                        <div class="media-body">
-                                            <span class="text-muted">Won Signals</span>
-                                            <div class="fw-semibold fs-25">
-                                                <?php
-                                                $wonCryptoSignals = Utils::getSignalCryptoCountWinByUserId($user["id"]);
-                                                echo $wonCryptoSignals;
-                                                ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>  
-                                <div class="me-5 mt-5 mt-md-0">
-                                    <div class="media mb-4 d-flex">
-                                        <div class="media-icon bg-danger bradius text-white me-3 mt-1">
-                                            <span class="mt-3">
-                                                <i class="fa fa-line-chart fs-20"></i>
-                                            </span>
-                                        </div>
-                                        <div class="media-body">
-                                            <span class="text-muted">Loss Signals</span>
-                                            <div class="fw-semibold fs-25">
-                                                <?= Utils::getSignalCryptoCountLossByUserId($user["id"]) ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>  
-                                <div class="me-0 mt-5 mt-md-0">
-                                    <div class="media">
-                                        <div class="media-icon bg-primary text-white bradius me-3 mt-1">
-                                            <span class="mt-3">
-                                                <i class="fe fe-dollar-sign fs-20"></i>
-                                            </span>
-                                        </div>
-                                        <div class="media-body">
-                                            <span class="text-muted">Profit From Signals</span>
-                                            <div class="fw-semibold fs-25">
-                                                <?= Utils::getSignalCryptoProfitByUserId($user["id"]) ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
+        <div class="col-xl-12 row " style="margin: 0px;
+             padding: 0px;">
+            <div class="col-xl-3">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Crypto</div>
                     </div>
-                </div>
-                <div class="col-xl-9 row" style="padding: 0px; margin: 0px;">
-                    <div class="col-xl-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Crypto Signals</h3>
-                            </div>
-                            <div class="card-body">
-                                <div class="chart-container"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                                    <canvas id="winSignalCryptoChart" class="h-275 chartjs-render-monitor" width="663" height="343" style="display: block; height: 275px; width: 531px;"></canvas>
+                    <div class="card-body">
+                        <div class="main-profile-contact-list">
+                            <div class="me-5">
+                                <div class="media mb-4 d-flex">
+                                    <div class="media-icon bg-secondary bradius me-3 mt-1">
+                                        <i class="fa fa-line-chart fs-20 text-white"></i>
+                                    </div>
+                                    <div class="media-body">
+                                        <span class="text-muted">Signals</span>
+                                        <div class="fw-semibold fs-25">
+                                            <?= Utils::getSignalCryptoCountByUserId($user["id"]) ?>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Crypto Profit</h3>
+                            <div class="me-5 mt-5 mt-md-0">
+                                <div class="media mb-4 d-flex">
+                                    <div class="media-icon bg-success bradius text-white me-3 mt-1">
+                                        <span class="mt-3">
+                                            <i class="fa fa-line-chart fs-20"></i>
+                                        </span>
+                                    </div>
+                                    <div class="media-body">
+                                        <span class="text-muted">Won Signals</span>
+                                        <div class="fw-semibold fs-25">
+                                            <?php
+                                            $wonCryptoSignals = Utils::getSignalCryptoCountWinByUserId($user["id"]);
+                                            echo $wonCryptoSignals;
+                                            ?>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="card-body">
-                                <div class="chart-container"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                                    <canvas id="ProfitCryptoChart" class="h-275 chartjs-render-monitor" width="663" height="343" style="display: block; height: 275px; width: 531px;"></canvas>
+                            <div class="me-5 mt-5 mt-md-0">
+                                <div class="media mb-4 d-flex">
+                                    <div class="media-icon bg-danger bradius text-white me-3 mt-1">
+                                        <span class="mt-3">
+                                            <i class="fa fa-line-chart fs-20"></i>
+                                        </span>
+                                    </div>
+                                    <div class="media-body">
+                                        <span class="text-muted">Loss Signals</span>
+                                        <div class="fw-semibold fs-25">
+                                            <?= Utils::getSignalCryptoCountLossByUserId($user["id"]) ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="me-0 mt-5 mt-md-0">
+                                <div class="media">
+                                    <div class="media-icon bg-primary text-white bradius me-3 mt-1">
+                                        <span class="mt-3">
+                                            <i class="fe fe-dollar-sign fs-20"></i>
+                                        </span>
+                                    </div>
+                                    <div class="media-body">
+                                        <span class="text-muted">Profit From Signals</span>
+                                        <div class="fw-semibold fs-25">
+                                            <?= Utils::getSignalCryptoProfitByUserId($user["id"]) ?>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-xl-12 row" style="margin: 0px;
-                 padding: 0px;" >
-                <div class="col-xl-3">
+            <div class="col-xl-9 row" style="padding: 0px; margin: 0px;">
+                <div class="col-xl-6">
                     <div class="card">
                         <div class="card-header">
-                            <div class="card-title">Forex</div>
+                            <h3 class="card-title">Crypto Signals</h3>
                         </div>
                         <div class="card-body">
-                            <div class="main-profile-contact-list">
-                                <div class="me-5">
-                                    <div class="media mb-4 d-flex">
-                                        <div class="media-icon bg-secondary bradius me-3 mt-1">
-                                            <i class="fa fa-line-chart fs-20 text-white"></i>
-                                        </div>
-                                        <div class="media-body">
-                                            <span class="text-muted">Signal</span>
-                                            <div class="fw-semibold fs-25">
-                                                <?= Utils::getSignalForexCountByUserId($user["id"]) ?>
-                                            </div>
+                            <div class="chart-container"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                                <canvas id="winSignalCryptoChart" class="h-275 chartjs-render-monitor" width="663" height="343" style="display: block; height: 275px; width: 531px;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Crypto Profit</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                                <canvas id="ProfitCryptoChart" class="h-275 chartjs-render-monitor" width="663" height="343" style="display: block; height: 275px; width: 531px;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-12 row" style="margin: 0px;
+             padding: 0px;" >
+            <div class="col-xl-3">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Forex</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="main-profile-contact-list">
+                            <div class="me-5">
+                                <div class="media mb-4 d-flex">
+                                    <div class="media-icon bg-secondary bradius me-3 mt-1">
+                                        <i class="fa fa-line-chart fs-20 text-white"></i>
+                                    </div>
+                                    <div class="media-body">
+                                        <span class="text-muted">Signal</span>
+                                        <div class="fw-semibold fs-25">
+                                            <?= Utils::getSignalForexCountByUserId($user["id"]) ?>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="me-5 mt-5 mt-md-0">
-                                    <div class="media mb-4 d-flex">
-                                        <div class="media-icon bg-success bradius text-white me-3 mt-1">
-                                            <span class="mt-3">
-                                                <i class="fa fa-line-chart fs-20"></i>
-                                            </span>
-                                        </div>
-                                        <div class="media-body">
-                                            <span class="text-muted">Won Signals</span>
-                                            <div class="fw-semibold fs-25">
-                                                <?= Utils::getSignalForexCountWinByUserId($user["id"]) ?>
-                                            </div>
+                            </div>
+                            <div class="me-5 mt-5 mt-md-0">
+                                <div class="media mb-4 d-flex">
+                                    <div class="media-icon bg-success bradius text-white me-3 mt-1">
+                                        <span class="mt-3">
+                                            <i class="fa fa-line-chart fs-20"></i>
+                                        </span>
+                                    </div>
+                                    <div class="media-body">
+                                        <span class="text-muted">Won Signals</span>
+                                        <div class="fw-semibold fs-25">
+                                            <?= Utils::getSignalForexCountWinByUserId($user["id"]) ?>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="me-5 mt-5 mt-md-0">
-                                    <div class="media mb-4 d-flex">
-                                        <div class="media-icon bg-danger bradius text-white me-3 mt-1">
-                                            <span class="mt-3">
-                                                <i class="fa fa-line-chart fs-20"></i>
-                                            </span>
-                                        </div>
-                                        <div class="media-body">
-                                            <span class="text-muted">Loss Signals</span>
-                                            <div class="fw-semibold fs-25">
-                                                <?= Utils::getSignalForexCountLossByUserId($user["id"]) ?>
-                                            </div>
+                            </div>
+                            <div class="me-5 mt-5 mt-md-0">
+                                <div class="media mb-4 d-flex">
+                                    <div class="media-icon bg-danger bradius text-white me-3 mt-1">
+                                        <span class="mt-3">
+                                            <i class="fa fa-line-chart fs-20"></i>
+                                        </span>
+                                    </div>
+                                    <div class="media-body">
+                                        <span class="text-muted">Loss Signals</span>
+                                        <div class="fw-semibold fs-25">
+                                            <?= Utils::getSignalForexCountLossByUserId($user["id"]) ?>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="me-0 mt-5 mt-md-0">
-                                    <div class="media">
-                                        <div class="media-icon bg-primary text-white bradius me-3 mt-1">
-                                            <span class="mt-3">
-                                                <i class="fe fe-dollar-sign fs-20"></i>
-                                            </span>
-                                        </div>
-                                        <div class="media-body">
-                                            <span class="text-muted">Profit From Signals</span>
-                                            <div class="fw-semibold fs-25">
-                                                <?= Utils::getSignalForexProfitByUserId($user["id"]) ?>
-                                            </div>
+                            </div>
+                            <div class="me-0 mt-5 mt-md-0">
+                                <div class="media">
+                                    <div class="media-icon bg-primary text-white bradius me-3 mt-1">
+                                        <span class="mt-3">
+                                            <i class="fe fe-dollar-sign fs-20"></i>
+                                        </span>
+                                    </div>
+                                    <div class="media-body">
+                                        <span class="text-muted">Profit From Signals</span>
+                                        <div class="fw-semibold fs-25">
+                                            <?= Utils::getSignalForexProfitByUserId($user["id"]) ?>
                                         </div>
                                     </div>
                                 </div>
@@ -305,27 +305,99 @@ function addhttp($url) {
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-9 row" style="padding: 0px; margin: 0px;" >
-                    <div class="col-xl-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Forex Signals</h3>
+            </div>
+            <div class="col-xl-9 row" style="padding: 0px; margin: 0px;" >
+                <div class="col-xl-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Forex Signals</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                                <canvas id="winSignalForexChart" class="h-275 chartjs-render-monitor" width="663" height="343" style="display: block; height: 275px; width: 531px;"></canvas>
                             </div>
-                            <div class="card-body">
-                                <div class="chart-container"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                                    <canvas id="winSignalForexChart" class="h-275 chartjs-render-monitor" width="663" height="343" style="display: block; height: 275px; width: 531px;"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Forex Profit</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                                <canvas id="ProfitForexChart" class="h-275 chartjs-render-monitor" width="663" height="343" style="display: block; height: 275px; width: 531px;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-xl-12 row" style="margin: 0px;
+     padding: 0px;" >
+    <div class="col-xl-3">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Active Members</div>
+            </div>
+            <div class="card-body">
+                <div class="main-profile-contact-list">
+                    <div class="me-5">
+                        <div class="media mb-4 d-flex">
+                            <div class="media-icon bg-secondary bradius me-3 mt-1">
+                                <i style ="    display: inline;"class="lnr lnr-user fs-30  fs-20"></i>
+                            </div>
+                            <div class="media-body">
+                                <span class="text-muted">Total Members</span>
+                                <div class="fw-semibold fs-25">
+                                    <?= $totalMembers ?>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Forex Profit</h3>
+                    <div class="me-5 mt-5 mt-md-0">
+                        <div class="media mb-4 d-flex">
+                            <div class="media-icon bg-success bradius text-white me-3 mt-1">
+                                <span class="mt-3">
+                                    <i style ="    display: inline;"class="lnr lnr-user fs-30  fs-20"></i>
+                                </span>
                             </div>
-                            <div class="card-body">
-                                <div class="chart-container"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                                    <canvas id="ProfitForexChart" class="h-275 chartjs-render-monitor" width="663" height="343" style="display: block; height: 275px; width: 531px;"></canvas>
+                            <div class="media-body">
+                                <span class="text-muted">Crypto Members</span>
+                                <div class="fw-semibold fs-25">
+                                    <?= $totalMembersCrypto ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="me-5 mt-5 mt-md-0">
+                        <div class="media mb-4 d-flex">
+                            <div class="media-icon bg-danger bradius text-white me-3 mt-1">
+                                <span class="mt-3">
+                                    <i style ="    display: inline;"class="lnr lnr-user fs-30  fs-20"></i>
+                                </span>
+                            </div>
+                            <div class="media-body">
+                                <span class="text-muted">Forex Members</span>
+                                <div class="fw-semibold fs-25">
+                                    <?= $totalMembersForex ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="me-0 mt-5 mt-md-0">
+                        <div class="media">
+                            <div class="media-icon bg-primary text-white bradius me-3 mt-1">
+                                <span class="mt-3">
+                                    <i style ="    display: inline;"class="lnr lnr-user fs-30  fs-20"></i>
+                                </span>
+                            </div>
+                            <div class="media-body">
+                                <span class="text-muted">Crypto and Forex Signals</span>
+                                <div class="fw-semibold fs-25">
+                                    <?= $totalMembersCryptoForex ?>
                                 </div>
                             </div>
                         </div>
@@ -334,170 +406,99 @@ function addhttp($url) {
             </div>
         </div>
     </div>
-       <div class="col-xl-12 row" style="margin: 0px;
-                 padding: 0px;" >
-                <div class="col-xl-3">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-title">Active Members</div>
+
+    <div class="col-xl-3">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Subscriptions Pachages</div>
+            </div>
+            <div class="card-body">
+                <div class="main-profile-contact-list">
+                    <div class="me-5">
+                        <div class="media mb-4 d-flex">
+                            <div class="media-icon bg-secondary bradius me-3 mt-1">
+                                <i style ="    display: inline!important;" class=" lnr lnr-cart fs-30 text-white mt-4"></i>
+                            </div>
+                            <div class="media-body">
+                                <span class="text-muted">1 Month Subscription</span>
+                                <div class="fw-semibold fs-25">
+                                    <?= $user["monthly_charge_offer"] ?>
+                                </div>
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <div class="main-profile-contact-list">
-                                <div class="me-5">
-                                    <div class="media mb-4 d-flex">
-                                        <div class="media-icon bg-secondary bradius me-3 mt-1">
-                                            <i style ="    display: inline;"class="lnr lnr-user fs-30  fs-20"></i>
-                                        </div>
-                                        <div class="media-body">
-                                            <span class="text-muted">Total Members</span>
-                                            <div class="fw-semibold fs-25">
-                                                <?= $totalMembers ?>
-                                            </div>
-                                        </div>
-                                    </div>
+                    </div>
+                    <div class="me-5 mt-5 mt-md-0">
+                        <div class="media mb-4 d-flex">
+                            <div class="media-icon bg-success bradius text-white me-3 mt-1">
+                                <span class="mt-3">
+                                    <i style ="    display: inline;"class=" lnr lnr-cart fs-30 text-white mt-4"></i>
+                                </span>
+
+                            </div>
+                            <div class="media-body">
+                                <span class="text-muted">3 Months Subscription</span>
+                                <div class="fw-semibold fs-25">
+                                    <?= $user["three_months_offer"] ?>
                                 </div>
-                                <div class="me-5 mt-5 mt-md-0">
-                                    <div class="media mb-4 d-flex">
-                                        <div class="media-icon bg-success bradius text-white me-3 mt-1">
-                                            <span class="mt-3">
-                                              <i style ="    display: inline;"class="lnr lnr-user fs-30  fs-20"></i>
-                                            </span>
-                                        </div>
-                                        <div class="media-body">
-                                            <span class="text-muted">Crypto Members</span>
-                                            <div class="fw-semibold fs-25">
-                                                <?= $totalMembersCrypto ?>
-                                            </div>
-                                        </div>
-                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="me-5 mt-5 mt-md-0">
+                        <div class="media mb-4 d-flex">
+                            <div class="media-icon bg-danger bradius text-white me-3 mt-1">
+                                <span class="mt-3">
+                                    <i style ="    display: inline;" class=" lnr lnr-cart fs-30 text-white mt-4"></i>
+                                </span>
+                            </div>
+                            <div class="media-body">
+                                <span class="text-muted">1 Year Subscription</span>
+                                <div class="fw-semibold fs-25">
+                                    <?= $user["year_offer"] ?>
                                 </div>
-                                <div class="me-5 mt-5 mt-md-0">
-                                    <div class="media mb-4 d-flex">
-                                        <div class="media-icon bg-danger bradius text-white me-3 mt-1">
-                                            <span class="mt-3">
-                                               <i style ="    display: inline;"class="lnr lnr-user fs-30  fs-20"></i>
-                                            </span>
-                                        </div>
-                                        <div class="media-body">
-                                            <span class="text-muted">Forex Members</span>
-                                            <div class="fw-semibold fs-25">
-                                                <?= $totalMembersForex ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="me-0 mt-5 mt-md-0">
-                                    <div class="media">
-                                        <div class="media-icon bg-primary text-white bradius me-3 mt-1">
-                                            <span class="mt-3">
-                                              <i style ="    display: inline;"class="lnr lnr-user fs-30  fs-20"></i>
-                                            </span>
-                                        </div>
-                                        <div class="media-body">
-                                            <span class="text-muted">Crypto and Forex Signals</span>
-                                            <div class="fw-semibold fs-25">
-                                                <?= $totalMembersCryptoForex ?>
-                                            </div>
-                                        </div>
-                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="me-0 mt-5 mt-md-0">
+                        <div class="media">
+                            <div class="media-icon bg-primary text-white bradius me-3 mt-1">
+                                <span class="mt-3">
+                                    <i style ="    display: inline;" class=" lnr lnr-cart fs-30 text-white mt-4"></i>
+                                </span>
+                            </div>
+                            <div class="media-body">
+                                <span class="text-muted">Life Time Subscription</span>
+                                <div class="fw-semibold fs-25">
+                                    <?= $user["all_till_offer"] ?>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-           
-             <div class="col-xl-3">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-title">Subscriptions Pachages</div>
-                        </div>
-                        <div class="card-body">
-                            <div class="main-profile-contact-list">
-                                <div class="me-5">
-                                    <div class="media mb-4 d-flex">
-                                        <div class="media-icon bg-secondary bradius me-3 mt-1">
-                                             <i style ="    display: inline!important;" class=" lnr lnr-cart fs-30 text-white mt-4"></i>
-                                        </div>
-                                        <div class="media-body">
-                                            <span class="text-muted">1 Month Subscription</span>
-                                            <div class="fw-semibold fs-25">
-                                                <?= $user["monthly_charge_offer"] ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="me-5 mt-5 mt-md-0">
-                                    <div class="media mb-4 d-flex">
-                                        <div class="media-icon bg-success bradius text-white me-3 mt-1">
-                                            <span class="mt-3">
-                                               <i style ="    display: inline;"class=" lnr lnr-cart fs-30 text-white mt-4"></i>
-                                            </span>
-                                            
-                                        </div>
-                                        <div class="media-body">
-                                            <span class="text-muted">3 Months Subscription</span>
-                                            <div class="fw-semibold fs-25">
-                                                <?= $user["three_months_offer"] ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="me-5 mt-5 mt-md-0">
-                                    <div class="media mb-4 d-flex">
-                                        <div class="media-icon bg-danger bradius text-white me-3 mt-1">
-                                            <span class="mt-3">
-                                               <i style ="    display: inline;" class=" lnr lnr-cart fs-30 text-white mt-4"></i>
-                                            </span>
-                                        </div>
-                                        <div class="media-body">
-                                            <span class="text-muted">1 Year Subscription</span>
-                                            <div class="fw-semibold fs-25">
-                                                <?= $user["year_offer"] ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="me-0 mt-5 mt-md-0">
-                                    <div class="media">
-                                        <div class="media-icon bg-primary text-white bradius me-3 mt-1">
-                                            <span class="mt-3">
-                                              <i style ="    display: inline;" class=" lnr lnr-cart fs-30 text-white mt-4"></i>
-                                            </span>
-                                        </div>
-                                        <div class="media-body">
-                                            <span class="text-muted">Life Time Subscription</span>
-                                            <div class="fw-semibold fs-25">
-                                                <?= $user["all_till_offer"] ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-6 col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Package Consumption</h3>
+            </div>
+            <div class="card-body">
+                <div class="example">
+
+
+                    <div class="progress progress-md mb-6">
+                        <div class="progress-bar bg-danger-gradient" style="width: 20%;">20% Members</div>
+                    </div>
+
+                    <div class="progress progress-md">
+                        <div class="progress-bar bg-info-gradient" style="width: 80%;">80% Signals</div>
                     </div>
                 </div>
-             <div class="col-xl-6 col-sm-12">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h3 class="card-title">Package Consumption</h3>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="example">
-                                            
-                                           
-                                            <div class="progress progress-md mb-6">
-                                                <div class="progress-bar bg-danger-gradient" style="width: 20%;">20% Members</div>
-                                            </div>
-                                        
-                                            <div class="progress progress-md">
-                                                <div class="progress-bar bg-info-gradient" style="width: 80%;">80% Signals</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-         
-       </div>
+            </div>
+        </div>
+    </div>
+
+</div>
 </div>
 <!-- COL-END -->
 
@@ -508,7 +509,7 @@ function addhttp($url) {
         url: '<?php echo Url::toRoute("/my-api/get-signals-stat") ?>',
         type: "POST",
         data: {
-            'userId': '<?= Yii::$app->user->id ?>',
+            'userId': '<?= $user["id"] ?>',
         },
         success: function (data) {
 

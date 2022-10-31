@@ -1032,10 +1032,10 @@ ORDER BY `dateWithputFormat` ASC";
 
     public function actionGetSignalsStat() {
         $post = Yii::$app->request->post();
-        $userId = Yii::$app->user->id;
+        $userId = $post["userId"];
         $month = date('m');
         $month = intval($month);
-          $union = "";
+        $union = "";
         for ($i = 1; $i < $month; $i++) {
             $union = $union . "UNION SELECT $i ";
         }
