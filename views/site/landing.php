@@ -1,7 +1,9 @@
 <?php
 
 use app\assets\LandingAsset;
+use richardfan\widget\JSRegister;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 LandingAsset::register($this);
 
@@ -86,12 +88,21 @@ $sashPath = Yii::getAlias('@web') . '/sash';
                                 <div class="collapse navbar-collapse bg-white px-0" id="navbarSupportedContent-4">
                                     <!-- SEARCH -->
                                     <div class="header-nav-right p-5">
-                                        <a href="register.html" class="btn ripple btn-min w-sm btn-outline-primary me-2 my-auto"
-                                           target="_blank">New User
-                                        </a>
-                                        <a href="login" class="btn ripple btn-min w-sm btn-primary me-2 my-auto"
-                                           target="_blank">Login
-                                        </a>
+                                        <?php if (Yii::$app->user->isGuest) { ?>
+                                            <a href="login" class="btn ripple btn-min w-sm btn-outline-primary me-2 my-auto"
+                                               target="_blank">New User
+                                            </a>
+                                            <a href="login" class="btn ripple btn-min w-sm btn-primary me-2 my-auto"
+                                               target="_blank">Login
+                                            </a>
+                                        <?php } else { ?>
+                                            <a href="logout" class="btn ripple btn-min w-sm btn-primary me-2 my-auto"
+                                               target="_blank">Logout
+                                            </a>
+                                            <a href="dashboard" class="btn ripple btn-min w-sm btn-primary me-2 my-auto"
+                                               target="_blank">ProLabz Console
+                                            </a>
+                                        <?php } ?>
                                     </div>
                                 </div>
                             </div>
@@ -122,35 +133,44 @@ $sashPath = Yii::getAlias('@web') . '/sash';
                                             <a class="side-menu__item" data-bs-toggle="slide" href="#Features"><span
                                                     class="side-menu__label">Features</span></a>
                                         </li>
-                                        <li class="slide">
-                                            <a class="side-menu__item" data-bs-toggle="slide" href="#About"><span
-                                                    class="side-menu__label">About</span></a>
-                                        </li>
+
                                         <li class="slide">
                                             <a class="side-menu__item" data-bs-toggle="slide" href="#Faqs"><span
                                                     class="side-menu__label">Faq's</span></a>
                                         </li>
-                                        <li class="slide">
-                                            <a class="side-menu__item" data-bs-toggle="slide" href="#Blog"><span
-                                                    class="side-menu__label">Blog</span></a>
-                                        </li>
-                                        <li class="slide">
-                                            <a class="side-menu__item" data-bs-toggle="slide" href="#Clients"><span
-                                                    class="side-menu__label">Clients</span></a>
-                                        </li>
+
                                         <li class="slide">
                                             <a class="side-menu__item" data-bs-toggle="slide" href="#Contact"><span
                                                     class="side-menu__label">Contact</span></a>
                                         </li>
                                     </ul>
                                     <div class="header-nav-right d-none d-lg-flex">
-                                        <a href="register.html"
-                                           class="btn ripple btn-min w-sm btn-outline-primary me-2 my-auto d-lg-none d-xl-block d-block"
-                                           target="_blank">New User
-                                        </a>
-                                        <a href="login" class="btn ripple btn-min w-sm btn-primary me-2 my-auto d-lg-none d-xl-block d-block"
-                                           target="_blank">Login
-                                        </a>
+                                        <?php if (Yii::$app->user->isGuest) { ?>
+                                            <a href="register.html"
+                                               class="btn ripple btn-min w-sm btn-outline-primary me-2 my-auto d-lg-none d-xl-block d-block"
+                                               target="_blank">New User
+                                            </a>
+                                            <a href="login" class="btn ripple btn-min w-sm btn-primary me-2 my-auto d-lg-none d-xl-block d-block"
+                                               target="_blank">Login
+                                            </a>
+                                        <?php } else { ?>
+
+
+
+                                            <?php
+                                            echo Html::beginForm(['/site/logout', 'id' => 'form-logout'])
+                                            ?>
+                                            <button type = "submit" class = "btn ripple btn-min w-sm btn-outline-primary me-2 my-auto d-lg-none d-xl-block d-block">Logout</button>
+
+                                            <?php
+                                            echo Html::endForm()
+                                            ?>
+                                            <a href="index" class="btn ripple btn-min w-sm btn-primary me-2 my-auto"
+                                               target="_blank">ProLabz Console
+                                            </a>
+
+                                        <?php } ?>
+
                                     </div>
                                 </div>
                             </div>
@@ -162,28 +182,36 @@ $sashPath = Yii::getAlias('@web') . '/sash';
                     <div class="container px-sm-0">
                         <div class="row">
                             <div class="col-xl-6 col-lg-6 mb-5 pb-5 animation-zidex pos-relative">
-                               
+
                                 <h1 class="text-start fw-bold">We help you manage your VIP Channels <span
-                                        class="text-primary animate-heading">Pro-Labz</span></h1>
+                                        class="text-primary animate-heading">Pro</span>
+
+                                    <span
+                                        class="text-primary animate-heading">Labz</span>
+                                </h1>
                                 <h6 class="pb-3">
-                                   What can you do with Pro-Labz?
-                               ● Edit and track your members, VIP Channel and
-Signals
+                                    What can you do with Pro-Labz? </h6>
+                                <h5>
+                                    ● Edit and track your members, VIP Channel and
+                                    Signals
+                                </h5>
+                                <h5>
+                                    ●Share and save your profits and data
+                                </h5>
+                                <h5>
+                                    ●Attract new customers
+                                </h5>
 
-●Share and save your profits and data 
-
-●Attract new customers from our unlimited number
-of users
-                                </h6>
-
+                                <br>
+                                <br>
                                 <a href="https://themeforest.net/item/sash-bootstrap-5-admin-dashboard-template/35183671"
                                    target="_blank" class="btn ripple btn-min w-lg mb-3 me-2 btn-primary"><i
                                         class="fe fe-play me-2"></i> View Demo
                                 </a>
-                               
+
                             </div>
                             <div class="col-xl-6 col-lg-6 my-auto">
-                                <img src="<?= $sashPath ?>/assets/images/landing/market4.png" alt="">
+                                <img src="<?= $sashPath ?>/assets/images/dashboard.png" alt="">
                             </div>
                         </div>
                     </div>
@@ -204,30 +232,11 @@ of users
                                     <div class="row">
                                         <h4 class="text-center fw-semibold">Statistics</h4>
                                         <span class="landing-title"></span>
-                                        <h2 class="text-center fw-semibold mb-7">Sash Template Statistics.</h2>
+                                        <h2 class="text-center fw-semibold mb-7">Pro-Labz Statistics.</h2>
                                     </div>
                                     <div class="row text-center services-statistics landing-statistics">
-                                        <div class="col-xl-3 col-md-6 col-lg-6">
-                                            <div class="card">
-                                                <div class="card-body bg-primary-transparent">
-                                                    <div class="counter-status">
-                                                        <div
-                                                            class="counter-icon bg-primary-transparent box-shadow-primary">
-                                                            <i class="fe fe-layers text-primary fs-23"></i>
-                                                        </div>
-                                                        <div class="test-body text-center">
-                                                            <h1 class=" mb-0">
-                                                                <span class="counter fw-semibold counter ">100</span>+
-                                                            </h1>
-                                                            <div class="counter-text">
-                                                                <h5 class="font-weight-normal mb-0 ">HTML Pages</h5>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-3 col-md-6 col-lg-6">
+
+                                        <div class="col-xl-4 col-md-6 col-lg-6">
                                             <div class="card">
                                                 <div class="card-body bg-secondary-transparent">
                                                     <div class="counter-status">
@@ -240,7 +249,7 @@ of users
                                                                 <span class="counter fw-semibold counter ">60</span>+
                                                             </h1>
                                                             <div class="counter-text">
-                                                                <h5 class="font-weight-normal mb-0 ">Integrated Plugins
+                                                                <h5 class="font-weight-normal mb-0 ">Subscribers
                                                                 </h5>
                                                             </div>
                                                         </div>
@@ -248,7 +257,7 @@ of users
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-xl-3 col-md-6 col-lg-6">
+                                        <div class="col-xl-4 col-md-6 col-lg-6">
                                             <div class="card">
                                                 <div class="card-body bg-success-transparent">
                                                     <div class="counter-status">
@@ -261,14 +270,14 @@ of users
                                                                 <span class="counter fw-semibold counter ">10</span>+
                                                             </h1>
                                                             <div class="counter-text">
-                                                                <h5 class="font-weight-normal mb-0 ">Form Elements</h5>
+                                                                <h5 class="font-weight-normal mb-0 ">Visitors</h5>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-xl-3 col-md-6 col-lg-6">
+                                        <div class="col-xl-4 col-md-6 col-lg-6">
                                             <div class="card">
                                                 <div class="card-body bg-danger-transparent">
                                                     <div class="counter-status">
@@ -281,7 +290,7 @@ of users
                                                                 <span class="counter fw-semibold counter ">30</span>+
                                                             </h1>
                                                             <div class="counter-text">
-                                                                <h5 class="font-weight-normal mb-0 ">Customize Widgets
+                                                                <h5 class="font-weight-normal mb-0 ">Accounts
                                                                 </h5>
                                                             </div>
                                                         </div>
@@ -383,7 +392,7 @@ of users
                                                     <div class="text-left">
                                                         <h4 class="fw-bold">Members</h4>
                                                         <p class="mb-0">
-                                                          ProLabz allows you to add, monitor and track your members 
+                                                            ProLabz allows you to add, monitor and track your members
                                                         </p>
                                                     </div>
                                                 </div>
@@ -460,8 +469,8 @@ of users
                                                     <div class="text-left">
                                                         <h4 class="fw-bold">Signals</h4>
                                                         <p class="mb-0">
-                                                  Our Signals feature allows you to share your success, trades and charts with your members through unlimited platforms
-This feature also gives you the chance to separate between Forex and Crypto users 
+                                                            Our Signals feature allows you to share your success, trades and charts with your members through unlimited platforms
+                                                            This feature also gives you the chance to separate between Forex and Crypto users
                                                         </p>
                                                     </div>
                                                 </div>
@@ -581,7 +590,7 @@ This feature also gives you the chance to separate between Forex and Crypto user
                                                     <div class="text-left">
                                                         <h4 class="fw-bold">Market & Share</h4>
                                                         <p class="mb-0">
-                                                       Our platfotm allows you to share your success in a modern fashionable dashboards through ProLabz and other social media platforms to unlimited number of users
+                                                            Our platfotm allows you to share your success in a modern fashionable dashboards through ProLabz and other social media platforms to unlimited number of users
                                                         </p>
                                                     </div>
                                                 </div>
@@ -617,7 +626,7 @@ This feature also gives you the chance to separate between Forex and Crypto user
                                                     <div class="text-left">
                                                         <h4 class="fw-bold">USDT Cash-out*</h4>
                                                         <p class="mb-0">
-                                                           ProLabz will allow you to upgrade your data entry game with our easy filtration of Clients info, USDT flow and sales
+                                                            ProLabz will allow you to upgrade your data entry game with our easy filtration of Clients info, USDT flow and sales
                                                         </p>
                                                     </div>
                                                 </div>
@@ -629,73 +638,54 @@ This feature also gives you the chance to separate between Forex and Crypto user
                             <!-- ROW-2 CLOSED -->
 
                             <!-- ROW-3 OPEN -->
-                            <div class="section bg-landing pb-0 bg-image-style" id="About">
-                                <div class="container">
-                                    <div class="row">
-                                        <h4 class="text-center fw-semibold">Our Mission</h4>
-                                        <span class="landing-title"></span>
-                                        <div class="text-center">
-                                            <h2 class="text-center fw-semibold">Is to help our clients market, share and track data
-                                            </h2>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="card bg-transparent">
-                                                <div class="card-body text-dark">
-                                                    <div class="statistics-info">
-                                                        <div class="row">
-                                                            <div class="col-xl-6 col-lg-6 ps-0">
-                                                                <div class="text-center reveal revealleft mb-3">
-                                                                    <img src="<?= $sashPath ?>/assets/images/landing/business-team-working-on-business-plan.png"
-                                                                         alt="" class="br-5">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-xl-6 col-lg-6 pe-0 my-auto">
+                            <!--                            <div class="section bg-landing pb-0 bg-image-style" id="About">
+                                                            <div class="container">
+                                                                <div class="row">
+                                                                    <h4 class="text-center fw-semibold">Our Mission</h4>
+                                                                    <span class="landing-title"></span>
+                                                                    <div class="text-center">
+                                                                        <h2 class="text-center fw-semibold">Our mission is to help you Track, Share and Control your data
+                                                                        </h2>
+                                                                    </div>
+                                                                    <div class="col-lg-12">
+                                                                        <div class="card bg-transparent">
+                                                                            <div class="card-body text-dark">
+                                                                                <div class="statistics-info">
+                                                                                    <div class="row">
+                                                                                        <div class="col-xl-6 col-lg-6 ps-0">
+                                                                                            <div class="text-center reveal revealleft mb-3">
+                                                                                                <img src="<?= $sashPath ?>/assets/images/landing/business-team-working-on-business-plan.png"
+                                                                                                     alt="" class="br-5">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="col-xl-6 col-lg-6 pe-0 my-auto">
 
-                                                                <div class="ps-5 reveal revealright">
-                                                                    <h2 class="text-start fw-semibold fs-25 mb-6">We are
-                                                                        a creative agency with a passion for design.
-                                                                    </h2>
-                                                                    <div class="d-flex">
-                                                                        <span><svg style="width:20px;height:20px"
-                                                                                   viewBox="0 0 24 24">
-                                                                            <path fill="#6c5ffc"
-                                                                                  d="M23,12L20.56,9.22L20.9,5.54L17.29,4.72L15.4,1.54L12,3L8.6,1.54L6.71,4.72L3.1,5.53L3.44,9.21L1,12L3.44,14.78L3.1,18.47L6.71,19.29L8.6,22.47L12,21L15.4,22.46L17.29,19.28L20.9,18.46L20.56,14.78L23,12M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z" />
-                                                                            </svg></span>
-                                                                        <div class="ms-5 mb-4">
-                                                                            <h5 class="fw-bold">Quality & Clean Code
-                                                                            </h5>
-                                                                            <p>The Sash admin code is maintained very
-                                                                                cleanly and well-structured with proper
-                                                                                comments.</p>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="d-flex">
-                                                                        <span><svg style="width:20px;height:20px"
-                                                                                   viewBox="0 0 24 24">
-                                                                            <path fill="#6c5ffc"
-                                                                                  d="M23,12L20.56,9.22L20.9,5.54L17.29,4.72L15.4,1.54L12,3L8.6,1.54L6.71,4.72L3.1,5.53L3.44,9.21L1,12L3.44,14.78L3.1,18.47L6.71,19.29L8.6,22.47L12,21L15.4,22.46L17.29,19.28L20.9,18.46L20.56,14.78L23,12M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z" />
-                                                                            </svg></span>
-                                                                        <div class="ms-5 mb-4">
-                                                                            <h5 class="fw-bold">Well Documented</h5>
-                                                                            <p>
-                                                                                The documentation provides clear-cut
-                                                                                material for the Sash admin template.
-                                                                                The documentation is explained or
-                                                                                instructed in such a way that every user
-                                                                                can understand.
-                                                                            </p>
+                                                                                            <div class="ps-5 reveal revealright">
+                                                                                                <h2 class="text-start fw-semibold fs-25 mb-6">
+                                                                                                </h2>
+                                                                                                <div class="d-flex">
+                                                                                                    <span><svg style="width:20px;height:20px"
+                                                                                                               viewBox="0 0 24 24">
+                                                                                                        <path fill="#6c5ffc"
+                                                                                                              d="M23,12L20.56,9.22L20.9,5.54L17.29,4.72L15.4,1.54L12,3L8.6,1.54L6.71,4.72L3.1,5.53L3.44,9.21L1,12L3.44,14.78L3.1,18.47L6.71,19.29L8.6,22.47L12,21L15.4,22.46L17.29,19.28L20.9,18.46L20.56,14.78L23,12M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z" />
+                                                                                                        </svg></span>
+                                                                                                    <div class="ms-5 mb-4">
+                                                                                                        <h5 class="fw-bold">At ProLabz, our mission is to enhance your business capability through reliable and sharable data entry dashboards
+                                                                                                        </h5>
+
+                                                                                                    </div>
+                                                                                                </div>
+
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                                        </div>-->
                             <!-- ROW-3 CLOSED -->
 
                             <!-- ROW-4 OPEN -->
@@ -707,42 +697,41 @@ This feature also gives you the chance to separate between Forex and Crypto user
                                             <span class="landing-title"></span>
                                             <div class="demo-screen-skin code-quality" id="dependencies">
                                                 <div class="text-center p-0">
-                                                    <h2 class="text-center fw-semibold text-white">Features Used in Sash
-                                                        Admin Template</h2>
+                                                    <h2 class="text-center fw-semibold text-white">Features You Can Use in ProLabz</h2>
                                                     <div class="row justify-content-center">
                                                         <div class="col-lg-12 px-0">
                                                             <div class="feature-logos mt-5">
                                                                 <div class="slide">
                                                                     <img src="<?= $sashPath ?>/assets/images/landing/web/1.png">
-                                                                    <h5 class="mt-3 text-white">Bootstrap5</h5>
+                                                                    <h5 class="mt-3 text-white">Data</h5>
                                                                 </div>
                                                                 <div class="slide">
                                                                     <img src="<?= $sashPath ?>/assets/images/landing/web/2.png">
-                                                                    <h5 class="mt-3 text-white">HTML5</h5>
+                                                                    <h5 class="mt-3 text-white">Profile</h5>
                                                                 </div>
                                                                 <div class="slide">
                                                                     <img src="<?= $sashPath ?>/assets/images/landing/web/3.png">
-                                                                    <h5 class="mt-3 text-white">JQuery</h5>
+                                                                    <h5 class="mt-3 text-white">Share</h5>
                                                                 </div>
                                                                 <div class="slide">
                                                                     <img src="<?= $sashPath ?>/assets/images/landing/web/4.png">
-                                                                    <h5 class="mt-3 text-white">Sass</h5>
+                                                                    <h5 class="mt-3 text-white">Subscriptions</h5>
                                                                 </div>
                                                                 <div class="slide">
                                                                     <img src="<?= $sashPath ?>/assets/images/landing/web/5.png">
-                                                                    <h5 class="mt-3 text-white">Gulp</h5>
+                                                                    <h5 class="mt-3 text-white">Statistics</h5>
                                                                 </div>
                                                                 <div class="slide">
                                                                     <img src="<?= $sashPath ?>/assets/images/landing/web/6.png">
-                                                                    <h5 class="mt-3 text-white">NPM</h5>
+                                                                    <h5 class="mt-3 text-white">Comparison</h5>
                                                                 </div>
                                                                 <div class="slide">
                                                                     <img src="<?= $sashPath ?>/assets/images/landing/web/1.png">
-                                                                    <h5 class="mt-3 text-white">Bootstrap5</h5>
+                                                                    <h5 class="mt-3 text-white">Tracking Data</h5>
                                                                 </div>
                                                                 <div class="slide">
                                                                     <img src="<?= $sashPath ?>/assets/images/landing/web/2.png">
-                                                                    <h5 class="mt-3 text-white">HTML5</h5>
+                                                                    <h5 class="mt-3 text-white">New Members</h5>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -755,7 +744,7 @@ This feature also gives you the chance to separate between Forex and Crypto user
                             </div>
                             <!-- ROW-4 CLOSED -->
 
-                          
+
 
                             <!-- ROW-6 OPEN -->
                             <div class="bg-landing section bg-image-style">
@@ -765,59 +754,59 @@ This feature also gives you the chance to separate between Forex and Crypto user
                                         <span class="landing-title"></span>
                                         <h2 class="text-center fw-semibold">Find the <span class="text-primary">Perfect
                                                 Plan</span> for your Business.</h2>
+                                        <br>
+                                        <br>
+                                        <br>
                                         <div class="pricing-tabs">
-                                            <div class="pri-tabs-heading text-center">
-                                                <ul class="nav nav-price">
-                                                    <li><a data-bs-toggle="tab" href="#month">Monthly</a></li>
-                                                    <li><a class="active show" data-bs-toggle="tab"
-                                                           href="#annualyear">Annual</a></li>
-                                                </ul>
-                                            </div>
+
                                             <div class="tab-content">
                                                 <div class="tab-pane pb-0 active show" id="annualyear">
                                                     <div class="row d-flex align-items-center justify-content-center">
+
+
+
+
+
+
                                                         <div class="col-lg-4 col-xl-4 col-md-8 col-sm-12">
                                                             <div class="card p-3 pricing-card reveal revealrotate">
                                                                 <div class="card-header d-block text-justified pt-2">
                                                                     <p class="fs-18 fw-semibold mb-1">Basic</p>
                                                                     <p class="text-justify fw-semibold mb-1"> <span
                                                                             class="fs-30 me-2">$</span><span
-                                                                            class="fs-30 me-1">399</span><span
+                                                                            class="fs-30 me-1">80</span><span
                                                                             class="fs-25"><span
                                                                                 class="op-0-5 text-muted text-20">/</span>
                                                                             year</span></p>
-                                                                    <p class="fs-13 mb-1">Lorem ipsum dolor sit amet
-                                                                        consectetur adipisicing elit. Iure quos debitis
-                                                                        aliquam .</p>
-                                                                    <p class="fs-13 mb-1 text-secondary">Billed monthly
+                                                                    <p class="fs-13 mb-1"></p>
+                                                                    <p class="fs-13 mb-1 text-secondary">Billed yearly
                                                                         on regular basis!</p>
                                                                 </div>
                                                                 <div class="card-body pt-2">
                                                                     <ul class="text-justify pricing-body ps-0">
                                                                         <li><i
                                                                                 class="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-secondary"></i><strong>
-                                                                                2 Free</strong> Domain Name</li>
+                                                                                100</strong> Member</li>
                                                                         <li><i
                                                                                 class="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-secondary"></i>
-                                                                            <strong>3 </strong> One-Click Apps
+                                                                            <strong>200 </strong> Signals
                                                                         </li>
+                                                                        <li><i
+                                                                                class="mdi mdi-checkbox-marked-circle-outline  p-2 fs-16 text-secondary"></i><strong>
+                                                                                Share</strong> Signals and Profile</li>
                                                                         <li class="text-muted"><i
                                                                                 class="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>
-                                                                                1 </strong> Databases</li>
+                                                                                Usdt </strong> Management</li>
                                                                         <li class="text-muted"><i
                                                                                 class="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>
-                                                                                Unlimited </strong> Cloud Storage</li>
-                                                                        <li class="text-muted"><i
-                                                                                class="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>
-                                                                                Money </strong> BackGuarantee</li>
-                                                                        <li class=text-muted"><i
-                                                                                class="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>
-                                                                                24/7</strong> support</li>
+                                                                                Search </strong> Engine</li>
+
                                                                     </ul>
                                                                 </div>
                                                                 <div class="card-footer text-center border-top-0 pt-1">
+
                                                                     <button
-                                                                        class="btn btn-lg btn-outline-secondary btn-block">
+                                                                        class="btn btn-lg btn-outline-secondary btn-block <?= (Yii::$app->user->isGuest) ? " notLogged" : "" ?>" id="basic">
                                                                         <span class="ms-4 me-4">Select</span>
                                                                     </button>
                                                                 </div>
@@ -828,45 +817,42 @@ This feature also gives you the chance to separate between Forex and Crypto user
                                                                 class="card p-3 border-primary pricing-card advanced reveal revealrotate">
                                                                 <div class="card-header d-block text-justified pt-2">
                                                                     <p class="fs-18 fw-semibold mb-1 pe-0">Advanced<span
-                                                                            class="tag bg-primary text-white float-end">Limited
-                                                                            Deal</span></p>
+                                                                            class="tag bg-primary text-white float-end">Recommended</span></p>
                                                                     <p class="text-justify fw-semibold mb-1"> <span
                                                                             class="fs-30 me-2">$</span><span
-                                                                            class="fs-30 me-1">1,299</span><span
+                                                                            class="fs-30 me-1">150</span><span
                                                                             class="fs-25"><span
                                                                                 class="op-0-5 text-muted text-20">/</span>
                                                                             year</span></p>
-                                                                    <p class="fs-13 mb-2">Lorem ipsum dolor sit amet
-                                                                        consectetur adipisicing elit. Iure quos debitis
-                                                                        aliquam .</p>
-                                                                    <p class="fs-13 mb-1 text-primary">Billed monthly on
+                                                                    <p class="fs-13 mb-2"></p>
+                                                                    <p class="fs-13 mb-1 text-primary">Billed yearly on
                                                                         regular basis!</p>
                                                                 </div>
                                                                 <div class="card-body pt-2">
                                                                     <ul class="text-justify pricing-body ps-0">
                                                                         <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i>
-                                                                            <strong> 5 Free</strong> Domain Name
+
+                                                                                class="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-text-primary"></i><strong>
+                                                                                300</strong> Member</li>
+                                                                        <li><i
+                                                                                class="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-text-primary"></i>
+                                                                            <strong>500 </strong> Signals
                                                                         </li>
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>5
-                                                                            </strong> One-Click Apps</li>
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>
-                                                                                3 </strong> Databases</li>
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>
-                                                                                Unlimited </strong> Cloud Storage</li>
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>
-                                                                                Money </strong> BackGuarantee</li>
-                                                                        <li class="mb-6"><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>
-                                                                                24/7</strong> support</li>
+                                                                        <li ><i
+                                                                                class="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-text-primary"></i><strong>
+                                                                                Share</strong> Signals and Profile</li>
+                                                                        <li ><i
+                                                                                class="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-text-primary"></i><strong>
+                                                                                Usdt </strong> Management</li>
+                                                                        <li class="text-muted"><i
+                                                                                class="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>
+                                                                                Search </strong> Engine</li>
+
                                                                     </ul>
                                                                 </div>
                                                                 <div class="card-footer text-center border-top-0 pt-1">
                                                                     <button
+                                                                        id="advanced"
                                                                         class="btn btn-lg btn-primary-gradient text-white btn-block">
                                                                         <span class="ms-4 me-4">Select</span>
                                                                     </button>
@@ -879,41 +865,39 @@ This feature also gives you the chance to separate between Forex and Crypto user
                                                                     <p class="fs-18 fw-semibold mb-1">Regular</p>
                                                                     <p class="text-justify fw-semibold mb-1"> <span
                                                                             class="fs-30 me-2">$</span><span
-                                                                            class="fs-30 me-1">899</span><span
+                                                                            class="fs-30 me-1">250</span><span
                                                                             class="fs-25"><span
                                                                                 class="op-0-5 text-muted text-20">/</span>
                                                                             year</span></p>
-                                                                    <p class="fs-13 mb-1">Lorem ipsum dolor sit amet
-                                                                        consectetur adipisicing elit. Iure quos debitis
-                                                                        aliquam .</p>
-                                                                    <p class="fs-13 mb-1  text-danger">Billed monthly on
+                                                                    <p class="fs-13 mb-1"></p>
+                                                                    <p class="fs-13 mb-1  text-danger">Billed yearly on
                                                                         regular basis!</p>
                                                                 </div>
                                                                 <div class="card-body pt-2">
                                                                     <ul class="text-justify pricing-body ps-0">
                                                                         <li><i
+
                                                                                 class="mdi mdi-checkbox-marked-circle-outline text-danger p-2 fs-16"></i><strong>
-                                                                                1 Free</strong> Domain Name</li>
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-danger p-2 fs-16"></i><strong>4
-                                                                            </strong> One-Click Apps</li>
+                                                                                300</strong> Member</li>
                                                                         <li><i
                                                                                 class="mdi mdi-checkbox-marked-circle-outline text-danger p-2 fs-16"></i><strong>
-                                                                                2 </strong> Databases</li>
-                                                                        <li class="text-muted"><i
-                                                                                class="mdi mdi-close-circle-outline text-gray p-2 fs-16"></i><strong>
-                                                                                Unlimited </strong> Cloud Storage</li>
-                                                                        <li class="text-muted"><i
-                                                                                class="mdi mdi-close-circle-outline text-gray p-2 fs-16"></i><strong>
-                                                                                Money </strong> BackGuarantee</li>
-                                                                        <li class="text-muted"><i
-                                                                                class="mdi mdi-close-circle-outline text-gray p-2 fs-16"></i><strong>
-                                                                                24/7</strong> support</li>
+                                                                                <strong>500 </strong> Signals
+                                                                        </li>
+                                                                        <li ><i
+                                                                                class="mdi mdi-checkbox-marked-circle-outline text-danger p-2 fs-16"></i><strong>
+                                                                                Share</strong> Signals and Profile</li>
+                                                                        <li ><i
+                                                                                class="mdi mdi-checkbox-marked-circle-outline text-danger p-2 fs-16"></i><strong>
+                                                                                Usdt </strong> Management</li>
+                                                                        <li ><i
+                                                                                class="mdi mdi-checkbox-marked-circle-outline text-danger p-2 fs-16"></i><strong>
+                                                                                Search </strong> Engine</li>
+
                                                                     </ul>
                                                                 </div>
                                                                 <div class="card-footer text-center border-top-0 pt-1">
                                                                     <button
-                                                                        class="btn btn-lg btn-outline-danger btn-block">
+                                                                        class="btn btn-lg btn-outline-danger btn-block<?= (Yii::$app->user->isGuest) ? " notLogged" : "" ?>" id="regular">
                                                                         <span class="ms-4 me-4">Select</span>
                                                                     </button>
                                                                 </div>
@@ -921,152 +905,7 @@ This feature also gives you the chance to separate between Forex and Crypto user
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="tab-pane" id="month">
-                                                    <div class="row d-flex align-items-center justify-content-center">
-                                                        <div class="col-lg-4 col-xl-4 col-md-8 col-sm-12">
-                                                            <div class="card p-3 pricing-card">
-                                                                <div class="card-header d-block text-justified pt-2">
-                                                                    <p class="fs-18 fw-semibold mb-1">Basic</p>
-                                                                    <p class="text-justify fw-semibold mb-1"> <span
-                                                                            class="fs-30 me-2">$</span><span
-                                                                            class="fs-30 me-1">39</span><span
-                                                                            class="fs-25"><span
-                                                                                class="op-0-5 text-muted text-20">/</span>
-                                                                            month</span></p>
-                                                                    <p class="fs-13 mb-1">Lorem ipsum dolor sit amet
-                                                                        consectetur adipisicing elit. Iure quos debitis
-                                                                        aliquam .</p>
-                                                                    <p class="fs-13 mb-1 text-secondary">Billed monthly
-                                                                        on regular basis!</p>
-                                                                </div>
-                                                                <div class="card-body pt-2">
-                                                                    <ul class="text-justify pricing-body ps-0">
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-secondary"></i><strong>
-                                                                                2 Free</strong> Domain Name</li>
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-secondary"></i>
-                                                                            <strong>3 </strong> One-Click Apps
-                                                                        </li>
-                                                                        <li class="text-muted"><i
-                                                                                class="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>
-                                                                                1 </strong> Databases</li>
-                                                                        <li class="text-muted"><i
-                                                                                class="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>
-                                                                                Unlimited </strong> Cloud Storage</li>
-                                                                        <li class="text-muted"><i
-                                                                                class="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>
-                                                                                Money </strong> BackGuarantee</li>
-                                                                        <li class=text-muted"><i
-                                                                                class="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>
-                                                                                24/7</strong> support</li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="card-footer text-center border-top-0 pt-1">
-                                                                    <button
-                                                                        class="btn btn-lg btn-outline-secondary btn-block">
-                                                                        <span class="ms-4 me-4">Select</span>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-4 col-xl-4 col-md-8 col-sm-12">
-                                                            <div class="card p-3 border-primary pricing-card advanced">
-                                                                <div class="card-header d-block text-justified pt-2">
-                                                                    <p class="fs-18 fw-semibold mb-1 pe-0">Advanced<span
-                                                                            class="tag bg-primary text-white float-end">Limited
-                                                                            Deal</span></p>
-                                                                    <p class="text-justify fw-semibold mb-1"> <span
-                                                                            class="fs-30 me-2">$</span><span
-                                                                            class="fs-30 me-1">199</span><span
-                                                                            class="fs-25"><span
-                                                                                class="op-0-5 text-muted text-20">/</span>
-                                                                            month</span></p>
-                                                                    <p class="fs-13 mb-2">Lorem ipsum dolor sit amet
-                                                                        consectetur adipisicing elit. Iure quos debitis
-                                                                        aliquam .</p>
-                                                                    <p class="fs-13 mb-1 text-primary">Billed monthly on
-                                                                        regular basis!</p>
-                                                                </div>
-                                                                <div class="card-body pt-2">
-                                                                    <ul class="text-justify pricing-body ps-0">
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i>
-                                                                            <strong> 5 Free</strong> Domain Name
-                                                                        </li>
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>5
-                                                                            </strong> One-Click Apps</li>
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>
-                                                                                3 </strong> Databases</li>
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>
-                                                                                Unlimited </strong> Cloud Storage</li>
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>
-                                                                                Money </strong> BackGuarantee</li>
-                                                                        <li class="mb-6"><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>
-                                                                                24/7</strong> support</li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="card-footer text-center border-top-0 pt-1">
-                                                                    <button
-                                                                        class="btn btn-lg btn-primary-gradient text-white btn-block">
-                                                                        <span class="ms-4 me-4">Select</span>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-4 col-xl-4 col-md-8 col-sm-12">
-                                                            <div class="card p-3 pricing-card">
-                                                                <div class="card-header d-block text-justified pt-2">
-                                                                    <p class="fs-18 fw-semibold mb-1">Regular</p>
-                                                                    <p class="text-justify fw-semibold mb-1"> <span
-                                                                            class="fs-30 me-2">$</span><span
-                                                                            class="fs-30 me-1">69</span><span
-                                                                            class="fs-25"><span
-                                                                                class="op-0-5 text-muted text-20">/</span>
-                                                                            month</span></p>
-                                                                    <p class="fs-13 mb-1">Lorem ipsum dolor sit amet
-                                                                        consectetur adipisicing elit. Iure quos debitis
-                                                                        aliquam .</p>
-                                                                    <p class="fs-13 mb-1  text-danger">Billed monthly on
-                                                                        regular basis!</p>
-                                                                </div>
-                                                                <div class="card-body pt-2">
-                                                                    <ul class="text-justify pricing-body ps-0">
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-danger p-2 fs-16"></i><strong>
-                                                                                1 Free</strong> Domain Name</li>
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-danger p-2 fs-16"></i><strong>4
-                                                                            </strong> One-Click Apps</li>
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-danger p-2 fs-16"></i><strong>
-                                                                                2 </strong> Databases</li>
-                                                                        <li class="text-muted"><i
-                                                                                class="mdi mdi-close-circle-outline text-gray p-2 fs-16"></i><strong>
-                                                                                Unlimited </strong> Cloud Storage</li>
-                                                                        <li class="text-muted"><i
-                                                                                class="mdi mdi-close-circle-outline text-gray p-2 fs-16"></i><strong>
-                                                                                Money </strong> BackGuarantee</li>
-                                                                        <li class="text-muted"><i
-                                                                                class="mdi mdi-close-circle-outline text-gray p-2 fs-16"></i><strong>
-                                                                                24/7</strong> support</li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="card-footer text-center border-top-0 pt-1">
-                                                                    <button
-                                                                        class="btn btn-lg btn-outline-danger btn-block">
-                                                                        <span class="ms-4 me-4">Select</span>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -1084,15 +923,12 @@ This feature also gives you the chance to separate between Forex and Crypto user
                                         <div class="row justify-content-center">
                                             <p class="col-xl-9 wow fadeInUp text-default sub-text mb-7"
                                                data-wow-delay="0s">
-                                                The Sash admin template is one of the modern dashboard templates.
-                                                It is also a premium admin dashboard with high-end features, where users
-                                                can easily customize
-                                                or change their projects according to their choice.
+
                                             </p>
                                         </div>
                                         <section class="sptb demo-screen-demo" id="faqs">
                                             <div class="row align-items-center">
-                                                <div class="col-md-12 col-lg-6">
+                                                <div class="col-md-12 col-lg-12">
                                                     <div class="col-md-12 grid-item  px-0">
                                                         <div
                                                             class="card card-collapsed bg-primary-transparent p-0 reveal">
@@ -1112,8 +948,7 @@ This feature also gives you the chance to separate between Forex and Crypto user
                                                                     <span class="fw-bold">Note: </span>Please Refer
                                                                     support section for more information.
                                                                 </p>
-                                                                <a href="javascript:void(0)"
-                                                                   class="btn btn-outline-primary tx-13">Click here</a>
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1124,8 +959,7 @@ This feature also gives you the chance to separate between Forex and Crypto user
                                                                  data-bs-toggle="card-collapse">
                                                                 <a href="#"
                                                                    class="card-options-collapse  h5 fw-bold card-title mb-0"><span
-                                                                        class="me-3 fs-18 fw-bold text-success">02.</span>What
-                                                                    type of files i will get after purchase ?</a>
+                                                                        class="me-3 fs-18 fw-bold text-success">02.</span>How can i upgrade my package?</a>
                                                             </div>
                                                             <div class="card-body pt-0">
                                                                 <p>
@@ -1136,8 +970,7 @@ This feature also gives you the chance to separate between Forex and Crypto user
                                                                     <span class="fw-bold">Note: </span>Please Refer
                                                                     support section for more information.
                                                                 </p>
-                                                                <a href="javascript:void(0)"
-                                                                   class="btn btn-outline-success tx-13">Click here</a>
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1148,8 +981,7 @@ This feature also gives you the chance to separate between Forex and Crypto user
                                                                  data-bs-toggle="card-collapse">
                                                                 <a href="#"
                                                                    class="card-options-collapse  h5 fw-bold card-title mb-0"><span
-                                                                        class="me-3 fs-18 fw-bold text-secondary">03.</span>What
-                                                                    is a single Application</a>
+                                                                        class="me-3 fs-18 fw-bold text-secondary">03.</span>How can i delete a members ?</a>
                                                             </div>
                                                             <div class="card-body pt-0">
                                                                 <p>
@@ -1160,9 +992,7 @@ This feature also gives you the chance to separate between Forex and Crypto user
                                                                     <span class="fw-bold">Note: </span>Please Refer
                                                                     support section for more information.
                                                                 </p>
-                                                                <a href="javascript:void(0)"
-                                                                   class="btn btn-outline-secondary tx-13">Click
-                                                                    here</a>
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1173,8 +1003,7 @@ This feature also gives you the chance to separate between Forex and Crypto user
                                                                  data-bs-toggle="card-collapse">
                                                                 <a href="#"
                                                                    class="card-options-collapse  h5 fw-bold card-title mb-0"><span
-                                                                        class="me-3 fs-18 fw-bold text-warning">04.</span>How
-                                                                    to get future updates ?</a>
+                                                                        class="me-3 fs-18 fw-bold text-warning">04.</span>How can i freeze a member ?</a>
                                                             </div>
                                                             <div class="card-body pt-0">
                                                                 <p>
@@ -1185,8 +1014,7 @@ This feature also gives you the chance to separate between Forex and Crypto user
                                                                     <span class="fw-bold">Note: </span>Please Refer
                                                                     support section for more information.
                                                                 </p>
-                                                                <a href="javascript:void(0)"
-                                                                   class="btn btn-outline-warning tx-13">Click here</a>
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1215,10 +1043,7 @@ This feature also gives you the chance to separate between Forex and Crypto user
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-12 col-lg-6 reveal revealright">
-                                                    <img src="<?= $sashPath ?>/assets/images/landing/frequently-asked-questions.png"
-                                                         alt="">
-                                                </div>
+
                                             </div>
                                         </section>
                                     </div>
@@ -1226,9 +1051,9 @@ This feature also gives you the chance to separate between Forex and Crypto user
                             </div>
                             <!-- ROW-7 CLOSED -->
 
-                          
 
-                         
+
+
 
                             <!-- ROW-10 OPEN -->
                             <div class="bg-image-landing section pb-0" id="Contact">
@@ -1247,43 +1072,9 @@ This feature also gives you the chance to separate between Forex and Crypto user
                                                                 <div class="text-dark">
                                                                     <div class="services-statistics reveal my-5">
                                                                         <div class="row text-center">
-                                                                            <div class="col-xl-3 col-md-6 col-lg-6">
-                                                                                <div class="card">
-                                                                                    <div class="card-body p-0">
-                                                                                        <div class="counter-status">
-                                                                                            <div
-                                                                                                class="counter-icon bg-primary-transparent box-shadow-primary">
-                                                                                                <i
-                                                                                                    class="fe fe-map-pin text-primary fs-23"></i>
-                                                                                            </div>
-                                                                                            <h4
-                                                                                                class="mb-2 fw-semibold">
-                                                                                                Main Branch</h4>
-                                                                                            <p>San Francisco, CA </p>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-xl-3 col-md-6 col-lg-6">
-                                                                                <div class="card">
-                                                                                    <div class="card-body p-0">
-                                                                                        <div class="counter-status">
-                                                                                            <div
-                                                                                                class="counter-icon bg-secondary-transparent box-shadow-secondary">
-                                                                                                <i
-                                                                                                    class="fe fe-headphones text-secondary fs-23"></i>
-                                                                                            </div>
-                                                                                            <h4
-                                                                                                class="mb-2 fw-semibold">
-                                                                                                Phone & Email</h4>
-                                                                                            <p class="mb-0">+125 254
-                                                                                                3562 </p>
-                                                                                            <p>georgeme@abc.com</p>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-xl-3 col-md-6 col-lg-6">
+
+
+                                                                            <div class="col-xl-12 col-md-12 col-lg-12">
                                                                                 <div class="card">
                                                                                     <div class="card-body p-0">
                                                                                         <div class="counter-statuss">
@@ -1296,32 +1087,13 @@ This feature also gives you the chance to separate between Forex and Crypto user
                                                                                                 class="mb-2 fw-semibold">
                                                                                                 Contact</h4>
                                                                                             <p class="mb-0">
-                                                                                                www.example.com</p>
-                                                                                            <p>example@dev.com</p>
+                                                                                                contact@pro-labz.com</p>
+                                                                                            <p>pro-labz.com</p>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="col-xl-3 col-md-6 col-lg-6">
-                                                                                <div class="card">
-                                                                                    <div class="card-body p-0">
-                                                                                        <div class="counter-status">
-                                                                                            <div
-                                                                                                class="counter-icon bg-danger-transparent box-shadow-danger">
-                                                                                                <i
-                                                                                                    class="fe fe-airplay text-danger fs-23"></i>
-                                                                                            </div>
-                                                                                            <h4
-                                                                                                class="mb-2 fw-semibold">
-                                                                                                Working Hours</h4>
-                                                                                            <p class="mb-0">Monday -
-                                                                                                Friday: 9am - 6pm</p>
-                                                                                            <p>Satday - Sunday: Holiday
-                                                                                            </p>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
+
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1365,42 +1137,6 @@ This feature also gives you the chance to separate between Forex and Crypto user
                             </div>
                             <!-- ROW-10 CLOSED -->
 
-                            <!-- ROW-11 OPEN -->
-                            <div class="">
-                                <div class="container">
-                                    <div class="testimonial-owl-landing buynow-landing reveal revealrotate">
-                                        <div class="row pt-6">
-                                            <div class="col-md-12">
-                                                <div class="card bg-transparent">
-                                                    <div class="card-body pt-5 px-7">
-                                                        <div class="row">
-                                                            <div class="col-lg-9">
-                                                                <h1 class="fw-semibold text-white">Start Your Project
-                                                                    with Sash.</h1>
-                                                                <p class="text-white">Sed ut perspiciatis unde omnis
-                                                                    iste natus error sit voluptatem accusantium
-                                                                    doloremque laudantium, totam rem aperiam, eaque ipsa
-                                                                    quae ab illo inventore veritatis et quasi architecto
-                                                                    beatae vitae dicta sunt
-                                                                    explicabo.
-                                                                </p>
-                                                            </div>
-                                                            <div class="col-lg-3 text-end my-auto">
-                                                                <a href="https://themeforest.net/item/sash-bootstrap-5-admin-dashboard-template/35183671"
-                                                                   target="_blank"
-                                                                   class="btn btn-pink w-lg pt-2 pb-2"><i
-                                                                        class="fe fe-shopping-cart me-2"></i>Buy Now
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- ROW-11 CLOSED -->
 
                         </div>
                     </div>
@@ -1419,16 +1155,25 @@ This feature also gives you the chance to separate between Forex and Crypto user
                             <div class="top-footer">
                                 <div class="row">
                                     <div class="col-lg-4 col-sm-12 col-md-12 reveal revealleft">
-                                        <h6>About</h6>
-                                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-                                            doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
-                                            veritatis et quasi architecto beatae vitae dicta sunt
-                                            explicabo.
+
+                                        <h6 class="pb-3">
+                                            What can you do with Pro-Labz? </h6>
+                                        <p>
+                                        <h5>
+                                            ● Edit and track your members, VIP Channel and
+                                            Signals
+                                        </h5>
+                                        <h5>
+                                            ●Share and save your profits and data
+                                        </h5>
+                                        <h5>
+                                            ●Attract new customers
+                                        </h5>
                                         </p>
-                                        <p class="mb-5 mb-lg-2">Duis aute irure dolor in reprehenderit in voluptate
-                                            velit esse cillum dolore eu fugiat nulla pariatur Excepteur sint occaecat .
-                                        </p>
+
+
                                     </div>
+
                                     <div class="col-lg-2 col-sm-6 col-md-4 reveal revealleft">
                                         <h6>Pages</h6>
                                         <ul class="list-unstyled mb-5 mb-lg-0">
@@ -1487,9 +1232,9 @@ This feature also gives you the chance to separate between Forex and Crypto user
                             <footer class="main-footer px-0 pb-0 text-center">
                                 <div class="row ">
                                     <div class="col-md-12 col-sm-12">
-                                        Copyright © <span id="year"></span> <a href="javascript:void(0)">Sash</a>.
-                                        Designed with <span class="fa fa-heart text-danger"></span> by <a
-                                            href="javascript:void(0)"> Spruko </a> All rights reserved.
+                                        Copyright © 2022 <span id="year"></span> <a href="javascript:void(0)">Prolabz</a>.
+                                        <span class="fa fa-heart text-danger"></span> <a
+                                            href="javascript:void(0)"> </a> All rights reserved.
                                     </div>
                                 </div>
                             </footer>
@@ -1506,6 +1251,159 @@ This feature also gives you the chance to separate between Forex and Crypto user
 
 
 
+
+
+
+    <?php JSRegister::begin(); ?>
+    <script>
+
+        $(".notLogged").click(function () {
+            window.location.href = "<?= Url::toRoute('site/login') ?>";
+        });
+        $("#basic").click(function () {
+            if ($("#basic").hasClass("notLogged")) {
+            } else {
+
+                $.ajax({
+                    url: "https://api.nowpayments.io/v1/payment/",
+//                    url: "https://api-sandbox.nowpayments.io/v1/payment",
+                    beforeSend: function (request) {
+                        request.setRequestHeader("x-api-key", "H8EGMZ3-5534RCE-GSFTSBK-CVC6GV8");
+                    },
+                    type: "POST", data: {
+                        'price_amount':<?= $basic["price"] ?>,
+                        'price_currency': "usd",
+                        'pay_amount': <?= $basic["price"] ?>,
+                        'pay_currency': "USDTTRC20",
+                        'ipn_callback_url': "https://nowpayments.io",
+                        'order_id': "1",
+                        'order_description': '<?= $basic["description"] ?>',
+                        'case': "success",
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        $.ajax({
+                            url: '<?php echo Url::toRoute("/site/create-payment") ?>',
+                            type: "POST",
+                            data: {
+                                response
+                            }
+                            ,
+                            success: function (data) {
+                                console.log(data);
+                                window.location.href = "<?= Url::toRoute('site/payment-qr') ?>" + '?pay_address=' +
+                                        data["pay_address"] + "&order_id=" + data["order_id"] + "&r_user=" + data["r_user"];
+                            },
+                            error: function (errormessage) {
+                                console.log("not working");
+                            }
+                        });
+                    },
+                    error: function (errormessage) {
+                        console.log("not working");
+                    }
+                });
+            }
+
+        });
+        $("#advanced").click(function () {
+            if ($("#advanced").hasClass("notLogged")) {
+            } else {
+                $.ajax({
+                    url: "https://api.nowpayments.io/v1/payment/",
+//                    url: "https://api-sandbox.nowpayments.io/v1/payment",
+                    beforeSend: function (request) {
+                        request.setRequestHeader("x-api-key", "H8EGMZ3-5534RCE-GSFTSBK-CVC6GV8");
+                    },
+                    type: "POST", data: {
+                        'price_amount':<?= $advanced["price"] ?>,
+                        'price_currency': "usd",
+                        'pay_amount': <?= $advanced["price"] ?>,
+                        'pay_currency': "USDTTRC20",
+                        'ipn_callback_url': "https://nowpayments.io",
+                        'order_id': "2",
+                        'order_description': '<?= $advanced["description"] ?>',
+                        'case': "success",
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        $.ajax({
+                            url: '<?php echo Url::toRoute("/site/create-payment") ?>',
+                            type: "POST",
+                            data: {
+                                response
+                            }
+                            ,
+                            success: function (data) {
+                                console.log(data);
+                                window.location.href = "<?= Url::toRoute('site/payment-qr') ?>" + '?pay_address=' +
+                                        data["pay_address"] + "&order_id=" + data["order_id"] + "&r_user=" + data["r_user"];
+                            },
+                            error: function (errormessage) {
+                                console.log("not working");
+                            }
+                        });
+                    },
+                    error: function (errormessage) {
+                        console.log("not working");
+                    }
+                });
+            }
+
+        });
+        $("#regular").click(function () {
+            if ($("#regular").hasClass("notLogged")) {
+            } else {
+                $.ajax({
+                    url: "https://api.nowpayments.io/v1/payment/",
+//                    url: "https://api-sandbox.nowpayments.io/v1/payment",
+                    beforeSend: function (request) {
+                        request.setRequestHeader("x-api-key", "H8EGMZ3-5534RCE-GSFTSBK-CVC6GV8");
+                    },
+                    type: "POST", data: {
+                        'price_amount':<?= $regular["price"] ?>,
+                        'price_currency': "usd",
+                        'pay_amount': <?= $regular["price"] ?>,
+                        'pay_currency': "USDTTRC20",
+                        'ipn_callback_url': "https://nowpayments.io",
+                        'order_id': "3",
+                        'order_description': '<?= $regular["description"] ?>',
+                        'case': "success",
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        $.ajax({
+                            url: '<?php echo Url::toRoute("/site/create-payment") ?>',
+                            type: "POST",
+                            data: {
+                                response
+                            }
+                            ,
+                            success: function (data) {
+                                console.log(data);
+                                window.location.href = "<?= Url::toRoute('site/payment-qr') ?>" + '?pay_address=' +
+                                        data["pay_address"] + "&order_id=" + data["order_id"] + "&r_user=" + data["r_user"];
+                            },
+                            error: function (errormessage) {
+                                console.log("not working");
+                            }
+                        });
+                    },
+                    error: function (errormessage) {
+                        console.log("not working");
+                    }
+                });
+            }
+
+
+        });
+
+
+
+
+
+    </script>
+    <?php JSRegister::end(); ?>
 
 
     <?php $this->endBody() ?>

@@ -67,6 +67,8 @@ class AppAsset extends AssetBundle {
         'sash/assets/plugins/counters/jquery.missofis-countdown.js',
         'sash/assets/plugins/counters/flipclock.js',
         'sash/assets/js/show-password.min.js',
+        'sash/assets/plugins/notify/js/jquery.growl.js',
+        'js/html2canvas.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

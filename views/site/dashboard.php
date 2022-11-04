@@ -745,9 +745,8 @@ DashboardAsset::register($this);
 
 </div>
 <?php JSRegister::begin(); ?>
+
 <script>
-
-
 
 
 
@@ -781,7 +780,7 @@ DashboardAsset::register($this);
             var forexmemberSubscriptions = data["forexmemberSubscriptions"];
             var cryptoforexmemberSubscriptions = data["cryptoforexmemberSubscriptions"];
             var profitCrpto = data["profitCrpto"];
-//            var profitCrpto =  data["resultWinPercentage"] - data["resultLossPercentage"];
+            //            var profitCrpto =  data["resultWinPercentage"] - data["resultLossPercentage"];
             var resultSignals = data["resultSignals"];
             var resultSignalsForex = data["resultSignalsForex"];
             var labelsForexSignals = data["labelsForexSignals"];
@@ -1121,7 +1120,7 @@ DashboardAsset::register($this);
             });
             /////
 
-//     forexsignals
+            //     forexsignals
             var forexsignals = document.getElementById("forexsignals");
             forexsignals.height = "330";
             var forexsignalsContext = forexsignals.getContext("2d");
@@ -1276,11 +1275,11 @@ DashboardAsset::register($this);
                 type: 'line',
                 data: {
                     labels: labelsubscriptions,
-//                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
+                    //                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
                     datasets: [{
                             label: 'Total Members',
                             data: dataSubscriptions,
-//                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
+                            //                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
                             backgroundColor: 'transparent',
                             borderColor: '#05c3fb',
                             borderWidth: '2.5',
@@ -1333,11 +1332,11 @@ DashboardAsset::register($this);
                 type: 'line',
                 data: {
                     labels: labelsubscriptionsleadschartProfitsFromCryptoMembers,
-//                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
+                    //                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
                     datasets: [{
                             label: 'Total Members',
                             data: dataSubscriptionsleadschartProfitsFromCryptoMembers,
-//                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
+                            //                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
                             backgroundColor: 'transparent',
                             borderColor: '#4ecc48',
                             borderWidth: '2.5',
@@ -1390,11 +1389,11 @@ DashboardAsset::register($this);
                 type: 'line',
                 data: {
                     labels: labelsubscriptionsleadschartProfitsFromCryptoForexMembers,
-//                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
+                    //                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
                     datasets: [{
                             label: 'Total Members',
                             data: dataSubscriptionsleadschartProfitsFromCryptoForexMembers,
-//                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
+                            //                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
                             backgroundColor: 'transparent',
                             borderColor: '#f46ef4',
                             borderWidth: '2.5',
@@ -1447,11 +1446,11 @@ DashboardAsset::register($this);
                 type: 'line',
                 data: {
                     labels: labelsCryptoSignals,
-//                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
+                    //                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
                     datasets: [{
                             label: 'Total Members',
                             data: resultSignals,
-//                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
+                            //                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
                             backgroundColor: 'transparent',
                             borderColor: '#05c3fb',
                             borderWidth: '2.5',
@@ -1505,11 +1504,11 @@ DashboardAsset::register($this);
                 type: 'line',
                 data: {
                     labels: labelsCryptoSignals,
-//                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
+                    //                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
                     datasets: [{
                             label: 'Total Members',
                             data: resultWonCryptoSignals,
-//                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
+                            //                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
                             backgroundColor: 'transparent',
                             borderColor: '#299e48',
                             borderWidth: '2.5',
@@ -1563,11 +1562,11 @@ DashboardAsset::register($this);
                 type: 'line',
                 data: {
                     labels: labelsCryptoSignals,
-//                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
+                    //                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
                     datasets: [{
                             label: 'Total Members',
                             data: resultLossCryptoSignals,
-//                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
+                            //                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
                             backgroundColor: 'transparent',
                             borderColor: '#ed2024',
                             borderWidth: '2.5',
@@ -1622,11 +1621,11 @@ DashboardAsset::register($this);
                 type: 'line',
                 data: {
                     labels: profitCrpto,
-//                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
+                    //                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
                     datasets: [{
                             label: 'Total Members',
                             data: profitCrpto,
-//                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
+                            //                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
                             backgroundColor: 'transparent',
                             borderColor: '#05c3fb',
                             borderWidth: '2.5',
@@ -1680,11 +1679,11 @@ DashboardAsset::register($this);
                 type: 'line',
                 data: {
                     labels: labelsCryptoSignals,
-//                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
+                    //                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
                     datasets: [{
                             label: 'Total Members',
                             data: resultWinCrypto,
-//                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
+                            //                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
                             backgroundColor: 'transparent',
                             borderColor: '#4ecc48',
                             borderWidth: '2.5',
@@ -1739,11 +1738,11 @@ DashboardAsset::register($this);
                 type: 'line',
                 data: {
                     labels: labelsCryptoSignals,
-//                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
+                    //                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
                     datasets: [{
                             label: 'Total Members',
                             data: resultLossCrypto,
-//                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
+                            //                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
                             backgroundColor: 'transparent',
                             borderColor: '#ed2024',
                             borderWidth: '2.5',
@@ -1798,11 +1797,11 @@ DashboardAsset::register($this);
                 type: 'line',
                 data: {
                     labels: labelsForexSignals,
-//                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
+                    //                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
                     datasets: [{
                             label: 'Total Members',
                             data: resultSignals,
-//                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
+                            //                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
                             backgroundColor: 'transparent',
                             borderColor: '#05c3fb',
                             borderWidth: '2.5',
@@ -1856,11 +1855,11 @@ DashboardAsset::register($this);
                 type: 'line',
                 data: {
                     labels: labelsForexSignals,
-//                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
+                    //                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
                     datasets: [{
                             label: 'Total Members',
                             data: resultWonForexSignals,
-//                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
+                            //                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
                             backgroundColor: 'transparent',
                             borderColor: '#4ecc48',
                             borderWidth: '2.5',
@@ -1914,11 +1913,11 @@ DashboardAsset::register($this);
                 type: 'line',
                 data: {
                     labels: labelsForexSignals,
-//                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
+                    //                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
                     datasets: [{
                             label: 'Total Members',
                             data: resultLossForexSignals,
-//                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
+                            //                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
                             backgroundColor: 'transparent',
                             borderColor: '#ed2024',
                             borderWidth: '2.5',
@@ -1973,11 +1972,11 @@ DashboardAsset::register($this);
                 type: 'line',
                 data: {
                     labels: profitCrpto,
-//                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
+                    //                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
                     datasets: [{
                             label: 'Total Members',
                             data: profitCrpto,
-//                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
+                            //                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
                             backgroundColor: 'transparent',
                             borderColor: '#05c3fb',
                             borderWidth: '2.5',
@@ -2031,11 +2030,11 @@ DashboardAsset::register($this);
                 type: 'line',
                 data: {
                     labels: labelsForexSignals,
-//                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
+                    //                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
                     datasets: [{
                             label: 'Total Members',
                             data: resultWinForex,
-//                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
+                            //                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
                             backgroundColor: 'transparent',
                             borderColor: '#4ecc48',
                             borderWidth: '2.5',
@@ -2090,11 +2089,11 @@ DashboardAsset::register($this);
                 type: 'line',
                 data: {
                     labels: labelsForexSignals,
-//                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
+                    //                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
                     datasets: [{
                             label: 'Total Members',
                             data: resultLossCrypto,
-//                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
+                            //                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
                             backgroundColor: 'transparent',
                             borderColor: '#ed2024',
                             borderWidth: '2.5',
@@ -2156,11 +2155,11 @@ DashboardAsset::register($this);
                 type: 'line',
                 data: {
                     labels: labelsubscriptionsleadschartProfitsFromForexMembers,
-//                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
+                    //                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
                     datasets: [{
                             label: 'Total Members',
                             data: dataSubscriptionsleadschartProfitsFromForexMembers,
-//                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
+                            //                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
                             backgroundColor: 'transparent',
                             borderColor: '#ed2024',
                             borderWidth: '2.5',
@@ -2213,11 +2212,11 @@ DashboardAsset::register($this);
                 type: 'line',
                 data: {
                     labels: labelsMembers0,
-//                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
+                    //                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
                     datasets: [{
                             label: 'Total Members',
                             data: CryptoMembers,
-//                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
+                            //                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
                             backgroundColor: 'transparent',
                             borderColor: '#ed2024',
                             borderWidth: '2.5',
@@ -2268,11 +2267,11 @@ DashboardAsset::register($this);
                 type: 'line',
                 data: {
                     labels: labelsMembers0,
-//                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
+                    //                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
                     datasets: [{
                             label: 'Total Members',
                             data: resultMembers0,
-//                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
+                            //                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
                             backgroundColor: 'transparent',
                             borderColor: '#f46ef4',
                             borderWidth: '2.5',
@@ -2324,11 +2323,11 @@ DashboardAsset::register($this);
                 type: 'line',
                 data: {
                     labels: labelsMembers0,
-//                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
+                    //                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
                     datasets: [{
                             label: 'Total Members',
                             data: forexMembers,
-//                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
+                            //                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
                             backgroundColor: 'transparent',
                             borderColor: '#4ecc48',
                             borderWidth: '2.5',
@@ -2381,11 +2380,11 @@ DashboardAsset::register($this);
                 type: 'line',
                 data: {
                     labels: labelsMembers0,
-//                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
+                    //                        labels: ['Date 1', 'Date 2', 'Date 3', 'Date 4', 'Date 5', 'Date 6', 'Date 7', 'Date 8', 'Date 9', 'Date 10', 'Date 11', 'Date 12', 'Date 13', 'Date 14', 'Date 15'],
                     datasets: [{
                             label: 'Total Members',
                             data: forexandcryptoMembers,
-//                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
+                            //                    data: [45, 23, 32, 67, 49, 72, 52, 55, 46, 54, 32, 74, 88, 36, 36, 32, 48, 54],
                             backgroundColor: 'transparent',
                             borderColor: '#f7b731',
                             borderWidth: '2.5',
@@ -2438,5 +2437,8 @@ DashboardAsset::register($this);
     );
 
 </script>
+
+
+
 
 <?php JSRegister::end(); ?>

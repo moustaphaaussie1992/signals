@@ -26,17 +26,17 @@ use yii\helpers\ArrayHelper;
  * @property string|null $insta
  * @property string|null $contact_number
  * @property string|null $telegram_link
- * @property string|null $fullname 
- * @property string|null $discord 
- * @property string|null $year_offer 
- * @property string|null $year_offer_forex 
- * @property string|null $channel_link_telegram 
- * @property string|null $monthly_charge_offer 
- * @property string|null $three_months_offer 
- * @property string|null $all_till_offer 
+ * @property string|null $fullname
+ * @property string|null $discord
+ * @property string|null $year_offer
+ * @property string|null $year_offer_forex
+ * @property string|null $channel_link_telegram
+ * @property string|null $monthly_charge_offer
+ * @property string|null $three_months_offer
+ * @property string|null $all_till_offer
  * @property string|null $monthly_charge_offer_forex
- * @property string|null $three_months_offer_forex 
- * @property string|null $all_till_offer_forex 
+ * @property string|null $three_months_offer_forex
+ * @property string|null $all_till_offer_forex
  *
  * @property Members[] $members
  */
@@ -45,6 +45,9 @@ class User extends base\User {
     public static $ROLE_USER = "User";
     public static $ROLE_USERSUBSCRIBED = "UserSubscribed";
     public static $ROLE_ADMIN = "Administrator";
+    public static $ROLE_UserAdvanced = "UserAdvanced";
+    public static $ROLE_UserBasic = "UserBasic";
+    public static $ROLE_UserRegular = "UserRegular";
 
     /**
      * Gets query for [[Members]].

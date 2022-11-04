@@ -1,6 +1,5 @@
 <?php
 
-
 use app\models\MembersSearch;
 use app\models\Type;
 use richardfan\widget\JSRegister;
@@ -30,11 +29,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="card overflow-hidden">
                     <div class="card-body">
                         <div class="d-flex">
-                                  <div class="mt-2" style="margin-right: 20px">
+                            <div class="mt-2" style="margin-right: 20px">
                                 <h6 class="">New Members</h6>
                                 <h2 class="mb-0 number-font"><?= $newMembers ?></h2>
                             </div>
-                             <div class="mt-2" style="margin-right: 20px">
+                            <div class="mt-2" style="margin-right: 20px">
                                 <h6 class="">Inactive Members</h6>
                                 <h2 class="mb-0 number-font"><?= $totalInactive ?></h2>
                             </div>
@@ -42,41 +41,41 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <h6 class="">Active Members</h6>
                                 <h2 class="mb-0 number-font"><?= $totalMembers ?></h2>
                             </div>
-                            
-                      
-                            
-                             
+
+
+
+
                             <div class="ms-auto">
                                 <div class="chart-wrapper mt-1"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
                                     <canvas id="leadschartMembers" class="h-8 w-9 chart-dropshadow chartjs-render-monitor" width="120" height="80" style="display: block; height: 64px; width: 96px;"></canvas>
                                 </div>
                             </div>
-                            
+
                         </div>
-                           <div class="d-flex">
-                         <div class="mt-2" style="margin-right: 50px">
-                        <span class="text-muted fs-12"">
-<!--                            <span class="text-pink">
-                                <i class="fe fe-arrow-down-circle text-pink"></i> 0.75%
-                            </span>-->
-                            This Month</span>
-                         </div> <div class="mt-2" style="margin-right: 90px">
-                            <span class="text-muted fs-12">
-<!--                            <span class="text-pink">
-                                <i class="fe fe-arrow-down-circle text-pink"></i> 0.75%
-                            </span>-->
-                            All Time</span>
-                         </div>
-                         <div class="mt-2" style="margin-right: 20px">
-                          <span class="text-muted fs-12" style="margin-right: 20px">
-<!--                            <span class="text-pink">
-                                <i class="fe fe-arrow-down-circle text-pink"></i> 0.75%
-                            </span>-->
-                              All Time</span></div>
-                    </div>
+                        <div class="d-flex">
+                            <div class="mt-2" style="margin-right: 50px">
+                                <span class="text-muted fs-12"">
+        <!--                            <span class="text-pink">
+                                        <i class="fe fe-arrow-down-circle text-pink"></i> 0.75%
+                                    </span>-->
+                                    This Month</span>
+                            </div> <div class="mt-2" style="margin-right: 90px">
+                                <span class="text-muted fs-12">
+    <!--                            <span class="text-pink">
+                                    <i class="fe fe-arrow-down-circle text-pink"></i> 0.75%
+                                </span>-->
+                                    All Time</span>
+                            </div>
+                            <div class="mt-2" style="margin-right: 20px">
+                                <span class="text-muted fs-12" style="margin-right: 20px">
+      <!--                            <span class="text-pink">
+                                      <i class="fe fe-arrow-down-circle text-pink"></i> 0.75%
+                                  </span>-->
+                                    All Time</span></div>
+                        </div>
                     </div>
                 </div>
-                
+
             </div>
 
             <div class="col-lg-6">
@@ -143,7 +142,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </p>
 
 
-            <?php // echo $this->render('_search', ['model' => $searchModel]);    ?>
+            <?php // echo $this->render('_search', ['model' => $searchModel]);     ?>
             <div class="card-body">
                 <div class="grid-margin">
                     <?=
@@ -211,22 +210,21 @@ $this->params['breadcrumbs'][] = $this->title;
                                     }
                                 }
                             ],
-                           
-                                      [
+                            [
                                 'attribute' => 'active',
-                               
-                               'format' => 'raw',
-                                          'contentOptions' => ['style' => 'width: 40px;'],
+                                'format' => 'raw',
+                                'contentOptions' => ['style' => 'width: 40px;'],
                                 'value' => function($model) {
 
                                     $type = Type::findOne(["id" => $model["r_type"]]);
-                                    if ($model["active"]==1) {
-                                       return  '<div class="avatar avatar-md bg-secondary-transparent text-secondary bradius me-3">
+                                    if ($model["active"] == 1) {
+                                        return '<div class="avatar avatar-md bg-secondary-transparent text-secondary bradius me-3">
                                                 <i class="fe fe-check"></i>
-                                            </div>'; }
-                                    else return '<div class="avatar  avatar-md bg-pink-transparent text-pink bradius me-3">
+                                            </div>';
+                                    } else
+                                        return '<div class="avatar  avatar-md bg-pink-transparent text-pink bradius me-3">
                                                 <i class="fe fe-x"></i>
-                                            </div>' ;
+                                            </div>';
                                 }
                             ],
                             ['class' => 'yii\grid\ActionColumn',
@@ -235,15 +233,15 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'template' => '{phone} {telegram}',
                                 'buttons' => [
                                     'telegram' => function ($url, $model) {
-                                      
-                                          return Html::a('<span class="fa fa-telegram "></span>', Url::to( $model["telegram"], true), [
+
+                                        return Html::a('<span class="fa fa-telegram "></span>', Url::to($model["telegram"], true), [
                                                     'class' => 'btn  btn-sm',
                                                     'style' => 'color:#2AABEE'
                                         ]);
                                     },
                                     'phone' => function ($url, $model) {
-                                 
-                                           return Html::a('<span class="fa fa-whatsapp "></span>', Url::to('https://wa.me/' . $model["phone"], true), [
+
+                                        return Html::a('<span class="fa fa-whatsapp "></span>', Url::to('https://wa.me/' . $model["phone"], true), [
                                                     'class' => 'btn  btn-sm',
                                                     'style' => 'color:#4caf50'
                                         ]);
@@ -373,18 +371,18 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                 });
 
-const findCumulativeSum = arr => {
-   const creds = arr.reduce((acc, val) => {
-      let { sum, res } = acc;
-      sum += val;
-      res.push(sum);
-      return { sum, res };
-   }, {
-      sum: 0,
-      res: []
-   });
-   return creds.res;
-};
+                const findCumulativeSum = arr => {
+                    const creds = arr.reduce((acc, val) => {
+                        let {sum, res} = acc;
+                        sum += val;
+                        res.push(sum);
+                        return {sum, res};
+                    }, {
+                        sum: 0,
+                        res: []
+                    });
+                    return creds.res;
+                };
 //console.log(findCumulativeSum(resultMembers0))
 
 
@@ -443,7 +441,7 @@ const findCumulativeSum = arr => {
                         legend: {
                             labels: {
                                 fontColor: "#9ba6b5"
-                              
+
                             },
                         },
                     }
@@ -590,6 +588,7 @@ const findCumulativeSum = arr => {
 
 
 </script>
+
 <?php JSRegister::end(); ?>
 
 <?php Pjax::end(); ?>

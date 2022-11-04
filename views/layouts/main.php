@@ -2,9 +2,8 @@
 /** @var View $this */
 
 /** @var string $content */
-
 use app\assets\AppAsset;
-use richardfan\widget\JSRegister;
+use app\models\UserPayments;
 use yii\bootstrap5\Html;
 use yii\helpers\Url;
 use yii\web\View;
@@ -19,6 +18,26 @@ $this->registerMetaTag(['name' => 'viewport', 'content' => 'width=device-width, 
 $this->registerMetaTag(['name' => 'description', 'content' => $this->params['meta_description'] ?? '']);
 $this->registerMetaTag(['name' => 'keywords', 'content' => $this->params['meta_keywords'] ?? '']);
 $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@web/favicon.ico']);
+
+
+$checkPaymentStatus = false;
+$payment = UserPayments::Find()
+        ->where(['r_user' => Yii::$app->user->id])
+        ->orderBy('id desc')
+        ->all();
+
+//$hasPayment = UserPayments::find()
+//        ->where(['r_user' => Yii::$app->user->id])
+//        ->one();
+if (sizeof($payment) > 0) {
+    $hasPayment = $payment[0];
+
+    if ($hasPayment["payment_status"] == "finished") {
+
+    } else {
+        $checkPaymentStatus = true;
+    }
+}
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -93,7 +112,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
                                         <!-- SIDE-MENU -->
                                         <div class="dropdown d-flex profile-1">
                                             <a href="javascript:void(0)" data-bs-toggle="dropdown" class="nav-link leading-none d-flex">
-                                                <img id="profile "src="<?= $sashPath ?>/assets/images/users/21.jpg" alt="profile-user"
+                                                <img id="profile"src="<?= $sashPath ?>/assets/images/users/21.jpg" alt="profile-user"
                                                      class="avatar  profile-user brround cover-image">
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
@@ -154,7 +173,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
             <div class="app-sidebar__overlay" data-bs-toggle="sidebar"></div>
             <div class="app-sidebar">
                 <div class="side-header">
-                    <a class="header-brand1" style ="color:white;font-size: 30px;"href="<?= Url::to(['site/dashboard']) ?>">
+                    <a class="header-brand1" style ="color:white;font-size: 30px;"href="<?= Url::to(['site/index']) ?>">
                         <img style ="width:60%"src="<?= $sashPath ?>/assets/images/brand/logo-3.png" class="header-brand-img desktop-logo" alt="logo">
                         <img src="<?= $sashPath ?>/assets/images/brand/logo-1.png" class="header-brand-img toggle-logo"
                              alt="logo">
@@ -172,17 +191,18 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
                         <path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" />
                         </svg></div>
                     <ul class="side-menu">
-                        <li class="sub-category">
-                            <h3>Main</h3>
-                        </li>
+
                         <li class="slide">
-                            <a class="side-menu__item has-link" data-bs-toggle="slide" href="<?= Url::to(['site/dashboard']) ?>"><i
+                            <a class="side-menu__item has-link" data-bs-toggle="slide" href="<?= Url::to(['site/index']) ?>"><i
                                     class="side-menu__icon fe fe-home"></i><span
                                     class="side-menu__label">Dashboard</span></a>
                         </li>
-                        <li class="sub-category">
-                            <h3>Settings</h3>
-                        </li>
+
+
+
+
+
+
                         <li class="slide">
                             <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
                                     class="side-menu__icon fa fa-users"></i><span
@@ -199,7 +219,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
                         </li>
                         <li class="slide">
                             <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
-                                    class="side-menu__icon fe fe-slack"></i><span
+                                    class="side-menu__icon ion-arrow-graph-up-right"></i><span
                                     class="side-menu__label">Signals</span><i
                                     class="angle fe fe-chevron-right"></i></a>
                             <ul class="slide-menu">
@@ -211,7 +231,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
                         </li>
                         <li class="slide">
                             <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
-                                    class="side-menu__icon fe fe-slack"></i><span
+                                    class="side-menu__icon fa fa-btc"></i><span
                                     class="side-menu__label">Usdt</span><i
                                     class="angle fe fe-chevron-right"></i></a>
                             <ul class="slide-menu">
@@ -221,6 +241,40 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
 
                             </ul>
                         </li>
+                        <li>
+                            <a class="side-menu__item has-link" href="<?= Url::to(['site/landing']) ?>"><i
+                                    class="side-menu__icon fe fe-zap"></i><span
+                                    class="side-menu__label">Landing Page</span>
+                                    <!--<span class="badge bg-green br-5 side-badge blink-text pb-1">New</span>-->
+                            </a>
+
+
+                        </li>
+                        <li>
+                            <a class="side-menu__item has-link" href="<?= Url::to(['user/prolabz-users']) ?>"><i
+                                    class="side-menu__icon fe fe-users"></i><span
+                                    class="side-menu__label">Pro-Labz Users</span>
+                                    <!--<span class="badge bg-green br-5 side-badge blink-text pb-1">New</span>-->
+                            </a>
+
+
+                        </li>
+                        <li class="slide">
+                            <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
+                                    class="side-menu__icon fa fa-user"></i><span
+                                    class="side-menu__label">Profile</span><i
+                                    class="angle fe fe-chevron-right"></i></a>
+
+
+                            <ul class="slide-menu">
+                                <li class="side-menu-label1"><a href="javascript:void(0)">Profile</a></li>
+                                <li><a href="<?= Url::to(['profile/index']) ?>" class="slide-item"> Edit Profile</a></li>
+                                <li><a href="<?= Url::to(['profile/edit', 'userId' => Yii::$app->user->id]) ?>" class="slide-item"> Edit Profile</a></li>
+
+
+                            </ul>
+                        </li>
+
                         <?php
                         if (Yii::$app->user->can("Administrator")) {
                             ?>
@@ -258,29 +312,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
                                                             class="side-menu__label">profile test</span></a>
                                                 </li>-->
 
-                        <li class="sub-category">
-                            <h3>UI Kit</h3>
-                        </li>
 
-
-                        <li>
-                            <a class="side-menu__item has-link" href="<?= Url::to(['site/landing']) ?>"><i
-                                    class="side-menu__icon fe fe-zap"></i><span
-                                    class="side-menu__label">Landing Page</span>
-                                    <!--<span class="badge bg-green br-5 side-badge blink-text pb-1">New</span>-->
-                            </a>
-
-
-                        </li>
-                         <li>
-                            <a class="side-menu__item has-link" href="<?= Url::to(['user/prolabz-users']) ?>"><i
-                                    class="side-menu__icon fe fe-users"></i><span
-                                    class="side-menu__label">Pro-Labz Users</span>
-                                    <!--<span class="badge bg-green br-5 side-badge blink-text pb-1">New</span>-->
-                            </a>
-
-
-                        </li>
 
 
 
@@ -825,7 +857,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
         <div class="container">
             <div class="row align-items-center flex-row-reverse">
                 <div class="col-md-12 col-sm-12 text-center">
-                    Copyright © <span id="year"></span> <a href="javascript:void(0)"> Prolabz</a>.  <span
+                    Copyright © <span id="year"></span> <a href="javascript:void(0)"> Prolabz</a>  <span
                         class="fa fa-heart text-danger"></span>  </a> All rights reserved.
                 </div>
             </div>
@@ -838,34 +870,93 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
     <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
 
     <?php $this->endBody() ?>
-    <!--<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" crossorigin="anonymous"></script>-->
+
+
+    <script>
+        $.ajax({
+
+            url: '<?= Url::toRoute("/my-api/get-user-profile") ?>',
+            type: "POST",
+            data: {
+                'userId': '<?= Yii::$app->user->id ?>',
+            },
+            success: function (data) {
+
+
+                $("#profile").attr("src", '<?= Url::base(true) ?>/profilePhotos/' + data["photo"]);
+            },
+            error: function (errormessage) {
+                console.log("not working");
+            }
+        });
+<?php
+if ($checkPaymentStatus) {
+    ?>
+            $.ajax({
+
+                url: "https://api.nowpayments.io/v1/payment/<?= $hasPayment["payment_id"] ?>",
+
+                type: "GET",
+                beforeSend: function (request) {
+                    //                    request.setRequestHeader("x-api-key", "4EP85PK-0064YQ2-JVTTM1D-DFM2KNC");
+                    request.setRequestHeader("x-api-key", "H8EGMZ3-5534RCE-GSFTSBK-CVC6GV8");
+                },
+                success: function (data) {
+
+                    $.ajax({
+                        url: '<?php echo Url::toRoute("/site/update-payment") ?>',
+                        type: "POST",
+                        data: {
+                            'payment_id': data["payment_id"],
+                            'payment_status': data["payment_status"]
+                        },
+                        success: function (data) {
+                            console.log(data["status"]);
+                            if (data["status"] == "finished") {
+                                if (data["orderName"] = "basic") {
+                                    event.preventDefault();
+                                    event.stopPropagation();
+                                    return $.growl.notice({
+                                        message: "Basic Subscription Activated"
+                                    });
+                                } else if (data["orderName"] == "advanced") {
+                                    event.preventDefault();
+                                    event.stopPropagation();
+                                    return $.growl.notice({
+                                        message: "Advanced Subscription Activated"
+                                    });
+                                } else if (data["orderName"] == "regular") {
+                                    event.preventDefault();
+                                    event.stopPropagation();
+                                    return $.growl.notice({
+                                        message: "Regular Subscription Activated"
+                                    });
+                                }
+                            } else {
+
+                            }
+
+                            console.log(data);
+                        },
+                        error: function (errormessage) {
+                            console.log("not working");
+                        }
+                    });
+                },
+                error: function (errormessage) {
+                    console.log("not working");
+                }
+            });
+    <?php
+}
+?>
+
+
+    </script>
+        <!--<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" crossorigin="anonymous"></script>-->
 
 </body>
 
 </html>
 
-<?php JSRegister::begin(); ?>
-<script>
-    
-//    $.ajax({
-//        url: '<?php echo Url::toRoute("/my-api/get-user-profile") ?>',
-//        type: "POST",
-//        data: {
-//            'userId': '<?= Yii::$app->user->id ?>',
-//        },
-//        success: function (data) {
-//            
-//$("#profile").attr("src", data);
-//
-//      
-//            
-//            
-//     error: function (errormessage) {
-//            console.log("not working");
-//        }
-//        }});
-
-
-</script>
-<?php JSRegister::end(); ?>
 <?php $this->endPage() ?>

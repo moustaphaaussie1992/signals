@@ -8,8 +8,10 @@
 
 namespace app\controllers;
 
+use app\models\User;
 use Yii;
 use yii\rest\Controller;
+use yii\web\Response;
 
 /**
  * Description of MyApiController
@@ -17,16 +19,18 @@ use yii\rest\Controller;
  * @author user
  */
 class MyApiController extends Controller {
-        public function actionGetUserProfile() {
+
+    public function actionGetUserProfile() {
+        \Yii::$app->response->format = Response::FORMAT_JSON;
         $post = Yii::$app->request->post();
-        $userId = $Yii::$app->user->id;
-        return   User::find()
-                ->select( 'photo')
-                ->asArray()
-                ->where(['id' => $userId])
-                ->one();
-        
-        }
+        $userId = Yii::$app->user->id;
+
+        return User::find()
+                        ->select('photo')
+                        ->asArray()
+                        ->where(['id' => $userId])
+                        ->one();
+    }
 
     public function actionGetUsersStat() {
 

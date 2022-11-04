@@ -5,8 +5,10 @@ namespace app\controllers;
 use app\models\ForexSignals;
 use app\models\ForexSignalsSearch;
 use app\models\User;
+use app\models\Utils;
 use Yii;
 use yii\filters\VerbFilter;
+use yii\helpers\Url;
 use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -71,12 +73,44 @@ class ForexSignalsController extends Controller {
         } else {
             $model->loadDefaultValues();
         }
-
+        $shareUrl = Url::current(['userId' => $user["id"]], true);
+        $shareUrl = str_replace('forex-signals/index', 'forex-signals/share', $shareUrl);
         return $this->render('index', [
                     'searchModel' => $searchModel,
                     'dataProvider' => $dataProvider,
                     'model' => $model,
                     'user' => $user,
+                    'shareUrl' => $shareUrl,
+        ]);
+    }
+
+    public function actionShare() {
+
+        $searchModel = new ForexSignalsSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
+        $userId = $this->request->queryParams["userId"];
+        $user = User::find()
+                ->select(['id', 'username', 'email', 'photo', 'back_photo', 'bio', 'twitter'
+                    , 'facebook', 'tiktok', 'insta', 'contact_number', 'telegram_link', 'discord', 'year_offer', 'all_till_offer', 'three_months_offer', 'monthly_charge_offer', 'year_offer_forex', 'all_till_offer_forex', 'three_months_offer_forex', 'monthly_charge_offer_forex'])
+                ->asArray()
+                ->where(['id' => $userId])
+                ->one();
+
+
+        $netProfit = Utils::getSignalForexProfitByUserId($userId);
+        $wonProfit = Utils::getSignalForexProfitWonByUserId($userId);
+        $lossProfit = Utils::getSignalForexProfitLossByUserId($userId);
+
+        $this->layout = 'main-wothout-additions';
+
+        return $this->render('share', [
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
+                    'user' => $user,
+                    'netProfit' => $netProfit,
+                    'wonProfit' => $wonProfit,
+                    'lossProfit' => $lossProfit
         ]);
     }
 

@@ -221,9 +221,18 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="row">
 
     <div class="col-12 col-sm-12">
-        <div class="card">
+        <div class="card" id="myGrid">
             <div class="card-header">
                 <h3 class="card-title mb-0"><?= Html::encode($this->title) ?></h3>
+
+                <a style="    right: 10px;
+                   position: absolute;
+                   " id="copyUrl" class="btn ripple btn-primary-gradient me-2 copyTextClass"><i class="fe fe-copy"> </i>Copy Url</a>
+                <a style="    right: 140px;
+                   position: absolute;
+                   " id="screenshot" class="btn ripple btn-secondary-gradient me-2 copyTextClass"><i class="fe fe-image"> </i>Download Photo</a>
+
+
             </div>
 
 
@@ -346,13 +355,36 @@ justify-content: center;">
 
                 </div>
             </div>
+            <footer class="footer">
+                <div class="container">
+                    <div class="row align-items-center flex-row-reverse">
+                        <div class="col-md-12 col-sm-12 text-center">
+                            Copyright © <span id="year"></span> <a href="javascript:void(0)"> Pro-labz.com </a>  <span
+                                class="fa fa-heart text-danger"></span>  </a> All rights reserved.
+                        </div>
+                    </div>
+                </div>
+            </footer>
         </div>
     </div>
 </div>
 
 <?php JSRegister::begin(); ?>
 <script>
+    $("#copyUrl").click(function () {
 
+
+        var copyText = '<?= $shareUrl ?>';
+
+        // Copy the text inside the text field
+        navigator.clipboard.writeText(copyText);
+
+        event.preventDefault();
+        event.stopPropagation();
+        return $.growl.notice({
+            message: "URL Copied To Clipboard"
+        });
+    });
 
 // on first focus (bubbles up to document), open the menu
     $(document).on('focus', '.select2-selection.select2-selection--single', function (e) {
@@ -515,6 +547,33 @@ justify-content: center;">
         error: function (errormessage) {
             console.log("not working");
         }
+    });
+
+    $("#screenshot").on('click', function () {
+        html2canvas(document.getElementById("myGrid")).then(canvas => {
+//        html2canvas(document.getElementById("p0")).then(canvas => {
+            var canvasImage = canvas.toDataURL("image/png");
+            let xhr = new XMLHttpRequest();
+            xhr.responseType = 'blob';
+            xhr.onload = function () {
+                let a = document.createElement('a');
+                a.href = window.URL.createObjectURL(xhr.response);
+                a.download = 'image_name.png';
+                a.style.display = 'none';
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+            };
+            xhr.open('GET', canvasImage);
+            xhr.send();
+        });
+
+        event.preventDefault();
+        event.stopPropagation();
+        return $.growl.notice({
+            message: "Image Downloaded successfully !"
+        });
+
     });
 
 

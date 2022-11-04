@@ -5,7 +5,7 @@ namespace app\controllers;
 use app\models\CryptoSignals;
 use app\models\CryptoSignalsSearch;
 use app\models\User;
-use Spipu\Html2Pdf\Html2Pdf;
+use app\models\Utils;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -68,23 +68,56 @@ class CryptoSignalsController extends Controller {
         } else {
             $model->loadDefaultValues();
         }
-        
-        
-           $html2pdf = new Html2Pdf();
-        $html2pdf->writeHTML($this->renderPartial('index',[
-            
-           'searchModel' => $searchModel,
-                    'dataProvider' => $dataProvider,
-                    'model' => $model,
-                    'user' => $user,
-        ]));
-        $html2pdf->output();
+
+        $shareUrl = \yii\helpers\Url::current(['userId' => $user["id"]], true);
+        $shareUrl = str_replace('crypto-signals/index', 'crypto-signals/share', $shareUrl);
+//        \yii\helpers\VarDumper::dump($shareUrl);
+//        die();
+//        $html2pdf = new Html2Pdf();
+//        $html2pdf->writeHTML($this->renderPartial('index', [
+//                    'searchModel' => $searchModel,
+//                    'dataProvider' => $dataProvider,
+//                    'model' => $model,
+//                    'user' => $user,
+//        ]));
+//        $html2pdf->output();
 
         return $this->render('index', [
                     'searchModel' => $searchModel,
                     'dataProvider' => $dataProvider,
                     'model' => $model,
                     'user' => $user,
+                    'shareUrl' => $shareUrl,
+        ]);
+    }
+
+    public function actionShare() {
+
+        $searchModel = new CryptoSignalsSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
+        $userId = $this->request->queryParams["userId"];
+        $user = User::find()
+                ->select(['id', 'username', 'email', 'photo', 'back_photo', 'bio', 'twitter'
+                    , 'facebook', 'tiktok', 'insta', 'contact_number', 'telegram_link', 'discord', 'year_offer', 'all_till_offer', 'three_months_offer', 'monthly_charge_offer', 'year_offer_forex', 'all_till_offer_forex', 'three_months_offer_forex', 'monthly_charge_offer_forex'])
+                ->asArray()
+                ->where(['id' => $userId])
+                ->one();
+
+
+        $netProfit = Utils::getSignalCryptoProfitByUserId($userId);
+        $wonProfit = Utils::getSignalCryptoProfitWonByUserId($userId);
+        $lossProfit = Utils::getSignalCryptoProfitLossByUserId($userId);
+
+        $this->layout = 'main-wothout-additions';
+
+        return $this->render('share', [
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
+                    'user' => $user,
+                    'netProfit' => $netProfit,
+                    'wonProfit' => $wonProfit,
+                    'lossProfit' => $lossProfit
         ]);
     }
 

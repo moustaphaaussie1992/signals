@@ -15,7 +15,7 @@ $config = [
     ],
     'components' => [
         'request' => [
-            // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
+// !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'AOcpAcqlXVA_ln_97haZaFmtdG3QAZSX',
         ],
         'cache' => [
@@ -33,35 +33,35 @@ $config = [
             'errorAction' => 'site/error',
         ],
         'htmlToPdf' => [
-    'class' => 'boundstate\htmlconverter\HtmlToPdfConverter',
-    'bin' => '/usr/bin/wkhtmltopdf',
-    // global wkhtmltopdf command line options
-    // (see http://wkhtmltopdf.org/usage/wkhtmltopdf.txt)
-    'options' => [
-        'print-media-type',
-        'disable-smart-shrinking',
-        'no-outline',
-        'page-size' => 'letter',
-        'load-error-handling' => 'ignore',
-        'load-media-error-handling' => 'ignore'
-    ],
-],
-'htmlToImage' => [
-    'class' => 'boundstate\htmlconverter\HtmlToImageConverter',
-    'bin' => '/usr/bin/wkhtmltoimage',
-],
-'response' => [
-    'formatters' => [
-        'pdf' => [
-            'class' => 'boundstate\htmlconverter\PdfResponseFormatter',
-            // Set a filename to download the response as an attachments (instead of displaying in browser)
-            'filename' => 'attachment.pdf'
+            'class' => 'boundstate\htmlconverter\HtmlToPdfConverter',
+            'bin' => '/usr/bin/wkhtmltopdf',
+            // global wkhtmltopdf command line options
+// (see http://wkhtmltopdf.org/usage/wkhtmltopdf.txt)
+            'options' => [
+                'print-media-type',
+                'disable-smart-shrinking',
+                'no-outline',
+                'page-size' => 'letter',
+                'load-error-handling' => 'ignore',
+                'load-media-error-handling' => 'ignore'
+            ],
         ],
-        'image' => [
-            'class' => 'boundstate\htmlconverter\ImageResponseFormatter',
+        'htmlToImage' => [
+            'class' => 'boundstate\htmlconverter\HtmlToImageConverter',
+            'bin' => '/usr/bin/wkhtmltoimage',
         ],
-    ]
-],
+        'response' => [
+            'formatters' => [
+                'pdf' => [
+                    'class' => 'boundstate\htmlconverter\PdfResponseFormatter',
+                    // Set a filename to download the response as an attachments (instead of displaying in browser)
+                    'filename' => 'attachment.pdf'
+                ],
+                'image' => [
+                    'class' => 'boundstate\htmlconverter\ImageResponseFormatter',
+                ],
+            ]
+        ],
 //        'mailer' => [
 //            'class' => \yii\symfonymailer\Mailer::class,
 ////            'viewPath' => '@app/mail',
@@ -176,7 +176,7 @@ $config = [
     'as access' => [
         'class' => 'mdm\admin\components\AccessControl',
         'allowActions' => [
-//            '*',
+            '*',
             'site/logout',
             'site/login',
             'site/error',
@@ -186,7 +186,11 @@ $config = [
             'user/forget-password',
             'user/create-new-password',
             'user/check-email-to-reset-password',
-            'admin/*'
+            'admin/*',
+            'crypto-signals/share',
+            'forex-signals/share',
+            'user/prolabz-users',
+            'site/landing',
         ]
     ],
     'params' => $params,
