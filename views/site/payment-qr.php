@@ -79,7 +79,7 @@ $result = $writer->write($qr);
 
                             <hr>
                             <div class="btn-list mt-4">
-                                <a href="cart.html" class="btn ripple btn-primary me-2"><i class="fe fe-menu"> </i> Go to Prolabz Console</a>
+                                <a href="index" class="btn ripple btn-primary me-2"><i class="fe fe-menu"> </i> Go to Prolabz Console</a>
 
                             </div>
                         </div>

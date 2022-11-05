@@ -176,7 +176,6 @@ $config = [
     'as access' => [
         'class' => 'mdm\admin\components\AccessControl',
         'allowActions' => [
-            '*',
             'site/logout',
             'site/login',
             'site/error',
@@ -186,11 +185,12 @@ $config = [
             'user/forget-password',
             'user/create-new-password',
             'user/check-email-to-reset-password',
-            'admin/*',
+//            'admin/*',
             'crypto-signals/share',
             'forex-signals/share',
             'user/prolabz-users',
             'site/landing',
+            'site/payment-qr',
         ]
     ],
     'params' => $params,
